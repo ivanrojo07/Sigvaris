@@ -15,7 +15,7 @@
         <div class="card-body">
             <div class="row">
                  <div class="col-3 form-group">
-                <label class="control-label">Fecha de baja:</label>
+                <label class="control-label">Fecha de baja :</label>
                 <input value="{{date("Y-m-d")}}" readonly type="date" class="form-control">
             </div>
                 <div class="col-3 form-group">
