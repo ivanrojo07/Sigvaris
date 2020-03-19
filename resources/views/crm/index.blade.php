@@ -337,6 +337,23 @@
                 </tbody>
             </table>
             {{ $crms->links() }}
+            <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" style="display: none;" >
+                 <h4>Historial Ventas</h4>
+                <table class="table table-striped table-bordered table-hover" id="tablaPacientesV">
+                    <thead>
+                    <tr class="info">
+                        <th>Folio</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Productos</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                    <tbody id="datostablasven">
+
+                    </tbody>
+                </table>
+            </div>
             <div class="tablaUsuario_Crm" id="tablaUsuario_Crm" style="display: none;" >
                  <h4>C.R.M. Historial</h4>
                 <table class="table table-striped table-bordered table-hover" id="tablaPacientes">
@@ -356,23 +373,7 @@
                     </tbody>
                 </table>
             </div>   
-             <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" style="display: none;" >
-                 <h4>Historial Ventas</h4>
-                <table class="table table-striped table-bordered table-hover" id="tablaPacientesV">
-                    <thead>
-                    <tr class="info">
-                        <th>Folio</th>
-                        <th>Cliente</th>
-                        <th>Total</th>
-                        <th>Productos</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                    <tbody id="datostablasven">
-
-                    </tbody>
-                </table>
-            </div>  
+               
         </div>
         <div class="card-footer">
   
