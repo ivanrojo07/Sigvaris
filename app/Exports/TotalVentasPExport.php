@@ -11,7 +11,7 @@ use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class TotalVentasExport implements FromCollection, WithHeadings
+class TotalVentasPExport implements FromCollection, WithHeadings
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -19,7 +19,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
     public function collection()
     {
         $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('oficina_id',2)
+            ->where('oficina_id',1)
             ->get();
         $TotalVentas=$Ventas->count();
         $VentasIVA= $Ventas->sum('total');
