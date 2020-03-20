@@ -28,7 +28,8 @@ class Venta extends Model
         'digitos_targeta',
         'PagoTarjeta',
         'PagoEfectivo',
-        'mesesPago'
+        'mesesPago',
+        'requiere_factura'
     ];
 
     /**

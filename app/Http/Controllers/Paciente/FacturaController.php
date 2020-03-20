@@ -7,6 +7,7 @@ use App\Factura;
 use App\Paciente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Venta;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -119,8 +120,8 @@ class FacturaController extends Controller
         //
     }
 
-    public function download(){
-        return Excel::download(new FacturasExport, 'facturas.xlsx');
+    public function download(Request $request){
+        return Excel::download(new FacturasExport($request->fecha), 'facturas.xlsx');
     }
 
     public function getVentas(Paciente $paciente)
