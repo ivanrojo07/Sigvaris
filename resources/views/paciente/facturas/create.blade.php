@@ -25,7 +25,7 @@
                             <form action="{{route('facturas.download')}}" method="POST" class="form-inline float-right">
                                 @csrf
                                 <input type="date" name="fecha" id="fechaFactura" style="display:none">
-                                {{-- <button type="submit" class="btn btn-primary rounded-0">FACTURA</button> --}}
+                                <button type="submit" class="btn btn-primary rounded-0">FACTURA</button>
                             </form>
                             <form action="{{route('datos_fiscales.download')}}" method="POST" class="form-inline">
                                 @csrf
