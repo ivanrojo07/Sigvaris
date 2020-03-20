@@ -510,7 +510,7 @@
         let ind = parseFloat($(p).find('.precio_individual').first().text());
         let total = cant*ind;
         let totaliva = cantiva*ind;
-        console.log('----------',cantiva);
+        console.log('----------',a);
         $(p).find('.precio_total').text(total);
         $(p).find('.precio_individual_iva').text(totaliva);
         cambiarTotalVenta();
