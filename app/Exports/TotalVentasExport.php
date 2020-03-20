@@ -18,14 +18,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return collect(['',
-        '',
-        '',
-        '',
-        '',
-        '',
-        ''
-        ]);
+        return ;
 
     }
 
