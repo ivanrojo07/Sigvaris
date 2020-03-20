@@ -46,7 +46,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
             ->get()
             ->first()
             //->pluck('productos')
-            ->flatten()
+            //->flatten()
             ->map(
                 
                 function ($Venta,$TotalVentas,$VentasIVA,$VentasSIVA,$auxNu,$auxRe,$NumDoc) {
