@@ -37,7 +37,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings
                     $index,
                     $Venta->paciente->nombre." ".$Venta->paciente->paterno." ".$Venta->paciente->materno,
                     $Venta->paciente->doctor != null ? $Venta->paciente->doctor->nombre : "",
-                    $Venta->paciente->doctor != null ? $Venta->paciente->doctor->consultorios[0] != null  $Venta->paciente->doctor->consultorios[0]->hospital->nombre:"" : ""    ,
+                    $Venta->paciente->doctor != null ? $Venta->paciente->doctor->consultorios[0] != null ? $Venta->paciente->doctor->consultorios[0]->hospital->nombre:"" : ""    ,
                     "",
                     $Venta->paciente->ventas()->count() == 1?  "1":"2",
                     $Venta->productos != null ? $Venta->productos()->pluck('cantidad')->sum():"",
