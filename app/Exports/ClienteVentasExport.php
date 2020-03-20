@@ -31,10 +31,8 @@ class ClienteVentasExport implements FromCollection, WithHeadings
                         $SkuRe.=$producto->sku;
                     }
                 return collect([
-                    date('Y-m-d'),
-                    Carbon::parse($Venta->fecha)->format('h:i:s'),
                     $Venta->id,
-                    $index,
+                    date('Y-m-d'),                    
                     $Venta->paciente->nombre." ".$Venta->paciente->paterno." ".$Venta->paciente->materno,
                     $Venta->paciente->doctor != null ? $Venta->paciente->doctor->nombre : "",
                     $Venta->paciente->doctor != null ? $Venta->paciente->doctor->consultorios[0] != null ? $Venta->paciente->doctor->consultorios[0]->hospital->nombre:"" : ""    ,
