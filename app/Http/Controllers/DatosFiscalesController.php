@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DatosFiscalesExport;
-use App\Exports\FacturasExport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 

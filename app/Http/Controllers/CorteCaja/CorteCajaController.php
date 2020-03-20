@@ -8,6 +8,7 @@ use App\Exports\TotalVentasExport;
 
 use App\Exports\ClienteVentasExport;
 use App\Exports\ClienteVentasPExport;
+use App\Exports\DatosFiscalesExport;
 use App\Exports\TotalVentasPExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -114,5 +115,10 @@ class CorteCajaController extends Controller
     }
     public function export2C(){
         return Excel::download(new ClienteVentasPExport, 'corte_cajaC.xls');
+    }
+    public function download(Request $request)
+    {
+        // dd($request->fecha);
+        return Excel::download(new DatosFiscalesExport($request->fecha), 'datos-fiscales.xlsx');
     }
 }
