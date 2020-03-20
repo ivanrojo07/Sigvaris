@@ -11,7 +11,7 @@ use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class CorteCajaExport implements FromCollection, WithHeadings
+class CorteCajaPExport implements FromCollection, WithHeadings
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -20,7 +20,7 @@ class CorteCajaExport implements FromCollection, WithHeadings
     {
         $index=0;
         return Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('oficina_id',2)
+            ->where('oficina_id',1)
             ->get()
             //->pluck('productos')
             ->flatten()
