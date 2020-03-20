@@ -37,7 +37,7 @@ class PacienteDatosFiscalesController extends Controller
     public function store(Request $request, Paciente $paciente)
     {
         // dd($request->input());
-        $paciente->datoFiscal->updateOrCreate([
+        $paciente->datoFiscal()->updateOrCreate([
             'paciente_id' => $paciente->id
         ], [
             'tipo_persona' => $request->tipo_persona,
