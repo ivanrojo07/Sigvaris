@@ -251,9 +251,9 @@ class PacienteCrmController extends Controller
             
              $tablaUsuario.= '<tr class="active tupla" title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrmHistorial('.$crm->id.',\''.$crm->estado['nombre'].'\')">';
             $tablaUsuario.= "<td >".$request->input('nombre')."</td>"; 
-            $tablaUsuario.= "<td >".$crm['created_at']."</td>";  
-            $tablaUsuario.= "<td >".$crm['fecha_aviso']."</td>";     
-            $tablaUsuario.= "<td >".$crm['fecha_contacto']."</td>";  
+            $tablaUsuario.= "<td >".\Carbon\Carbon::parse($crm['created_at'])->format('m-d-Y')."</td>";  
+            $tablaUsuario.= "<td >".\Carbon\Carbon::parse($crm['fecha_aviso'])->format('m-d-Y')."</td>";     
+            $tablaUsuario.= "<td >".\Carbon\Carbon::parse($crm['fecha_contacto'])->format('m-d-Y')."</td>";  
             $tablaUsuario.= "<td >".$crm['forma_contacto']."</td>";
             $tablaUsuario.= "<td >".$crm->estado['nombre']."</td>";    
             $tablaUsuario.= "<td >".$crm['hora']."</td>";  

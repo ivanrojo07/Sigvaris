@@ -292,7 +292,9 @@
                         <th>Creación</th>
                         <th>Fecha Aviso</th>
                         <th>Fecha Contacto</th>
+                        <th>Forma de Contacto</th>
                         <th>Ultima Venta</th>
+                        <th>Comentarios</th>
                         <th>Historial de Paciente</th>
                     </tr>
                 </thead>
@@ -306,10 +308,22 @@
                        
                         <tr class="active tupla" >
                             <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['nombre']}}</td>
-                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->created_at}}</td>
-                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->fecha_aviso}}</td>
-                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->fecha_contacto}}</td>
-                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$UltimaVenta->fecha}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($crm->created_at)->format('m-d-Y')}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($crm->fecha_aviso)->format('m-d-Y')}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($crm->fecha_contacto)->format('m-d-Y')}}</td>
+
+                            @if($crm->forma_contacto=="Telefono")
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['telefono']}}</td>
+                            @elseif($crm->forma_contacto=="Mail")
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['mail']}}</td>
+                            @elseif($crm->forma_contacto=="Celular")
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['celular']}}</td>
+
+                            @else
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')"></td>
+                            @endif
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($UltimaVenta->fecha)->format('m-d-Y')}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->comentarios}}</td>
                             
                             {{--<td>
                                     <a  class="btn btn-primary" onclick="generarHistorialVentas('{{ $pacientes->find($crm->paciente_id) }}')">
@@ -337,6 +351,23 @@
                 </tbody>
             </table>
             {{ $crms->links() }}
+            <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" style="display: none;" >
+                 <h4>Historial Ventas</h4>
+                <table class="table table-striped table-bordered table-hover" id="tablaPacientesV">
+                    <thead>
+                    <tr class="info">
+                        <th>Folio</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Productos</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                    <tbody id="datostablasven">
+
+                    </tbody>
+                </table>
+            </div>
             <div class="tablaUsuario_Crm" id="tablaUsuario_Crm" style="display: none;" >
                  <h4>C.R.M. Historial</h4>
                 <table class="table table-striped table-bordered table-hover" id="tablaPacientes">
@@ -356,23 +387,7 @@
                     </tbody>
                 </table>
             </div>   
-             <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" style="display: none;" >
-                 <h4>Historial Ventas</h4>
-                <table class="table table-striped table-bordered table-hover" id="tablaPacientesV">
-                    <thead>
-                    <tr class="info">
-                        <th>Folio</th>
-                        <th>Cliente</th>
-                        <th>Total</th>
-                        <th>Productos</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                    <tbody id="datostablasven">
-
-                    </tbody>
-                </table>
-            </div>  
+               
         </div>
         <div class="card-footer">
   
