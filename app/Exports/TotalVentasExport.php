@@ -19,7 +19,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
     public function collection()
     {
         $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('oficina_id',1)
+            ->where('oficina_id',2)
             ->get();
         $TotalVentas=$Ventas->count();
         $VentasIVA= $Ventas->sum('total');
@@ -42,7 +42,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
         array_unique($auxRe);
         array_unique($NumDoc);
         return Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('id',1)
+            ->where('id',2)
             ->get()
             //->first()
             //->pluck('productos')
