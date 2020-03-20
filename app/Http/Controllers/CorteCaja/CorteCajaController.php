@@ -6,6 +6,7 @@ use App\Exports\CorteCajaExport;
 use App\Exports\CorteCajaPExport;
 use App\Exports\TotalVentasExport;
 use App\Exports\ClienteVentasExport;
+use App\Exports\ClienteVentasPExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Venta;
@@ -105,5 +106,11 @@ class CorteCajaController extends Controller
 
     public function export2(){
         return Excel::download(new CorteCajaPExport, 'corte_caja.xls');
+    }
+    public function export2V(){
+        return Excel::download(new CorteCajaPExport, 'corte_caja.xls');
+    }
+    public function export2C(){
+        return Excel::download(new ClienteVentasPExport, 'corte_caja.xls');
     }
 }
