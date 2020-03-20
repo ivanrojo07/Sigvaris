@@ -41,9 +41,8 @@ class TotalVentasExport implements FromCollection, WithHeadings
         array_unique($auxNu);
         array_unique($auxRe);
         array_unique($NumDoc);
-        dd($TotalVentas);
         return Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('id',1)
+            ->where('id',"<=",2)
             ->get()
             //->first()
             //->pluck('productos')
