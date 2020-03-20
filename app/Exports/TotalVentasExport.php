@@ -18,7 +18,29 @@ class TotalVentasExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return ;
+        $index=0;
+        return Venta::where('fecha', '>=', date('Y-m-d'))
+            ->where('oficina_id',2)
+            ->get()
+            //->pluck('productos')
+            ->flatten()
+            ->map(
+                
+                function ($Venta,$index) {
+
+                //dd($Venta->productos()->pluck('cantidad')->sum());
+                $index++;
+                return collect([
+                    date('Y-m-d'),
+                    Carbon::parse($Venta->fecha)->format('h:i:s'),
+                    $Venta->id,
+                    $index,
+                    $Venta->paciente->nombre." ".$Venta->paciente->paterno." ".$Venta->paciente->materno,
+                    $Venta->paciente->doctor != null ? $Venta->paciente->doctor->nombre : "",
+                    $Venta->paciente->ventas()->count() == 1?  "1":"2"
+
+                ]);
+            });
 
     }
 

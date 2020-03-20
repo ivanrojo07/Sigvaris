@@ -94,7 +94,7 @@ class CorteCajaController extends Controller
         return Excel::download(new CorteCajaExport, 'corte_caja.xls');
     }
     public function exportV(){
-        return Excel::download(new TotalVentasExport, 'corte_caja.xls');
+        return Excel::download(new TotalVentasExport, 'corte_cajaV.xls');
     }
     public function exportC(){
         return Excel::download(new CorteCajaExport, 'corte_caja.xls');
