@@ -121,6 +121,8 @@ Route::get('pacientes/{paciente}/ventas', 'Venta\VentaController@createConPacien
 Route::post('get_ventas','Venta\VentaController@getVentas');
 Route::post('get-ventas-clientes','Venta\VentaController@getVentasClientes');
 Route::get('corte-caja/export/Perisur', 'CorteCaja\CorteCajaController@export')->name('corte-caja.export.perisur');
+Route::get('corte-caja/export/Perisur/ventas', 'CorteCaja\CorteCajaController@exportV')->name('corte-caja.export.perisur.ventas');
+Route::get('corte-caja/export/Perisur/cliente', 'CorteCaja\CorteCajaController@exportC')->name('corte-caja.export.perisur.cliente');
 Route::get('corte-caja/export/Polanco', 'CorteCaja\CorteCajaController@export2')->name('corte-caja.export.polanco');
 Route::resource('corte-caja', 'CorteCaja\CorteCajaController');
 Route::resource('ventas.cambio-fisico', 'Venta\CambioFisicoController');

@@ -34,6 +34,8 @@
                 <div class="card-body">
                     <label class="text-uppercase text-muted">Exportar excel</label>
                     <a href="{{route('corte-caja.export.perisur')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Perisur</a>
+                    <a href="{{route('corte-caja.export.perisur.ventas')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Perisur Ventas totales</a>
+                    <a href="{{route('corte-caja.export.perisur.ventas')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Perisur Clientes</a>
                     <a href="{{route('corte-caja.export.polanco')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Polanco</a>
                 </div>
             </div>
