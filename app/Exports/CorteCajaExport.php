@@ -31,7 +31,7 @@ class CorteCajaExport implements FromCollection, WithHeadings
                 $index++;
                 return collect([
                     date('Y-m-d'),
-                    $Venta->fecha->format('h:i:s'),
+                    Carbon::parse($Venta->fecha)->format('h:i:s'),
                     $Venta->id,
                     $index,
                     $Venta->paciente->nombre." ".$Venta->paciente->paterno." ".$Venta->paciente->materno,
