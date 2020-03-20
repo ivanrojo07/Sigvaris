@@ -20,6 +20,7 @@ class CorteCajaPExport implements FromCollection, WithHeadings
     {
         $index=0;
         return Venta::where('fecha', '>=', date('Y-m-d'))
+            ->where('oficina_id',1)
             ->get()
             //->pluck('productos')
             ->flatten()
