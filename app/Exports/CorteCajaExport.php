@@ -33,7 +33,7 @@ class CorteCajaExport implements FromCollection, WithHeadings
                     $index,
                     $Venta->paciente->nombre." ".$Venta->paciente->paterno." ".$Venta->paciente->materno,
                     $Venta->paciente->doctor != null ? $Venta->paciente->doctor->nombre : "",
-                    $Venta->paciente->ventas()->count() == 1? , "1":"2",
+                    $Venta->paciente->ventas()->count() == 1?  "1":"2",
                     $Venta->id,
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
                     $Venta->productos != null ? $Venta->productos()->pluck('cantidad')->sum():"",
