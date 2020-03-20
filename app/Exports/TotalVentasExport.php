@@ -38,9 +38,9 @@ class TotalVentasExport implements FromCollection, WithHeadings
             }
 
         }
-        array_unique($auxNu);
-        array_unique($auxRe);
-        array_unique($NumDoc);
+        $auxNu=array_unique($auxNu);
+        $auxRe=array_unique($auxRe);
+        $NumDoc=array_unique($NumDoc);
         $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc));
         
         return collect([[
