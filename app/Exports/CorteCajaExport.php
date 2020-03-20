@@ -18,12 +18,15 @@ class CorteCajaExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        $index=0;
+        
         return Venta::where('fecha', '>=', date('Y-m-d'))
             ->get()
             //->pluck('productos')
             ->flatten()
-            ->map(function ($Venta) {
+            ->map(
+                $index=0;
+                function ($Venta) {
+
                 //dd($Venta->productos()->pluck('cantidad')->sum());
                 $index++;
                 return collect([
