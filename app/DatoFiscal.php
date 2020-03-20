@@ -24,4 +24,8 @@ class DatoFiscal extends Model
         'estado',
         'codigo_postal',
     ];
+
+    public function paciente(){
+        return $this->belongsTo('App\Paciente');
+    }
 }

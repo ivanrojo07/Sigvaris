@@ -18,3 +18,5 @@ Route::get('productos/sku/{sku}', 'Producto\ApiProductoController@getProductoByS
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('pacientes/{paciente}/datos_fiscales', 'ApiPacienteDatosFiscalesController@get');

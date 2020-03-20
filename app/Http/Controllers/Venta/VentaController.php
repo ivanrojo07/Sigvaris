@@ -11,6 +11,7 @@ use App\Promocion;
 use App\Doctor;
 use App\Empleado;
 use App\Crm;
+use App\DatoFiscal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -89,7 +90,6 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        //dd();
         if (!isset($request->producto_id) || is_null($request->producto_id)) {
             return redirect()
                 ->back()
@@ -129,7 +129,23 @@ class VentaController extends Controller
 
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
-        
+
+        if( $request->facturar == "1" ){
+            $venta->update(['requiere_factura' => 1]);
+            DatoFiscal::updateOrCreate(
+                ['paciente_id' => $request->paciente_id],
+                [
+                    'tipo_persona' => $request->tipo_persona,
+                    'nombre_o_razon_social' => $request->nombre_o_razon_social,
+                    'regimen_fiscal' => $request->regimen_fiscal,
+                    'correo' => $request->correo,
+                    'rfc' => $request->rfc,
+                    'num_ext' => $request->num_ext,
+                    'num_int' => $request->num_int
+                ]
+            );
+        }
+
         $CRM = new Crm(
                     array(
                         'paciente_id' => $request->input('paciente_id'),

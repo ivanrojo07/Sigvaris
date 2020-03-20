@@ -14,6 +14,7 @@ Route::get('/expedientes/{pacientes}/{file}', function ($pacientes, $file) {
 });
 Route::resource('pacientes.expediente','Paciente\PacienteExpedienteController');
 Route::resource('pacientes.datos_fiscales','Paciente\PacienteDatosFiscalesController');
+Route::post('datos_fiscales/download', 'DatosFiscalesController@download')->name('datos_fiscales.download');
 
 Route::get('inicio', 'InicioController@index')->name('inicio');
 // Route::get('/login', function(){echo

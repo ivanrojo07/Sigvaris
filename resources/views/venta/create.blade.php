@@ -328,7 +328,7 @@
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1"
                                         data-toggle="collapse" href="#collapseExample" role="button"
-                                        aria-expanded="false" aria-controls="collapseExample">
+                                        aria-expanded="false" aria-controls="collapseExample" name="facturar" value="1">
                                     <label class="custom-control-label" for="customCheck1">FACTURAR</label>
                                 </div>
                             </p>
@@ -337,41 +337,37 @@
                                     <div class="row">
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">TIPO PERSONA</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="tipoPersona" name="tipo_persona">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">NOMBRE / RAZÓN
                                                 SOCIAL</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="nombreORazonSocial" name="nombre_o_razon_social">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">RÉGIMEN FISCAL
                                                 SOCIAL</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="regimeFiscal" name="regimen_fiscal">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">CORREO</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="correo" name="correo">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">RFC</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="rfc" name="rfc">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">CALLE</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="calle">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">NUM. EXT</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="num_ext" name="num_ext">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">NUM. INT</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                        <div class="col-12 col-md-3 mt-3">
-                                            <label for="" class="text-uppercase text-muted">NUM. INT</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="num_int" name="num_int">
                                         </div>
                                     </div>
                                 </div>
@@ -792,6 +788,25 @@
     $(document).on('click', '.botonSeleccionCliente', async function(){
         
         const pacienteId = $(this).attr('pacienteid');
+
+        $.ajax({
+            url:`{{ url('/api/pacientes/${pacienteId}/datos_fiscales') }}`,
+            type: 'GET',
+            success: function(datos_fiscales){
+                console.log({
+                    pacienteId,
+                    datos_fiscales
+                });
+                $('#tipoPersona').val(datos_fiscales.tipo_persona);
+                $('#nombreORazonSocial').val(datos_fiscales.nombre_o_razon_social);
+                $('#regimeFiscal').val(datos_fiscales.regimen_fiscal);
+                $('#correo').val(datos_fiscales.correo);
+                $('#rfc').val(datos_fiscales.rfc);
+                $('#calle').val(datos_fiscales.calle);
+                $('#num_ext').val(datos_fiscales.num_ext);
+                $('#num_int').val(datos_fiscales.num_int);
+            }
+        });
 
         const nombrePaciente = $(`.nombrePaciente[pacienteId=${pacienteId}]`).html();
         const apellidosPaciente = $(`.apellidosPaciente[pacienteId=${pacienteId}]`).html();
