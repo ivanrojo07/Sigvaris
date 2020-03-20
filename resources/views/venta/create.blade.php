@@ -505,7 +505,7 @@
 
     function cambiarTotal(a, p){
         let cant = parseFloat(a.value);
-        let cantiva = parseFloat(a.getAttribute("iva"));
+        let cantiva = a.getAttribute("iva");
         
         let ind = parseFloat($(p).find('.precio_individual').first().text());
         let total = cant*ind;
