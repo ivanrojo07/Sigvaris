@@ -27,7 +27,7 @@
                                 <input type="date" name="fecha" id="fechaFactura" style="display:none">
                                 <button type="submit" class="btn btn-primary rounded-0">FACTURA</button>
                             </form>
-                            <form action="{{route('datos_fiscales.download')}}" method="POST" class="form-inline">
+                            <form action="{{route('corte-caja.export.datos-fiscales')}}" method="GET" class="form-inline">
                                 @csrf
                                 <input type="date" name="fecha" id="fechaDatosFiscales" style="display:none">
                                 <button type="submit" class="btn btn-primary rounded-0">DATOS FISCALES</button>

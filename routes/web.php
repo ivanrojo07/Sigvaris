@@ -120,7 +120,7 @@ Route::get('pacientes/{paciente}/ventas', 'Venta\VentaController@createConPacien
 
 Route::post('get_ventas','Venta\VentaController@getVentas');
 Route::post('get-ventas-clientes','Venta\VentaController@getVentasClientes');
-Route::post('corte-caja/export/datos-fiscales', 'CorteCaja\CorteCajaController@download')->name('corte-caja.export.datos-fiscales');
+Route::get('corte-caja/export/datos-fiscales', 'CorteCaja\CorteCajaController@download')->name('corte-caja.export.datos-fiscales');
 Route::get('corte-caja/export/Perisur', 'CorteCaja\CorteCajaController@export')->name('corte-caja.export.perisur');
 Route::get('corte-caja/export/Perisur/ventas', 'CorteCaja\CorteCajaController@exportV')->name('corte-caja.export.perisur.ventas');
 Route::get('corte-caja/export/Perisur/cliente', 'CorteCaja\CorteCajaController@exportC')->name('corte-caja.export.perisur.cliente');
