@@ -9,7 +9,7 @@
             <h3 class="text-center text-uppercase text-muted">CORTE DE CAJA</h3>
         </div>
         {{-- CONTENEDOR FECHA Y HORA --}}
-        <div class="col-12 col-lg-9 mt-4">
+        <div class="col-12 col-lg-6 mt-4">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -33,10 +33,19 @@
             <div class="card">
                 <div class="card-body">
                     <label class="text-uppercase text-muted">Exportar excel</label>
+                    <a href="{{route('corte-caja.export.polanco')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Polanco</a>
+                    <a href="{{route('corte-caja.export.polanco.ventas')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Polanco Ventas totales</a>
+                    <a href="{{route('corte-caja.export.polanco.cliente')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Polanco Clientes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <label class="text-uppercase text-muted">Exportar excel</label>
                     <a href="{{route('corte-caja.export.perisur')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Perisur</a>
                     <a href="{{route('corte-caja.export.perisur.ventas')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Perisur Ventas totales</a>
                     <a href="{{route('corte-caja.export.perisur.cliente')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Perisur Clientes</a>
-                    <a href="{{route('corte-caja.export.polanco')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Polanco</a>
                 </div>
             </div>
         </div>

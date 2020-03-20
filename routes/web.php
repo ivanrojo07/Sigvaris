@@ -124,6 +124,8 @@ Route::get('corte-caja/export/Perisur', 'CorteCaja\CorteCajaController@export')-
 Route::get('corte-caja/export/Perisur/ventas', 'CorteCaja\CorteCajaController@exportV')->name('corte-caja.export.perisur.ventas');
 Route::get('corte-caja/export/Perisur/cliente', 'CorteCaja\CorteCajaController@exportC')->name('corte-caja.export.perisur.cliente');
 Route::get('corte-caja/export/Polanco', 'CorteCaja\CorteCajaController@export2')->name('corte-caja.export.polanco');
+Route::get('corte-caja/export/Polanco/ventas', 'CorteCaja\CorteCajaController@exportV')->name('corte-caja.export.polanco.ventas');
+Route::get('corte-caja/export/Polanco/cliente', 'CorteCaja\CorteCajaController@exportC')->name('corte-caja.export.polanco.cliente');
 Route::resource('corte-caja', 'CorteCaja\CorteCajaController');
 Route::resource('ventas.cambio-fisico', 'Venta\CambioFisicoController');
 Route::resource('ventas.damage-oot', 'Venta\DamageOOTController');
