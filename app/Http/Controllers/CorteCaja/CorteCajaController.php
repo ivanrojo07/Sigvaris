@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CorteCaja;
 use App\Exports\CorteCajaExport;
 use App\Exports\CorteCajaPExport;
 use App\Exports\TotalVentasExport;
+use App\Exports\ClienteVentasExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Venta;
@@ -97,7 +98,7 @@ class CorteCajaController extends Controller
         return Excel::download(new TotalVentasExport, 'corte_cajaV.xls');
     }
     public function exportC(){
-        return Excel::download(new CorteCajaExport, 'corte_caja.xls');
+        return Excel::download(new ClienteVentasExport, 'corte_caja.xls');
     }
 
 
