@@ -64,7 +64,7 @@
                                             <h3>Pacientes</h3>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <label>Buscar:<input type="search" id="BuscarPaciente">
+                                            <label>Buscar:<input type="search" id="BuscarPaciente" onkeypress="return event.keyCode!=13">
                                             </label>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                             <h3>Productos</h3>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <label>Buscar:<input type="text" id="BuscarProducto">
+                                            <label>Buscar:<input type="text" id="BuscarProducto" onkeypress="return event.keyCode!=13">
                                             </label>
                                         </div>
                                     </div>
