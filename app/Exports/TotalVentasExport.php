@@ -42,7 +42,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
         array_unique($auxRe);
         array_unique($NumDoc);
         $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc));
-        dd($todo);
+        
         return Venta::where('fecha', '>=', date('Y-m-d'))
             ->where('oficina_id',1)
             ->get()
@@ -50,8 +50,9 @@ class TotalVentasExport implements FromCollection, WithHeadings
             //->pluck('productos')
             ->flatten()
             ->map(function ($Venta,$todo) {
+                dd($todo);
                 return collect([
-                    "223",
+                    $todo['TotalVentas'],
                     $todo['VentasIVA'],
                     $todo['VentasSIVA'],
                     $todo['auxNu']+$todo['auxRe'],
