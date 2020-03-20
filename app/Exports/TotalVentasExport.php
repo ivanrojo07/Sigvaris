@@ -19,7 +19,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
     public function collection()
     {
         $index=0;
-        return [1,1,1,1,1,1,1];
+        return collect([1,1,1,1,1,1,1]);
 
     }
 
