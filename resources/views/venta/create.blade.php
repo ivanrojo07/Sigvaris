@@ -369,6 +369,18 @@
                                             <label for="" class="text-uppercase text-muted">NUM. INT</label>
                                             <input type="text" class="form-control" id="num_int" name="num_int">
                                         </div>
+                                        <div class="col-12 col-md-3 mt-3">
+                                            <label for="" class="text-uppercase text-muted">CP</label>
+                                            <input type="text" class="form-control" id="codigo_postal" name="codigo_postal">
+                                        </div>
+                                        <div class="col-12 col-md-3 mt-3">
+                                            <label for="" class="text-uppercase text-muted">Ciudad</label>
+                                            <input type="text" class="form-control" id="ciudad" name="ciudad">
+                                        </div>
+                                        <div class="col-12 col-md-3 mt-3">
+                                            <label for="" class="text-uppercase text-muted">Delegación o municipio</label>
+                                            <input type="text" class="form-control" id="alcaldia_o_municipio" name="alcaldia_o_municipio">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -805,6 +817,9 @@
                 $('#calle').val(datos_fiscales.calle);
                 $('#num_ext').val(datos_fiscales.num_ext);
                 $('#num_int').val(datos_fiscales.num_int);
+                $('#codigo_postal').val(datos_fiscales.codigo_postal);
+                $('#ciudad').val(datos_fiscales.ciudad);
+                $('#alcaldia_o_municipio').val(datos_fiscales.alcaldia_o_municipio);
             }
         });
 

@@ -35,7 +35,7 @@ class VentaController extends Controller
     public function index()
     {
         $medicos = Doctor::get();
-        $ventas = Venta::orderBy('fecha','desct')->paginate(5);
+        $ventas = Venta::orderBy('fecha', 'desct')->paginate(5);
         return view('venta.index_all', ['ventas' => $ventas, 'medicos' => $medicos]);
     }
 
@@ -53,8 +53,8 @@ class VentaController extends Controller
     {
         $hoy = Carbon::now()->toDateString();
         $descuentos = Descuento::where('inicio', '<=', $hoy)->where('fin', '>=', $hoy)->get();
-        $productos = Producto::where('id','<',1)->get();
-        $pacientes = Paciente::where('id','<',1)->get();
+        $productos = Producto::where('id', '<', 1)->get();
+        $pacientes = Paciente::where('id', '<', 1)->get();
         $empleadosFitter = Empleado::fitters()->get();
         return view('venta.create', [
             'pacientes' => null,
@@ -71,16 +71,18 @@ class VentaController extends Controller
         //dd($paciente);
         $hoy = Carbon::now()->toDateString();
         $descuentos = Descuento::where('inicio', '<=', $hoy)->where('fin', '>=', $hoy)->get();
-        $productos = Producto::where('id','<',1)->get();
+        $productos = Producto::where('id', '<', 1)->get();
         $pacientes = Paciente::get();
         $empleadosFitter = Empleado::fitters()->get();
         //dd($pacientes);
-        return view('venta.create', ['pacientes' => $pacientes, 
-                                    'paciente' => $paciente, 
-                                    'descuentos' => $descuentos, 
-                                    'productos' => $productos, 
-                                    'folio' => Venta::count() + 1,
-                                    'empleadosFitter' => $empleadosFitter]);
+        return view('venta.create', [
+            'pacientes' => $pacientes,
+            'paciente' => $paciente,
+            'descuentos' => $descuentos,
+            'productos' => $productos,
+            'folio' => Venta::count() + 1,
+            'empleadosFitter' => $empleadosFitter
+        ]);
     }
     /**
      * Store a newly created resource in storage.
@@ -97,7 +99,7 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         //dd($request->PagoEfectivo+$request->PagoTarjeta==$request->total);
-        if (!($request->PagoEfectivo+$request->PagoTarjeta==round($request->total,2))) {
+        if (!($request->PagoEfectivo + $request->PagoTarjeta == round($request->total, 2))) {
             return redirect()
                 ->back()
                 ->withErrors(['Error con importes de motos en efectivo o tarjeta'])
@@ -130,7 +132,7 @@ class VentaController extends Controller
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
 
-        if( $request->facturar == "1" ){
+        if ($request->facturar == "1") {
             $venta->update(['requiere_factura' => 1]);
             DatoFiscal::updateOrCreate(
                 ['paciente_id' => $request->paciente_id],
@@ -141,34 +143,37 @@ class VentaController extends Controller
                     'correo' => $request->correo,
                     'rfc' => $request->rfc,
                     'num_ext' => $request->num_ext,
-                    'num_int' => $request->num_int
+                    'num_int' => $request->num_int,
+                    'codigo_postal' => $request->codigo_postal,
+                    'ciudad' => $request->ciudad,
+                    'alcaldia_o_municipio' => $request->alcaldia_o_municipio
                 ]
             );
         }
 
         $CRM = new Crm(
-                    array(
-                        'paciente_id' => $request->input('paciente_id'),
-                        'estado_id'   => 1,
-                        'hora'        => '00:00',
-                        'forma_contacto' => 'Telefono',
-                        'fecha_contacto' => Carbon::now()->addMonths(5),
-                        'fecha_aviso' => Carbon::now()->addMonths(5)
+            array(
+                'paciente_id' => $request->input('paciente_id'),
+                'estado_id'   => 1,
+                'hora'        => '00:00',
+                'forma_contacto' => 'Telefono',
+                'fecha_contacto' => Carbon::now()->addMonths(5),
+                'fecha_aviso' => Carbon::now()->addMonths(5)
 
-                    )
-                );
+            )
+        );
         $CRM->save();
         $CRM = new Crm(
-                    array(
-                        'paciente_id' => $request->input('paciente_id'),
-                        'estado_id'   => 5,
-                        'hora'        => '00:00',
-                        'forma_contacto' => 'Telefono',
-                        'fecha_contacto' => Carbon::now()->addDays(8),
-                        'fecha_aviso' => Carbon::now()->addDays(8)
+            array(
+                'paciente_id' => $request->input('paciente_id'),
+                'estado_id'   => 5,
+                'hora'        => '00:00',
+                'forma_contacto' => 'Telefono',
+                'fecha_contacto' => Carbon::now()->addDays(8),
+                'fecha_aviso' => Carbon::now()->addDays(8)
 
-                    )
-                );
+            )
+        );
         $CRM->save();
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
