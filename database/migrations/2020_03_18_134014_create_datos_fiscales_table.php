@@ -32,7 +32,7 @@ class CreateDatosFiscalesTable extends Migration
             $table->string('codigo_postal')->nullable();
             $table->timestamps();
 
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            // $table->foreign('paciente_id')->references('id')->on('pacientes');
         });
     }
 
