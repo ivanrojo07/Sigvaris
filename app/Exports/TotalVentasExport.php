@@ -18,8 +18,49 @@ class TotalVentasExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        $index=0;
-        return collect([1,1,1,1,1,1,1]);
+        $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
+            ->where('oficina_id',1)
+            ->get();
+        $TotalVentas=$Ventas->count();
+        $VentasIVA= $Venta->sum('total');
+        $VentasSIVA=$Venta->sum('subtotal');
+        $auxNu=[];
+        $auxRe=[];
+        $NumDoc=[];
+        foreach ($Ventas as $Venta) {
+            if ( $Venta->paciente->ventas()->count()==1) {
+                array_push ($auxNu,$Venta->paciente->id);
+            }else{
+                array_push ($auxRe,$Venta->paciente->id);
+            }
+            if ( $Venta->paciente->doctor != null) {
+                array_push ($NumDoc, $Venta->paciente->doctor->id);
+            }
+
+        }
+        array_unique($auxNu);
+        array_unique($auxRe);
+        array_unique($NumDoc);
+        return Venta::where('fecha', '>=', date('Y-m-d'))
+            ->where('oficina_id',1)
+            ->get()
+            ->first()
+            //->pluck('productos')
+            ->flatten()
+            ->map(
+                
+                function ($Venta,$TotalVentas,$VentasIVA,$VentasSIVA,$auxNu,$auxRe,$NumDoc) {
+                return collect([
+                    $TotalVentas,
+                    $VentasIVA,
+                    $VentasSIVA,
+                    count($auxNu)+count($auxRe),
+                    count($auxNu),
+                    count($auxRe),
+                    count($NumDoc)
+
+                ]);
+            });
 
     }
 
