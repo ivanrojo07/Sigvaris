@@ -22,8 +22,8 @@ class TotalVentasExport implements FromCollection, WithHeadings
             ->where('oficina_id',1)
             ->get();
         $TotalVentas=$Ventas->count();
-        $VentasIVA= $Venta->sum('total');
-        $VentasSIVA=$Venta->sum('subtotal');
+        $VentasIVA= $Ventas->sum('total');
+        $VentasSIVA=$Ventas->sum('subtotal');
         $auxNu=[];
         $auxRe=[];
         $NumDoc=[];
