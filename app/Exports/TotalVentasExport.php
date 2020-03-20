@@ -18,41 +18,32 @@ class TotalVentasExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        
-        return Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('id',1)
-            ->get()
-            //->first()
-            //->pluck('productos')
-            ->flatten()
-            ->map(function ($Venta) {
-                $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
-                    ->where('oficina_id',1)
-                    ->get();
-                $TotalVentas=$Ventas->count();
-                $VentasIVA= $Ventas->sum('total');
-                $VentasSIVA=$Ventas->sum('subtotal');
-                $auxNu=[];
-                $auxRe=[];
-                $NumDoc=[];
-                foreach ($Ventas as $Venta) {
-                    if ( $Venta->paciente->ventas()->count()==1) {
-                        array_push ($auxNu,$Venta->paciente->id);
-                    }else{
-                        array_push ($auxRe,$Venta->paciente->id);
-                    }
-                    if ( $Venta->paciente->doctor != null) {
-                        array_push ($NumDoc, $Venta->paciente->doctor->id);
-                    }
+        $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
+            ->where('oficina_id',1)
+            ->get();
+        $TotalVentas=$Ventas->count();
+        $VentasIVA= $Ventas->sum('total');
+        $VentasSIVA=$Ventas->sum('subtotal');
+        $auxNu=[];
+        $auxRe=[];
+        $NumDoc=[];
+        foreach ($Ventas as $Venta) {
+            if ( $Venta->paciente->ventas()->count()==1) {
+                array_push ($auxNu,$Venta->paciente->id);
+            }else{
+                array_push ($auxRe,$Venta->paciente->id);
+            }
+            if ( $Venta->paciente->doctor != null) {
+                array_push ($NumDoc, $Venta->paciente->doctor->id);
+            }
 
-                }
-                array_unique($auxNu);
-                array_unique($auxRe);
-                array_unique($NumDoc);
-                $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc));
-                
-                dd($todo);
-                return collect([
+        }
+        array_unique($auxNu);
+        array_unique($auxRe);
+        array_unique($NumDoc);
+        $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc));
+        
+        return collect([
                     $todo['TotalVentas'],
                     $todo['VentasIVA'],
                     $todo['VentasSIVA'],
@@ -62,7 +53,16 @@ class TotalVentasExport implements FromCollection, WithHeadings
                     $todo['NumDoc']
 
                 ]);
-            });
+        /**return Venta::where('fecha', '>=', date('Y-m-d'))
+            ->where('oficina_id',1)
+            ->get()
+            //->first()
+            //->pluck('productos')
+            ->flatten()
+            ->map(function ($Venta,$todo) {
+                dd($todo);
+                
+            });**/
 
     }
 
