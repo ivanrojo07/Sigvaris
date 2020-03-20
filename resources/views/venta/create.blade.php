@@ -428,7 +428,7 @@
         <tr id="producto_agregado${producto.id}">
             <td>
 
-                <input class="form-control cantidad" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1">
+                <input class="form-control cantidad" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1" iva="${producto.precio_publico_iva}">
                 <input class="form-control" type="hidden" name="producto_id[]" value="${producto.id}">
 
             </td>
@@ -438,7 +438,7 @@
             <td class="precio_individual">
                 ${producto.precio_publico}
             </td>
-            <td>${producto.precio_publico_iva}</td>
+            <td class="precio_individual_iva">${producto.precio_publico_iva}</td>
             <td class="precio_total">
                 ${producto.precio_publico}
             </td>
@@ -505,9 +505,13 @@
 
     function cambiarTotal(a, p){
         let cant = parseFloat(a.value);
+        let cantiva = parseFloat(a.iva);
+        
         let ind = parseFloat($(p).find('.precio_individual').first().text());
         let total = cant*ind;
+        let totaliva = cantiva*ind;
         $(p).find('.precio_total').text(total);
+        $(p).find('.precio_individual_iva').text(totaliva);
         cambiarTotalVenta();
     }
 
