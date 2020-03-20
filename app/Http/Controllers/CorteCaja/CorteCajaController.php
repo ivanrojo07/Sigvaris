@@ -99,7 +99,7 @@ class CorteCajaController extends Controller
         return Excel::download(new TotalVentasExport, 'corte_cajaV.xls');
     }
     public function exportC(){
-        return Excel::download(new ClienteVentasExport, 'corte_caja.xls');
+        return Excel::download(new ClienteVentasExport, 'corte_cajaC.xls');
     }
 
 
@@ -108,9 +108,9 @@ class CorteCajaController extends Controller
         return Excel::download(new CorteCajaPExport, 'corte_caja.xls');
     }
     public function export2V(){
-        return Excel::download(new CorteCajaPExport, 'corte_caja.xls');
+        return Excel::download(new CorteCajaPExport, 'corte_cajaV.xls');
     }
     public function export2C(){
-        return Excel::download(new ClienteVentasPExport, 'corte_caja.xls');
+        return Excel::download(new ClienteVentasPExport, 'corte_cajaC.xls');
     }
 }
