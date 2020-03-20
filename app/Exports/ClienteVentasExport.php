@@ -19,7 +19,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings
     public function collection()
     {
         return Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('oficina_id',1)
+            ->where('oficina_id',2)
             ->get()
             //->pluck('productos')
             ->flatten()
