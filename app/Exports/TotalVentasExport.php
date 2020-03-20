@@ -50,7 +50,7 @@ class TotalVentasExport implements FromCollection, WithHeadings
             ->flatten()
             ->map(function ($Venta,$todo) {
                 return collect([
-                    $todo['TotalVentas'],
+                    "223",
                     $todo['VentasIVA'],
                     $todo['VentasSIVA'],
                     $todo['auxNu']+$todo['auxRe'],
