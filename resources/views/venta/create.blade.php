@@ -64,7 +64,7 @@
                                             <h3>Pacientes</h3>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <label>Buscar:<input type="search" id="BuscarPaciente">
+                                            <label>Buscar:<input type="search" id="BuscarPaciente" onkeypress="return event.keyCode!=13">
                                             </label>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                             <h3>Productos</h3>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <label>Buscar:<input type="search" id="BuscarProducto">
+                                            <label>Buscar:<input type="text" id="BuscarProducto" onkeypress="return event.keyCode!=13">
                                             </label>
                                         </div>
                                     </div>
@@ -428,8 +428,8 @@
         <tr id="producto_agregado${producto.id}">
             <td>
 
-                <input class="form-control cantidad" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1">
-                <input class="form-control" type="hidden" name="producto_id[]" value="${producto.id}">
+                <input class="form-control cantidad" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1" iva=${producto.precio_publico_iva}>
+                <input class="form-control" type="hidden" name="producto_id[]" value="${producto.id}" iva=${producto.precio_publico_iva}>
 
             </td>
             <td>
@@ -438,7 +438,7 @@
             <td class="precio_individual">
                 ${producto.precio_publico}
             </td>
-            <td>${producto.precio_publico_iva}</td>
+            <td class="precio_individual_iva">${producto.precio_publico_iva}</td>
             <td class="precio_total">
                 ${producto.precio_publico}
             </td>
@@ -505,9 +505,14 @@
 
     function cambiarTotal(a, p){
         let cant = parseFloat(a.value);
+        let cantiva = parseFloat(a.getAttribute("iva"));
+        
         let ind = parseFloat($(p).find('.precio_individual').first().text());
         let total = cant*ind;
+        let totaliva = cantiva*cant;
+        console.log('----------',ind);
         $(p).find('.precio_total').text(total);
+        $(p).find('.precio_individual_iva').text(totaliva);
         cambiarTotalVenta();
     }
 

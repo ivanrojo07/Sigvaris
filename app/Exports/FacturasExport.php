@@ -56,7 +56,6 @@ class FacturasExport implements FromCollection, WithHeadings
                 ];
             } ),
         );
-        return Factura::get();
     }
 
     public function headings(): array
