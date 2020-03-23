@@ -23,6 +23,7 @@ class DatoFiscal extends Model
         'alcaldia_o_municipio',
         'estado',
         'codigo_postal',
+        'uso_cfdi'
     ];
 
     public function paciente(){

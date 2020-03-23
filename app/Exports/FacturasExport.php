@@ -9,25 +9,22 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class FacturasExport implements FromCollection, WithHeadings
 {
-    public function __construct($fecha)
+    public function __construct($fecha, $oficina_id)
     {
         $this->fecha = $fecha;
+        $this->oficina_id = $oficina_id;
     }
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        // dd($this->fecha);
         return collect(
-            Venta::where('requiere_factura',1)->where('fecha',"=",$this->fecha)->with('productos.ventas')->get()->pluck('productos')->flatten()->map( function($producto){
-                $venta = Venta::find( $producto->pivot->venta_id );
-                // dd($venta);
-                // dd();
-                // dd($producto->ventas->first());
+            Venta::where('requiere_factura', 1)->where('oficina_id',"=",$this->oficina_id)->where('fecha', "=", $this->fecha)->with('productos.ventas')->get()->pluck('productos')->flatten()->map(function ($producto) {
+                $venta = Venta::find($producto->pivot->venta_id);
                 return [
                     'clave' => 1,
-                    'cliente' => 'MOST ' . strtoupper( substr( $venta->oficina->nombre, 0, 3) ),
+                    'cliente' => 'MOST ' . strtoupper(substr($venta->oficina->nombre, 0, 3)),
                     'fecha_de_elaboracion' => $venta->fecha,
                     'numero_almacen_cabecera' => $venta->oficina->nombre == 'Polanco' ? 2 : 7,
                     'numero_de_moneda' => 1,
@@ -35,7 +32,7 @@ class FacturasExport implements FromCollection, WithHeadings
                     'tipo_de_cambio_02' => "tienda: " . $venta->oficina->nombre . " fecha venta: " . date('d-m-Y'),
                     // 'observaciones' => 'tienda: ' . $venta->oficina->nombre . " fecha venta: " . date('d-m-Y'),
                     // 'observaciones' => 'tienda: ' . $venta->oficina->nombre . " fecha venta: " . date('d-m-Y'),
-                    'clave_del_vendedor' => strtoupper( substr( $venta->oficina->nombre, 0, 3) ) . ", " . $venta->oficina->nombre == 'Polanco' ? 8 : 7,
+                    'clave_del_vendedor' => strtoupper(substr($venta->oficina->nombre, 0, 3)) . ", " . $venta->oficina->nombre == 'Polanco' ? 8 : 7,
                     'nombre_del_paciente' => $venta->paciente->full_name,
                     'fecha_entrega' => date('d-m-Y'),
                     'fecha_vencimiento' => date('d-m-Y'),
@@ -54,7 +51,7 @@ class FacturasExport implements FromCollection, WithHeadings
                     'numero_almacen' => $venta->oficina->nombre == 'Polanco' ? 2 : 7,
                     'observaciones' => '',
                 ];
-            } ),
+            }),
         );
     }
 

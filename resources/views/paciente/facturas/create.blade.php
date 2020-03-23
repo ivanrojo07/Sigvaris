@@ -15,8 +15,17 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <label for="">📅 FECHA</label>
+                            <label for="" class="text-uppercase text-muted" >📅 FECHA</label>
                             <input type="date" name="fecha" class="form-control" id="fecha">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="" class="text-uppercase text-muted" >🏛️ SUCURSAL</label>
+                            <select name="oficina_id" class="form-control" id="oficina">
+                                <option value="">Seleccionar</option>
+                                @foreach ($oficinas as $oficina)
+                                    <option value="{{$oficina->id}}">{{$oficina->nombre}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <hr>
@@ -24,13 +33,16 @@
                         <div class="col-12">
                             <form action="{{route('facturas.download')}}" method="POST" class="form-inline float-right">
                                 @csrf
+                                <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
                                 <input type="date" name="fecha" id="fechaFactura" style="display:none">
-                                <button type="submit" class="btn btn-primary rounded-0">FACTURA</button>
+                                <button type="submit" class="btn btn-primary rounded-0">FACTURA MOSTRADOR</button>
                             </form>
-                            <form action="{{route('corte-caja.export.datos-fiscales')}}" method="GET" class="form-inline">
+                            <form action="{{route('corte-caja.export.datos-fiscales')}}" method="GET"
+                                class="form-inline">
                                 @csrf
+                                <input type="text" name="oficina_id" id="oficinaIdDatosFiscales" style="display:none">
                                 <input type="date" name="fecha" id="fechaDatosFiscales" style="display:none">
-                                <button type="submit" class="btn btn-primary rounded-0">DATOS FISCALES</button>
+                                <button type="submit" class="btn btn-primary rounded-0">FACTURA</button>
                             </form>
                         </div>
                     </div>
@@ -42,6 +54,12 @@
 
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
+
+    $(document).on('change', '#oficina', function(){
+        $('#oficinaIdFactura').val( $(this).val() );
+        $('#oficinaIdDatosFiscales').val( $(this).val() );
+    });
+
     $(document).on('change','#fecha',function(){
         $('#fechaFactura').val( $(this).val() );
         $('#fechaDatosFiscales').val( $(this).val() );

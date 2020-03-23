@@ -8,9 +8,10 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class DatosFiscalesExport implements FromCollection, WithHeadings
 {
-    public function __construct($fecha)
+    public function __construct($fecha, $oficina_id)
     {
         $this->fecha = $fecha;
+        $this->oficina_id = $oficina_id;
     }
     /**
      * @return \Illuminate\Support\Collection
@@ -19,6 +20,7 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
     {
         return Venta::where('requiere_factura', 1)
             ->where('fecha', $this->fecha)
+            ->where('oficina_id', $this->oficina_id)
             ->get()->pluck('paciente')
             ->flatten()
             ->pluck('datoFiscal')
@@ -39,7 +41,10 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
                     'ciudad' => $datos_fiscales->ciudad,
                     'alcaldia_o_municipio' => $datos_fiscales->alcaldia_o_municipio,
                     'estado' => $datos_fiscales->estado,
-                    'codigo_postal' => $datos_fiscales->codigo_postal
+                    'codigo_postal' => $datos_fiscales->codigo_postal,
+                    'porcentaje_descuento' => '',
+                    'nombre_descuento' => '',
+                    'uso_cfdi' => $datos_fiscales->uso_cfdi,
                 ];
             });
     }
@@ -62,6 +67,9 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
             'ALCALDIA O MUNICIPIO',
             'ESTADO',
             'CODIGO POSTAL',
+            'PORCENTAJE DESCUENTO',
+            'NOMBRE DESCUENTO',
+            'USO CFDI'
         ];
     }
 }

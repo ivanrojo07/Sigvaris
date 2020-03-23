@@ -7,6 +7,7 @@ use App\Factura;
 use App\Paciente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Oficina;
 use App\Venta;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -44,7 +45,9 @@ class FacturaController extends Controller
      */
     public function create()
     {
-        return view('paciente.facturas.create',['pacientes'=>Paciente::get()]);
+        $pacientes = Paciente::get();
+        $oficinas = Oficina::get();
+        return view('paciente.facturas.create',['pacientes'=>$pacientes, 'oficinas' => $oficinas]);
     }
 
     /**
@@ -121,7 +124,7 @@ class FacturaController extends Controller
     }
 
     public function download(Request $request){
-        return Excel::download(new FacturasExport($request->fecha), 'facturas.xlsx');
+        return Excel::download(new FacturasExport($request->fecha, $request->oficina_id), 'facturas-mostrador.xlsx');
     }
 
     public function getVentas(Paciente $paciente)

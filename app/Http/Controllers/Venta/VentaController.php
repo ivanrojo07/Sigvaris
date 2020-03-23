@@ -146,7 +146,8 @@ class VentaController extends Controller
                     'num_int' => $request->num_int,
                     'codigo_postal' => $request->codigo_postal,
                     'ciudad' => $request->ciudad,
-                    'alcaldia_o_municipio' => $request->alcaldia_o_municipio
+                    'alcaldia_o_municipio' => $request->alcaldia_o_municipio,
+                    'uso_cfdi' => $request->uso_cfdi
                 ]
             );
         }

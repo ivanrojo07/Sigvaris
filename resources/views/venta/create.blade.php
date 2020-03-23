@@ -381,6 +381,33 @@
                                             <label for="" class="text-uppercase text-muted">Delegación o municipio</label>
                                             <input type="text" class="form-control" id="alcaldia_o_municipio" name="alcaldia_o_municipio">
                                         </div>
+                                        <div class="col-12 col-md-3 mt-3">
+                                            <label for="" class="text-uppercase text-muted">Uso cfdi</label>
+                                            <select name="uso_cfdi" class="form-control" id="uso_cfdi">
+                                                <option value="">Seleccionar</option>
+                                                <option value="D01 - Honorarios médicos, dentales y gastos hospitalarios">D01 - Honorarios médicos, dentales y gastos hospitalarios</option>
+                                                <option value="D02 - Gastos médicos por incapacidad o discapacidad">D02 - Gastos médicos por incapacidad o discapacidad</option>
+                                                <option value="D03 - Gastos funerales">D03 - Gastos funerales</option>
+                                                <option value="D04 - Donativos">D04 - Donativos</option>
+                                                <option value="D05 - Interéses reales efectivamente pagados por créditos hipotecarios (casa habitación)">D05 - Interéses reales efectivamente pagados por créditos hipotecarios (casa habitación)</option>
+                                                <option value="D06 - Aportaciones voluntarias al SAR">D06 - Aportaciones voluntarias al SAR</option>
+                                                <option value="D08 - Gastos de transportación escolar obligatoria">D08 - Gastos de transportación escolar obligatoria</option>
+                                                <option value="D09 - Depositos en cuentas para el ahorro, primas que tengan como base planes de pensión">D09 - Depositos en cuentas para el ahorro, primas que tengan como base planes de pensión</option>
+                                                <option value="D10 - Pagos por servicios educativos (colegiaturas)">D10 - Pagos por servicios educativos (colegiaturas)</option>
+                                                <option value="G01 - Adquisición de mercancias">G01 - Adquisición de mercancias</option>
+                                                <option value="G02 - Devoluciones, descuentos o bonificaciones">G02 - Devoluciones, descuentos o bonificaciones</option>
+                                                <option value="G03 - Gastos en general">G03 - Gastos en general</option>
+                                                <option value="I01 - Construcciones">I01 - Construcciones</option>
+                                                <option value="I02 - Moviliario y equipo de oficina por inversiones">I02 - Moviliario y equipo de oficina por inversiones</option>
+                                                <option value="I03 - Equipo de transporte">I03 - Equipo de transporte</option>
+                                                <option value="I04 - Equipo de cómputo y accesorios">I04 - Equipo de cómputo y accesorios</option>
+                                                <option value="I05 - Dados, troqueles, moldes, matrices y herramental">I05 - Dados, troqueles, moldes, matrices y herramental</option>
+                                                <option value="I06 - Comunicaciones telefónicas">I06 - Comunicaciones telefónicas</option>
+                                                <option value="I07 - Comunicaciones satelitales">I07 - Comunicaciones satelitales</option>
+                                                <option value="I08 - Otra maquinaria y equipo">I08 - Otra maquinaria y equipo</option>
+                                                <option value="P01 - Por definir">P01 - Por definir</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -825,6 +852,7 @@
                 $('#codigo_postal').val(datos_fiscales.codigo_postal);
                 $('#ciudad').val(datos_fiscales.ciudad);
                 $('#alcaldia_o_municipio').val(datos_fiscales.alcaldia_o_municipio);
+                $('#uso_cfdi').val(datos_fiscales.uso_cfdi);
             }
         });
 

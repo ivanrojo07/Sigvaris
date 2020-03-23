@@ -119,6 +119,6 @@ class CorteCajaController extends Controller
     public function download(Request $request)
     {
         // dd($request->fecha);
-        return Excel::download(new DatosFiscalesExport($request->fecha), 'datos-fiscales.xlsx');
+        return Excel::download(new DatosFiscalesExport($request->fecha, $request->oficina_id), 'factura.xlsx');
     }
 }
