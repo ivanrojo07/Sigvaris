@@ -8,9 +8,8 @@ use App\Exports\ClienteVentasExport;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use Maatwebsite\Excel\Concerns\SkipsUnknownSheets;
 
-class SheetsExport implements  WithMultipleSheets, SkipsUnknownSheets
+class SheetsExport implements  WithMultipleSheets
 {
 
     
