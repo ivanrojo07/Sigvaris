@@ -10,8 +10,9 @@ use App\Descuento;
 use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class ClienteVentasPExport implements FromCollection, WithHeadings
+class ClienteVentasPExport implements FromCollection, WithHeadings, WithTitle
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -70,5 +71,9 @@ class ClienteVentasPExport implements FromCollection, WithHeadings
 
 
         ];
+    }
+    public function title(): string
+    {
+        return 'Clientes';
     }
 }

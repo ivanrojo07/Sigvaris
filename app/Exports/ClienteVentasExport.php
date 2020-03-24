@@ -74,6 +74,6 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
     }
     public function title(): string
     {
-        return 'Corte de Caja';
+        return 'Clientes';
     }
 }

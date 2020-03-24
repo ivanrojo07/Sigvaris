@@ -12,6 +12,8 @@ use App\Exports\CorteCajaPExport;
 use App\Exports\TotalVentasPExport;
 use App\Exports\ClienteVentasPExport;
 
+use App\Exports\SheetsPExport;
+
 use App\Exports\DatosFiscalesExport;
 
 
@@ -113,7 +115,7 @@ class CorteCajaController extends Controller
 
 
     public function export2(){
-        return Excel::download(new CorteCajaPExport, 'corte_caja.xls');
+        return Excel::download(new SheetsPExport, 'corte_caja.xls');
     }
     public function export2V(){
         return Excel::download(new TotalVentasPExport, 'corte_cajaV.xls');
