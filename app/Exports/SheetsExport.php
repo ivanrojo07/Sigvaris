@@ -8,18 +8,12 @@ use App\Exports\ClienteVentasExport;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\SkipsUnknownSheets;
 
-class SheetsExport implements FromArray, WithMultipleSheets
+class SheetsExport implements  WithMultipleSheets, SkipsUnknownSheets
 {
 
-    public function __construct()
-    {
-
-    }
-
-    public function array(): array
-    {
-    }
+    
 
     public function sheets(): array
     {
