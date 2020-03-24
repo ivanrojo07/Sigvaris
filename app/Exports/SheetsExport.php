@@ -8,9 +8,9 @@ use App\Exports\ClienteVentasExport;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
-use Maatwebsite\Excel\Concerns\WithTitle;
 
-class SheetsExport implements  WithMultipleSheets, WithTitle
+
+class SheetsExport implements  WithMultipleSheets
 {
 
     
@@ -25,12 +25,5 @@ class SheetsExport implements  WithMultipleSheets, WithTitle
 
         return $sheets;
     }
-    public function title(): array
-    {
-        return  [
-            'Corte de Caja' ,
-            'Ventas Totales',
-            'Cientes '
-        ];
-    }
+    
 }
