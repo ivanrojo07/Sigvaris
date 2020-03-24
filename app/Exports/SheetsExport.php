@@ -11,16 +11,14 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class SheetsExport implements FromArray, WithMultipleSheets
 {
-    protected $sheets;
 
-    public function __construct(array $sheets)
+    public function __construct()
     {
-        $this->sheets = $sheets;
+
     }
 
     public function array(): array
     {
-        return $this->sheets;
     }
 
     public function sheets(): array
