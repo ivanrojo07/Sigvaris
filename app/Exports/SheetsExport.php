@@ -24,9 +24,9 @@ class SheetsExport implements FromArray, WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [
-            new CorteCajaExport(),
-            new TotalVentasExport(),
-            new ClienteVentasExport()
+            'Corte de Caja' => new CorteCajaExport(),
+            'Ventas Totales' => new TotalVentasExport(),
+            'Cientes ' => new ClienteVentasExport()
         ];
 
         return $sheets;
