@@ -198,9 +198,9 @@
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
-                                                    
-                                                     value="1">
-                                                <label class="custom-control-label" >INAPAM</label>
+                                                    href="#collapseExample" role="button"
+                                                    aria-expanded="false" aria-controls="collapseExample" value="1">
+                                                <label class="custom-control-label" for="customCheck1">INAPAM</label>
                                             </div>                                        </div>
                                     </div>
                                     
