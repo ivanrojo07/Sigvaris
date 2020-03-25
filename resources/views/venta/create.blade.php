@@ -200,7 +200,7 @@
                                                 <input type="checkbox" class="custom-control-input"
                                                     
                                                      value="1">
-                                                <label class="custom-control-label" for="customCheck1">INAPAM</label>
+                                                <label class="custom-control-label" >INAPAM</label>
                                             </div>                                        </div>
                                     </div>
                                     
