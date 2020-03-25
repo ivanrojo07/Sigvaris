@@ -72,6 +72,7 @@ class PacienteExpedienteController extends Controller
         }else{
              $inapam==$inapam[2];
         }
+        dd($inapam);
         $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
             
             'aviso_privacidad'=>$aviso_privacidad,
