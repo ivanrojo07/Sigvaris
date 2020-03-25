@@ -195,9 +195,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-12">
-                                            <input type="checkbox" class="custom-control-input" id="ii" name="ii" value="1">
-                                            <label class="custom-control-label" for="customCheck1">INAPAM</label>
+                                        <div class="col-12 col-sm-12 col-md-12 text-center">
+                                            <a>
+                                                <input type="checkbox" class="custom-control-input" id="ii" name="ii" value="1">
+                                                <label class="custom-control-label" for="customCheck1">INAPAM</label>
+                                            </a>
                                         </div>
                                     </div>
                                     
