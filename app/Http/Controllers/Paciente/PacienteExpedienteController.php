@@ -48,13 +48,13 @@ class PacienteExpedienteController extends Controller
     {
        
         if ($request->aviso_privacidad && $request->file('aviso_privacidad')->isValid()) {
-            $aviso_privacidad = explode("/",$request->aviso_privacidad->storeAs('expedientes/'.$paciente->id, 'aviso_privacidad.'.$request->aviso_privacidad->extension(), 'public'));
+            $aviso_privacidad = explode("/",$request->aviso_privacidad->storeAs('expedientes/'.$paciente->id, '/aviso_privacidad.'.$request->aviso_privacidad->extension(), 'public'));
         }
         if ($request->identificacion && $request->file('identificacion')->isValid()) {
-            $identificacion = explode("/",$request->identificacion->storeAs('expedientes/'.$paciente->id, 'identificacion.'.$request->identificacion->extension(), 'public'));
+            $identificacion = explode("/",$request->identificacion->storeAs('expedientes/'.$paciente->id, '/identificacion.'.$request->identificacion->extension(), 'public'));
         }
         if ($request->inapam && $request->file('inapam')->isValid()) {
-            $inapam = explode("/",$request->inapam->storeAs('expedientes/'.$paciente->id, 'inapam.'.$request->inapam->extension(), 'public'));
+            $inapam = explode("/",$request->inapam->storeAs('expedientes/'.$paciente->id, '/inapam.'.$request->inapam->extension(), 'public'));
         }
 
         if (!isset($aviso_privacidad)) {
@@ -70,7 +70,7 @@ class PacienteExpedienteController extends Controller
         if (!isset($inapam)) {
             $inapam=null;
         }else{
-             $inapam==$inapam[2];
+             $inapam='inapam.'.$request->inapam->extension();
         }
         dd($inapam);
         $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
