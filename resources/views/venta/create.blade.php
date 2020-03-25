@@ -549,7 +549,7 @@
         let totaliva = cantiva*cant;
         console.log('----------',ind);
         $(p).find('.precio_total').text(total);
-        $(p).find('.precio_individual_iva').text(parseFloat(totaliva));
+        $(p).find('.precio_individual_iva').text(parseFloat(totaliva).toFixed(2));
         cambiarTotalVenta();
     }
 
