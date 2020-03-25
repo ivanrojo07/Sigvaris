@@ -197,7 +197,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
                                             
-                                                <input type="checkbox" class="custom-control-input" >
+                                                <input type="checkbox"  >
                                                 <label class="custom-control-label" >INAPAM</label>
                                             
                                         </div>
