@@ -196,11 +196,12 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
-                                            
-                                                <input type="checkbox"  >
-                                                <label class="custom-control-label" >INAPAM</label>
-                                            
-                                        </div>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    
+                                                     value="1">
+                                                <label class="custom-control-label" for="customCheck1">INAPAM</label>
+                                            </div>                                        </div>
                                     </div>
                                     
                                     {{-- Pagos Y tarjeta --}}
