@@ -196,10 +196,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
-                                            <a>
-                                                <input type="checkbox" class="custom-control-input" id="ii" name="ii" >
+                                            
+                                                <input type="checkbox" class="custom-control-input" >
                                                 <label class="custom-control-label" >INAPAM</label>
-                                            </a>
+                                            
                                         </div>
                                     </div>
                                     
