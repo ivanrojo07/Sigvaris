@@ -70,7 +70,7 @@ class PacienteExpedienteController extends Controller
         if (!isset($inapam)) {
             $inapam=null;
         }else{
-             $inapam=='inapam.'.$request->inapam->extension();
+             $inapam==$inapam[2];
         }
         $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
             
