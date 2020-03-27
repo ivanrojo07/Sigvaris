@@ -479,6 +479,7 @@
         if (aux.toFixed(2)!=$('#total').val()) {
             $('#total').val(aux.toFixed(2));
         }
+        $('#INAPAM').prop("inam",0);
     }
 
     var checkbox = document.getElementById('INAPAM');
