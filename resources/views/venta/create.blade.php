@@ -526,6 +526,7 @@
             </td>
         </tr>`);
         cambiarTotalVenta();
+        $('#BuscarProducto').val("");
     }
 
     function quitarProducto(p){
