@@ -486,7 +486,7 @@
             </td>
         </tr>`);
         cambiarTotalVenta();
-        console.log($('customCheck1').val());
+        console.log($('customCheck1').attr("aria-expanded"));
     }
 
     function quitarProducto(p){
