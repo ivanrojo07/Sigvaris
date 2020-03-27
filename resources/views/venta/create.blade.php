@@ -327,6 +327,14 @@
                                             <input type="number" required="" class="form-control" name="total"
                                                 id="total" value="0" min="1" step="0.01" readonly>
                                         </div>
+                                        {{-- INPUT DESCUENTO --}}
+                                        <div class="col-12 col-sm-6 col-md-4 mt-2">
+
+                                            <label for="" class="text-uppercase text-muted">Descuento de INAPAM: $</label>
+
+                                            <input type="number" required="" class="form-control" name="descuento"
+                                                id="descuentoInapam" value="0" step="0.01" readonly="">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -479,7 +487,7 @@
     function on(){
         var subtotal=parseFloat($('#subtotal').val());
         $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
-        $('#INAPAM').prop("inam", parseFloat($('#subtotal').val())*.05);
+        $('#descuentoInapam').val(parseFloat($('#subtotal').val())*.05);
     }
 
     function off(){
@@ -497,7 +505,7 @@
         if (aux.toFixed(2)!=$('#total').val()) {
             $('#total').val(aux.toFixed(2));
         }
-        $('#INAPAM').prop("inam",0);
+        $('#descuentoInapam').val(0);
     }
 
     var checkbox = document.getElementById('INAPAM');
