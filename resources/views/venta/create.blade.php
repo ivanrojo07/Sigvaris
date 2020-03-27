@@ -460,12 +460,19 @@
 </div>
 <script type="text/javascript">
     function sendFormValidador() {
-      if ($('#total').val()==($('#PagoTarjeta').val()+$('#PagoEfectivo').val())) {
+    if ($('#empleado_id').val()!=null) {
+        if ($('#total').val()==($('#PagoTarjeta').val()+$('#PagoEfectivo').val())) {
         document.getElementById("form-cliente").submit();
       } else {
         alert("Valida los campos de forma de pago");
         return false;
       }
+
+    }else{
+        alert("Valida el campo de empleado");
+        return false;
+    }
+      
     }
 
     function on(){
