@@ -933,16 +933,16 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        if ({{$paciente->expediente()->first()==null}}) {
-            $('#ErrorInapam').show();
-        }else{
             <?php
-            dd($paciente->expediente()->first()->inapam);
+            if ($paciente->expediente()->first()!=null) {
+                if ($paciente->expediente()->first()->inapam) {
+                    echo "$('#ErrorInapam').show();";
+                }
+            } else {
+                echo "$('#ErrorInapam').show();";
+            }
+            //dd($paciente->expediente()->first()->inapam);
             ?>
-            if ({{$paciente->expediente()->first(1)}}) {
-            $('#ErrorInapam').show();
-        }
-        }
         
         const pacienteId = {{$paciente->id}};
 
