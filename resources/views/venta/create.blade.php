@@ -196,6 +196,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
+                                            <div class="alert alert-danger" id="ErrorInapam" style="display: none;">
+                                                El INAPAM no esta cargado 
+                                            </div>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" id="INAPAM">
                                                 <label class="form-check-label" for="exampleCheck1">INAPAM</label>
@@ -456,6 +459,16 @@
 </div>
 
 <script>
+    function INAPAM_GET() {
+            var paciente_id=$('#paciente_id').val();
+            var total_productos=parseInt(0);
+            var subtotal=parseFloat($('#subtotal').val());
+            var iva=parseFloat($('#iva').val());
+            var des=parseFloat($('#descuento').val());
+            var sigpesos=parseInt($('#sigpesos_usar').val());
+            var aux=subtotal+iva-des-sigpesos;
+            $('#total').val(aux.toFixed(2));
+    }
     function agregarProducto(p){
         let producto = JSON.parse($(p).val());
         // alert(producto);
@@ -840,6 +853,7 @@
    @if(!isset($paciente))
     $(document).on('click', '.botonSeleccionCliente', async function(){
         
+                
         const pacienteId = $(this).attr('pacienteid');
 
         $.ajax({
@@ -919,7 +933,10 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-
+        if ({{$paciente->expediente->inapam}}==null) {
+            $('#ErrorInapam').show();
+        }
+        
         const pacienteId = {{$paciente->id}};
 
         const nombrePaciente = "{{ $paciente->nombre }}";
