@@ -30,6 +30,8 @@ class FacturasExport implements FromCollection, WithHeadings
             $ventas = $ventas->where('oficina_id', $this->oficina_id);
         }
 
+        ini_set('memory_limit', '-1');
+
         return collect(
             $ventas->where('requiere_factura', 0)->with('productos.ventas')->get()->pluck('productos')->flatten()->map(function ($producto) {
                 $venta = Venta::find($producto->pivot->venta_id);
