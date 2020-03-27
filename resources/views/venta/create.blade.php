@@ -515,7 +515,7 @@
     checkbox.addEventListener("change", comprueba, false);
 
     function comprueba(){
-
+        var pacienteId=$('#paciente_id').val();
         if(checkbox.checked){
             $.ajax({
                 url:`{{ url('/api/pacientes/${pacienteId}/inapam') }}`,
