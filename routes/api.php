@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('pacientes/{paciente}/datos_fiscales', 'ApiPacienteDatosFiscalesController@get');
+
+Route::get('pacientes/{paciente}/inapam', 'ApiPacienteDatosFiscalesController@getinapam');

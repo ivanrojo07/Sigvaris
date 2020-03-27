@@ -11,4 +11,16 @@ class ApiPacienteDatosFiscalesController extends Controller
     {
         return response()->json($paciente->datoFiscal);
     }
+    public function getinapam(Paciente $paciente)
+    {
+    	if ($paciente->expediente()->first()!=null) {
+            if ($paciente->expediente()->first()->inapam==null) {
+                return response()->json("1");
+            }
+        } else {
+            return response()->json("1");
+        }
+        return response()->json("0");
+        
+    }
 }

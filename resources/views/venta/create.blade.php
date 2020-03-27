@@ -879,6 +879,15 @@
             }
         });
 
+        $.ajax({
+            url:`{{ url('/api/pacientes/${pacienteId}/inapam') }}`,
+            type: 'GET',
+            success: function(inapam){
+                if (inapam=="1") {
+                    $('#ErrorInapam').show();
+                } 
+            }
+        });
         const nombrePaciente = $(`.nombrePaciente[pacienteId=${pacienteId}]`).html();
         const apellidosPaciente = $(`.apellidosPaciente[pacienteId=${pacienteId}]`).html();
 
