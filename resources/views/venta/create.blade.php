@@ -937,7 +937,7 @@
             $('#ErrorInapam').show();
         }else{
             <?php
-            dd($paciente->expediente()->first(1));
+            dd($paciente->expediente());
             ?>
             if ({{$paciente->expediente()->first(1)}}) {
             $('#ErrorInapam').show();
