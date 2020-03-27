@@ -835,7 +835,49 @@
                 }
             });
         });
+        $("#BuscarProducto").on('keyup', function (e) {
+          var keycode = e.keyCode || e.which;
+            if (keycode == 13) {
+                $("#productos").dataTable().fnDestroy();
+                //console.log($(this).val());
+                $('#productos').DataTable({
+                    "ajax":{
+                        type: "POST",
+                        url:"getProductos_nombre",
+                        data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                               "nombre" : $(this).val()
+                        }
+                    },
+                    "searching": false,
+                    pageLength : 3,
+                    'language':{
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Mostrar _MENU_ registros",
+                        "sZeroRecords":    "No se encontraron resultados",
+                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                        "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                        "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
 
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+            });
+            }
+        });
         $('#BuscarProducto').change( function() {
             $("#productos").dataTable().fnDestroy();
            //console.log($(this).val());
