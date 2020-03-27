@@ -19,8 +19,19 @@ class FacturasExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
+
+        $ventas = Venta::where('requiere_factura', 0);
+
+        if (!is_null($this->fecha)) {
+            $ventas = $ventas->where('fecha', "=", $this->fecha);
+        }
+
+        if (!is_null($this->oficina_id)) {
+            $ventas = $ventas->where('oficina_id', $this->oficina_id);
+        }
+
         return collect(
-            Venta::where('requiere_factura', 0)->where('oficina_id',"=",$this->oficina_id)->where('fecha', "=", $this->fecha)->with('productos.ventas')->get()->pluck('productos')->flatten()->map(function ($producto) {
+            $ventas->where('requiere_factura', 0)->with('productos.ventas')->get()->pluck('productos')->flatten()->map(function ($producto) {
                 $venta = Venta::find($producto->pivot->venta_id);
                 return [
                     'clave' => 1,

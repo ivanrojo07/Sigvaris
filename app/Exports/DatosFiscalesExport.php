@@ -18,13 +18,21 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return Venta::where('requiere_factura', 1)
-            ->where('fecha', $this->fecha)
-            ->where('oficina_id', $this->oficina_id)
-            ->get()->pluck('paciente')
+        $ventas = Venta::where('requiere_factura',1);
+
+        if($this->fecha){
+            $ventas = $ventas->where('fecha', $this->fecha);
+        }
+
+        if($this->oficina_id){
+            $ventas = $ventas->where('oficina_id', $this->oficina_id);
+        }
+
+        return $ventas->get()->pluck('paciente')
             ->flatten()
             ->pluck('datoFiscal')
             ->flatten()
+            ->unique()
             ->map(function ($datos_fiscales) {
                 return [
                     'paciente' => $datos_fiscales->paciente->nombre . " " . $datos_fiscales->paciente->paterno . " " . $datos_fiscales->paciente->materno,
