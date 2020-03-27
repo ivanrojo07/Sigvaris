@@ -12,7 +12,8 @@ class Descuento extends Model
         'id',
         'nombre',
         'inicio',
-        'fin'
+        'fin',
+        'descripcion'
     ];
     
     public function ventas(){
