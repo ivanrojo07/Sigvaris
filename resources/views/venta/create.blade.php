@@ -935,7 +935,7 @@
     $(document).ready(function(){
             <?php
             if ($paciente->expediente()->first()!=null) {
-                if ($paciente->expediente()->first()->inapam) {
+                if ($paciente->expediente()->first()->inapam==null) {
                     echo "$('#ErrorInapam').show();";
                 }
             } else {
