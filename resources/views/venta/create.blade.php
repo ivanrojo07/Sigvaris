@@ -935,7 +935,7 @@
     $(document).ready(function(){
         if ({{$paciente->expediente()->exists()==null}}) {
             $('#ErrorInapam').show();
-        }
+        }else{}
         
         const pacienteId = {{$paciente->id}};
 
