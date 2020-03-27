@@ -54,7 +54,7 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
                     'fecha' => $venta->fecha, 
                     'precio_sin_iva' => $producto->precio_publico,
                     'precio_con_iva' => $producto->precio_publico_iva,
-                    'descuento' => $venta->promocion ? $venta->promocion->descuento_de : '',
+                    'descuento' => $venta->promocion ? $venta->promocion->descuento_de . " (" . $venta->promocion->unidad_descuento . ")" : '',
                     'cantidad' => $producto->pivot->cantidad,
                     'sku' => $producto->sku,
                 ];
