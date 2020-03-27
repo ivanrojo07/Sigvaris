@@ -102,7 +102,7 @@ class VentaController extends Controller
         if (!($request->PagoEfectivo + $request->PagoTarjeta == round($request->total, 2))) {
             return redirect()
                 ->back()
-                ->withErrors(['Error con importes de motos en efectivo o tarjeta'])
+                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
                 ->withInput($request->input());
         }
         /*

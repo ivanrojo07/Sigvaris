@@ -486,6 +486,7 @@
             </td>
         </tr>`);
         cambiarTotalVenta();
+        console.log($('customCheck1').val());
     }
 
     function quitarProducto(p){
