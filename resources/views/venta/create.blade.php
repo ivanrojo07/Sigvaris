@@ -488,6 +488,8 @@
         var subtotal=parseFloat($('#subtotal').val());
         $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
         $('#descuentoInapam').val(parseFloat($('#subtotal').val())*.05);
+
+
     }
 
     function off(){
@@ -569,6 +571,8 @@
         });
         $('#promocion_id option:eq(0)').prop('selected',true);
         $('#descuento').val(0);
+        $('#descuentoInapam').val(0);
+        $("#INAPAM").prop("checked", false);
         $('#sigpesos').val(0);
         $('#subtotal').val(total.toFixed(2));
         let getIva = ($('#subtotal').val()*0.16);
@@ -706,6 +710,8 @@
         $('#descuento_id').change(function(){            
             var id=$('#descuento_id').val();
             $('#descuento').val(0);
+            $('#descuentoInapam').val(0);
+            $("#INAPAM").prop("checked", false);
             $('#sigpesos').val(0);
             var subtotal=parseFloat($('#subtotal').val());
             var iva=parseFloat($('#iva').val());
