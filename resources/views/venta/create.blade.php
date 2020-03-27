@@ -196,12 +196,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck2"
-                                                     role="button"
-                                                    aria-expanded="false" aria-controls="collapseExample" value="1">
-                                                <label class="custom-control-label" for="customCheck2">INAPAM</label>
-                                            </div>                                        </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="INAPAM">
+                                                <label class="form-check-label" for="exampleCheck1">INAPAM</label>
+                                            </div>
+                                       </div>
                                     </div>
                                     
                                     {{-- Pagos Y tarjeta --}}
@@ -486,7 +485,6 @@
             </td>
         </tr>`);
         cambiarTotalVenta();
-        console.log($('customCheck1').attr("aria-expanded"));
     }
 
     function quitarProducto(p){
