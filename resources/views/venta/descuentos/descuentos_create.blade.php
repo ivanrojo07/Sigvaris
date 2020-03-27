@@ -174,6 +174,10 @@
                                         <option value="0">No</option>
                                 </select>
                             </div>
+                            <div class="form-group col-4">
+                                <label for="nombre">Descripción *</label>
+                                <input type="text" class="form-control" name="descripcion" required="">
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-3 pt-4 m-auto">
@@ -234,6 +238,10 @@
                                         <option value="0">No</option>
                                 </select>
                             </div>
+                            <div class="form-group col-4">
+                                <label for="nombre">Descripción *</label>
+                                <input type="text" class="form-control" name="descripcion" required="">
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-3 pt-4 m-auto">
@@ -290,6 +298,10 @@
                                         <option value="1">Si</option>
                                         <option value="0">No</option>
                                 </select>
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="nombre">Descripción *</label>
+                                <input type="text" class="form-control" name="descripcion" required="">
                             </div>
                         </div>
                         <div class="row">

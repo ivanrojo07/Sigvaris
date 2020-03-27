@@ -196,12 +196,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck2"
-                                                     role="button"
-                                                    aria-expanded="false" aria-controls="collapseExample" value="1">
-                                                <label class="custom-control-label" for="customCheck2">INAPAM</label>
-                                            </div>                                        </div>
+                                            <div class="alert alert-danger" id="ErrorInapam" style="display: none;">
+                                                El INAPAM no esta cargado 
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="INAPAM">
+                                                <label class="form-check-label" for="exampleCheck1">INAPAM</label>
+                                            </div>
+                                       </div>
                                     </div>
                                     
                                     {{-- Pagos Y tarjeta --}}
@@ -455,8 +457,46 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function on(){
+        var subtotal=parseFloat($('#subtotal').val());
+        $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
+        $('#INAPAM').prop("inam", parseFloat($('#subtotal').val())*.05);
+    }
 
+    function off(){
+        var sigpesos=parseInt($('#sigpesos_usar').val());
+        var subtotal=parseFloat($('#subtotal').val());
+        var iva=parseFloat($('#iva').val());
+        var des=parseFloat($('#descuento').val());
+        // console.log(des);
+        console.log('SUBTOTAL', subtotal);
+        console.log('iva', iva);
+        console.log('des', des);
+        console.log('sigpesos', sigpesos);  
+        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos);
+        var aux=subtotal+iva-des-sigpesos;
+        if (aux.toFixed(2)!=$('#total').val()) {
+            $('#total').val(aux.toFixed(2));
+        }
+        $('#INAPAM').prop("inam",0);
+    }
+
+    var checkbox = document.getElementById('INAPAM');
+
+    checkbox.addEventListener("change", comprueba, false);
+
+    function comprueba(){
+      if(checkbox.checked){
+          on();
+      }else{
+         off();
+      }
+    }
+
+</script>
 <script>
+    
     function agregarProducto(p){
         let producto = JSON.parse($(p).val());
         // alert(producto);
@@ -486,6 +526,7 @@
             </td>
         </tr>`);
         cambiarTotalVenta();
+        $('#BuscarProducto').val("");
     }
 
     function quitarProducto(p){
@@ -526,8 +567,8 @@
              console.log('sigpesos3rff', sigpesos);
         }
         var sigpesos=parseInt($('#sigpesos_usar').val());
-        var subtotal=parseFloat($('#subtotal').val())
-        var iva=parseFloat($('#iva').val())
+        var subtotal=parseFloat($('#subtotal').val());
+        var iva=parseFloat($('#iva').val());
         var des=parseFloat($('#descuento').val());
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
@@ -754,8 +795,51 @@
             
             
         });
-        
-        $('#BuscarPaciente').change( function() {
+        $("#BuscarPaciente").on('keyup', function (e) {
+          var keycode = e.keyCode || e.which;
+            if (keycode == 13) {
+                $("#pacientes").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#pacientes').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/getPacientes_nombre",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "nombre" : $(this).val()
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+
+            }
+        });
+        /*$('#BuscarPaciente').change( function() {
             $("#pacientes").dataTable().fnDestroy();
             //console.log($(this).val());
             $('#pacientes').DataTable({
@@ -794,9 +878,51 @@
                     }
                 }
             });
-        });
+        });*/
+        $("#BuscarProducto").on('keyup', function (e) {
+          var keycode = e.keyCode || e.which;
+            if (keycode == 13) {
+                $("#productos").dataTable().fnDestroy();
+                //console.log($(this).val());
+                $('#productos').DataTable({
+                    "ajax":{
+                        type: "POST",
+                        url:"getProductos_nombre",
+                        data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                               "nombre" : $(this).val()
+                        }
+                    },
+                    "searching": false,
+                    pageLength : 3,
+                    'language':{
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Mostrar _MENU_ registros",
+                        "sZeroRecords":    "No se encontraron resultados",
+                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                        "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                        "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
 
-        $('#BuscarProducto').change( function() {
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+            });
+            }
+        });
+        /*$('#BuscarProducto').change( function() {
             $("#productos").dataTable().fnDestroy();
            //console.log($(this).val());
             $('#productos').DataTable({
@@ -835,12 +961,13 @@
                     }
                 }
             });
-        });
+        });*/
     });
 
    @if(!isset($paciente))
     $(document).on('click', '.botonSeleccionCliente', async function(){
         
+                
         const pacienteId = $(this).attr('pacienteid');
 
         $.ajax({
@@ -866,6 +993,17 @@
             }
         });
 
+        $.ajax({
+            url:`{{ url('/api/pacientes/${pacienteId}/inapam') }}`,
+            type: 'GET',
+            success: function(inapam){
+                if (inapam=="1") {
+                    $('#ErrorInapam').show();
+                }else{
+                    $('#ErrorInapam').hide()
+                }
+            }
+        });
         const nombrePaciente = $(`.nombrePaciente[pacienteId=${pacienteId}]`).html();
         const apellidosPaciente = $(`.apellidosPaciente[pacienteId=${pacienteId}]`).html();
 
@@ -920,7 +1058,17 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-
+            <?php
+            if ($paciente->expediente()->first()!=null) {
+                if ($paciente->expediente()->first()->inapam==null) {
+                    echo "$('#ErrorInapam').show();";
+                }
+            } else {
+                echo "$('#ErrorInapam').show();";
+            }
+            //dd($paciente->expediente()->first()->inapam);
+            ?>
+        
         const pacienteId = {{$paciente->id}};
 
         const nombrePaciente = "{{ $paciente->nombre }}";
