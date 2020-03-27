@@ -28,31 +28,35 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
             $ventas = $ventas->where('oficina_id', $this->oficina_id);
         }
 
-        return $ventas->get()->pluck('paciente')
+        return $ventas->get()->pluck('productos')
             ->flatten()
-            ->pluck('datoFiscal')
-            ->flatten()
-            ->unique()
-            ->map(function ($datos_fiscales) {
+            ->map(function ($producto) {
+                $venta = Venta::find($producto->pivot->venta_id);
                 return [
-                    'paciente' => $datos_fiscales->paciente ? $datos_fiscales->paciente->fullname : '',
-                    'tipo_persona' => $datos_fiscales->tipo_persona,
-                    'nombre_o_razon_social' => $datos_fiscales->nombre_o_razon_social,
-                    'regimen_fiscal' => $datos_fiscales->regimen_fiscal,
-                    'homoclave' => $datos_fiscales->homoclave,
-                    'correo' => $datos_fiscales->correo,
-                    'rfc' => $datos_fiscales->rfc,
-                    'calle' => $datos_fiscales->calle,
-                    'num_ext' => $datos_fiscales->num_ext,
-                    'num_int' => $datos_fiscales->num_int,
-                    'colonia' => $datos_fiscales->colonia,
-                    'ciudad' => $datos_fiscales->ciudad,
-                    'alcaldia_o_municipio' => $datos_fiscales->alcaldia_o_municipio,
-                    'estado' => $datos_fiscales->estado,
-                    'codigo_postal' => $datos_fiscales->codigo_postal,
+                    'paciente' => $venta->paciente->datoFiscal->paciente ? $venta->paciente->datoFiscal->paciente->fullname : '',
+                    'tipo_persona' => $venta->paciente->datoFiscal->tipo_persona,
+                    'nombre_o_razon_social' => $venta->paciente->datoFiscal->nombre_o_razon_social,
+                    'regimen_fiscal' => $venta->paciente->datoFiscal->regimen_fiscal,
+                    'homoclave' => $venta->paciente->datoFiscal->homoclave,
+                    'correo' => $venta->paciente->datoFiscal->correo,
+                    'rfc' => $venta->paciente->datoFiscal->rfc,
+                    'calle' => $venta->paciente->datoFiscal->calle,
+                    'num_ext' => $venta->paciente->datoFiscal->num_ext,
+                    'num_int' => $venta->paciente->datoFiscal->num_int,
+                    'colonia' => $venta->paciente->datoFiscal->colonia,
+                    'ciudad' => $venta->paciente->datoFiscal->ciudad,
+                    'alcaldia_o_municipio' => $venta->paciente->datoFiscal->alcaldia_o_municipio,
+                    'estado' => $venta->paciente->datoFiscal->estado,
+                    'codigo_postal' => $venta->paciente->datoFiscal->codigo_postal,
                     'porcentaje_descuento' => '',
                     'nombre_descuento' => '',
-                    'uso_cfdi' => $datos_fiscales->uso_cfdi,
+                    'uso_cfdi' => $venta->paciente->datoFiscal->uso_cfdi,
+                    'fecha' => $venta->fecha, 
+                    'precio_sin_iva' => $producto->precio_publico,
+                    'precio_con_iva' => $producto->precio_publico_iva,
+                    'descuento' => $venta->descuento ? $venta->descuento->nombre : 'N.H.',
+                    'cantidad' => $producto->pivot->cantidad,
+                    'sku' => $producto->sku,
                 ];
             });
     }
@@ -77,7 +81,13 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
             'CODIGO POSTAL',
             'PORCENTAJE DESCUENTO',
             'NOMBRE DESCUENTO',
-            'USO CFDI'
+            'USO CFDI',
+            'FECHA',
+            'PRECIO SIN IVA',
+            'PRECIO CON IVA',
+            'DESCUENTO',
+            'CANTIDAD',
+            'SKU'
         ];
     }
 }
