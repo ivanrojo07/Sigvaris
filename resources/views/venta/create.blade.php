@@ -426,10 +426,11 @@
                         </div>
                     </div>
                     <hr>
+                </form>
                     {{-- BOTON GUARDAR --}}
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-success rounded-0">
+                            <button type="submit" class="btn btn-success rounded-0" onclick="javascript:sendFormValidador();">
                                 <i class="fa fa-check"></i> Finalizar comprar
                             </button>
                         </div>
@@ -447,7 +448,7 @@
                 </div>
             </div>
 
-            </form>
+            
             <div class="col-4 offset-4 text-center">
                 {{--                 <form action="{{ route('pembayaran.print') }}" method="POST">
                 <input type="hidden" name="_token" class="form-control" value="{!! csrf_token() !!}"> --}}
@@ -458,6 +459,22 @@
     </div>
 </div>
 <script type="text/javascript">
+    function sendFormValidador() {
+    if ($('#empleado_id').val()!=null) {
+        if ($('#total').val()==($('#PagoTarjeta').val()+$('#PagoEfectivo').val())) {
+        document.getElementById("form-cliente").submit();
+      } else {
+        alert("Valida los campos de forma de pago");
+        return false;
+      }
+
+    }else{
+        alert("Valida el campo de empleado");
+        return false;
+    }
+      
+    }
+
     function on(){
         var subtotal=parseFloat($('#subtotal').val());
         $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
