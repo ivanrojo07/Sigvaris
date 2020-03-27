@@ -515,11 +515,29 @@
     checkbox.addEventListener("change", comprueba, false);
 
     function comprueba(){
-      if(checkbox.checked){
-          on();
-      }else{
-         off();
-      }
+
+        if(checkbox.checked){
+            $.ajax({
+                url:`{{ url('/api/pacientes/${pacienteId}/inapam') }}`,
+                type: 'GET',
+                success: function(inapam){
+                    if (inapam=="1") {
+                        var opcion = confirm("Se cargar la INAPAM despues ");
+                        if (opcion == true) {
+                            on();
+                        } else {
+                           $("#INAPAM").prop("checked", false); 
+                        }
+                    }else{
+                        on();
+                    }
+                }
+            });
+            
+            
+        }else{
+            off();
+        }
     }
 
 </script>
@@ -1032,7 +1050,7 @@
                 if (inapam=="1") {
                     $('#ErrorInapam').show();
                 }else{
-                    $('#ErrorInapam').hide()
+                    $('#ErrorInapam').hide();
                 }
             }
         });
