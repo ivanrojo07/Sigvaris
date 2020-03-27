@@ -35,7 +35,7 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
             ->unique()
             ->map(function ($datos_fiscales) {
                 return [
-                    'paciente' => $datos_fiscales->paciente->nombre . " " . $datos_fiscales->paciente->paterno . " " . $datos_fiscales->paciente->materno,
+                    'paciente' => $datos_fiscales->paciente ? $datos_fiscales->paciente->fullname : '',
                     'tipo_persona' => $datos_fiscales->tipo_persona,
                     'nombre_o_razon_social' => $datos_fiscales->nombre_o_razon_social,
                     'regimen_fiscal' => $datos_fiscales->regimen_fiscal,
