@@ -457,18 +457,45 @@
         </div>
     </div>
 </div>
-
-<script>
-    function INAPAM_GET() {
-            var paciente_id=$('#paciente_id').val();
-            var total_productos=parseInt(0);
-            var subtotal=parseFloat($('#subtotal').val());
-            var iva=parseFloat($('#iva').val());
-            var des=parseFloat($('#descuento').val());
-            var sigpesos=parseInt($('#sigpesos_usar').val());
-            var aux=subtotal+iva-des-sigpesos;
-            $('#total').val(aux.toFixed(2));
+<script type="text/javascript">
+    function on(){
+        var subtotal=parseFloat($('#subtotal').val());
+        $('#total').val($('#total').val()-parseFloat($('#subtotal').val())*.05);
+        $('#INAPAM').prop("inam", parseFloat($('#subtotal').val())*.05);
     }
+
+    function off(){
+        var sigpesos=parseInt($('#sigpesos_usar').val());
+        var subtotal=parseFloat($('#subtotal').val());
+        var iva=parseFloat($('#iva').val());
+        var des=parseFloat($('#descuento').val());
+        // console.log(des);
+        console.log('SUBTOTAL', subtotal);
+        console.log('iva', iva);
+        console.log('des', des);
+        console.log('sigpesos', sigpesos);  
+        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos);
+        var aux=subtotal+iva-des-sigpesos;
+        if (aux.toFixed(2)!=$('#total').val()) {
+            $('#total').val(aux.toFixed(2));
+        }
+    }
+
+    var checkbox = document.getElementById('INAPAM');
+
+    checkbox.addEventListener("change", comprueba, false);
+
+    function comprueba(){
+      if(checkbox.checked){
+          on();
+      }else{
+         off();
+      }
+    }
+
+</script>
+<script>
+    
     function agregarProducto(p){
         let producto = JSON.parse($(p).val());
         // alert(producto);
@@ -538,8 +565,8 @@
              console.log('sigpesos3rff', sigpesos);
         }
         var sigpesos=parseInt($('#sigpesos_usar').val());
-        var subtotal=parseFloat($('#subtotal').val())
-        var iva=parseFloat($('#iva').val())
+        var subtotal=parseFloat($('#subtotal').val());
+        var iva=parseFloat($('#iva').val());
         var des=parseFloat($('#descuento').val());
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
