@@ -936,7 +936,7 @@
         if ({{$paciente->expediente()->exists()==null}}) {
             $('#ErrorInapam').show();
         }else{
-           if ({{$paciente->expediente()->first()->inapam->exists()==null}}) {
+           if ({{$paciente->expediente()->first()->value('inapam')==null}}) {
                 $('#ErrorInapam').show();
             } 
         }
