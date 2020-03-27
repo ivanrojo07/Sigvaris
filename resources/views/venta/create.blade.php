@@ -933,7 +933,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        if ({{$paciente->expediente()->exists()}}==null) {
+        if ({{$paciente->expediente()->exists()}}) {
             $('#ErrorInapam').show();
         }
         
