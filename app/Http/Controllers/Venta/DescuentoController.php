@@ -251,7 +251,7 @@ class DescuentoController extends Controller
 
     public function getPromos(Descuento $descuento)
     {
-        return view('venta.get_promos',['promociones'=>$descuento->promociones]);
+        return view('venta.get_promos',['promociones'=>$descuento->promociones, 'nombre' =>$descuento->descripcion]);
     }
 
     public function getDescuento(Promocion $promocion,Request $request)
