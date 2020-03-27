@@ -885,7 +885,9 @@
             success: function(inapam){
                 if (inapam=="1") {
                     $('#ErrorInapam').show();
-                } 
+                }else{
+                    $('#ErrorInapam').hide()
+                }
             }
         });
         const nombrePaciente = $(`.nombrePaciente[pacienteId=${pacienteId}]`).html();
