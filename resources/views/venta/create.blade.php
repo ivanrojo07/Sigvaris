@@ -460,7 +460,7 @@
 <script type="text/javascript">
     function on(){
         var subtotal=parseFloat($('#subtotal').val());
-        $('#total').val($('#total').val()-parseFloat($('#subtotal').val())*.05);
+        $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
         $('#INAPAM').prop("inam", parseFloat($('#subtotal').val())*.05);
     }
 
