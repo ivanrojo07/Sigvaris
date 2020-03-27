@@ -70,14 +70,28 @@ class PacienteExpedienteController extends Controller
         if (!isset($inapam)) {
             $inapam=null;
         }else{
-             $inapam=='inapam.'.$request->inapam->extension();
+             $inapam=$inapam[2];
         }
-        $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
+        if (PacientesExpedientes::where('paciente_id',$paciente->id)->exists()) {
+            if ($identificacion!=null) {
+                $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
+                    'identificacion'=>$identificacion
+                ]);
+            }
+            if ($inapam!=null) {
+                $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
+                    'inapam'=>$inapam
+                ]);
+            }
             
-            'aviso_privacidad'=>$aviso_privacidad,
-            'identificacion'=>$identificacion,
-            'inapam'=>$inapam
-        ]);
+        }else{
+            $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
+                
+                'aviso_privacidad'=>$aviso_privacidad,
+                'identificacion'=>$identificacion,
+                'inapam'=>$inapam
+            ]);
+        }
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');
         return view('pacineteexpediente.view',['paciente'=>$paciente,'expediente'=>$expediente]);
     }

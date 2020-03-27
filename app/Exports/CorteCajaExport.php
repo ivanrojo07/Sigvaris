@@ -10,8 +10,9 @@ use App\Descuento;
 use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class CorteCajaExport implements FromCollection, WithHeadings
+class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -102,5 +103,9 @@ class CorteCajaExport implements FromCollection, WithHeadings
 
 
         ];
+    }
+    public function title(): string
+    {
+        return 'Corte de Caja';
     }
 }

@@ -194,6 +194,16 @@
                                                 id="sigpesos_usar" value="0" min="0" step="0.01">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 text-center">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck2"
+                                                     role="button"
+                                                    aria-expanded="false" aria-controls="collapseExample" value="1">
+                                                <label class="custom-control-label" for="customCheck2">INAPAM</label>
+                                            </div>                                        </div>
+                                    </div>
+                                    
                                     {{-- Pagos Y tarjeta --}}
                                     <div class="row">
                                         {{-- INPUT Tipo de pago --}}
@@ -539,7 +549,7 @@
         let totaliva = cantiva*cant;
         console.log('----------',ind);
         $(p).find('.precio_total').text(total);
-        $(p).find('.precio_individual_iva').text(totaliva);
+        $(p).find('.precio_individual_iva').text(parseFloat(totaliva).toFixed(2));
         cambiarTotalVenta();
     }
 

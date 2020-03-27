@@ -281,11 +281,17 @@ class DescuentoController extends Controller
                             );
                             break;
                         case 'Procentaje':
+                            $CostoProductoBarato=999999999;
+                            foreach ($request->input("productos_id") as $producto_id) {
+                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico")){
+                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico");
+                                }
+                            }
                             $response=array(
                                 'status'=>1,
                                 'sigpesos'=>0,
                                 'aceptsp'=>$promocion->aceptSigPesos,
-                                'total'=>$request->subtotal*($promocion->descuento_de/100)
+                                'total'=>$CostoProductoBarato*($promocion->descuento_de/100)
                             );
                             break;
                         case 'sigCompra':
