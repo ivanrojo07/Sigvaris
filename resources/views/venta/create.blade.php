@@ -460,7 +460,8 @@
 </div>
 <script type="text/javascript">
     function sendFormValidador() {
-    if ($('#empleado_id').val()!=null) {
+        console.log("empleado",$('#empleado_id').val());
+    if ($('#empleado_id').val()!="") {
         if ($('#total').val()==($('#PagoTarjeta').val()+$('#PagoEfectivo').val())) {
         document.getElementById("form-cliente").submit();
       } else {
