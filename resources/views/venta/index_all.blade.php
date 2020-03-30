@@ -24,32 +24,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-group mt-3 mb-3 col-sm-3 offset-sm-2">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Prenda: </span>
-                        <input class="form-control" type="text" name="prenda" id="prenda">
-                    </div>
-                </div>
-                <div class="input-group mt-3 mb-3 col-sm-3 offset-sm-1">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Número de piezas: </span>
-                        <input class="form-control" type="number" step="1" name="num_prendas" id="num_prendas" min="0">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="Checkbox1" name="prendasmas" value="">
-                      <label class="form-check-label" for="inlineCheckbox1">Prendas más Vendidas</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="Checkbox2" name="prendasmenos" value="">
-                      <label class="form-check-label" for="inlineCheckbox2">Prendas menos Vendidas</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-2 m-auto">
                     <button class="btn btn-outline-secondary" type="button" id="reporte">Buscar</button>
                 </div>
