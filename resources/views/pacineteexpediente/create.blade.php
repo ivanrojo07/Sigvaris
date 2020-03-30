@@ -31,7 +31,7 @@
 		    		</div>
 		    		<div class="col-3 col-sm-12 col-md-3 col-xl-3 form-group text-center">
 		    			<label class="control-label" for="">receta</label>
-		    			<input id="input-id5" type="file" accept=".pdf, .jpg, .jpeg, .png" class="file" name="inapam" data-preview-file-type="text" >
+		    			<input id="input-id5" type="file" accept=".pdf, .jpg, .jpeg, .png" class="file" name="receta" data-preview-file-type="text" >
 		    		</div>
 		    	</div>
 		    	
