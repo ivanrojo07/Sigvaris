@@ -104,7 +104,7 @@ class PacienteExpedienteController extends Controller
                 
                 'aviso_privacidad'=>$aviso_privacidad,
                 'identificacion'=>$identificacion,
-                'inapam'=>$inapam
+                'inapam'=>$inapam,
                 'receta'=>$receta
             ]);
         }
