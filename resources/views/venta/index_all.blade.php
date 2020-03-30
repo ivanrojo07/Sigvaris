@@ -240,6 +240,8 @@
                     textapp +="<td>"+item.fecha+"</td>";
                     textapp +=`<td> <div class="row"> <div class="col-auto pr-2"> <a href="{{ url('/ventas') }}/`+item.id+`" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a> </div>   </div></td>`;
                     console.log("Fecha json",item.fecha);
+                    console.log("Fecha json 2",Date.parse(item.fecha.substr(0,9));
+
                     var  fecha = new Date(Date.parse(item.fecha.substr(0,9))+31);
                     var fecha2 = new Date();
                         //fecha=fecha.setDate(Date.parse(item.fecha) + 31);
