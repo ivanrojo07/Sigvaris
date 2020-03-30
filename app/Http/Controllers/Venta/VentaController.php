@@ -246,8 +246,8 @@ class VentaController extends Controller
             $ventas = Venta::with('paciente', 'descuento')->where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
 
         // Obtención de Las ventas que contengan la prenda o prendas que se introdujeron en el campo prenda
-        /*$arr = [];
-        if ($request->prenda != "") {
+        $arr = [];
+        /*if ($request->prenda != "") {
             $query = $request->prenda;
             $wordsquery = explode(' ', $query);
             $total_ventas = Venta::where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
