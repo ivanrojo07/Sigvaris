@@ -54,7 +54,7 @@ class PacienteExpedienteController extends Controller
             $identificacion = explode("/",$request->identificacion->storeAs('expedientes/'.$paciente->id, 'identificacion.'.$request->identificacion->extension(), 'public'));
         }
         if ($request->identificacion2 && $request->file('identificacion2')->isValid()) {
-            $identificacion2 = explode("/",$request->identificacion2->storeAs('expedientes/'.$paciente->id, 'identificacion2.'.$request->identificacion->extension(), 'public'));
+            $identificacion2 = explode("/",$request->identificacion2->storeAs('expedientes/'.$paciente->id, 'identificacion2.'.$request->identificacion2->extension(), 'public'));
         }
         if ($request->inapam && $request->file('inapam')->isValid()) {
             $inapam = explode("/",$request->inapam->storeAs('expedientes/'.$paciente->id, 'inapam.'.$request->inapam->extension(), 'public'));
