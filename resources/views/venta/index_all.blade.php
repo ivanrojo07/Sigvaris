@@ -242,12 +242,12 @@
                     console.log("Fecha json",item.fecha);
                     console.log("Fecha json 2",item.fecha.substr(0,10));
 
-                    var  fecha = new Date(Date.parse(item.fecha.substr(0,10))+31);
+                    var  fecha = new Date(Date.parse(item.fecha.substr(0,10)));
                     var fecha2 = new Date();
                         //fecha=fecha.setDate(Date.parse(item.fecha) + 31);
                     console.log("Fecha",fecha.getTime());
                     console.log("Fecha2",fecha2.getTime());
-                    if (fecha2.getTime() > fecha.getTime()) {
+                    if ( fecha.getTime()-fecha2.getTime() < 31) {
                         textapp +=`<td nowrap><div class="row"><div class="col-auto pr-2"><a href="{{url('ventas/')}}`+item.id+`/damage" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a></div></div></td>`;
                     }else{
                         textapp +="<td></td>";
