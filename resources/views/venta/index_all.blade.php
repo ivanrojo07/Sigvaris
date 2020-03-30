@@ -225,7 +225,7 @@
                 var val=1;
                 let tbody = '';
                 $.each(res.ventas,function(i,item){
-                    //console.log(item.id);
+                    //console.log(item.id); pagination
                     val=1;
                     var textapp = "";
                     textapp += "<tr>";
@@ -245,9 +245,15 @@
                         textapp +="<td></td>";
                     }
                     
-                    textapp +="<td></td>";
-                    textapp +="<td></td>";
-                    textapp +="<td></td>";
+                    textapp +=`<td nowrap>
+                        <a href="{{url('ventas')}}`+item.id+`/cambio-fisico/create" class="btn btn-warning">Cambio fisico</a>
+                    </td>`;
+                    textapp +=`<td nowrap>
+                        <a href="{{url('ventas')}}`+item.id+`/damage-oot/create" class="btn btn-warning">Cambio fisico</a>
+                    </td>`;
+                    textapp +=`<td nowrap>
+                        <a href="{{url('ventas')}}`+item.id+`/devoluciones/create" class="btn btn-warning">Cambio fisico</a>
+                    </td>`
                     textapp +="</tr>";  
                     $('#ventas').append(textapp);    
                     /*$('#ventas').append(`
