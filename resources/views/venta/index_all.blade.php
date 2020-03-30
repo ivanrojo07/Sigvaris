@@ -227,8 +227,24 @@
                 $.each(res.ventas,function(i,item){
                     //console.log(item.id);
                     val=1;
-                                
-                   $('#ventas').append(`
+                    var textapp = "";
+                    textapp .="<tr>";
+                    textapp .="<td>"+item.id+"</td>";
+                    textapp .="<td>"+item.paciente.nombre+` `+ item.paciente.paterno+` `+item.paciente.materno+"</td>";
+                    if (item.descuento_id!=null) {
+                        textapp .="<td>"+item.descuento.descripcion+"</td>";
+                    }else{
+                        textapp .="<td></td>";
+                    }
+                    textapp .="<td>"+item.fecha+"</td>";
+                    textapp .=`<td> <div class="row"> <div class="col-auto pr-2"> <a href="{{ url('/ventas') }}/`+item.id+`" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a> </div>   </div></td>`;
+                    textapp .="<td></td>";
+                    textapp .="<td></td>";
+                    textapp .="<td></td>";
+                    textapp .="<td></td>";
+                    textapp .="</tr>";  
+                    $('#ventas').append(textapp);    
+                    /*$('#ventas').append(`
                     <tr>
                         <td>`+item.id+`</td>
                         <td>`+item.paciente.nombre+` `+ item.paciente.paterno+` `+item.paciente.materno+`</td>
@@ -244,7 +260,7 @@
                             </div>
                         </td>
                     </tr>
-                    `); 
+                    `); */
                     ventas_total+=parseFloat(item.total);
                     total_realizadas++;
                     $.each(total_clientes,function(e,element){

@@ -291,7 +291,7 @@ class VentaController extends Controller
         foreach ($consulta as $productos) {
             $prod[] = ["0" => Producto::find($productos->producto_id), "1" => $productos->TotalVentas];
         }*/
-        return response()->json(["ventas" => $ventas, "consulta" => $prod]);
+        return response()->json(["ventas" => $ventas_final, "consulta" => $prod]);
     }
 
     public function getVentasClientes(Request $request)
