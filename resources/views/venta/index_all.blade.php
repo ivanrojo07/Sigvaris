@@ -243,7 +243,7 @@
                         textapp +=`<td nowrap>
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <a href="{{url('ventas/'')}}`+item->id+`'/damage"
+                                    <a href="{{url('ventas/')}}`+item->id+`'/damage"
                                         class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a>
                                 </div>
                             </div>
