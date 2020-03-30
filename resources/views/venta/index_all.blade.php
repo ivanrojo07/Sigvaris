@@ -130,6 +130,7 @@
         {{-- @include('venta.rep_medicos') --}}
     </div>
 </div>
+<script src="http://momentjs.com/downloads/moment.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#hventas').DataTable({
@@ -247,7 +248,7 @@
                         //fecha=fecha.setDate(Date.parse(item.fecha) + 31);
                     console.log("Fecha",fecha.getTime());
                     console.log("Fecha2",fecha2.getTime());
-                    if ( fecha.getTime()-fecha2.getTime() < 31) {
+                    if ( ((fecha2.getTime()-fecha.getTime())/(1000*60*60*24)) < 31) {
                         textapp +=`<td nowrap><div class="row"><div class="col-auto pr-2"><a href="{{url('ventas/')}}`+item.id+`/damage" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a></div></div></td>`;
                     }else{
                         textapp +="<td></td>";
