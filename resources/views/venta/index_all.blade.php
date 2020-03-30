@@ -244,7 +244,7 @@
                         //fecha=fecha.setDate(Date.parse(item.fecha) + 31);
                     console.log("Fecha",fecha.getTime());
                     console.log("Fecha2",fecha2.getTime());
-                    if (fecha > new Date()) {
+                    if (fecha2.getTime() > fecha.getTime()) {
                         textapp +=`<td nowrap><div class="row"><div class="col-auto pr-2"><a href="{{url('ventas/')}}`+item.id+`/damage" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a></div></div></td>`;
                     }else{
                         textapp +="<td></td>";
