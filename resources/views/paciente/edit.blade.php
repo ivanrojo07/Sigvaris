@@ -63,11 +63,52 @@
                     <label class="control-label">Teléfono:</label>
                     <input value="{{$paciente->telefono}}" type="text" name="telefono" class="form-control">
                 </div>
+                <div class="form-group col-3">
+                    <label for="doctor_id">Doctor que recomienda:</label>
+                    <select class="form-control" name="doctor_id" id="doctor_id" required>
+                        <option value="">Buscar..</option>
+                        <option value="otro">Otro..</option>
+                        
+                    </select>
+                </div>
+                <div class="col-3 form-group" id="sech_doctor">
+                    <label class="control-label">Buscar:</label>
+                    <input type="text" name="sech_doctor" id="sech_doctor11" class="form-control">
+                </div>
+                <div class="col-3 form-group" id="otro_doctor">
+                    <label class="control-label">Otro doctor nombre:</label>
+                    <input type="text" name="otro_doctor" class="form-control">
+                </div>
             </div>
             <div class="row">
                 @include('paciente.subnav')
             </div>
         </div>
+        {{-- Lista de doctores --}}
+        <h6 class="text-center" id="tablaDocTitulo">LISTA PARA ASIGNAR DOCTOR</h6>
+        <div class="row" id="tablaDoc">
+            <div class="col-12 col-md-2"></div>
+            <div class="col-12 col-md-8">
+                    <div class="col-12">
+                            <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
+                                    <thead>
+                                        <tr class="info">
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido paterno</th>
+                                            <th>Apellido materno</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cuerpTable">
+                                    </tbody>
+                                    
+                                    </table>
+                    </div>
+            </div>
+            <div class="col-12 col-md-2"></div>
+        </div>
+
         <div class="card-footer">
             <div class="row">
                 <div class="col-4 offset-4 text-center">
@@ -82,7 +123,10 @@
         </div>
     </form>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
 $('#otro_doctor').hide();
     $('#doctor_id').change(function () {
@@ -111,5 +155,90 @@ $('#otro_doctor').hide();
         $("#doctor_id").html(resultado);
     });
 </script>
+<script>
+    $(document).ready(function() {
+        //$('#listaEmpleados').DataTable();
+        $('#sech_doctor11').change(function () {
+            $.ajax({
+                url: "/getDoctoresTable/",
+                type: "GET",
+                data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                               "nombre" : $('#sech_doctor11').val()
+                        },
+                dataType: "html",
+            }).done(function (resultado) {
+                $("#cuerpTable").html(resultado);
+            });
+        });
+     
+    });
+</script>
+<script>
 
+$('input').change( function(){
+    
+    if( $('#nacimiento').val() ){
+        var date = new Date( $('#nacimiento').val() );
+        var dia = ("0" + date.getDate()).slice(-2);
+        dia = parseInt(dia)+1;
+        dia = dia.toString();
+        const mes = ("0" + (date.getMonth() + 1)).slice(-2);
+        const anio = date.getFullYear().toString().substr(-2);
+        const rfc_paterno = $('#paterno').val().substr(0,2);
+        const rfc_materno = $('#materno').val().substr(0,1);
+        const rfc_nombre = $('#nombre').val().substr(0,1);
+        var rfc_completo = rfc_paterno+rfc_materno+rfc_nombre+anio+mes+dia;
+        rfc_completo = rfc_completo.toUpperCase();
+        $('#rfc').val( rfc_completo );
+
+    }
+
+    // alert($("#nacimiento").val());
+} );
+
+$('#otro_doctor').hide();
+    $('#doctor_id').change(function () {
+        if($(this).val() == 'otro'){
+            $(this).attr('name', 'doctor_id_falsa');
+            $('#otro_doctor').show();
+            
+            $('#tablaDocTitulo').hide();
+            $('#sech_doctor').hide();
+            $('#tablaDoc').hide();
+            $('#otro_doctor').find('input').val('');
+            $('#otro_doctor').find('input').attr('required', 'true');
+        }else{
+            $(this).attr('name', 'doctor_id');
+            $('#otro_doctor').hide();
+
+            $('#tablaDocTitulo').show();
+            $('#sech_doctor').show();
+            $('#tablaDoc').show();
+            $('#otro_doctor').find('input').val('');
+            $('#otro_doctor').find('input').removeAttr('required');
+        }
+    });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    /**$.ajax({
+        url: "{{ url('/getDoctores') }}",
+        type: "GET",
+        dataType: "html",
+    }).done(function (resultado) {
+        $("#doctor_id").html(resultado);
+    });**/
+
+
+
+$(document).on('click', '.asignar', function(event) {
+    const doctor_id = $(this).attr('id-doctor');
+    const doctor_nombre = $(this).attr('nom');
+    $('#doctor_id').append("<option value='"+doctor_id+"' >"+doctor_nombre+"</option>");
+    $('#doctor_id').val(doctor_id);
+    /* Act on the event */
+});
+</script>
 @endsection
