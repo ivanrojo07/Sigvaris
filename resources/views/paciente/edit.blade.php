@@ -67,7 +67,7 @@
                     <label for="doctor_id">Doctor que recomienda:</label>
                     <select class="form-control" name="doctor_id" id="doctor_id" required>
                         @if($paciente->otro_doctor==null)
-                            <option value="{{$paciente->doctor_id}}">{{$paciente->doctor()->nombre}}</option>
+                            <option value="{{$paciente->doctor_id}}">{{$paciente->doctor->nombre}} {{$paciente->doctor->apellidopaterno}} {{$paciente->doctor->apellidomaterno}}</option>
                         @else
                             <option value="{{$paciente->otro_doctor}}">{{$paciente->otro_doctor}}</option>
                         @endif
