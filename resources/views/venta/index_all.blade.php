@@ -130,7 +130,7 @@
         {{-- @include('venta.rep_medicos') --}}
     </div>
 </div>
-<script src="http://momentjs.com/downloads/moment.min.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('#hventas').DataTable({
