@@ -246,13 +246,13 @@
                     }
                     
                     textapp +=`<td nowrap>
-                        <a href="{{url('ventas')}}`+item.id+`/cambio-fisico/create" class="btn btn-warning">Cambio fisico</a>
+                        <a href="{{url('ventas')}}/`+item.id+`/cambio-fisico/create" class="btn btn-warning">Cambio fisico</a>
                     </td>`;
                     textapp +=`<td nowrap>
-                        <a href="{{url('ventas')}}`+item.id+`/damage-oot/create" class="btn btn-warning">Cambio fisico</a>
+                        <a href="{{url('ventas')}}/`+item.id+`/damage-oot/create" class="btn btn-info">Damage OOT</a>
                     </td>`;
                     textapp +=`<td nowrap>
-                        <a href="{{url('ventas')}}`+item.id+`/devoluciones/create" class="btn btn-warning">Cambio fisico</a>
+                        <a href="{{url('ventas')}}/`+item.id+`/devoluciones/create"  class="btn btn-info">Devolución</a>
                     </td>`
                     textapp +="</tr>";  
                     $('#ventas').append(textapp);    
