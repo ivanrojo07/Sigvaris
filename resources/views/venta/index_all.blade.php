@@ -239,9 +239,11 @@
                     }
                     textapp +="<td>"+item.fecha+"</td>";
                     textapp +=`<td> <div class="row"> <div class="col-auto pr-2"> <a href="{{ url('/ventas') }}/`+item.id+`" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a> </div>   </div></td>`;
-                    var  fecha = new Date();
+                    var  fecha = new Date(Date.parse(item.fecha)+31);
+                    var fecha2 = new Date();
                         //fecha=fecha.setDate(Date.parse(item.fecha) + 31);
                     console.log("Fecha",fecha.getTime());
+                    console.log("Fecha2",fecha2.getTime());
                     if (fecha > new Date()) {
                         textapp +=`<td nowrap><div class="row"><div class="col-auto pr-2"><a href="{{url('ventas/')}}`+item.id+`/damage" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a></div></div></td>`;
                     }else{
