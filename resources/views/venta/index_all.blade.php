@@ -231,6 +231,7 @@
                     textapp += "<tr>";
                     textapp +="<td>"+item.id+"</td>";
                     textapp +="<td>"+item.paciente.nombre+` `+ item.paciente.paterno+` `+item.paciente.materno+"</td>";
+                    textapp +="<td>"+item.total+"</td>";
                     if (item.descuento!=null) {
                         textapp +="<td>"+item.descuento.descripcion+"</td>";
                     }else{
