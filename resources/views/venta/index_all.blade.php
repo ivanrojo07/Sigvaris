@@ -116,7 +116,7 @@
                 </table>
             </div>
 
-            {{--$ventas->links()--}}
+            {{$ventas->links()}}
             
             {{--<div class="row m-3">
                 <div class="col-sm-9 offset-sm-2">
