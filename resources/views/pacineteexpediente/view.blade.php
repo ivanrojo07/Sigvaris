@@ -7,6 +7,10 @@
 		$identificacion = explode(".", $expediente->identificacion);
 		$identificacion = $identificacion[1];
 	}
+	if ($expediente->identificacion2!=null) {
+		$identificacion2 = explode(".", $expediente->identificacion2);
+		$identificacion2 = $identificacion[1];
+	}
 	if ($expediente->inapam!=null) {
 		$inapam = explode(".", $expediente->inapam);
 		$inapam = $inapam[1];
