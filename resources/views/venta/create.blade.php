@@ -487,7 +487,7 @@
     function on(){
         var subtotal=parseFloat($('#subtotal').val());
         $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
-        $('#descuentoInapam').val(parseFloat($('#subtotal').val())*.05);
+        $('#descuentoInapam').val(parseFloat(parseFloat($('#subtotal').val())*.05).toFixed(2));
 
 
     }
