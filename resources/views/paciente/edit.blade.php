@@ -147,13 +147,13 @@ $('#otro_doctor').hide();
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $.ajax({
+    /**$.ajax({
         url: "{{ url('/getDoctores') }}",
         type: "GET",
         dataType: "html",
     }).done(function (resultado) {
         $("#doctor_id").html(resultado);
-    });
+    });**/
 </script>
 <script>
     $(document).ready(function() {
