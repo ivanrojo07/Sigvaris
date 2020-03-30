@@ -239,7 +239,9 @@
                     }
                     textapp +="<td>"+item.fecha+"</td>";
                     textapp +=`<td> <div class="row"> <div class="col-auto pr-2"> <a href="{{ url('/ventas') }}/`+item.id+`" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a> </div>   </div></td>`;
-                    if (((new Date(item.fecha)).setDate(new Date(item.fecha) + 31)).getTime()> (new Date()).getTime()) {
+                    var fecha = new Date();
+                        fecha=fecha.setDate(fecha.getDate() + 31);
+                    if (fecha.getTime()> (new Date()).getTime()) {
                         textapp +=`<td nowrap><div class="row"><div class="col-auto pr-2"><a href="{{url('ventas/')}}`+item.id+`/damage" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a></div></div></td>`;
                     }else{
                         textapp +="<td></td>";
