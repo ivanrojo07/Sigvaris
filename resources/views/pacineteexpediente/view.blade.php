@@ -11,7 +11,10 @@
 		$inapam = explode(".", $expediente->inapam);
 		$inapam = $inapam[1];
 	}
-	
+	if ($expediente->receta!=null) {
+		$receta = explode(".", $expediente->receta);
+		$receta = $receta[1];
+	}
 	
 	@endphp
 	<div class="card">
@@ -50,6 +53,16 @@
 					@endif
 				@endif
 
+				@if($expediente->receta!=null)
+					@if($receta != "pdf")
+					<div class="Portfolio m-4">
+						<a href="#!">
+							<img class="card" src="{{ url('/expedientes/'.$paciente->id.'/'.$expediente->receta) }}" width="200px" height="200px" alt="">
+						</a>
+						<div class="desc">receta</div>
+					</div>
+					@endif
+				@endif
 				<!-- ######## BOTONES PARA VER PDF  ###########-->
 
 				<div class="row">
@@ -84,6 +97,18 @@
 						</div>
 						@endif
 					@endif
+					@if($expediente->receta!=null)
+						@if($receta == "pdf")
+						<div class="row m-4 my-auto">
+							<div class="col-md-12 text-center">
+								<a class="btn btn-info" target="_blank" href="{{ url('/expedientes/'.$paciente->id.'/'.$expediente->receta) }}">
+									ver receta
+								</a>
+							</div>
+						</div>
+						@endif
+					@endif
+					
 				</div>
 
 			</div>

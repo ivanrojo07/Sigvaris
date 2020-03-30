@@ -29,7 +29,10 @@
 		    			<label class="control-label" for="">Inapam</label>
 		    			<input id="input-id4" type="file" accept=".pdf, .jpg, .jpeg, .png" class="file" name="inapam" data-preview-file-type="text" >
 		    		</div>
-
+		    		<div class="col-3 col-sm-12 col-md-3 col-xl-3 form-group text-center">
+		    			<label class="control-label" for="">receta</label>
+		    			<input id="input-id5" type="file" accept=".pdf, .jpg, .jpeg, .png" class="file" name="inapam" data-preview-file-type="text" >
+		    		</div>
 		    	</div>
 		    	
 				<div class="row form-group">
@@ -83,6 +86,20 @@
 	           "{{ url('/expedientes/'.$paciente->id.'/'.$expediente->inapam) }}"
 	        ]
 	    });
+	    $("#input-id5").fileinput({
+	        theme: 'fas',
+	        showUpload: true,
+	        showCaption: true,
+	        browseClass: "btn btn-primary btn-lg",
+	        fileType: "any",
+	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+	        overwriteInitial: true,
+	        initialPreviewAsData: true,
+	        initialPreview: [
+	           "{{ url('/expedientes/'.$paciente->id.'/'.$expediente->receta) }}"
+	        ]
+	    });
+	    
 	</script>
 	@endif
 @endsection

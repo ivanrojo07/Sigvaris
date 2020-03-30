@@ -57,6 +57,11 @@ class PacienteExpedienteController extends Controller
             $inapam = explode("/",$request->inapam->storeAs('expedientes/'.$paciente->id, 'inapam.'.$request->inapam->extension(), 'public'));
         }
 
+        if ($request->receta && $request->file('receta')->isValid()) {
+            $receta = explode("/",$request->receta->storeAs('expedientes/'.$paciente->id, 'receta.'.$request->receta->extension(), 'public'));
+        }
+
+
         if (!isset($aviso_privacidad)) {
             $aviso_privacidad=null;
         }else{
@@ -72,6 +77,12 @@ class PacienteExpedienteController extends Controller
         }else{
              $inapam=$inapam[2];
         }
+        if (!isset($receta)) {
+            $receta=null;
+        }else{
+             $receta=$receta[2];
+        }
+
         if (PacientesExpedientes::where('paciente_id',$paciente->id)->exists()) {
             if ($identificacion!=null) {
                 $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
@@ -83,13 +94,18 @@ class PacienteExpedienteController extends Controller
                     'inapam'=>$inapam
                 ]);
             }
-            
+            if ($receta!=null) {
+                $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
+                    'receta'=>$receta
+                ]);
+            }
         }else{
             $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
                 
                 'aviso_privacidad'=>$aviso_privacidad,
                 'identificacion'=>$identificacion,
                 'inapam'=>$inapam
+                'receta'=>$receta
             ]);
         }
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');
