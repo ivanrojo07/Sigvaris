@@ -233,7 +233,7 @@ class VentaController extends Controller
         $ventasxprenda = [];
 
         // OBTENEMOS LAS PRENDAS POR EL NUMERO DE PIEZAS
-        if ($request->num_prendas != "" && $request->num_prendas != "0") {
+        /*if ($request->num_prendas != "" && $request->num_prendas != "0") {
             $ventas = Venta::with('paciente', 'descuento')->where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
             foreach ($ventas as $v) {
                 if ($v->productos->count() == $request->num_prendas)
@@ -242,11 +242,11 @@ class VentaController extends Controller
             $ventas = [];
             foreach ($ventasxprenda as $v)
                 $ventas[] = $v;
-        } else
+        } else*/
             $ventas = Venta::with('paciente', 'descuento')->where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
 
         // Obtención de Las ventas que contengan la prenda o prendas que se introdujeron en el campo prenda
-        $arr = [];
+        /*$arr = [];
         if ($request->prenda != "") {
             $query = $request->prenda;
             $wordsquery = explode(' ', $query);
@@ -266,7 +266,7 @@ class VentaController extends Controller
                     $arr[] = $venta;
             }
             //dd($arr);
-        }
+        }*/
 
         // Combinar las ventas de acuerdo a las dos busquedas anteriores
         $ventas_final = [];
@@ -282,7 +282,7 @@ class VentaController extends Controller
         }
 
         // Obtencion de las prendas MAS o MENOS vendidas
-        if ($request->mas != "")
+        /*if ($request->mas != "")
             $consulta = DB::select("SELECT producto_id, SUM(cantidad) AS TotalVentas FROM producto_venta GROUP BY producto_id ORDER BY SUM(cantidad) DESC LIMIT 0 , 30 ");
         elseif ($request->menos != "")
             $consulta = DB::select("SELECT producto_id, SUM(cantidad) AS TotalVentas FROM producto_venta GROUP BY producto_id ORDER BY SUM(cantidad) LIMIT 0 , 100 ");
@@ -290,7 +290,7 @@ class VentaController extends Controller
             $consulta = [];
         foreach ($consulta as $productos) {
             $prod[] = ["0" => Producto::find($productos->producto_id), "1" => $productos->TotalVentas];
-        }
+        }*/
         return response()->json(["ventas" => $ventas_final, "consulta" => $prod]);
     }
 

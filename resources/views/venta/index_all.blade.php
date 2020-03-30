@@ -23,6 +23,7 @@
                     </div>                
                 </div>
             </div>
+            <br><br>
             <div class="row">
                 <div class="col-sm-2 m-auto">
                     <button class="btn btn-outline-secondary" type="button" id="reporte">Buscar</button>
@@ -115,15 +116,15 @@
                 </table>
             </div>
 
-            {{$ventas->links()}}
+            {{--$ventas->links()--}}
             
-            <div class="row m-3">
+            {{--<div class="row m-3">
                 <div class="col-sm-9 offset-sm-2">
                     <h3 style="display: none;" id="tituloP">Prendas Vendidas</h3>
                     <table class="table table-hover" id="PrendasVen">
                     </table>
                 </div>
-            </div>
+            </div>--}}
         </div>
         {{-- @include('venta.rep_clientes') --}}
         {{-- @include('venta.rep_medicos') --}}
@@ -212,11 +213,7 @@
             data:{
                 "_token": "{{CSRF_TOKEN()}}",
                 "desde":$('#desde').val(),
-                "hasta":$('#hasta').val(),
-                "mas":$('#Checkbox1').val(),
-                "menos":$('#Checkbox2').val(),
-                "num_prendas":$('#num_prendas').val(),
-                "prenda":$('#prenda').val()
+                "hasta":$('#hasta').val()
             },
             dataType:"json",
             success:function(res){
@@ -230,6 +227,7 @@
                 $.each(res.ventas,function(i,item){
                     //console.log(item.id);
                     val=1;
+                                
                    $('#ventas').append(`
                     <tr>
                         <td>`+item.id+`</td>
@@ -267,13 +265,13 @@
                         <td>$`+ventas_total+`</td>
                     </tr>
                     `);
-                $.each(res.consulta, function(index, el) {
+                /**$.each(res.consulta, function(index, el) {
                     tbody += `<tr>
                         <td>${el[0].sku}</td>
                         <td>${el[0].descripcion}</td>
                         <td>${el[1]}</td>
                     </tr>`;
-                });
+                });**/
                 let tabla = `<thead>
                                 <tr>
                                     <th>SKU</th>
@@ -282,8 +280,8 @@
                                 </tr>
                             </thead>
                         <tbody>` + tbody + `</tbody>`;
-                $('#PrendasVen').text('');
-                $('#PrendasVen').append(tabla);
+                //$('#PrendasVen').text('');
+                //$('#PrendasVen').append(tabla);
                 
                 $('#tituloP').prop('style', '');
             },
