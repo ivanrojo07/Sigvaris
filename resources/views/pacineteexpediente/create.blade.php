@@ -26,6 +26,10 @@
 		    			<input id="input-id3" type="file" accept=".pdf, .jpg, .jpeg, .png" class="file" name="identificacion" data-preview-file-type="text" >
 		    		</div>
 		    		<div class="col-3 col-sm-12 col-md-3 col-xl-3 form-group text-center">
+		    			<label class="control-label" for="">Reversa de la Identificación </label>
+		    			<input id="input-id6" type="file" accept=".pdf, .jpg, .jpeg, .png" class="file" name="identificacion2" data-preview-file-type="text" >
+		    		</div>
+		    		<div class="col-3 col-sm-12 col-md-3 col-xl-3 form-group text-center">
 		    			<label class="control-label" for="">Inapam</label>
 		    			<input id="input-id4" type="file" accept=".pdf, .jpg, .jpeg, .png" class="file" name="inapam" data-preview-file-type="text" >
 		    		</div>
@@ -73,6 +77,20 @@
 	          "{{ url('/expedientes/'.$paciente->id.'/'.$expediente->identificacion) }}"
 	        ]
 	    });
+	    $("#input-id6").fileinput({
+	        theme: 'fas',
+	        showUpload: true,
+	        showCaption: true,
+	        browseClass: "btn btn-primary btn-lg",
+	        fileType: "any",
+	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+	        overwriteInitial: true,
+	        initialPreviewAsData: true,
+	        initialPreview: [
+	          "{{ url('/expedientes/'.$paciente->id.'/'.$expediente->identificacion2) }}"
+	        ]
+	    });
+
 	    $("#input-id4").fileinput({
 	        theme: 'fas',
 	        showUpload: true,

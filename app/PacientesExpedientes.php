@@ -8,7 +8,7 @@ class PacientesExpedientes extends Model
 {
     //
     protected $table='pacientes_expediente';
-    protected $fillable=['id','paciente_id','receta','aviso_privacidad','identificacion','inapam'];
+    protected $fillable=['id','paciente_id','receta','aviso_privacidad','identificacion','identificacion2','inapam'];
     protected $hidden=['created_at','updated_at'];
 
     public function paciente()

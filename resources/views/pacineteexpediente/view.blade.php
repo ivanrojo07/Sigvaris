@@ -42,6 +42,16 @@
 					</div>
 					@endif
 				@endif
+				@if($expediente->identificacion2!=null)
+					@if($identificacion2 != "pdf")
+					<div class="Portfolio m-4">
+						<a href="#!">
+							<img class="card" src="{{ url('/expedientes/'.$paciente->id.'/'.$expediente->identificacion2) }}" width="200px" height="200px" alt="">
+						</a>
+						<div class="desc">Reversa de la Identificación</div>
+					</div>
+					@endif
+				@endif
 				@if($expediente->inapam!=null)
 					@if($inapam != "pdf")
 					<div class="Portfolio m-4">
@@ -81,6 +91,17 @@
 							<div class="col-md-12 text-center">
 								<a class="btn btn-info" target="_blank" href="{{ url('/expedientes/'.$paciente->id.'/'.$expediente->identificacion) }}">
 									ver Identificación
+								</a>
+							</div>
+						</div>
+						@endif
+					@endif
+					@if($expediente->identificacion2!=null)
+						@if($identificacion2 == "pdf")
+						<div class="row m-4 my-auto">
+							<div class="col-md-12 text-center">
+								<a class="btn btn-info" target="_blank" href="{{ url('/expedientes/'.$paciente->id.'/'.$expediente->identificacion2) }}">
+									ver Reversa de la Identificación
 								</a>
 							</div>
 						</div>

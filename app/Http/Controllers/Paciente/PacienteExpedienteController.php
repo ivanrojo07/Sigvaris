@@ -53,6 +53,9 @@ class PacienteExpedienteController extends Controller
         if ($request->identificacion && $request->file('identificacion')->isValid()) {
             $identificacion = explode("/",$request->identificacion->storeAs('expedientes/'.$paciente->id, 'identificacion.'.$request->identificacion->extension(), 'public'));
         }
+        if ($request->identificacion2 && $request->file('identificacion2')->isValid()) {
+            $identificacion2 = explode("/",$request->identificacion2->storeAs('expedientes/'.$paciente->id, 'identificacion2.'.$request->identificacion->extension(), 'public'));
+        }
         if ($request->inapam && $request->file('inapam')->isValid()) {
             $inapam = explode("/",$request->inapam->storeAs('expedientes/'.$paciente->id, 'inapam.'.$request->inapam->extension(), 'public'));
         }
@@ -72,6 +75,12 @@ class PacienteExpedienteController extends Controller
         }else{
             $identificacion=$identificacion[2];
         }
+        if (!isset($identificacion2)) {
+            $identificacion2=null;
+        }else{
+            $identificacion2=$identificacion2[2];
+        }
+
         if (!isset($inapam)) {
             $inapam=null;
         }else{
@@ -99,13 +108,21 @@ class PacienteExpedienteController extends Controller
                     'receta'=>$receta
                 ]);
             }
+            if ($identificacion2!=null) {
+                $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
+                    'identificacion2'=>$identificacion2
+                ]);
+            }
+            
+
         }else{
             $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
                 
                 'aviso_privacidad'=>$aviso_privacidad,
                 'identificacion'=>$identificacion,
                 'inapam'=>$inapam,
-                'receta'=>$receta
+                'receta'=>$receta,
+                'identificacion2'=>$identificacion2
             ]);
         }
         Alert::success('Información Agregada', 'Se ha registrado correctamente la información');
