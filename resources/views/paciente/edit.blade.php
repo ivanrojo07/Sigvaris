@@ -66,7 +66,7 @@
                 <div class="form-group col-3">
                     <label for="doctor_id">Doctor que recomienda:</label>
                     <select class="form-control" name="doctor_id" id="doctor_id" required>
-                        @if($paciente->otro_doctor!=null)
+                        @if($paciente->otro_doctor==null)
                             <option value="{{$paciente->doctor_id}}">{{$paciente->doctor()->getFullnameAttribute()}}</option>
                         @else
                             <option value="{{$paciente->otro_doctor}}">{{$paciente->otro_doctor}}</option>
