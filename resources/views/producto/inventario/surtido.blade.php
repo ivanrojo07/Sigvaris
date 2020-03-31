@@ -52,29 +52,7 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    function erorEtiqueta() {
-            event.preventDefault(); // prevent form submit
-            var form = event.target.form; // storing the form
-            swal({
-                title: "intentalo de nuevo",
-                text: "Producto no encontrado.",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "SI",
-                cancelButtonText: "¡NO!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }, function (isConfirm) {
-                if (!isConfirm) {
-
-                    //swal("Cancelado", "", "error");
-                } else {
-
-                    //document.getElementById(etiqueta).submit();          // submitting the form when user press yes
-                }
-            });
-        }
+   
 
     $(document).ready(function() {
         var t = $('#productos').DataTable();
@@ -102,7 +80,7 @@
                                 res.precio_publico_iva
                             ]).draw();
                         }else{
-                            erorEtiqueta();
+                            alert("Producto no encontrado.");
                         }
                     }
 
