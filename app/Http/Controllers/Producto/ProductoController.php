@@ -146,7 +146,7 @@ class ProductoController extends Controller
                     ->orWhere('swiss_id',$request->input('sku'))
                     ->get();
             if (count($Producto)==1) {
-                return json_encode(['producto'=> $Producto[0]]);
+                return $Producto[0];
             }else{
                 return 0;
             }
