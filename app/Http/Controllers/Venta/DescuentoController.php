@@ -459,7 +459,7 @@ class DescuentoController extends Controller
             $sigpesosCumpleaños=0;
         }
         
-        if(isset($paciente->ventas))
+        if(isset($paciente->ventas->last()->created_at))
         {
             $intervalo = new DateInterval('P6M');
             $hoy=Carbon::now();
