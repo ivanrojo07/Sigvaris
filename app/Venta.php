@@ -29,7 +29,8 @@ class Venta extends Model
         'PagoTarjeta',
         'PagoEfectivo',
         'mesesPago',
-        'requiere_factura'
+        'requiere_factura',
+        'comentario'
     ];
 
     /**

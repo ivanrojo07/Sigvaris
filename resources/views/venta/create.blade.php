@@ -336,6 +336,16 @@
                                                 id="descuentoInapam" value="0" step="0.01" readonly="">
                                         </div>
                                     </div>
+                                    {{-- Comentario --}}
+                                    <div class="row">
+                                        
+                                        <div  class="col-12 col-sm-12 col-md-12 form-group">
+                                            <label for="" class="text-uppercase text-muted">Comentario</label>
+                                            <input type="text" class="form-control" id="comentario"
+                                                name="comentario">
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
