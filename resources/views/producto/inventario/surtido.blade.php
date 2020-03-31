@@ -68,14 +68,14 @@
                         },
                     success: function(res){
                         console.log(res);
-                        if (res!=0) {
+                        if (res.producto) {
                             t.row.add([
-                                res.sku,
-                                res.upc,
-                                res.swiss_id,
-                                res.descripcion,
-                                res.precio_publico,
-                                res.precio_publico_iva
+                                res.producto.sku,
+                                res.producto.upc,
+                                res.producto.swiss_id,
+                                res.producto.descripcion,
+                                res.producto.precio_publico,
+                                res.producto.precio_publico_iva
                             ]).draw();
                         }
                     }
