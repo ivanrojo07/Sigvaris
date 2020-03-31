@@ -96,6 +96,7 @@ Route::post('calcular_descuento/{promocion}','Venta\DescuentoController@getDescu
 Route::get('obtener_sigpesos/{paciente}','Venta\DescuentoController@getSigpesos');
 
 Route::get('productos/inventario', 'Inventario\InventarioController@index')->name('productos.inventario');
+Route::get('productos/surtido', 'Inventario\InventarioController@surtido')->name('productos.surtido');
 Route::get('productos/inventario/historial', 'Inventario\InventarioController@historial')->name('productos.inventario.historial');
 Route::get('productos/inventario/modificar/{id}', 'Inventario\InventarioController@edit')->name('producto.inventario.modificar');
 Route::post('productos/inventario/update', 'Inventario\InventarioController@update')->name('producto.inventario.update');
@@ -108,7 +109,7 @@ Route::resource('productos', 'Producto\ProductoController')->middleware('product
 Route::post('ventas/getProductos_nombre','Producto\ProductoController@getProductosNombre')->name('ventas/getProductos_nombre');
 Route::post('pacientes/{id}/getProductos_nombre','Producto\ProductoController@getProductosNombre');
 Route::post('productos/getProductoExists','Producto\ProductoController@getProductoExists')->name('productos/getProductoExists');
-
+Route::post('productos/getProductoExistsDesc','Producto\ProductoController@getProductoExistsDesc')->name('productos/getProductoExistsDesc');
 Route::get('import-export-csv-excel', array('as' => 'excel.import', 'uses' => 'FileController@importExportExcelORCSV'))->middleware('productos.rol');
 Route::post('import-csv-excel', array('as' => 'import-csv-excel', 'uses' => 'FileController@importFileIntoDB'))->middleware('productos.rol');
 Route::get('download-excel-file/{type}', array('as' => 'excel-file', 'uses' => 'FileController@downloadExcelFile'))->middleware('productos.rol');

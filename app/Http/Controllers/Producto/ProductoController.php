@@ -135,5 +135,31 @@ class ProductoController extends Controller
         //dd(Producto::where('sku',$request->input('sku'))->get());
         //return Producto::where('sku',$request->input('sku'))->exists();
     }
+    public function getProductoExistsDesc(Request $request)
+    {
+        if (Producto::where('sku',$request->input('sku'))
+                    ->orWhere('upc',$request->input('sku'))
+                    ->orWhere('swiss_id',$request->input('sku'))
+                    ->exists()) {
+            $Producto=Producto::where('sku',$request->input('sku'))
+                    ->orWhere('upc',$request->input('sku'))
+                    ->orWhere('swiss_id',$request->input('sku')
+                    ->get();
+            if (count($Producto)==1) {
+                return json_encode(['producto'=> $Producto[0]]);
+            }else{
+                return 0;
+            }
+
+            
+        }
+        //dd($ajaxProductos);
+        
+        }else{
+            return 0;
+        }
+        //dd(Producto::where('sku',$request->input('sku'))->get());
+        //return Producto::where('sku',$request->input('sku'))->exists();
+    }
     
 }

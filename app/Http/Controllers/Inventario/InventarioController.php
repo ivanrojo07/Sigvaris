@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class InventarioController extends Controller
 {
+    public function surtido()
+    {
+        return view('producto.inventario.surtido');
+    }
     public function index()
     {
         // dd( session('oficina') );
