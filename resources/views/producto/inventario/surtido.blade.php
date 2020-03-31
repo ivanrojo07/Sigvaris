@@ -78,7 +78,7 @@
                         console.log(res);
                         if (res!=0) {
                             t.row.add([
-                                res.producto.sku,
+                                res.producto.id,
                                 res.producto.upc,
                                 res.producto.swiss_id,
                                 res.producto.descripcion,
