@@ -67,6 +67,7 @@
                                "sku" : $("#BuscarProducto").val()
                         },
                     success: function(res){
+                        console.log(res);
                         if (res!=0) {
                             t.row.add([
                                 res.sku,
