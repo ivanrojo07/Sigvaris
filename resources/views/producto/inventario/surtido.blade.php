@@ -62,8 +62,8 @@
                 var t = $("#productos").dataTable();
                 //console.log($(this).val());
                 $.ajax({
-                    url:"{{ url('/productos/getProductoExistsDesc') }}/",
-                    type:'POST',
+                    url:"{{ url('productos/getProductoExistsDesc') }}",
+                    type:'POST',/
                     data: {"_token": $("meta[name='csrf-token']").attr("content"),
                                "sku" : $("#BuscarProducto").val()
                         },
