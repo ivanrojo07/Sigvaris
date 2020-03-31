@@ -143,7 +143,7 @@ class ProductoController extends Controller
                     ->exists()) {
             $Producto=Producto::where('sku',$request->input('sku'))
                     ->orWhere('upc',$request->input('sku'))
-                    ->orWhere('swiss_id',$request->input('sku')
+                    ->orWhere('swiss_id',$request->input('sku'))
                     ->get();
             if (count($Producto)==1) {
                 return json_encode(['producto'=> $Producto[0]]);
@@ -154,8 +154,7 @@ class ProductoController extends Controller
             
         }
         //dd($ajaxProductos);
-        
-        }else{
+        else{
             return 0;
         }
         //dd(Producto::where('sku',$request->input('sku'))->get());
