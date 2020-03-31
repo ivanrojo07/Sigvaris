@@ -66,7 +66,7 @@
                     type:'POST',
                     data: {"_token": $("meta[name='csrf-token']").attr("content"),
                                "sku" : $("#BuscarProducto").val()
-                        }
+                        },
                     success: function(res){
                         if (res!=0) {
                             t.row.add([
