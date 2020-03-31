@@ -48,7 +48,7 @@ class DamageController extends Controller
         $Producto=Producto::where('sku',$request->input("sku"))->get();
 
         Producto::where('sku',$request->input("sku"))
-                  ->update(['stock'=>$Producto[0]->stock+1]);
+                  ->update(['stock'=>$Producto[0]->stock-1]);
 
         $HistorialCambioVenta->save();
         $medicos = Doctor::get();
