@@ -63,7 +63,7 @@
                 //console.log($(this).val());
                 $.ajax({
                     url:"{{ url('productos/getProductoExistsDesc') }}",
-                    type:'POST',/
+                    type:'POST',
                     data: {"_token": $("meta[name='csrf-token']").attr("content"),
                                "sku" : $("#BuscarProducto").val()
                         },
