@@ -77,7 +77,7 @@
                     success: function(res){
                         
                         if (res!=0) {
-                            console.log(res.producto);
+                            console.log(res);
                             t.row.add([
                                 res.producto.id,
                                 res.producto.upc,
