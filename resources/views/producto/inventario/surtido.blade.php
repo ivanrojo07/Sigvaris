@@ -76,7 +76,7 @@
                         },
                     success: function(res){
                         console.log(res);
-                        if (res.producto) {
+                        if (res!=0) {
                             t.row.add([
                                 res.producto.sku,
                                 res.producto.upc,
