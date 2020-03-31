@@ -13,12 +13,17 @@
             <div class="card rounded-0">
                 <div class="card-header rounded-0">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
+                        <div class="col-sm-12 col-md-4">
                             <h3>Productos</h3>
                         </div>
-                        <div class="col-sm-12 col-md-6">
+                        <div class="col-sm-12 col-md-4">
                             <label>Buscar:<input type="text" id="BuscarProducto" onkeypress="return event.keyCode!=13">
                             </label>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <a  class="btn btn-primary">
+                                <i  onclick='$("#productos").dataTable().fnDestroy();' class="fa fa-bars"></i><strong> Limpiar tabla</strong>
+                            </a>
                         </div>
                     </div>
                 </div>
