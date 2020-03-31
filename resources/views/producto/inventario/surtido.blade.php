@@ -76,7 +76,7 @@
                                 res.descripcion,
                                 res.precio_publico,
                                 res.precio_publico_iva
-                            ]);
+                            ]).draw( false );
                         }
                     }
 
