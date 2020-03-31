@@ -38,15 +38,6 @@
                                 </tr>
                             </thead>
                             <tfoot>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                    <th>Column 3</th>
-                                    <th>Column 4</th>
-                                    <th>Column 5</th>
-                                    <th>Column 6</th>
-
-                                </tr>
                             </tfoot>
                         </table>
                     </div>
