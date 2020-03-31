@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-sm-12 col-md-4">
                             <a  class="btn btn-primary">
-                                <i  onclick='$("#productos").dataTable().fnDestroy();' class="fa fa-bars"></i><strong> Limpiar tabla</strong>
+                                <i  onclick='$("#productos").dataTable().clear();' class="fa fa-bars"></i><strong> Limpiar tabla</strong>
                             </a>
                         </div>
                     </div>
