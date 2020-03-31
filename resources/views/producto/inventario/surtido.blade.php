@@ -54,12 +54,11 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#productos').DataTable();
+        var t = $('#productos').DataTable();
 
         $("#BuscarProducto").on('keyup', function (e) {
           var keycode = e.keyCode || e.which;
             if (keycode == 13) {
-                var t = $("#productos").dataTable();
                 //console.log($(this).val());
                 $.ajax({
                     url:"{{ url('productos/getProductoExistsDesc') }}",
@@ -76,7 +75,7 @@
                                 res.descripcion,
                                 res.precio_publico,
                                 res.precio_publico_iva
-                            ]).draw( false );
+                            ]).draw();
                         }
                     }
 
