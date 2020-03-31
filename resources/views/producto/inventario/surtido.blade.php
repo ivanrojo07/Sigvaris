@@ -79,12 +79,12 @@
                         if (res!=0) {
                             console.log(res);
                             t.row.add([
-                                res.producto.id,
-                                res.producto.upc,
-                                res.producto.swiss_id,
-                                res.producto.descripcion,
-                                res.producto.precio_publico,
-                                res.producto.precio_publico_iva
+                                res.id,
+                                res.upc,
+                                res.swiss_id,
+                                res.descripcion,
+                                res.precio_publico,
+                                res.precio_publico_iva
                             ]).draw();
                         }
                     }
