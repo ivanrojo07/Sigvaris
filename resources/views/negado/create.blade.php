@@ -11,35 +11,35 @@
             </div>
         </div>
         <div class="card-body">
-            <form role="form" id="form-cliente" method="POST" action="{{-- route('productos.store') --}}" name="form">
+            <form role="form" id="form-cliente" method="POST" action="{{route('negado.create')}}" name="form">
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="row">
                         <div class="col-3 form-group">
                             <label id="No_repetido" class="control-label">✱SKU:</label>
-                            <input type="text" id="sku" name="sku" class="form-control" required="">
+                            <input type="text" id="producto_id" name="producto_id" class="form-control" required="">
                         </div>
                         <div class="col-3 form-group">
                             <label id="No_repetido" class="control-label">✱Paciente:</label>
-                            <input type="text" id="Paciente" name="Paciente" class="form-control" required="">
+                            <input type="text" id="paciente_id" name="paciente_id" class="form-control" required="">
                         </div>
                         <div class="col-3 form-group">
                             <label for="actual">✱Fecha actual</label>
-                            <input type="date" class="form-control" value="{{date('Y-m-d')}}"
+                            <input type="date" class="form-control" id="fecha" name="fecha" value="{{date('Y-m-d')}}"
                                 readonly="">
                         </div>
                         <div class="col-3 form-group">
                             <label for="actual">Fecha posible entrega:</label>
-                            <input type="date" class="form-control" value=""
+                            <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" value=""
                                 >
                         </div>
                         <div class="col-3 form-group">
                             <label class="control-label">Producto que se entrego en lugar del negado:</label>
-                            <input type="text" name="id_producto" class="form-control" required="" id="precio">
+                            <input type="text" name="producto2" class="form-control" required="" id="precio">
                         </div>
                         <div class="col-3 form-group">
                             <label class="control-label"><br>Comentarios :</label>
-                            <input type="number" name="stock" class="form-control" step="1" required="" id="stock">
+                            <input type="number" name="comentarios" class="form-control" step="1" required="" id="comentarios">
                         </div>
                         
                         <input type="hidden" name="oficina_id" value="{{session('oficina')}}">

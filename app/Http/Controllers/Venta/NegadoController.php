@@ -24,9 +24,10 @@ class NegadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //return view('venta.devolucion.create', compact('venta'));
+        $negado = new Negado($request->all());
+        return view('negado.create');
     }
 
     /**
