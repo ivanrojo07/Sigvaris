@@ -50,9 +50,12 @@ class NegadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
+        $negados=Negado::get();
+        return view('venta.index_all', ['negados' => $negados]);
+
     }
 
     /**
