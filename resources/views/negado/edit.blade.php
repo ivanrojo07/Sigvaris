@@ -17,7 +17,7 @@
             
         </div>
         <div class="card-body">
-            <form role="form" id="form-cliente" method="POST" action="{{route('negado.update', ['negado'=>$negado])}}" name="form">
+            <form role="form" id="form-cliente" method="POST" action="{{url('negado/{{$negado->id}}/update')}}" name="form">
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="row">
