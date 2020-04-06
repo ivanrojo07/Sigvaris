@@ -5,15 +5,16 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-4">
+                <div class="col-6">
                     <h4>Crear Producto Negado</h4>
                 </div>
-            </div>
-            <div class="col-4 text-center">
+                <div class="col-6 text-center">
                     <a href="{{ url('negado/show') }}" class="btn btn-primary">
                         <i class="fa fa-bars"></i><strong> Lista de Productos Negados</strong>
                     </a>
                 </div>
+            </div>
+            
         </div>
         <div class="card-body">
             <form role="form" id="form-cliente" method="POST" action="{{route('negado.create')}}" name="form">

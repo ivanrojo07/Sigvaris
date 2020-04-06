@@ -18,7 +18,7 @@
                         <th>Fecha</th>
                         <th>Fecha entrega</th>
                         <th>Comentarios</th>
-                        <th></th>
+                        <th>Operación</th>
                     </tr>
                 </thead>
                 <tbody>
