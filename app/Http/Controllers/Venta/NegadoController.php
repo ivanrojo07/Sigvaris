@@ -54,7 +54,7 @@ class NegadoController extends Controller
     {
         //
         $negados=Negado::get();
-        return view('venta.index_all', ['negados' => $negados]);
+        return view('negado.index', ['negados' => $negados]);
 
     }
 
