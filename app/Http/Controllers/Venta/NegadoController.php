@@ -64,9 +64,11 @@ class NegadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    
+    public function edit(Negado $negado)
     {
         //
+        return view('negado.edit', ['negado' => $negado]);
     }
 
     /**
@@ -76,9 +78,12 @@ class NegadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Negado $negado)
     {
         //
+        $negado->update($request->all());
+        $negados=Negado::get();
+        return view('negado.index', ['negados' => $negados]);
     }
 
     /**

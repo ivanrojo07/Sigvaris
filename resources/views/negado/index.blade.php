@@ -36,9 +36,10 @@
                         <td>
                             <div class="row">
                                 <div class="col-auto pr-2">
-                                    <a href=""
-                                        class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a>
+                                    <a href="{{route('negado.edit', ['negado'=>$negado])}}"
+                                        class="btn btn-primary"><i class="fas fa-eye"></i><strong> editar</strong></a>
                                 </div>
+
                             </div>
                         </td>
                     </tr>
