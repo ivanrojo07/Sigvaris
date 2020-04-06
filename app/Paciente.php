@@ -64,6 +64,10 @@ class Paciente extends Model
     {
         return $this->hasMany('App\Venta');
     }
+    public function negados()
+    {
+        return $this->hasMany('App\Negado');
+    }
 
     public function nivel()
     {
