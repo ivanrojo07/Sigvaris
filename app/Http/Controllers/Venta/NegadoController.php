@@ -26,6 +26,7 @@ class NegadoController extends Controller
      */
     public function create(Request $request)
     {
+        dd($request->all());
         $negado = new Negado($request->all());
         return view('negado.create');
     }
