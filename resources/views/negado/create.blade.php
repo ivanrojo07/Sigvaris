@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-4 text-center">
-                    <a href="{{ route('negado.show') }}" class="btn btn-primary">
+                    <a href="{{ url('negado/show') }}" class="btn btn-primary">
                         <i class="fa fa-bars"></i><strong> Lista de Productos Negados</strong>
                     </a>
                 </div>
