@@ -38,7 +38,7 @@
                             <input type="text" name="id_producto" class="form-control" required="" id="precio">
                         </div>
                         <div class="col-3 form-group">
-                            <label class="control-label">Comentarios :</label>
+                            <label class="control-label"><br>Comentarios :</label>
                             <input type="number" name="stock" class="form-control" step="1" required="" id="stock">
                         </div>
                         
