@@ -27,6 +27,11 @@
                 <div class="card-body">
                     <div class="row">
                         <input type="hidden" name="paciente_id" value="{{$negado->paciente_id}}">
+                        <input type="hidden" name="producto_id" value="{{$negado->producto_id}}">
+                        <div class="col-3 form-group">
+                            <label id="No_repetido" class="control-label">✱SKU:</label>
+                            <input type="text"  class="form-control" value="{{$negado->producto->sku}}" readonly=""  required="">
+                        </div>
                         <div class="col-3 form-group">
                             <label id="No_repetido" class="control-label">✱Paciente:</label>
                             <input type="text"  class="form-control" value="{{$negado->paciente->fullname}}" readonly=""  required="">
