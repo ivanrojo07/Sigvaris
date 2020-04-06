@@ -245,8 +245,8 @@
         
         const paciente_id = $(this).attr('pacienteid');
         const paciente_nombre = $(this).attr('nombre');
-        $('#producto_id').append("<option value='"+paciente_id+"' >"+paciente_nombre+"</option>");
-        $('#producto_id').val(paciente_id);
+        $('#paciente_id').append("<option value='"+paciente_id+"' >"+paciente_nombre+"</option>");
+        $('#paciente_id').val(paciente_id);
     /* Act on the event */
     });
     function agregarProducto(p){
