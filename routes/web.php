@@ -135,7 +135,7 @@ Route::resource('ventas.devoluciones', 'Venta\DevolucionController');
 Route::resource('ventas', 'Venta\VentaController');
 
 Route::resource('negado', 'Venta\NegadoController');
-
+Route::post('negado/create', 'Venta\NegadoController@create');
 
 Route::resource('hospitals', 'Hospital\HospitalController');
 Route::resource('estados', 'Estado\EstadoController');
