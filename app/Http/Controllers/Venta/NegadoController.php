@@ -23,9 +23,9 @@ class NegadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Venta $venta)
+    public function create()
     {
-        return view('venta.devolucion.create', compact('venta'));
+        //return view('venta.devolucion.create', compact('venta'));
     }
 
     /**
@@ -34,10 +34,10 @@ class NegadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Venta $venta)
+    public function store()
     {
-        $realizarDevolucionService = new RealizarDevolucionService($request, $venta);
-        return redirect()->route('ventas.index');
+        //$realizarDevolucionService = new RealizarDevolucionService($request, $venta);
+        //return redirect()->route('ventas.index');
     }
 
     /**
