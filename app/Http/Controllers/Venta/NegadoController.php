@@ -50,10 +50,32 @@ class NegadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(request $request)
     {
         //
         $negados=Negado::get();
+        if ($request->fechaInicioBusqueda) {
+            $negados = $negados->where('fecha', '>=', $request->fechaInicioBusqueda);
+             
+        }
+
+        if ($request->fechaFinBusqueda) {
+            $negados = $negados->where('fecha', '<=', $request->fechaFinBusqueda);
+
+        }
+       
+         
+        $negados = $negados->paginate(10);
+        if ($request->fechaInicioBusqueda) {
+            $negados->appends(['fechaInicioBusqueda' => $request->fechaInicioBusqueda]);
+        }
+
+        if ($request->fechaFinBusqueda) {
+           $negados->appends(['fechaFinBusqueda' => $request->fechaFinBusqueda]);
+        }
+       
+
+        
         return view('negado.index', ['negados' => $negados]);
 
     }

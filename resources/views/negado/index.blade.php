@@ -15,11 +15,31 @@
                     <strong> Crear un producto Negado</strong>
                 </a>
             </div>
+
         </div>
 
             
         </div>
         <div class="card-body">
+            <form action="{{route('negado.show')}}" method="GET" id="formBusuqeda">
+                @csrf
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <label for="desde" class="text-muted text-uppercase"><strong>Desde:</strong></label>
+                        <input type="date" class="form-control" name="fechaInicioBusqueda" required>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <label for="hasta" class="text-muted text-uppercase"><strong>Hasta:</strong></label>
+                        <input type="date" class="form-control" name="fechaFinBusqueda" required>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <a type="submit" class="btn btn-primary text-white border-0" id="botonBuscarCrms">Buscar</a>
+                    </div>
+                </div>
+            </form>
+
             <table class="table">
                 <thead>
                     <tr>
@@ -59,6 +79,7 @@
 
                 </tbody>
             </table>
+            {{ $negados->links() }}
         </div>
     </div>
 </div>
