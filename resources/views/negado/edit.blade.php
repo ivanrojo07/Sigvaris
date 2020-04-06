@@ -26,9 +26,10 @@
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="row">
+                        <input type="hidden" name="paciente_id" value="{{$negado->paciente_id}}">
                         <div class="col-3 form-group">
                             <label id="No_repetido" class="control-label">✱Paciente:</label>
-                            <input type="text" id="paciente_id" name="paciente_id" class="form-control" value="{{$negado->paciente_id}}" required="">
+                            <input type="text"  class="form-control" value="{{$negado->paciente->fullname}}" readonly=""  required="">
                         </div>
                         <div class="col-3 form-group">
                             <label for="actual">✱Fecha actual</label>
