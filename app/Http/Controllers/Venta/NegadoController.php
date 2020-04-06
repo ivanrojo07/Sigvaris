@@ -78,7 +78,7 @@ class NegadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Negado $negado)
+    public function editar(Request $request, Negado $negado)
     {
         //
         $negado->update($request->all());
