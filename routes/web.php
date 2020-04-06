@@ -139,7 +139,7 @@ Route::resource('negado', 'Venta\NegadoController');
 Route::post('negado/create', 'Venta\NegadoController@create');
 Route::post('negado/{negado}/editar', 'Venta\NegadoController@editar');
 Route::get('negado/show', 'Venta\NegadoController@show');
-Route::get('negado/show2', 'Venta\NegadoController@show2');
+Route::post('negado/show2', 'Venta\NegadoController@show2');
 
 Route::resource('hospitals', 'Hospital\HospitalController');
 Route::resource('estados', 'Estado\EstadoController');
