@@ -6,7 +6,18 @@
     
     <div class="card">
         <div class="card-header">
-            <h4>Historial Negados</h4>
+            <div class="row">
+            <div class="col-6">
+                <h4>Historial Negados</h4>
+            </div>
+            <div class="col-6 text-center">
+                <a href="{{route('negado.index')}}" class="btn btn-primary">
+                    <strong> Crear un producto Negado</strong>
+                </a>
+            </div>
+        </div>
+
+            
         </div>
         <div class="card-body">
             <table class="table">

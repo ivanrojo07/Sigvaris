@@ -5,12 +5,17 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-6">
+                <div class="col-3">
                     <h4>Actualizar Producto Negado</h4>
                 </div>
-                <div class="col-6 text-center">
+                <div class="col-3 text-center">
                     <a href="{{ url('negado/show') }}" class="btn btn-primary">
                         <i class="fa fa-bars"></i><strong> Lista de Productos Negados</strong>
+                    </a>
+                </div>
+                <div class="col-3 text-center">
+                    <a href="{{route('negado.index')}}" class="btn btn-primary">
+                        <strong> Crear un producto Negado</strong>
                     </a>
                 </div>
             </div>
