@@ -51,7 +51,7 @@ class NegadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(request $request)
+    public function show()
     {
         //
         $negados=Negado::get();

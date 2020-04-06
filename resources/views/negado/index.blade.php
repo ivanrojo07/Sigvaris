@@ -21,7 +21,7 @@
             
         </div>
         <div class="card-body">
-            <form action="{{route('negado.show')}}" method="GET" id="formBusuqeda">
+            <form action="{{route('negado.show2')}}" method="GET" id="formBusuqeda">
                 @csrf
                 <div class="row">
                     <div class="col-12 col-sm-6 col-md-4">
