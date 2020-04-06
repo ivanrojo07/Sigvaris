@@ -27,11 +27,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-3 form-group">
-                            <label id="No_repetido" class="control-label">✱SKU:</label>
-                            <input type="text" id="producto_id" name="producto_id" class="form-control" required="" 
-                            value="{{$negado->producto()->sku}}">
-                        </div>
-                        <div class="col-3 form-group">
                             <label id="No_repetido" class="control-label">✱Paciente:</label>
                             <input type="text" id="paciente_id" name="paciente_id" class="form-control" value="{{$negado->paciente_id}}" required="">
                         </div>

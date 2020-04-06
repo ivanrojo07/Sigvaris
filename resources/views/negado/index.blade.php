@@ -40,7 +40,7 @@
                     <tr>
                         <td>{{$negado->id}}</td>
                         <td>{{$negado->paciente->fullname}}</td>
-                        <td>{{$negado->producto_id}}</td>
+                        <td>{{$negado->producto->descripcion}}</td>
                         <td>{{\Carbon\Carbon::parse($negado->fecha)->format('m/d/Y')}}</td>
                         <td>{{\Carbon\Carbon::parse($negado->fecha_entraga)->format('m/d/Y')}}</td>
                         <td>{{$negado->comentarios}}</td>
