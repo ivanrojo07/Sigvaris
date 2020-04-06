@@ -136,7 +136,6 @@ Route::resource('ventas', 'Venta\VentaController');
 
 Route::resource('negado', 'Venta\NegadoController');
 Route::post('negado/create', 'Venta\NegadoController@create');
-Route::post('negado.editar', 'Venta\NegadoController@editar');
 Route::get('negado/show', 'Venta\NegadoController@show');
 
 Route::resource('hospitals', 'Hospital\HospitalController');
