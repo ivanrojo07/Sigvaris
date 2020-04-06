@@ -63,26 +63,10 @@ class NegadoController extends Controller
     public function show2(request $request)
     {
         //
-        $negados=Negado::get();
-        if ($request->fechaInicioBusqueda) {
-            $negados = $negados->where('fecha', '>=', $request->fechaInicioBusqueda);
-             
-        }
-
-        if ($request->fechaFinBusqueda) {
-            $negados = $negados->where('fecha', '<=', $request->fechaFinBusqueda);
-
-        }
-       
-         
-        //$negados = $negados->paginate(10);
-        if ($request->fechaInicioBusqueda) {
-            $negados->appends(['fechaInicioBusqueda' => $request->fechaInicioBusqueda]);
-        }
-
-        if ($request->fechaFinBusqueda) {
-           $negados->appends(['fechaFinBusqueda' => $request->fechaFinBusqueda]);
-        }
+        $negados=Negado::
+            where('fecha', '>=', $request->fechaInicioBusqueda)
+            ->where('fecha', '<=', $request->fechaFinBusqueda)
+            ->get();
        
 
         
