@@ -83,5 +83,12 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#botonBuscarCrms").click(function(){
+            $("#formBusuqeda").submit();
+        });
 
+    });
+</script>
 @endsection
