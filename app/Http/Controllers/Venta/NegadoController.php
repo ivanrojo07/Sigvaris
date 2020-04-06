@@ -55,6 +55,15 @@ class NegadoController extends Controller
     {
         //
         $negados=Negado::get();
+        
+        return view('negado.index', ['negados' => $negados]);
+
+    }
+
+    public function show2(request $request)
+    {
+        //
+        $negados=Negado::get();
         if ($request->fechaInicioBusqueda) {
             $negados = $negados->where('fecha', '>=', $request->fechaInicioBusqueda);
              
