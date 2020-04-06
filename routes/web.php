@@ -107,6 +107,7 @@ Route::resource('productos', 'Producto\ProductoController')->middleware('product
 
 
 Route::post('ventas/getProductos_nombre','Producto\ProductoController@getProductosNombre')->name('ventas/getProductos_nombre');
+Route::post('getProductos_nombre','Producto\ProductoController@getProductosNombre')->name('getProductos_nombre');
 Route::post('pacientes/{id}/getProductos_nombre','Producto\ProductoController@getProductosNombre');
 Route::post('productos/getProductoExists','Producto\ProductoController@getProductoExists')->name('productos/getProductoExists');
 Route::post('productos/getProductoExistsDesc','Producto\ProductoController@getProductoExistsDesc')->name('productos/getProductoExistsDesc');
