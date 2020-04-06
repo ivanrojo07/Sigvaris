@@ -47,6 +47,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>sku</th>
                             <th>Nombre</th>
                             <th>Precio Individual</th>
                             <th>Cantidad</th>
@@ -56,6 +57,7 @@
                     <tbody>
                         @foreach($venta->productos as $producto)
                         <tr>
+                            <td>{{$producto->sku}}</td>
                             <td>{{$producto->descripcion}}</td>
                             <td>{{$producto->precio_publico_iva}}</td>
                             <td>{{$producto->pivot->cantidad}}</td>
