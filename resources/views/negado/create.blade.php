@@ -100,7 +100,9 @@
                     <div class="row">
                         <div class="col-3 form-group">
                             <label id="No_repetido" class="control-label">✱SKU:</label>
-                            <input type="text" id="producto_id" name="producto_id" class="form-control" required="">
+                            <select class="form-control" name="producto_id" id="producto_id" required>
+                                <option value="">Buscar..</option>                                
+                            </select>
                         </div>
                         <div class="col-3 form-group">
                             <label id="No_repetido" class="control-label">✱Paciente:</label>
@@ -238,12 +240,21 @@
         });      
     });
   
+    function agregarProducto(p){
+        let producto = JSON.parse($(p).val());
+        // alert(producto);
+
+
+        $('#producto_id').append("<option value='"+producto.id+"' >"+producto.descripcion+"</option>");
+        $('#producto_id').val(producto.id);
+
+    }
     $(document).on('click', '.botonSeleccionCliente', async function(){
         
         const paciente_id = $(this).attr('pacienteid');
         const paciente_nombre = $(this).attr('nombre');
-        $('#paciente_id').append("<option value='"+paciente_id+"' >"+paciente_nombre+"</option>");
-        $('#paciente_id').val(paciente_id);
+        $('#producto_id').append("<option value='"+paciente_id+"' >"+paciente_nombre+"</option>");
+        $('#producto_id').val(paciente_id);
     /* Act on the event */
     });
 </script>
