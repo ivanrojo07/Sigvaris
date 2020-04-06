@@ -26,7 +26,7 @@
                         <div class="col-3 form-group">
                             <label for="actual">✱Fecha actual</label>
                             <input type="date" class="form-control" id="fecha" name="fecha" value="{{date('Y-m-d')}}"
-                                readonly="">
+                                readonly="" required="">
                         </div>
                         <div class="col-3 form-group">
                             <label for="actual">Fecha posible entrega:</label>
@@ -35,11 +35,11 @@
                         </div>
                         <div class="col-3 form-group">
                             <label class="control-label">Producto que se entrego en lugar del negado:</label>
-                            <input type="text" name="producto2" class="form-control" required="" id="precio">
+                            <input type="text" name="producto2" class="form-control"  id="precio">
                         </div>
                         <div class="col-3 form-group">
                             <label class="control-label"><br>Comentarios :</label>
-                            <input type="number" name="comentarios" class="form-control" step="1" required="" id="comentarios">
+                            <input type="text" name="comentarios" class="form-control" step="1"  id="comentarios">
                         </div>
                         
                         <input type="hidden" name="oficina_id" value="{{session('oficina')}}">

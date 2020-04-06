@@ -28,7 +28,4 @@ class Producto extends Model
         return $this->belongsToMany('App\Venta', 'producto_venta')->withPivot('cantidad','precio');
     }
 
-    public function Negados(){
-        return $this->hasMany('App\Negado');
-    }
 }
