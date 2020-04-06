@@ -67,7 +67,7 @@ class NegadoController extends Controller
             where('fecha', '>=', $request->fechaInicioBusqueda)
             ->where('fecha', '<=', $request->fechaFinBusqueda)
             ->get();
-        dd($request->fechaInicioBusqueda);
+        //dd($request->fechaInicioBusqueda);
 
         
         return view('negado.index', ['negados' => $negados]);
