@@ -241,8 +241,8 @@
     $(document).on('click', '.botonSeleccionCliente', async function(){
         
         const paciente_id = $(this).attr('pacienteid');
-        //const doctor_nombre = $(this).attr('nom');
-        $('#paciente_id').append("<option value='"+paciente_id+"' >nombre</option>");
+        const paciente_nombre = $(this).attr('nombre');
+        $('#paciente_id').append("<option value='"+paciente_id+"' >"+paciente_nombre+"</option>");
         $('#paciente_id').val(paciente_id);
     /* Act on the event */
     });

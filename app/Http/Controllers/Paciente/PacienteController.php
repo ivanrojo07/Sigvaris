@@ -270,7 +270,7 @@ class PacienteController extends Controller
                                         '<span pacienteId="'.$Paciente->id.'" class="nombrePaciente">'.$Paciente->nombre.'</span>',
                                         '<span pacienteId="'.$Paciente->id.'" class="apellidosPaciente">'.$Paciente->materno.' '.$Paciente->paterno.'</span>',
                                         $Paciente->telefono,
-                                        '<button type="button" class="btn btn-success botonSeleccionCliente rounded-0" pacienteId="'.$Paciente->id.'">
+                                        '<button type="button" class="btn btn-success botonSeleccionCliente rounded-0" pacienteId="'.$Paciente->id.'" nombre="'.$Paciente->nombre.'">
                                             <i class="fas fa-arrow-up"></i>
                                         </button>'
                                         ]);
