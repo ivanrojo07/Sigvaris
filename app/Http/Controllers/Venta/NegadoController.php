@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Venta;
 
+use UxWeb\SweetAlert\SweetAlert as Alert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Negado;
@@ -65,7 +66,7 @@ class NegadoController extends Controller
         }
        
          
-        $negados = $negados->paginate(10);
+        //$negados = $negados->paginate(10);
         if ($request->fechaInicioBusqueda) {
             $negados->appends(['fechaInicioBusqueda' => $request->fechaInicioBusqueda]);
         }

@@ -79,7 +79,7 @@
 
                 </tbody>
             </table>
-            {{ $negados->links() }}
+            {{-- $negados->links() --}}
         </div>
     </div>
 </div>
