@@ -31,7 +31,7 @@
                         <div class="col-3 form-group">
                             <label for="actual">Fecha posible entrega:</label>
                             <input type="date" class="form-control" value=""
-                                readonly="">
+                                >
                         </div>
                         <div class="col-3 form-group">
                             <label class="control-label">Producto que se entrego en lugar del negado:</label>
