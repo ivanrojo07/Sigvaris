@@ -201,7 +201,7 @@
                 $('#productos').DataTable({
                     "ajax":{
                         type: "POST",
-                        url:"getProductos_nombre",
+                        url:"/getProductos_nombre",
                         data: {"_token": $("meta[name='csrf-token']").attr("content"),
                                "nombre" : $(this).val()
                         }
