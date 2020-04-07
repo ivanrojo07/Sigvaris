@@ -90,38 +90,22 @@ class ReporteController extends Controller
             $fechaFinal = $request->input('fechaFinal');
 
 
-            $ventasPorFechaPorPaciente = Venta::where('fecha', '>=', $fechaInicial)
+            $ventas = Venta::has('productos')->where('fecha', '>=', $fechaInicial)
                 ->where('fecha', '<=', $fechaFinal)
                 ->withCount('productos');
 
             if ($request->oficinaId) {
-                $ventasPorFechaPorPaciente->where('oficina_id', $request->oficinaId);
+                $ventas->where('oficina_id', $request->oficinaId);
             }
 
             if ($request->empleadoFitterId) {
-                $ventasPorFechaPorPaciente->where('empleado_id', $request->empleadoFitterId);
+                $ventas->where('empleado_id', $request->empleadoFitterId);
             }
 
 
-            $ventasPorFechaPorPaciente = $ventasPorFechaPorPaciente->get()
-                ->groupBy('paciente_id')
-                ->transform(function ($item, $k) {
-                    return $item->groupBy(function ($date) {
-                        return Carbon::parse($date->fecha)->format('Y-m-d'); // grouping by years
-                        //return Carbon::parse($date->created_at)->format('m'); // grouping by months
-                    });
-                });
+            $ventas = $ventas->get();
 
-            foreach ($ventasPorFechaPorPaciente as $venta) {
-                $prendasVendidasPorPaciente =  $venta
-                    ->pluck('productos_count')
-                    ->flatten()
-                    ->sum();
-            }
-
-            // return $ventasPorFechaPorPaciente;
-
-            return view('reportes.dos', compact('ventasPorFechaPorPaciente', 'oficinas', 'empleadosFitter'));
+            return view('reportes.dos', compact('ventas', 'oficinas', 'empleadosFitter'));
         }
 
         return view('reportes.dos', compact('oficinas', 'empleadosFitter'));
