@@ -89,7 +89,7 @@
                     <div class="col-3"></div>
                     <div class="col-3">
                         <label for="totalCompras" class="text-uppercase"><strong>total pacientes</strong></label>
-                        <input type="text" readonly value="{{$pacientesConCompra->count()}}" class="form-control">
+                        <input type="text" readonly value="{{$pacientesConCompra ? $pacientesConCompra->count() : 0}}" class="form-control">
                     </div>
                     <div class="col-3">
                         <label for="totalCompras" class="text-uppercase"><strong>total prendas</strong></label>
