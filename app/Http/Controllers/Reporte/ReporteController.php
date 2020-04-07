@@ -523,6 +523,8 @@ class ReporteController extends Controller
                 ->with('productos')->get()
                 ->pluck('productos')->flatten()->groupBy('sku');
 
+            // dd($ventasPorSku);
+
             // with('productos')->get()->pluck('productos')->flatten()
 
             return view('reportes.nueve', compact('ventasPorSku'));
