@@ -87,9 +87,12 @@
                 <div class="row mt-3">
                     <div class="col-3"></div>
                     <div class="col-3"></div>
-                    <div class="col-3"></div>
                     <div class="col-3">
-                        <label for="totalCompras" class="text-uppercase"><strong>Compras totales</strong></label>
+                        <label for="totalCompras" class="text-uppercase"><strong>total pacientes</strong></label>
+                        <input type="text" readonly value="{{$pacientesConCompra->count()}}" class="form-control">
+                    </div>
+                    <div class="col-3">
+                        <label for="totalCompras" class="text-uppercase"><strong>total prendas</strong></label>
                         <input type="text" readonly value="{{$totalProductosCompras}}" class="form-control">
                     </div>
                 </div>

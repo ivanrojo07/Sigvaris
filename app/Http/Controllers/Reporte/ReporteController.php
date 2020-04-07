@@ -311,7 +311,8 @@ class ReporteController extends Controller
                 $query->where('fecha', '>=', $request->fechaInicial)
                     ->where('fecha', '<=', $request->fechaFinal);
             }])
-                ->get();
+                ->get()
+                ->unique();
 
             // return $pacientesConCompra;
 
