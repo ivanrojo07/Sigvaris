@@ -64,26 +64,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($pacientesConCompra as $key => $paciente)
+                        @foreach($pacientesConCompra as $paciente)
                                 <tr>
                                     <td>{{$paciente->nombre . " " . $paciente->paterno . " " . $paciente->materno}}</td>
                                     <td>
                                         {{
-                                            $paciente
-                                                ->ventas
-                                                ->where('fecha','>=',$rangoFechas["inicio"])
-                                                ->where('fecha', '<=',$rangoFechas["fin"])
-                                                ->pluck('productos')
-                                                ->flatten()
-                                                ->pluck('pivot')
-                                                ->flatten()
-                                                ->pluck('cantidad')->sum()
+                                            $paciente->ventas->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->sum()
                                         }}</td>
                                     <td>
                                         {{ round($paciente
                                             ->ventas
-                                            ->where('fecha','>=',$rangoFechas["inicio"])
-                                            ->where('fecha', '<=',$rangoFechas["fin"])
                                             ->pluck('productos')
                                             ->flatten()
                                             ->pluck('pivot')

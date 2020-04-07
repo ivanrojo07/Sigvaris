@@ -307,14 +307,17 @@ class ReporteController extends Controller
                 });
             }
 
-            $pacientesConCompra = $pacientesConCompra->with('ventas.productos')
+            $pacientesConCompra = $pacientesConCompra->with(['ventas' => function ($query) use ($request) {
+                $query->where('fecha', '>=', $request->fechaInicial)
+                    ->where('fecha', '<=', $request->fechaFinal);
+            }])
                 ->get();
+
+            // return $pacientesConCompra;
 
             $totalProductosCompras = $pacientesConCompra
                 ->pluck('ventas')
                 ->flatten()
-                ->where('fecha', '>=', $rangoFechas["inicio"])
-                ->where('fecha', '<=', $rangoFechas["fin"])
                 ->pluck('productos')
                 ->flatten()
                 ->pluck('pivot')
@@ -322,7 +325,7 @@ class ReporteController extends Controller
                 ->pluck('cantidad')->sum();
         }
 
-        return view('reportes.cuatroa', compact('pacientesConCompra', 'rangoFechas', 'totalProductosCompras', 'empleadosFitter', 'oficinas'));
+        return view('reportes.cuatroa', compact('pacientesConCompra','totalProductosCompras', 'rangoFechas', 'empleadosFitter', 'oficinas'));
     }
 
     public function cuatrob(Request $request)
