@@ -90,7 +90,7 @@ class ReporteController extends Controller
             $fechaFinal = $request->input('fechaFinal');
 
 
-            $ventas = Venta::has('productos')->where('fecha', '>=', $fechaInicial)
+            $ventas = Venta::has('paciente')->has('productos')->where('fecha', '>=', $fechaInicial)
                 ->where('fecha', '<=', $fechaFinal)
                 ->withCount('productos');
 
