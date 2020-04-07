@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>{{$mesTextual}}</td>
                                     @for ($anio = $anioInicial; $anio <= $anioFinal; $anio++)
-                                    <td>{{count(App\Venta::whereYear('fecha',$anio)->whereMonth('fecha',$mesNumerico)->get()->pluck('productos')->flatten())}}</td>
+                                    <td>{{App\Venta::whereYear('fecha',$anio)->whereMonth('fecha',$mesNumerico)->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten()->sum()}}</td>
                                     @endfor
                                 </tr>
                             @endforeach

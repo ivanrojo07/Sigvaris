@@ -463,6 +463,10 @@ class ReporteController extends Controller
                     // $productosPorMes[] = count(Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten());
                 }
 
+                // return 'entra';
+
+                // return Venta::whereYear('fecha','2020')->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten()->sum();
+
                 array_push($aniosYProductosPorMes, array($i => $productosPorMes));
             }
         }
