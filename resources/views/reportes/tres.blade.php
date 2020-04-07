@@ -148,7 +148,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 ctx.fillStyle = "#FFFFFF";
 
-var arregloSumaPacientes = {!! json_encode($arregloSumaPacientes) !!};
+var arregloSumaPacientes = {!! json_encode([ $totalPacientesConUnaPrenda, $totalPacientesConMasDeUnaPrenda ]) !!};
 arregloSumaPacientes = Object.values(arregloSumaPacientes);
 
 // Global Options:

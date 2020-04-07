@@ -203,9 +203,9 @@ class ReporteController extends Controller
                 $totalPacientesConUnProducto = Venta::where('fecha', $fecha)
                     ->with('paciente')
                     ->get()
-                    ->filter( function($venta){
+                    ->filter(function ($venta) {
                         return $venta->cantidad_productos == 1;
-                    } )
+                    })
                     ->pluck('paciente')
                     ->unique()
                     ->flatten();
@@ -213,7 +213,10 @@ class ReporteController extends Controller
                 $totalPacientesConUnProducto = count($totalPacientesConUnProducto);
                 $arregloTotalPacientesConUnProducto[] = $totalPacientesConUnProducto;
             }
-            $arregloTotalPacientesConUnProducto = array_values($arregloTotalPacientesConUnProducto);
+
+
+            // $arregloTotalPacientesConUnProducto = array_values($arregloTotalPacientesConUnProducto);
+            // dd( $arregloTotalPacientesConUnProducto );
 
             // POR CADA FECHA OBTENEMOS A LOS PACIENTES CON MAS DE UN PRODUCTO COMPRADO
             foreach ($arregloFechasConVentas as $key => $fecha) {
@@ -221,13 +224,14 @@ class ReporteController extends Controller
                     // ->has('productos')
                     ->with('paciente')
                     ->get()
-                    ->filter( function($venta){
+                    ->filter(function ($venta) {
                         return $venta->cantidad_productos > 1;
-                    } )
+                    })
                     ->pluck('paciente_id')
                     ->flatten()
                     ->unique()
                     ->toArray();
+                // dd($totalPacientesConMasDeUnProducto);
                 $totalPacientesConMasDeUnProducto = array_unique($totalPacientesConMasDeUnProducto);
                 $totalPacientesConUnProducto = count($totalPacientesConMasDeUnProducto);
                 $arregloTotalPacientesConMasDeUnProducto[] = $totalPacientesConUnProducto;
@@ -238,11 +242,43 @@ class ReporteController extends Controller
             // dd($arregloTotalPacientesConMasDeUnProducto);
             // dd($arregloTotalPacientesConMasDeUnProducto);
 
+            // dd( $arregloFechasConVentas );
+
+            $totalPacientesConMasDeUnaPrenda = Paciente::with(['ventas' => function ($query) use ($arregloFechasConVentas) {
+                return $query->whereIn('fecha', $arregloFechasConVentas);
+            }])
+            ->get()
+            ->filter( function($paciente){
+                return $paciente->ventas->
+                    pluck('productos')->flatten()->
+                    pluck('pivot')->flatten()->
+                    pluck('cantidad')->flatten()->
+                    sum() > 1;
+            } )
+            ->unique()
+            ->count();
+
+            $totalPacientesConUnaPrenda = Paciente::with(['ventas' => function ($query) use ($arregloFechasConVentas) {
+                return $query->whereIn('fecha', $arregloFechasConVentas);
+            }])
+            ->get()
+            ->filter( function($paciente){
+                return $paciente->ventas->
+                    pluck('productos')->flatten()->
+                    pluck('pivot')->flatten()->
+                    pluck('cantidad')->flatten()->
+                    sum() == 1;
+            } )
+            ->unique()
+            ->count();
+
             $arregloSumaPacientes[] = array_sum($arregloTotalPacientesConUnProducto);
             $arregloSumaPacientes[] = array_sum($arregloTotalPacientesConMasDeUnProducto);
         }
 
-        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'oficinas', 'empleadosFitter'));
+        // dd( $arregloSumaPacientes );
+
+        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas', 'empleadosFitter'));
     }
 
     public function cuatroa(Request $request)
@@ -272,20 +308,20 @@ class ReporteController extends Controller
                     ->where('fecha', '<=', $request->fechaFinal);
             });
 
-            if($request->oficina_id){
+            if ($request->oficina_id) {
                 $pacientesConCompra = $pacientesConCompra->whereHas('ventas', function (Builder $query) use ($request) {
-                    $query->where('oficina_id',$request->oficina_id);
+                    $query->where('oficina_id', $request->oficina_id);
                 });
             }
 
-            if($request->empleadoFitterId){
+            if ($request->empleadoFitterId) {
                 $pacientesConCompra = $pacientesConCompra->whereHas('ventas', function (Builder $query) use ($request) {
-                    $query->where('empleado_id',$request->empleadoFitterId);
+                    $query->where('empleado_id', $request->empleadoFitterId);
                 });
             }
 
             $pacientesConCompra = $pacientesConCompra->with('ventas.productos')
-            ->get();
+                ->get();
 
             $totalProductosCompras = $pacientesConCompra
                 ->pluck('ventas')
@@ -299,7 +335,7 @@ class ReporteController extends Controller
                 ->pluck('cantidad')->sum();
         }
 
-        return view('reportes.cuatroa', compact('pacientesConCompra', 'rangoFechas', 'totalProductosCompras', 'empleadosFitter','oficinas'));
+        return view('reportes.cuatroa', compact('pacientesConCompra', 'rangoFechas', 'totalProductosCompras', 'empleadosFitter', 'oficinas'));
     }
 
     public function cuatrob(Request $request)
@@ -422,9 +458,9 @@ class ReporteController extends Controller
                 $productosPorMes = [];
 
                 foreach ($meses as $key => $mes) {
-                    $productosPorMes[] = Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->map( function($venta){
+                    $productosPorMes[] = Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->map(function ($venta) {
                         return $venta->cantidad_productos;
-                    } );
+                    });
                     // $productosPorMes[] = count(Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten());
                 }
 
@@ -538,7 +574,8 @@ class ReporteController extends Controller
         return view('reportes.diez', compact('doctores', 'mesesSolicitados', 'mesesString'));
     }
 
-    public function once(){
+    public function once()
+    {
         return "reporte 11";
     }
 
@@ -618,7 +655,8 @@ class ReporteController extends Controller
 
             return $pacientes;
 
-            foreach ($pacientes as $paciente) { }
+            foreach ($pacientes as $paciente) {
+            }
         }
 
         return view('reportes.pacientes', compact('dataList', 'sku_y_num_pacentes', 'pacientes'));
@@ -647,7 +685,7 @@ class ReporteController extends Controller
         // de un fitter en un rango de fechas de un mes.
         $datosVentasMes = [];
 
-        if($request->input()){
+        if ($request->input()) {
             // OBTENEMOS EL RANGO DE FECHAS SOLICITADOS
             $fechaInicial = Carbon::createFromFormat('Y-m-d', $request->input('fechaInicial') . '-01');
             $fechaFinal   = Carbon::createFromFormat('Y-m-d', $request->input('fechaFinal') . '-01');
@@ -656,13 +694,12 @@ class ReporteController extends Controller
             $fechaInOneMes = $difAnio === 0 && $difMes === 0 ? true : false;
             $fitter = Empleado::findOrFail($request->empleadoFitterId);
             $fitter = Empleado::findOrFail($request->empleadoFitterId);
- 
+
             if ($request->pleadoFitterId && $fechaInOneMes) {
                 $datosVentasMes = $this->getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request);
-            } else if($request->empleadoFitterId && !$fechaInOneMes){
+            } else if ($request->empleadoFitterId && !$fechaInOneMes) {
                 // Rango de fechas en mas de un mes se genera por meses la informacion
                 $datosVentasMes = $this->getDatosVentaFitterMeses($fechaInicial, $fechaFinal, $fitter, $request);
-
             } else {
                 $pacientes_sin_compra = Paciente::noCompradores();
             }
@@ -684,7 +721,7 @@ class ReporteController extends Controller
      */
     private function getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request)
     {
-    
+
         // Rango de fecha en el mismo mes
         $datosVentasMes = ["montoVenta" => [], "pacientes" => [], "recompras" => [], "totales" => []];
         $fechaFinal = $fechaFinal->endOfMonth();
@@ -706,7 +743,7 @@ class ReporteController extends Controller
             ];
 
             // OBTENEMOS SI EN UNA VENTA SE COMPRA MAS DE UNA PRENDA
-            if($venta->productos->count() > 1 || $venta->productos[0]->pivot->cantidad > 1){
+            if ($venta->productos->count() > 1 || $venta->productos[0]->pivot->cantidad > 1) {
                 $datosVentasMes["pacientes"][] = [
                     "meta"  => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
                     "valor" => 1,
@@ -715,32 +752,32 @@ class ReporteController extends Controller
                 ];
             } else {
                 $datosVentasMes["pacientes"][] = [
-                    "meta"=> $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
-                    "valor"=> "-",
-                    "porcentaje"=> "-"
+                    "meta" => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
+                    "valor" => "-",
+                    "porcentaje" => "-"
                 ];
             }
 
             // OBTENEMOS SI EN UNA VENTA EL PACIENTE HACE RECOMPRA
-            if($venta->paciente->ventas->count() > 1) {
+            if ($venta->paciente->ventas->count() > 1) {
                 $datosVentasMes["recompras"][] = [
-                    "meta"=> $metaFitter ? $metaFitter->numero_recompras : 0,
-                    "valor"=> 1,
-                    "porcentaje"=> ((100) / $metaFitter->numero_recompras)
+                    "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                    "valor" => 1,
+                    "porcentaje" => ((100) / $metaFitter->numero_recompras)
                 ];
             } else {
                 $datosVentasMes["recompras"][] = [
-                    "meta"=> $metaFitter ? $metaFitter->numero_recompras : 0,
-                    "valor"=> "-",
-                    "porcentaje"=> "-"
-                ];   
+                    "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                    "valor" => "-",
+                    "porcentaje" => "-"
+                ];
             }
         }
 
         $sumValor = 0;
         $sumPorcentaje = 0;
         foreach ($datosVentasMes["montoVenta"] as $key => $fila) {
-            if($fila["valor"] != "-") {
+            if ($fila["valor"] != "-") {
                 $sumValor += $fila["valor"];
                 $sumPorcentaje += $fila["porcentaje"];
             }
@@ -750,7 +787,7 @@ class ReporteController extends Controller
         $sumValor = 0;
         $sumPorcentaje = 0;
         foreach ($datosVentasMes["pacientes"] as $key => $fila) {
-            if($fila["valor"] != "-") {
+            if ($fila["valor"] != "-") {
                 $sumValor += $fila["valor"];
                 $sumPorcentaje += $fila["porcentaje"];
             }
@@ -760,7 +797,7 @@ class ReporteController extends Controller
         $sumValor = 0;
         $sumPorcentaje = 0;
         foreach ($datosVentasMes["recompras"] as $key => $fila) {
-            if($fila["valor"] != "-") {
+            if ($fila["valor"] != "-") {
                 $sumValor += $fila["valor"];
                 $sumPorcentaje += $fila["porcentaje"];
             }
@@ -784,7 +821,7 @@ class ReporteController extends Controller
     private function getDatosVentaFitterMeses($fechaInicial, $fechaFinal, $fitter, $request)
     {
         setlocale(LC_ALL, 'es_ES');
-        $mes = $fechaInicial->formatLocalized('%B');// mes en idioma español        
+        $mes = $fechaInicial->formatLocalized('%B'); // mes en idioma español        
 
         $datosVentasMes = [];
         $fechaFinal = $fechaFinal->endOfMonth();
@@ -792,7 +829,7 @@ class ReporteController extends Controller
         while ($fechaInicial->lessThanOrEqualTo($fechaFinal)) {
             $datosMes = $this->getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request);
 
-            if($datosMes["totales"]["montoVenta"]["valor"] !== 0){
+            if ($datosMes["totales"]["montoVenta"]["valor"] !== 0) {
                 $datosVentasMes[] = [
                     "mes"   => ucfirst($fechaInicial->formatLocalized('%B')),
                     "metas" => [
@@ -800,7 +837,8 @@ class ReporteController extends Controller
                         "pacientes"  => $datosMes["pacientes"][0]["meta"],
                         "recompras"  => $datosMes["recompras"][0]["meta"],
                     ],
-                    $datosMes["totales"],                ];
+                    $datosMes["totales"],
+                ];
             }
 
             $fechaInicial->addMonth();
@@ -812,12 +850,12 @@ class ReporteController extends Controller
         $sumMetas = [0, 0, 0];
 
         foreach ($datosVentasMes as $row) {
-                $sumMonto += $row[0]["montoVenta"]["valor"];
-                $sumPacientes += $row[0]["pacientes"]["valor"];
-                $sumRecompras += $row[0]["recompras"]["valor"];
-                $sumMetas[0] += $row["metas"]["montoVenta"];
-                $sumMetas[1] += $row["metas"]["pacientes"];
-                $sumMetas[2] += $row["metas"]["recompras"];
+            $sumMonto += $row[0]["montoVenta"]["valor"];
+            $sumPacientes += $row[0]["pacientes"]["valor"];
+            $sumRecompras += $row[0]["recompras"]["valor"];
+            $sumMetas[0] += $row["metas"]["montoVenta"];
+            $sumMetas[1] += $row["metas"]["pacientes"];
+            $sumMetas[2] += $row["metas"]["recompras"];
         }
 
         $datosVentasMes["totales"] = [
@@ -826,7 +864,5 @@ class ReporteController extends Controller
             "recompras"  => [$sumMetas[2], $sumRecompras, (($sumRecompras * 100) / $sumMetas[2])]
         ];
         return $datosVentasMes;
-
-        
     }
 }
