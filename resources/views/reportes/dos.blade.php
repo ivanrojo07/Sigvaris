@@ -60,9 +60,9 @@
                     @foreach($ventas as $venta)
                     <tr>
                         <td>{{$venta->fecha}}</td>
-                        <td>{{$venta->paciente->nombre}}</td>
-                        <td>{{$venta->paciente->paterno}}</td>
-                        <td>{{$venta->paciente->materno}}</td>
+                        <td>{{$venta->paciente ? $venta->paciente->nombre : ''}}</td>
+                        <td>{{$venta->paciente ? $venta->paciente->paterno : ''}}</td>
+                        <td>{{$venta->paciente ? $venta->paciente->materno : ''}}</td>
                         <td>{{$venta->cantidad_productos}}</td>
                         {{-- <td>{{App\Paciente::find($paciente_id)->doctor()->first()->nombre}}</td> --}}
                         {{-- <td>{{App\Paciente::find($paciente_id) ? App\Paciente::find($paciente_id)->nombre : ''}}</td>
