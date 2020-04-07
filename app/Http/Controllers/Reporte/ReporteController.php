@@ -204,8 +204,13 @@ class ReporteController extends Controller
                     ->has('productos', '=', 1)
                     ->with('paciente')
                     ->get()
+                    ->filter( function($venta){
+                        return $venta->cantidad_productos == 1;
+                    } )
                     ->pluck('paciente')
+                    ->unique()
                     ->flatten();
+                // dd($totalPacientesConUnProducto);
                 $totalPacientesConUnProducto = count($totalPacientesConUnProducto);
                 $arregloTotalPacientesConUnProducto[] = $totalPacientesConUnProducto;
             }
@@ -214,9 +219,12 @@ class ReporteController extends Controller
             // POR CADA FECHA OBTENEMOS A LOS PACIENTES CON MAS DE UN PRODUCTO COMPRADO
             foreach ($arregloFechasConVentas as $key => $fecha) {
                 $totalPacientesConMasDeUnProducto = Venta::where('fecha', $fecha)
-                    ->has('productos', '>', 1)
+                    // ->has('productos')
                     ->with('paciente')
                     ->get()
+                    ->filter( function($venta){
+                        return $venta->cantidad_productos > 1;
+                    } )
                     ->pluck('paciente_id')
                     ->flatten()
                     ->toArray();

@@ -21,31 +21,26 @@ class PruebaController extends Controller
 
     public function index()
     {
-        return Doctor::find(1)->pacientes()
-            ->whereHas('ventas', function (Builder $query) {
-                $query->where('fecha', '>=', '2019-01-01')
-                    ->where('fecha', '<=', '2019-12-31');
-            })
-            ->withCount("ventas")
-            ->with('ventas')
-            ->having('ventas_count', '<=', 1)
-            ->get();
+        return Venta::where('cantidad_productos',3)->first();
+        // return Venta::with('productos')->get()->filter( function($venta){
+        //     return $venta->pluck('productos')->flatten()->count() > 1;
+        // } );
     }
 
     public function CrmVentasTotales()
     {
-        $Ventas=Venta::get();
+        $Ventas = Venta::get();
         foreach ($Ventas as $Venta) {
             $CRM = new Crm(
-                    array(
-                            'paciente_id' => $Venta->paciente_id,
-                            'estado_id'   => 1,
-                            'hora'        => '00:00',
-                            'forma_contacto' => 'Telefono',
-                            'fecha_contacto' => \Carbon\Carbon::parse($Venta->fecha)->addMonths(5),
-                            'fecha_aviso' => \Carbon\Carbon::parse($Venta->fecha)->addMonths(5)
-                        )
-                );
+                array(
+                    'paciente_id' => $Venta->paciente_id,
+                    'estado_id'   => 1,
+                    'hora'        => '00:00',
+                    'forma_contacto' => 'Telefono',
+                    'fecha_contacto' => \Carbon\Carbon::parse($Venta->fecha)->addMonths(5),
+                    'fecha_aviso' => \Carbon\Carbon::parse($Venta->fecha)->addMonths(5)
+                )
+            );
             $CRM->save();
         }
     }
