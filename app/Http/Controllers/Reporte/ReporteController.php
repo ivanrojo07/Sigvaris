@@ -290,7 +290,7 @@ class ReporteController extends Controller
             );
 
             // OBTENEMOS LOS PACIENTES CON COMPRAS
-            $pacientesConCompra = Paciente::whereHas('ventas', function (Builder $query) use ($request) {
+            $pacientesConCompra = Paciente::has('ventas')->whereHas('ventas', function (Builder $query) use ($request) {
                 $query->where('fecha', '>=', $request->fechaInicial)
                     ->where('fecha', '<=', $request->fechaFinal);
             });
@@ -312,6 +312,9 @@ class ReporteController extends Controller
                     ->where('fecha', '<=', $request->fechaFinal);
             }])
                 ->get()
+                ->filter( function($paciente){
+                    return $paciente->ventas->pluck('productos')->count() >= 1;
+                } )
                 ->unique();
 
             // return $pacientesConCompra;
@@ -323,7 +326,8 @@ class ReporteController extends Controller
                 ->flatten()
                 ->pluck('pivot')
                 ->flatten()
-                ->pluck('cantidad')->sum();
+                ->pluck('cantidad')
+                ->sum();
         }
 
         return view('reportes.cuatroa', compact('pacientesConCompra','totalProductosCompras', 'rangoFechas', 'empleadosFitter', 'oficinas'));
