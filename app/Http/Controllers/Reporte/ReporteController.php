@@ -313,7 +313,11 @@ class ReporteController extends Controller
             }])
                 ->get()
                 ->filter( function($paciente){
-                    return $paciente->ventas->pluck('productos')->count() >= 1;
+                    return $paciente->ventas
+                    ->pluck('productos')->flatten()
+                    ->pluck('pivot')->flatten()
+                    ->pluck('cantidad')->flatten()
+                    ->sum() >= 1;
                 } )
                 ->unique();
 
