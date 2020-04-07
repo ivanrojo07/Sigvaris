@@ -1,6 +1,15 @@
 @extends('doctor.show')
 @section('submodulos')
-
+    <form role="form" id="form-cliente" method="post" action="{{url('doctores.pacientesCambiar', ['doctor' => $doctor] )}}" name="form">
+        {{ csrf_field() }}
+        <label for="actual">Identificador de doctor que adquiere los pacientes</label>
+        <input type="text" class="form-control" id="id" name="id" required="">
+        <div class="col-4 offset-4 text-center">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-check"></i> Reasignar
+            </button>
+        </div>
+    </form>
     <div class="row my-5">
         <div class="col-4 px-5"><h4>Pacientes</h4></div>
         <input id="submenu" type="hidden" name="submenu" value="nav-pacientes">

@@ -33,6 +33,18 @@ class DoctorPacienteController extends Controller
         return view('doctorpacientes.index', ['doctor'=>$doc]);
     }
 
+    public function cambiarPacientesDoctor($doctor,Request $request)
+    {
+       $doc = Doctor::find($doctor);
+       $pacientes=$doc->pacientes;
+       foreach ($pacientes as $paciente) {
+           $paciente->update([
+                'doctor_id' => $request->id
+            ]);
+       }
+       $doc = Doctor::find($doctor);
+        return view('doctorpacientes.index', ['doctor'=>$doc]); 
+    }
     /**
      * Store a newly created resource in storage.
      *
