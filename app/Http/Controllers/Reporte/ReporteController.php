@@ -422,7 +422,10 @@ class ReporteController extends Controller
                 $productosPorMes = [];
 
                 foreach ($meses as $key => $mes) {
-                    $productosPorMes[] = count(Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->pluck('productos')->flatten());
+                    $productosPorMes[] = Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->map( function($venta){
+                        return $venta->cantidad_productos;
+                    } );
+                    // $productosPorMes[] = count(Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten());
                 }
 
                 array_push($aniosYProductosPorMes, array($i => $productosPorMes));

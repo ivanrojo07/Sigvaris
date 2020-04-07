@@ -21,7 +21,7 @@ class PruebaController extends Controller
 
     public function index()
     {
-        return Venta::where('cantidad_productos',3)->first();
+        return Venta::where('fecha','>=','2020-01-01')->where('fecha','<=','2020-04-31')->get();
         // return Venta::with('productos')->get()->filter( function($venta){
         //     return $venta->pluck('productos')->flatten()->count() > 1;
         // } );
