@@ -158,7 +158,7 @@
                 @endif
             @endif
 
-            @if (Auth::user()->role->reportes)
+            @if (Auth::user()->role->reportes || Auth::user()->id == 1 )
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                             Reportes

@@ -40,9 +40,10 @@
                     </thead>
                     <tbody>
                         @foreach($ventasPorSku as $key => $ventas)
+                        {{-- {{ dd( }} --}}
                             <tr>
                                 <td>{{$key}}</td>
-                                <td>{{count($ventas)}}</td>
+                                <td>{{$ventas->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten()->sum()}}</td>
                             </tr>
                         @endforeach
                     </tbody>    

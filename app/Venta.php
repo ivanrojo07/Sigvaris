@@ -82,4 +82,9 @@ class Venta extends Model
      * ATTRIBUTES
      * ==========
      */
+
+    public function getCantidadProductosAttribute()
+    {
+        return $this->productos->pluck('pivot')->flatten()->pluck('cantidad')->flatten()->sum();
+    }
 }

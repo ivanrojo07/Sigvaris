@@ -148,7 +148,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext('2d');
 ctx.fillStyle = "#FFFFFF";
 
-var arregloSumaPacientes = {!! json_encode($arregloSumaPacientes) !!};
+var arregloSumaPacientes = {!! json_encode([ $totalPacientesConUnaPrenda, $totalPacientesConMasDeUnaPrenda ]) !!};
 arregloSumaPacientes = Object.values(arregloSumaPacientes);
 
 // Global Options:
@@ -201,7 +201,7 @@ var options = {
 
 // Chart declaration:
 var myBarChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: data,
   options: options
 });

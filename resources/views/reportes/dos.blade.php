@@ -62,9 +62,9 @@
                                     <tr>
                                         <td>{{$fecha_venta}}</td>
                                         {{-- <td>{{App\Paciente::find($paciente_id)->doctor()->first()->nombre}}</td> --}}
-                                        <td>{{App\Paciente::find($paciente_id)->nombre}}</td>
-                                        <td>{{App\Paciente::find($paciente_id)->paterno}}</td>
-                                        <td>{{App\Paciente::find($paciente_id)->materno}}</td>
+                                        <td>{{App\Paciente::find($paciente_id) ? App\Paciente::find($paciente_id)->nombre : ''}}</td>
+                                        <td>{{App\Paciente::find($paciente_id) ? App\Paciente::find($paciente_id)->paterno : ''}}</td>
+                                        <td>{{App\Paciente::find($paciente_id) ? App\Paciente::find($paciente_id)->materno : ''}}</td>
                                         <td>{{
                                             $ventas->pluck('productos')
                                                 ->flatten()
