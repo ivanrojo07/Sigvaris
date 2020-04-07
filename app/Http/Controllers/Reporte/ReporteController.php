@@ -138,6 +138,9 @@ class ReporteController extends Controller
         $arregloTotalPacientesConMasDeUnProducto = array();
         $arregloFechasConVentas = array();
         $arregloSumaPacientes = array();
+        $totalPacientesConMasDeUnaPrenda = 0;
+        $totalPacientesConUnaPrenda = 0;
+
 
         if ($request->input()) {
 
