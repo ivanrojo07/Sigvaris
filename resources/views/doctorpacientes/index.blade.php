@@ -1,9 +1,9 @@
 @extends('doctor.show')
 @section('submodulos')
-    <form role="form" id="form-cliente" method="GET" action="{{url('doctores.pacientes', ['doctor' => $doctor] )}}" name="form">
+    <form role="form" id="form-cliente" method="post" action="{{url('doctores.pacientesCambiar', ['doctor' => $doctor] )}}" name="form">
         {{ csrf_field() }}
         <label for="actual">Identificador de doctor que adquiere los pacientes</label>
-        <input type="text" class="form-control" id="id" name="id"  readonly="" required="">
+        <input type="text" class="form-control" id="id" name="id" required="">
         <div class="col-4 offset-4 text-center">
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-check"></i> Reasignar

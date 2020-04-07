@@ -36,7 +36,7 @@ Route::resource('doctores.consultorios','Doctor\DoctorConsultorioController');
 Route::resource('doctores.especialidades','Doctor\DoctorEspecialidadController');
 Route::resource('doctores.premios','Doctor\DoctorPremioController');
 Route::get('doctores.pacientes/{doctor}','Doctor\DoctorPacienteController@getPacientes')->name('doctor.pacientes');
-Route::get('doctores.pacientesCambiar/{doctor}/{id}','Doctor\DoctorPacienteController@getPacientes')->name('doctor.pacientesCambiar');
+Route::post('doctores.pacientesCambiar/{doctor}','Doctor\DoctorPacienteController@getPacientes')->name('doctor.pacientesCambiar');
 
 Route::resource('empleados','Empleado\EmpleadoController');
 Route::resource('empleados.datoslaborales','Empleado\EmpleadosDatosLabController');
