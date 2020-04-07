@@ -201,7 +201,7 @@ var options = {
 
 // Chart declaration:
 var myBarChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: data,
   options: options
 });
