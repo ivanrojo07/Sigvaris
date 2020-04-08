@@ -101,6 +101,26 @@
                         {{-- @endforeach --}}
                     </tbody>    
                 </table>
+                <div class="row mt-3">
+                    <div class="col-3">
+                        <label for="" class="text-uppercase text-muted">
+                            TOTAL PACIENTES
+                        </label>
+                        <input type="text" value="{{$totalPacientesConUnaPrenda + $totalPacientesConMasDeUnaPrenda}}" class="form-control" readonly>
+                    </div>
+                    <div class="col-3">
+                        <label for="" class="text-uppercase text-muted">
+                            TOTAL PACIENTES 1ra vez
+                        </label>
+                        <input type="text" value="{{$totalPacientesConUnaPrenda}}" class="form-control" readonly>
+                    </div>
+                    <div class="col-3">
+                        <label for="" class="text-uppercase text-muted">
+                            TOTAL PACIENTES recompra
+                        </label>
+                        <input type="text" value="{{$totalPacientesConMasDeUnaPrenda}}" class="form-control" readonly>
+                    </div>
+                </div>
             </div>
             {{-- INFORMACION GENERAL DE LA BUSQUEDA --}}
             {{-- <div class="card-body">

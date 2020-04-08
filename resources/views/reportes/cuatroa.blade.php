@@ -64,26 +64,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($pacientesConCompra as $key => $paciente)
+                        @foreach($pacientesConCompra as $paciente)
                                 <tr>
                                     <td>{{$paciente->nombre . " " . $paciente->paterno . " " . $paciente->materno}}</td>
                                     <td>
                                         {{
-                                            $paciente
-                                                ->ventas
-                                                ->where('fecha','>=',$rangoFechas["inicio"])
-                                                ->where('fecha', '<=',$rangoFechas["fin"])
-                                                ->pluck('productos')
-                                                ->flatten()
-                                                ->pluck('pivot')
-                                                ->flatten()
-                                                ->pluck('cantidad')->sum()
+                                            $paciente->ventas->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->sum()
                                         }}</td>
                                     <td>
                                         {{ round($paciente
                                             ->ventas
-                                            ->where('fecha','>=',$rangoFechas["inicio"])
-                                            ->where('fecha', '<=',$rangoFechas["fin"])
                                             ->pluck('productos')
                                             ->flatten()
                                             ->pluck('pivot')
@@ -97,9 +87,12 @@
                 <div class="row mt-3">
                     <div class="col-3"></div>
                     <div class="col-3"></div>
-                    <div class="col-3"></div>
                     <div class="col-3">
-                        <label for="totalCompras" class="text-uppercase"><strong>Compras totales</strong></label>
+                        <label for="totalCompras" class="text-uppercase"><strong>total pacientes</strong></label>
+                        <input type="text" readonly value="{{$pacientesConCompra ? $pacientesConCompra->count() : 0}}" class="form-control">
+                    </div>
+                    <div class="col-3">
+                        <label for="totalCompras" class="text-uppercase"><strong>total prendas</strong></label>
                         <input type="text" readonly value="{{$totalProductosCompras}}" class="form-control">
                     </div>
                 </div>

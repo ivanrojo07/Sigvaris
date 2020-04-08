@@ -37,10 +37,10 @@
                 </thead>
                 <tbody>
                     @foreach($skusConVentas as $key => $sku)
-                        <tr>
-                            <td>{{$key}}</td>
-                            <td>
-                                {{
+                    <tr>
+                        <td>{{$key}}</td>
+                        <td>
+                            {{
                                     $sku->pluck('ventas')
                                         ->flatten()
                                         ->pluck('paciente_id')
@@ -48,8 +48,8 @@
                                         ->unique()
                                         ->count()    
                                 }}
-                            </td>
-                            <td>{{
+                        </td>
+                        <td>{{
                                 $sku->pluck('ventas')
                                     ->flatten()
                                     ->pluck('pivot')
@@ -57,9 +57,9 @@
                                     ->pluck('cantidad')
                                     ->sum()
                                 }}
-                            </td>
-                            <td>
-                                {{
+                        </td>
+                        <td>
+                            {{
                                     round($sku->pluck('ventas')
                                     ->flatten()
                                     ->pluck('pivot')
@@ -67,11 +67,21 @@
                                     ->pluck('cantidad')
                                     ->sum()/$totalPrendasVendidas*100,2)    
                                 }}
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
                     @endforeach
-                </tbody>    
+                </tbody>
             </table>
+            <div class="row">
+                <div class="col-4">
+                    <label for="" class="text-uppercase text-muted">TOTAL PACIENTES</label>
+                    <input value="{{$skusConVentas->flatten()->pluck('ventas')->flatten()->pluck('paciente')->flatten()->unique()->count()}}" type="text" readonly class="form-control">
+                </div>
+                <div class="col-4">
+                    <label for="" class="text-uppercase text-muted">TOTAL PRENDAS VENDIDAS</label>
+                    <input value="{{$totalPrendasVendidas}}" type="text" readonly class="form-control">
+                </div>
+            </div>
         </div>
         {{-- INFORMACION GENERAL --}}
         {{-- <div class="card-body">
@@ -86,7 +96,7 @@
                 </div>
             </div>
         </div> --}}
-    @endif
+        @endif
         {{-- <div class="card-body">
             <canvas id="canvas" height="280" width="600"></canvas>
         </div> --}}
@@ -94,7 +104,7 @@
 </div>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script>

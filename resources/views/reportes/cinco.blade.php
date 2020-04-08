@@ -16,7 +16,8 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Año</div>
                     </div>
-                    <input type="number" class="form-control" id="anioInicial" name="anioInicial" required min="2010" max="2100">
+                    <input type="number" class="form-control" id="anioInicial" name="anioInicial" required min="2010"
+                        max="2100">
                 </div>
                 {{-- Año final --}}
                 <label for="anioFinal">A: </label>
@@ -25,12 +26,14 @@
                     <div class=" ml-3 input-group-prepend">
                         <div class="input-group-text">Año</div>
                     </div>
-                    <input type="number" class="form-control" id="anioFinal" name="anioFinal" required min="2010" max="2100">
+                    <input type="number" class="form-control" id="anioFinal" name="anioFinal" required min="2010"
+                        max="2100">
                 </div>
                 {{-- Selección de tipo --}}
                 <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
                     <label class="btn btn-success active">
-                        <input type="radio" name="opciones" value="primeraVez" id="option1" autocomplete="off" checked> 1° vez
+                        <input type="radio" name="opciones" value="primeraVez" id="option1" autocomplete="off" checked>
+                        1° vez
                     </label>
                     <label class="btn btn-success">
                         <input type="radio" name="opciones" value="recompra" id="option3" autocomplete="off"> Recompra
@@ -47,31 +50,50 @@
                     <tr class="info">
                         <th>mes</th>
                         @foreach ($anios as $anio)
-                            <th>{{$anio}}</th>
+                        <th>{{$anio}}</th>
                         @endforeach
                     </tr>
-                    
+
                 </thead>
                 <tbody>
-                    
-                        @foreach ($meses as $mes)
-                            <tr>
-                                <td>{{$mes}}</td>
-                                @foreach($anios as $key => $anio)
-                                {{--  --}}
-                                @if ($opcion == "primeraVez")
-                                <td>{{count(App\Paciente::whereYear('created_at',$anio)->whereMonth('created_at',$mes)->doesnthave('ventas')->get())}}</td>
-                                @else
-                                <td>{{count(App\Paciente::whereYear('created_at',$anio)->whereMonth('created_at',$mes)->has('ventas')->get())}}</td>
-                                @endif
-                                
-                                @endforeach
-                            </tr>
-                        @endforeach
 
-                        
-                    
-                </tbody>    
+                    @foreach ($meses as $mes)
+                    <tr>
+                        <td>{{$mes}}</td>
+                        @foreach($anios as $key => $anio)
+                        {{--  --}}
+                        @if ($opcion == "primeraVez")
+                        <td>
+                            {{
+                                App\Paciente::whereYear('created_at',$anio)
+                                ->whereMonth('created_at',$mes)
+                                ->has('ventas')
+                                ->get()
+                                ->filter( function($paciente) use ($mes, $anio){
+                                    return $paciente->ventas()->count() == 1;
+                                } )->count()
+                            }}
+                        </td>
+                        @else
+                        <td>{{
+                                App\Paciente::whereYear('created_at',$anio)
+                                ->whereMonth('created_at',$mes)
+                                ->has('ventas')
+                                ->get()
+                                ->filter( function($paciente){
+                                    return $paciente->ventas->count() > 1;
+                                } )->count()
+                            }}
+                        </td>
+                        @endif
+
+                        @endforeach
+                    </tr>
+                    @endforeach
+
+
+
+                </tbody>
             </table>
         </div>
         {{-- @endif --}}
@@ -87,7 +109,7 @@
 </div>
 
 {{-- SCRIPTS PARA BUSQUEDA EN TABLA --}}
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>    
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" defer></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js" defer></script>
 <script>
@@ -103,10 +125,11 @@
 {{-- SCRIPTS PARA GRAFICAR TABLAS --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js" charset="utf-8">
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
 <script>
-var url = "{{url('stock/chart')}}";
+    var url = "{{url('stock/chart')}}";
 // var Years = new Array("2019", "2020", "2021");
 var Years = <?php echo json_encode($anios) ?>;
 var Labels = new Array("l1", "l2", "l3");

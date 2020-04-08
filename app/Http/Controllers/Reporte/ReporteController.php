@@ -90,38 +90,22 @@ class ReporteController extends Controller
             $fechaFinal = $request->input('fechaFinal');
 
 
-            $ventasPorFechaPorPaciente = Venta::where('fecha', '>=', $fechaInicial)
+            $ventas = Venta::has('paciente')->has('productos')->where('fecha', '>=', $fechaInicial)
                 ->where('fecha', '<=', $fechaFinal)
                 ->withCount('productos');
 
             if ($request->oficinaId) {
-                $ventasPorFechaPorPaciente->where('oficina_id', $request->oficinaId);
+                $ventas->where('oficina_id', $request->oficinaId);
             }
 
             if ($request->empleadoFitterId) {
-                $ventasPorFechaPorPaciente->where('empleado_id', $request->empleadoFitterId);
+                $ventas->where('empleado_id', $request->empleadoFitterId);
             }
 
 
-            $ventasPorFechaPorPaciente = $ventasPorFechaPorPaciente->get()
-                ->groupBy('paciente_id')
-                ->transform(function ($item, $k) {
-                    return $item->groupBy(function ($date) {
-                        return Carbon::parse($date->fecha)->format('Y-m-d'); // grouping by years
-                        //return Carbon::parse($date->created_at)->format('m'); // grouping by months
-                    });
-                });
+            $ventas = $ventas->get();
 
-            foreach ($ventasPorFechaPorPaciente as $venta) {
-                $prendasVendidasPorPaciente =  $venta
-                    ->pluck('productos_count')
-                    ->flatten()
-                    ->sum();
-            }
-
-            // return $ventasPorFechaPorPaciente;
-
-            return view('reportes.dos', compact('ventasPorFechaPorPaciente', 'oficinas', 'empleadosFitter'));
+            return view('reportes.dos', compact('ventas', 'oficinas', 'empleadosFitter'));
         }
 
         return view('reportes.dos', compact('oficinas', 'empleadosFitter'));
@@ -306,7 +290,7 @@ class ReporteController extends Controller
             );
 
             // OBTENEMOS LOS PACIENTES CON COMPRAS
-            $pacientesConCompra = Paciente::whereHas('ventas', function (Builder $query) use ($request) {
+            $pacientesConCompra = Paciente::has('ventas')->whereHas('ventas', function (Builder $query) use ($request) {
                 $query->where('fecha', '>=', $request->fechaInicial)
                     ->where('fecha', '<=', $request->fechaFinal);
             });
@@ -323,22 +307,34 @@ class ReporteController extends Controller
                 });
             }
 
-            $pacientesConCompra = $pacientesConCompra->with('ventas.productos')
-                ->get();
+            $pacientesConCompra = $pacientesConCompra->with(['ventas' => function ($query) use ($request) {
+                $query->where('fecha', '>=', $request->fechaInicial)
+                    ->where('fecha', '<=', $request->fechaFinal);
+            }])
+                ->get()
+                ->filter( function($paciente){
+                    return $paciente->ventas
+                    ->pluck('productos')->flatten()
+                    ->pluck('pivot')->flatten()
+                    ->pluck('cantidad')->flatten()
+                    ->sum() >= 1;
+                } )
+                ->unique();
+
+            // return $pacientesConCompra;
 
             $totalProductosCompras = $pacientesConCompra
                 ->pluck('ventas')
                 ->flatten()
-                ->where('fecha', '>=', $rangoFechas["inicio"])
-                ->where('fecha', '<=', $rangoFechas["fin"])
                 ->pluck('productos')
                 ->flatten()
                 ->pluck('pivot')
                 ->flatten()
-                ->pluck('cantidad')->sum();
+                ->pluck('cantidad')
+                ->sum();
         }
 
-        return view('reportes.cuatroa', compact('pacientesConCompra', 'rangoFechas', 'totalProductosCompras', 'empleadosFitter', 'oficinas'));
+        return view('reportes.cuatroa', compact('pacientesConCompra','totalProductosCompras', 'rangoFechas', 'empleadosFitter', 'oficinas'));
     }
 
     public function cuatrob(Request $request)
@@ -467,6 +463,10 @@ class ReporteController extends Controller
                     // $productosPorMes[] = count(Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten());
                 }
 
+                // return 'entra';
+
+                // return Venta::whereYear('fecha','2020')->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten()->sum();
+
                 array_push($aniosYProductosPorMes, array($i => $productosPorMes));
             }
         }
@@ -526,6 +526,8 @@ class ReporteController extends Controller
             // dd($ventasPorSku);
 
             // with('productos')->get()->pluck('productos')->flatten()
+
+            // return $ventasPorSku->flatten()->pluck('pivot')->flatten();
 
             return view('reportes.nueve', compact('ventasPorSku'));
         }
