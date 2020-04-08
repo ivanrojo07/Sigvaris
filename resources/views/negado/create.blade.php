@@ -129,8 +129,8 @@
                             <input type="text" name="comentarios" class="form-control" step="1"  id="comentarios">
                         </div>
                         <div class="col-3 form-group">
-                            <label class="control-label"><br>Folio :</label>
-                            <input type="number" name="comentarios" class="form-control" step="1"  id="comentarios">
+                            <label class="control-label"><br>✱Folio :</label>
+                            <input type="number" name="folio" class="form-control" step="1"  id="folio" required>
                         </div>
                         <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                     </div>

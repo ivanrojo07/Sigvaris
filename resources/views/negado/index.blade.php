@@ -58,7 +58,7 @@
                     @else
                     @foreach($negados as $negado)
                     <tr>
-                        <td>{{$negado->id}}</td>
+                        <td>{{$negado->folio}}</td>
                         <td>{{$negado->paciente->fullname}}</td>
                         <td>{{$negado->producto->descripcion}}</td>
                         <td>{{\Carbon\Carbon::parse($negado->fecha)->format('m/d/Y')}}</td>
