@@ -69,8 +69,8 @@
                                 ->whereMonth('created_at',$mes)
                                 ->has('ventas')
                                 ->get()
-                                ->filter( function($paciente){
-                                    return $paciente->ventas->count() == 1;
+                                ->filter( function($paciente) use ($mes, $anio){
+                                    return $paciente->ventas()->count() == 1;
                                 } )->count()
                             }}
                         </td>

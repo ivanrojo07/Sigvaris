@@ -527,6 +527,8 @@ class ReporteController extends Controller
 
             // with('productos')->get()->pluck('productos')->flatten()
 
+            // return $ventasPorSku->flatten()->pluck('pivot')->flatten();
+
             return view('reportes.nueve', compact('ventasPorSku'));
         }
 

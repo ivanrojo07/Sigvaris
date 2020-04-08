@@ -48,6 +48,12 @@
                         @endforeach
                     </tbody>    
                 </table>
+                <div class="row">
+                    <div class="col-3">
+                        <label for="" class="text-uppercase text-muted">TOTAL PRENDAS</label>
+                        <input value={{$ventasPorSku->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten()->sum()}} type="text" class="form-control" readonly>
+                    </div>
+                </div>
             </div>
         @endif
     </div>
