@@ -17,6 +17,7 @@ class Negado extends Model
         'fecha',
         'fecha_entrega',
         'comentarios',
+        'folio'
     ];
 
     public function paciente()
