@@ -42,6 +42,17 @@ class PruebaController extends Controller
                 )
             );
             $CRM->save();
+            $CRM = new Crm(
+                array(
+                    'paciente_id' => $Venta->paciente_id,
+                    'estado_id'   => 5,
+                    'hora'        => '00:00',
+                    'forma_contacto' => 'Telefono',
+                    'fecha_contacto' => \Carbon\Carbon::parse($Venta->fecha)->addDays(8),
+                    'fecha_aviso' => \Carbon\Carbon::parse($Venta->fecha)->addDays(8)
+                )
+            );
+            $CRM->save();
         }
     }
 }
