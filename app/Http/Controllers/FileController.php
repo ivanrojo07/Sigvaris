@@ -29,8 +29,8 @@ class FileController extends Controller
     public function importFileIntoDB(ImportExcelProductos $request)
     {
         $file = request()->file('sample_file');
-        //$this->storeExcelProductosService->make($file);
-        $this->storeExcelPacientesService->make($file);
+        $this->storeExcelProductosService->make($file);
+        //$this->storeExcelPacientesService->make($file);
 
         Alert::success('Archivo subido correctamente.');
         return redirect()->back();
