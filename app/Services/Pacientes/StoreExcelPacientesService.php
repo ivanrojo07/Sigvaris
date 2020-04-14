@@ -59,7 +59,7 @@ class StoreExcelPacientesService
                 'mail' => $row[28],
                 'doctor_id' => $ID_Doctor,
                 'nivel_id' => 1,
-                'oficina_id' => 2,
+                'oficina_id' => 1,
                 //'homoclave' => $row[11],
                 //'created_at' => date('Y-m-d h:m:s'),
                 //'updated_at' => date('Y-m-d h:m:s'),
@@ -76,14 +76,14 @@ class StoreExcelPacientesService
                 'mail' => $row[28],
                 //'id_doctor' => $ID_Doctor,
                 'nivel_id' => 1,
-                'oficina_id' => 2,
+                'oficina_id' => 1,
                 //'homoclave' => $row[11],
                 //'created_at' => date('Y-m-d h:m:s'),
                 //'updated_at' => date('Y-m-d h:m:s'),
             );
             }
             
-            $P=Paciente::updateOrCreate((['nombre' => $row[2],'materno' => $row[4],'paterno' => $row[3]]),$Paciente);
+            $P=Paciente::updateOrCreate(['nombre' => $row[2],'materno' => $row[4],'paterno' => $row[3]],$Paciente);
             $Precio_public=0;
             $Precio_public_iva=0;
             for ($i=0; $i <8 ; $i++) { 
@@ -98,7 +98,7 @@ class StoreExcelPacientesService
                         'fecha'=> Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1])),
                         'subtotal' => $Precio_public,
                         'total' => $Precio_public_iva,
-                        'oficina_id' => 2,
+                        'oficina_id' => 1,
                         'empleado_id' => 1,
                         'tipoPago' =>0
                     );
