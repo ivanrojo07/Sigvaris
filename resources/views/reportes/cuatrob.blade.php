@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-4">
                     <label for="" class="text-uppercase text-muted">TOTAL PACIENTES</label>
-                    <input value="{{$skusConVentas->flatten()->pluck('ventas')->flatten()->pluck('paciente')->flatten()->unique()->count()}}" type="text" readonly class="form-control">
+                    <input value="{{$skusConVentas ? $skusConVentas->flatten()->pluck('ventas')->flatten()->pluck('paciente')->flatten()->unique()->count() : ''}}" type="text" readonly class="form-control">
                 </div>
                 <div class="col-4">
                     <label for="" class="text-uppercase text-muted">TOTAL PRENDAS VENDIDAS</label>
