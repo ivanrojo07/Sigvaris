@@ -26,15 +26,15 @@ class StoreExcelPacientesService
 
         foreach ($data as $row) {
             if (isset($row[2])) {
-            if (isset($row[5])) {
+            if ($row[5]!="-") {
                 $Doctor= array(
                     'nombre' => $row[5],
-                    'apellidomaterno' => $row[7],
                     'apellidopaterno' => $row[6],
+                    'apellidomaterno' => $row[7],
                     //'celular' => $row[1],
                     //'mail' => $row[2],
                     //'nacimiento' => $row[2],
-                    //'activo' => $row[2],
+                    'activo' => 1,
                     //'deleted_at' => $row[2,]
                 );
                 $D=Doctor::updateOrCreate($Doctor, $Doctor);
@@ -49,8 +49,9 @@ class StoreExcelPacientesService
             if (isset($ID_Doctor)) {
                 $Paciente= array(
                 'nombre' => $row[2],
-                'materno' => $row[4],
                 'paterno' => $row[3],
+                'materno' => $row[4],
+                
                 //'nacimiento' => $row[3],
                 'rfc' => $row[19],
                 'celular' => $row[29],
@@ -58,7 +59,7 @@ class StoreExcelPacientesService
                 'mail' => $row[28],
                 'doctor_id' => $ID_Doctor,
                 'nivel_id' => 1,
-                'oficina_id' => 1,
+                'oficina_id' => 2,
                 //'homoclave' => $row[11],
                 //'created_at' => date('Y-m-d h:m:s'),
                 //'updated_at' => date('Y-m-d h:m:s'),
@@ -66,8 +67,8 @@ class StoreExcelPacientesService
             }else{
                 $Paciente= array(
                 'nombre' => $row[2],
-                'materno' => $row[4],
                 'paterno' => $row[3],
+                'materno' => $row[4],
                 //'nacimiento' => $row[3],
                 'rfc' => $row[19],
                 'celular' => $row[29],
@@ -75,7 +76,7 @@ class StoreExcelPacientesService
                 'mail' => $row[28],
                 //'id_doctor' => $ID_Doctor,
                 'nivel_id' => 1,
-                'oficina_id' => 1,
+                'oficina_id' => 2,
                 //'homoclave' => $row[11],
                 //'created_at' => date('Y-m-d h:m:s'),
                 //'updated_at' => date('Y-m-d h:m:s'),
@@ -97,45 +98,45 @@ class StoreExcelPacientesService
                         'fecha'=> Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row[1])),
                         'subtotal' => $Precio_public,
                         'total' => $Precio_public_iva,
-                        'oficina_id' => 1,
+                        'oficina_id' => 2,
                         'empleado_id' => 1,
                         'tipoPago' =>0
                     );
                     $V=Venta::updateOrCreate(['paciente_id'=>$P['id'],'subtotal' => $Precio_public,'total' => $Precio_public_iva,'empleado_id' => 1],$Venta);
                   
-                     /*for ($i=0; $i < 16 ; $i++) {
-                     if ( Producto::where('sku',$row[13+$i])->exists()) { 
+                     for ($i=0; $i < 8 ; $i++) {
+                     if ( Producto::where('sku',$row[11+$i])->exists()) { 
                         $V->productos()->attach(
-                            Producto::where('sku',$row[13+$i])->value('id'),array('cantidad'=>1,
-                            'precio'=>Producto::where('sku',$row[13+$i])->value('precio_publico'), 
+                            Producto::where('sku',$row[11+$i])->value('id'),array('cantidad'=>1,
+                            'precio'=>Producto::where('sku',$row[11+$i])->value('precio_publico'), 
                             'created_at' => date('Y-m-d h:m:s'), 
                             'updated_at' => date('Y-m-d h:m:s')
                         ));
                         }
                     }
 
-                    if (isset($row[31])) {
+                    if ($row[19]!="-") {
                         $Factura= array(
                         'venta_id'=>$V['id'],
-                        'nombre'=>$row[31],
+                        'nombre'=>$row[20],
                         //'fisica'=>$row[],
                         'rfc'=>$row[30],
                         //'regimen_fiscal'=>$row[],
                         //'homoclave'=>$row[],
-                        'correo'=>$row[39],
-                        'calle'=>$row[32],
-                        'num_ext'=>$row[33],
-                        'num_int'=>$row[34],
-                        'colonia'=>$row[35],
-                        'cp' => $row[36],
+                        'correo'=>$row[28],
+                        'calle'=>$row[21],
+                        'num_ext'=>$row[22],
+                        'num_int'=>$row[23],
+                        'colonia'=>$row[24],
+                        'cp' => $row[25],
                         //'ciudad'=>$row[],
-                        'municipio'=>$row[38],
-                        //'estado'=>$row[],
+                        'municipio'=>$row[26],
+                        'estado'=>$row[27],
                         'created_at' => date('Y-m-d h:m:s'), 
                         'updated_at' => date('Y-m-d h:m:s')
                         );
                         Factura::updateOrCreate($Factura,$Factura);
-                    }*/
+                    }
                     
                 
                 }

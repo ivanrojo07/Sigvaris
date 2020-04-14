@@ -75,8 +75,7 @@ class PacienteImport implements ToModel, WithCalculatedFormulas
 
                 $Venta->producto()->attach(Producto::where('sku',$row[13+$i])->value('id'),['cantidad'=>1,'precio'=>Producto::where('sku',$row[13+$i])->value('precio_publico'), 'created_at' => date('Y-m-d h:m:s'), 'updated_at' => date('Y-m-d h:m:s')]);
                 $Factura= new Factura([
-                    'venta_id'=>$Venta['id'],
-                    ''
+                    'venta_id'=>$Venta['id']
                 ]);
             }
         }
