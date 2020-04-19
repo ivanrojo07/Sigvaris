@@ -153,7 +153,8 @@
                                 <select class="form-control" name="unidad_descuento" id="unidad_descuento"  required="">        
                                         <option value="">Seleccionar ...</option>  
                                         <option value="Pesos">$</option>
-                                        <option value="Procentaje">%</option>
+                                        <option value="Procentaje1">% producto más bajo</option>
+                                        <option value="Procentaje2">% del total de la compra</option>
                                         <option value="sigCompra">sigPesos en la siguiente compra</option>
                                         <option value="Pieza">Pieza Gratis</option>
                                 </select>
@@ -217,7 +218,8 @@
                                 <select class="form-control" name="unidad_descuento" id="unidad_descuentoB"  required="">        
                                         <option value="">Seleccionar ...</option>  
                                         <option value="Pesos">$</option>
-                                        <option value="Procentaje">%</option>
+                                        <option value="Procentaje1">% producto más bajo</option>
+                                        <option value="Procentaje2">% del total de la compra</option>
                                         <option value="sigCompra">sigPesos en la siguiente compra</option>
                                         <option value="Pieza">Pieza Gratis</option>
                                 </select>

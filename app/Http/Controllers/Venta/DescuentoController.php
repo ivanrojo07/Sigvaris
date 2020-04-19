@@ -59,7 +59,8 @@ class DescuentoController extends Controller
     public function store(Request $request)
     {
         $descuento = Descuento::create($request->all());
-        $Promocion = Promocion::create(['tipo'=>$request->tipoDes, 'compra_min'=>$request->compra_min, 'unidad_compra'=>$request->unidad_compra,
+        $Promocion = Promocion::create(['tipo'=>$request->tipoDes, 
+                                        'compra_min'=>$request->compra_min, 'unidad_compra'=>$request->unidad_compra,
                                         'descuento_de'=>$request->descuento_de, 'unidad_descuento'=>$request->unidad_descuento, 
                                         'descuento_id'=>$descuento->id,'aceptSigPesos'=>$request->aceptSigPesos]);
         /**if($request->tipoA)
@@ -280,7 +281,7 @@ class DescuentoController extends Controller
                                 'total'=>$promocion->descuento_de
                             );
                             break;
-                        case 'Procentaje':
+                        case 'Procentaje1':
                             $CostoProductoBarato=999999999;
                             foreach ($request->input("productos_id") as $producto_id) {
                                 if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico")){
@@ -292,6 +293,14 @@ class DescuentoController extends Controller
                                 'sigpesos'=>0,
                                 'aceptsp'=>$promocion->aceptSigPesos,
                                 'total'=>$CostoProductoBarato*($promocion->descuento_de/100)
+                            );
+                            break;
+                        case 'Procentaje2':
+                            $response=array(
+                                'status'=>1,
+                                'sigpesos'=>0,
+                                'aceptsp'=>$promocion->aceptSigPesos,
+                                'total'=>$request->subtotal*($promocion->descuento_de/100)
                             );
                             break;
                         case 'sigCompra':
@@ -339,7 +348,21 @@ class DescuentoController extends Controller
                                 'total'=>$promocion->descuento_de
                             );
                             break;
-                        case 'Procentaje':
+                        case 'Procentaje1':
+                            $CostoProductoBarato=999999999;
+                            foreach ($request->input("productos_id") as $producto_id) {
+                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico")){
+                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico");
+                                }
+                            }
+                            $response=array(
+                                'status'=>1,
+                                'sigpesos'=>0,
+                                'aceptsp'=>$promocion->aceptSigPesos,
+                                'total'=>$CostoProductoBarato*($promocion->descuento_de/100)
+                            );
+                            break;
+                        case 'Procentaje2':
                             $response=array(
                                 'status'=>1,
                                 'sigpesos'=>0,
