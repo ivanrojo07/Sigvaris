@@ -159,7 +159,8 @@ class VentaController extends Controller
                 'hora'        => '00:00',
                 'forma_contacto' => 'Telefono',
                 'fecha_contacto' => Carbon::now()->addMonths(5),
-                'fecha_aviso' => Carbon::now()->addMonths(5)
+                'fecha_aviso' => Carbon::now()->addMonths(5),
+                'oficina_id' => session('oficina')
 
             )
         );
@@ -171,7 +172,8 @@ class VentaController extends Controller
                 'hora'        => '00:00',
                 'forma_contacto' => 'Telefono',
                 'fecha_contacto' => Carbon::now()->addDays(8),
-                'fecha_aviso' => Carbon::now()->addDays(8)
+                'fecha_aviso' => Carbon::now()->addDays(8),
+                'oficina_id' => session('oficina')
 
             )
         );
