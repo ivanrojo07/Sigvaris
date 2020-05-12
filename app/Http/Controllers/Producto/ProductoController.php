@@ -109,7 +109,8 @@ class ProductoController extends Controller
     public function getProductosNombre(Request $request)
     {
         $ajaxProductos=array();
-        $Productos=Producto::
+        $Pro=Producto::where('oficina_id',session('oficina'));
+        $Productos=$Pro::
                     where('sku','like',$request->input('nombre').'%')
                     ->orwhere('upc','like',$request->input('nombre').'%')
                     ->orwhere('swiss_id','like',$request->input('nombre').'%')
@@ -124,7 +125,8 @@ class ProductoController extends Controller
     }
     public function getProductoExists(Request $request)
     {
-        if (Producto::where('sku',$request->input('sku'))
+        $Producto=Producto::where('oficina_id',session('oficina'));
+        if ($Producto::where('sku',$request->input('sku'))
                     ->orWhere('upc',$request->input('sku'))
                     ->orWhere('swiss_id',$request->input('sku'))
                     ->exists()) {
