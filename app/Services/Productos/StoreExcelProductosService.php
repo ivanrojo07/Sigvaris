@@ -69,7 +69,7 @@ class StoreExcelProductosService
         }
 
         foreach ($arr as $producto) {
-            Producto::updateOrCreate(['sku'=>$producto['sku']], $producto);
+            Producto::updateOrCreate(['sku'=>$producto['sku'],'oficina_id' => session('oficina')], $producto);
         }
     }
 

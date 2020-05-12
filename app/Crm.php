@@ -19,7 +19,8 @@ class Crm extends Model
         'fecha_contacto',
         'forma_contacto',
         'hora',
-        'estado_id'
+        'estado_id',
+        'oficina_id'
     ];
 
     public function paciente(){

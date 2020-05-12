@@ -28,7 +28,7 @@
             <div class="card-body">
                 <form role="form" id="form-cliente" method="POST" action="{{ route('ventas.store') }}" name="form">
                     {{ csrf_field() }}
-
+                    <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                     <div class="row">
                         <div class="col-4 form-group">
                             <label class="control-label">Fitter:</label>
