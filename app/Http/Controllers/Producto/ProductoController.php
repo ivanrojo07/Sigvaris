@@ -30,7 +30,8 @@ class ProductoController extends Controller
     public function index()
     {
         //
-        $productos = Producto::get();
+        $Pro=Producto::where('oficina_id',session('oficina'));
+        $productos = $Pro->get();
         return view('producto.index', ['productos'=>$productos]);
     }
 
