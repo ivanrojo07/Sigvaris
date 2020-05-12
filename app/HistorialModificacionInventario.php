@@ -12,4 +12,9 @@ class HistorialModificacionInventario extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'producto_id');
+    }
+
 }

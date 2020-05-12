@@ -10,6 +10,7 @@
     </thead>
     <tbody>
         @foreach ($historialModificacionesInventario as $modificacion)
+            @if $modificacion->producto()->oficina_id===session('oficina')
             <tr>
                 <td>{{$modificacion->created_at}}</td>
                 <td>{{$modificacion->user()->first()->name}}</td>

@@ -31,4 +31,7 @@ class Producto extends Model
     public function Negados(){
         return $this->hasMany('App\Negado');
     }
+    public function Historial(){
+        return $this->hasMany('App\HistorialModificacionInventario');
+    }
 }
