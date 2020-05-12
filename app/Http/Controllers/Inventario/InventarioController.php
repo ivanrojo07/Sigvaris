@@ -18,7 +18,8 @@ class InventarioController extends Controller
     public function index()
     {
         // dd( session('oficina') );
-        $productos = Producto::get();
+        //$productos = Producto::get();
+        $productos =Producto::where('oficina_id',session('oficina'))->get();
         return view('producto.inventario.index', compact('productos'));
     }
 
