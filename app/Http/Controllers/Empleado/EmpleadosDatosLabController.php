@@ -209,12 +209,9 @@ class EmpleadosDatosLabController extends Controller
 		$datoslab->salarionom = $request->salarionom;
 		$datoslab->salariodia = $request->salariodia;
 
-		//$datoslab->periodopaga = $request->periodopaga;
-		$datoslab->periodopaga = $request->periodopaga == null ? "Ninguna" : $request->periodopaga;
-
+		$datoslab->periodopaga = $request->periodopaga;
 		$datoslab->prestaciones = $request->prestaciones;
-		//$datoslab->regimen = $request->regimen;
-		$datoslab->regimen = $request->regimen == null ? "Ninguna" : $request->regimen;
+		$datoslab->regimen = $request->regimen;
 		$datoslab->hentrada = $request->hentrada;
 		$datoslab->hsalida = $request->hsalida;
 		$datoslab->hcomida = $request->hcomida;

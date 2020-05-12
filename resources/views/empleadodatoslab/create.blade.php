@@ -85,7 +85,7 @@
 						{{--< --option id="1" value="Semanal" @if ($datoslab->periodopaga == "Semanal") selected="selected" @endif>Semanal</option>
 						<option id="2" value="Quincenal" @if ($datoslab->periodopaga == "Quincenal") selected="selected" @endif>Quincenal</option>
 						<option id="3" value="Mensual" @if ($datoslab->periodopaga == "Mensual") selected="selected" @endif>Mensual</option>--}}
-						<option value="">Seleccionar</option>
+						<option value="Ninguna">Seleccionar</option>
 						<option value="01 - Diario"  @if ($datoslab->periodopaga == "Diario") selected="selected" @endif >01 - Diario</option>
 						<option value="02 - Semanal" @if ($datoslab->periodopaga == "Semanal") selected="selected" @endif >02 - Semanal</option>
 						<option value="03 - Catorcenal" @if ($datoslab->periodopaga == "Catorcenal") selected="selected" @endif >03 - Catorcenal</option>
@@ -115,7 +115,7 @@
 						{{-- <option id="1" value="Sueldos y Salarios" @if ($datoslab->regimen == "Sueldos y Salarios") selected="selected" @endif>Sueldos y Salarios</option>
 						<option id="2" value="Jubilados" @if ($datoslab->regimen == "Jubilados") selected="selected" @endif>Jubilados</option>
 						<option id="3" value="Pensionados" @if ($datoslab->regimen == "Pensionados") selected="selected" @endif>Pensionados</option>--}}
-						<option value="">Seleccionar</option>
+						<option value="Ninguna">Seleccionar</option>
 						<option value="02 - Sueldos" @if ($datoslab->regimen == "Sueldos") selected="selected" @endif>02 - Sueldos</option>
 						<option value="03 - Jubilados" @if ($datoslab->regimen == "Jubilados") selected="selected" @endif>03 - Jubilados</option>
 						<option value="04 - Pensionados" @if ($datoslab->regimen == "Pensionados") selected="selected" @endif>04 - Pensionados</option>
