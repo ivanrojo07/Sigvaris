@@ -137,11 +137,12 @@ class ProductoController extends Controller
     }
     public function getProductoExistsDesc(Request $request)
     {
-        if (Producto::where('sku',$request->input('sku'))
+        $Producto=Producto::where('oficina_id',session('oficina'));
+        if ($Producto::where('sku',$request->input('sku'))
                     ->orWhere('upc',$request->input('sku'))
                     ->orWhere('swiss_id',$request->input('sku'))
                     ->exists()) {
-            $Producto=Producto::where('sku',$request->input('sku'))
+            $Producto=$Producto::where('sku',$request->input('sku'))
                     ->orWhere('upc',$request->input('sku'))
                     ->orWhere('swiss_id',$request->input('sku'))
                     ->get();
