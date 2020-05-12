@@ -30,7 +30,8 @@ class Venta extends Model
         'PagoEfectivo',
         'mesesPago',
         'requiere_factura',
-        'comentario'
+        'comentario',
+        'oficina_id'
     ];
 
     /**
