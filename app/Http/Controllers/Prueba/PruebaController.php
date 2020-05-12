@@ -26,11 +26,18 @@ class PruebaController extends Controller
         //     return $venta->pluck('productos')->flatten()->count() > 1;
         // } );
     }
-    public function GenerarTiendasVentasCrms()
+    public function GenerarTiendasVentas()
     {
         $Ventas = Venta::get();
         foreach ($Ventas as $Venta) {
             $Venta->update(['oficina_id'=>$Venta->paciente->oficina_id]);
+        }
+    }
+    public function GenerarTiendasCRMS()
+    {
+        $Crms = Crm::get();
+        foreach ($Crms as $Crm) {
+            $Crm->update(['oficina_id'=>$Crm->paciente->oficina_id]);
         }
     }
 
