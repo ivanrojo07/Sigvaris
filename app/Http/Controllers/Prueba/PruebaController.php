@@ -38,7 +38,7 @@ class PruebaController extends Controller
     {
         $Facturas=Factura::get();
         foreach ($Facturas as $Factura) {
-            $Factura->update(['RFC'=>$Factura->venta->paciente->rfc]);
+            $Factura->update(['rfc'=>$Factura->venta->paciente->rfc]);
         }
     }
     public function GenerarTiendasCRMS()
