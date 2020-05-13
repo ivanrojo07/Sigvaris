@@ -682,7 +682,7 @@
                 }
             });
             $('#unidad_descuento').change(function() {
-                if ($('#unidad_descuento').val()=='Procentaje') {
+                if ($('#unidad_descuento').val()=='Procentaje'||$('#unidad_descuento').val()=='Procentaje1'||$('#unidad_descuento').val()=='Procentaje2') {
                     $('#Des').show();
                     $('#Des_Por').show();
                     $('#Des_Pes').hide();
@@ -706,7 +706,7 @@
                 }
             });
             $('#unidad_descuentoB').change(function() {
-                if ($('#unidad_descuentoB').val()=='Procentaje') {
+                if ($('#unidad_descuentoB').val()=='Procentaje'||$('#unidad_descuentoB').val()=='Procentaje1'||$('#unidad_descuentoB').val()=='Procentaje2') {
                     $('#DesB').show();
                     $('#Des_PorB').show();
                     $('#Des_PesB').hide();
@@ -730,7 +730,7 @@
                 }
             });
             $('#unidad_descuentoC').change(function() {
-                if ($('#unidad_descuentoC').val()=='Procentaje') {
+                if ($('#unidad_descuentoC').val()=='Procentaje'||$('#unidad_descuentoC').val()=='Procentaje1'||$('#unidad_descuentoC').val()=='Procentaje2') {
                     $('#DesC').show();
                     $('#Des_PorC').show();
                     $('#Des_PesC').hide();
