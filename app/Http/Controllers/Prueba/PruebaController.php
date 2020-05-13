@@ -12,6 +12,7 @@ use App\Producto;
 use App\Puesto;
 use App\Venta;
 use App\Crm;
+use App\Factura;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,13 @@ class PruebaController extends Controller
         $Ventas = Venta::get();
         foreach ($Ventas as $Venta) {
             $Venta->update(['oficina_id'=>$Venta->paciente->oficina_id]);
+        }
+    }
+    public function FacturasRFC()
+    {
+        $Facturas=Factura::get();
+        foreach ($Facturas as $Factura) {
+            $Factura->update(['RFC'=>$Factura->venta->paciente->rfc]);
         }
     }
     public function GenerarTiendasCRMS()

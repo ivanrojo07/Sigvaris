@@ -214,7 +214,7 @@ Route::post('Devolucion_Damage','Venta\DamageController@Devolucion_Damage');
 
 
 Route::get('pruebas','Prueba\PruebaController@index');
-Route::get('pruebasJC','Prueba\PruebaController@GenerarTiendasCRMS');
+Route::get('pruebasJC','Prueba\PruebaController@FacturasRFC');
 
 
 // APIS
