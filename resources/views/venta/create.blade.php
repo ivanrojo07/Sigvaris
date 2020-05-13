@@ -668,7 +668,8 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var aux=subtotal+iva-des-sigpesos;
+            var desinapam=parseInt($('#descuentoInapam').val());
+            var aux=subtotal+iva-des-sigpesos-desinapam;
 
             $('#total').val(aux.toFixed(2));
             console.log('TOTAL ACTUALIZADO',$('#total').val());
@@ -755,7 +756,8 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var aux=subtotal+iva-des-sigpesos;
+            var desinapam=parseInt($('#descuentoInapam').val());
+            var aux=subtotal+iva-des-sigpesos-desinapam;
             $('#total').val(aux.toFixed(2));
             $.ajax({
                 url:"{{ url('/get_promos') }}/"+id,
@@ -785,7 +787,8 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var aux=subtotal+iva-des-sigpesos;
+            var desinapam=parseInt($('#descuentoInapam').val());
+            var aux=subtotal+iva-des-sigpesos-desinapam;
             $('#total').val(aux.toFixed(2));
             var productos_id=[];
             var cantidad_id=[];
@@ -818,7 +821,7 @@
                             $('#descuento').val(res.total);
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
-                            var aux=subtotal+iva-des-sigpesos;
+                            var aux=subtotal+iva-des-sigpesos-desinapam;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
                             {
@@ -828,14 +831,14 @@
                             $('#descuento').val(res.total);
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
-                            var aux=subtotal+iva-des-sigpesos;
+                            var aux=subtotal+iva-des-sigpesos-desinapam;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
                             {
                                 $('#total').val(0);
                             }
                         }
-                        
+
                         if (res.aceptsp==0) {
                             $('#sigpesos_usar').val(0);
                             $('#sigpesos_usar').prop("disabled", true);
@@ -1106,8 +1109,8 @@
             }
 
         });
-
-        if((subtotal+iva-des)<$('#sigpesos_usar').val())
+        var desinapam=parseInt($('#descuentoInapam').val());
+        if((subtotal+iva-des-desinapam)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
         }
@@ -1172,8 +1175,8 @@
             }
 
         });
-
-        if((subtotal+iva-des)<$('#sigpesos_usar').val())
+        var desinapam=parseInt($('#descuentoInapam').val());
+        if((subtotal+iva-des-desinapam)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
         }
