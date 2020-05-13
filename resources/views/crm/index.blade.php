@@ -46,6 +46,7 @@
 
                     <form id="crear_crm" name="crear_crm" action="{{route('crm.store')}}" method="POST">
                         {{ csrf_field() }}
+                        <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                         <div class="modal fade bd-example-modal-lg" id="crear_crm_modal" tabindex="-1" role="dialog"
                             aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -129,6 +130,7 @@
                     </form>
 
                     <form id="ver_crear_crm" name="ver_crear_crm" action="{{route('crm.store')}}" method="POST">
+                    <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                     <div class="modal fade bd-example-modal-lg" id="ver_crm_modal" tabindex="-1" role="dialog"
                         aria-labelledby="myLargeModalLabel" aria-hidden="true">
                          

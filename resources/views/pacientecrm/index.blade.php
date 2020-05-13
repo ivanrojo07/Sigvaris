@@ -17,6 +17,7 @@
 
                     <form id="crear_crm" name="crear_crm" action="{{route('crm.storePaciente')}}" method="POST">
                         {{ csrf_field() }}
+                        <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                         <input type="hidden" name="paciente_id" value="{{$paciente->id}}">
                         <div class="modal fade bd-example-modal-lg" id="crear_crm_modal" tabindex="-1" role="dialog"
                             aria-labelledby="myLargeModalLabel" aria-hidden="true">

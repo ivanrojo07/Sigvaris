@@ -45,7 +45,8 @@ class PacienteCrmController extends Controller
 
         }
        
-         
+        $crms=$crms->where('oficina_id',session('oficina'));
+        
         $crms = $crms->paginate(10);
         if ($request->fechaInicioBusqueda) {
             $crms->appends(['fechaInicioBusqueda' => $request->fechaInicioBusqueda]);
