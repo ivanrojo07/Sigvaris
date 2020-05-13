@@ -35,7 +35,9 @@ class VentaController extends Controller
     public function index()
     {
         $medicos = Doctor::get();
-        $ventas = Venta::orderBy('fecha', 'desct')->paginate(5);
+        //Poner ventas en historial cortes de caja 
+        $ventas =Venta::where('oficina_id',session('oficina'));
+        $ventas = $ventas->orderBy('fecha', 'desct')->paginate(5);
         return view('venta.index_all', ['ventas' => $ventas, 'medicos' => $medicos]);
     }
 
@@ -245,7 +247,8 @@ class VentaController extends Controller
             foreach ($ventasxprenda as $v)
                 $ventas[] = $v;
         } else*/
-            $ventas = Venta::with('paciente', 'descuento')->where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
+        $ventas =Venta::where('oficina_id',session('oficina'));
+            $ventas = $ventas->with('paciente', 'descuento')->where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
 
         // Obtención de Las ventas que contengan la prenda o prendas que se introdujeron en el campo prenda
         $arr = [];
