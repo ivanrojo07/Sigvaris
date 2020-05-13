@@ -306,7 +306,7 @@ class DescuentoController extends Controller
                         case 'sigCompra':
                             $response=array(
                                 'status'=>1,
-                                'sigpesos'=>0,
+                                'sigpesos'=>$promocion->descuento_de,
                                 'aceptsp'=>$promocion->aceptSigPesos,
                                 'total'=>0,
                                 'sigCom'=>$promocion->descuento_de
@@ -373,7 +373,7 @@ class DescuentoController extends Controller
                         case 'sigCompra':
                             $response=array(
                                 'status'=>1,
-                                'sigpesos'=>0,
+                                'sigpesos'=>$promocion->descuento_de,
                                 'aceptsp'=>$promocion->aceptSigPesos,
                                 'total'=>0,
                                 'sigCom'=>$promocion->descuento_de

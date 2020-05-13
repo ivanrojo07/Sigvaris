@@ -835,6 +835,7 @@
                                 $('#total').val(0);
                             }
                         }
+                        
                         if (res.aceptsp==0) {
                             $('#sigpesos_usar').val(0);
                             $('#sigpesos_usar').prop("disabled", true);
