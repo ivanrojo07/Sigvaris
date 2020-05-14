@@ -154,7 +154,7 @@ class ProductoController extends Controller
                 $ProductoActualizar=Producto::updateOrCreate(['id'=>$Producto[0]->id],[
                     'stock'=>$Producto[0]->stock+1
                 ]);
-                $date = Carbon::now();
+                $fecha_actual = Carbon::now();
                 if (HistorialSurtido::where("producto_id",$ProductoActualizar->id)
                                     ->exists()) {
                     if (Carbon::parse(HistorialSurtido::where("producto_id",$ProductoActualizar->id)
