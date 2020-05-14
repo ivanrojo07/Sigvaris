@@ -70,7 +70,7 @@
                             <option value="{{$paciente->doctor_id}}">{{$paciente->doctor->nombre}} {{$paciente->doctor->apellidopaterno}} {{$paciente->doctor->apellidomaterno}}</option disabled>
                         @endif
                         @if(!is_null($paciente->otro_doctor))
-                            <option value="otro" disabled>Otro..</option>
+                            <option value="otro" selected>Otro..</option>
                         @else
                             <option value="otro">Otro..</option>
                         @endif
@@ -137,7 +137,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
 @if(!is_null($paciente->otro_doctor))
-$('#otro_doctor').hide();
+$('#otro_doctor').show();
+$('#otro_doctor').find('input').val('');
+$('#otro_doctor').find('input').attr('required', 'true');
 @else
 $('#sech_doctor').hide();
 @endif
