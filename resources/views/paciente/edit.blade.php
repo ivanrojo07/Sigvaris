@@ -207,7 +207,6 @@ $('#nacimiento').change( function(){
         var rfc_completo = rfc_paterno+rfc_materno+rfc_nombre+anio+mes+dia;
         rfc_completo = rfc_completo.toUpperCase();
         $('#rfc').val( rfc_completo );
-
        //alert($("#nacimiento").val());
 } );
 @if(!is_null($paciente->otro_doctor))
