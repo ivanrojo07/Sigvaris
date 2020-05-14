@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-3 form-group">
                     <label class="control-label">✱RFC:</label>
-                    <input value="{{$paciente->rfc}}" type="text" name="rfc" class="form-control" required="">
+                    <input value="{{$paciente->rfc}}" type="text" name="rfc" id="rfc" class="form-control" required="">
                 </div>
                 <div class="form-group col-3">
                     <label for="nivel">Nivel:</label>
@@ -208,7 +208,7 @@ $('#nacimiento').change( function(){
         rfc_completo = rfc_completo.toUpperCase();
         $('#rfc').val( rfc_completo );
 
-    // alert($("#nacimiento").val());
+       //alert($("#nacimiento").val());
 } );
 @if(!is_null($paciente->otro_doctor))
 $('#otro_doctor').show();
