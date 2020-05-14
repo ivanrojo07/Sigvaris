@@ -196,9 +196,9 @@ $('#otro_doctor').hide();
 $('#nacimiento').change( function(){
     
         var date = new Date( $('#nacimiento').val() );
-        var dia = ("0" + date.getDate()).slice(-2);
-        dia = parseInt(dia)+1;
-        dia = dia.toString();
+        var dia = ("0" + (date.getDate() + 1)).slice(-2);
+        //dia = parseInt(dia)+1;
+        //dia = dia.toString();
         const mes = ("0" + (date.getMonth() + 1)).slice(-2);
         const anio = date.getFullYear().toString().substr(-2);
         const rfc_paterno = $('#paterno').val().substr(0,2);
