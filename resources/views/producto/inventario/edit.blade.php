@@ -90,6 +90,11 @@
                             </div>
                         </div>
                     </form>
+
+                </div>
+                {{-- TABLA DEL HISTORIAL --}}
+                <div class="card-body">
+                    @include('componentes.productos.inventario.historial.tabla',['historialModificacionesInventario' => $producto->Historial()])
                 </div>
             </div>
         </div>

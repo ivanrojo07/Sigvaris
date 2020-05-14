@@ -161,7 +161,7 @@ class ProductoController extends Controller
                                         ->get()
                                         ->last()
                                         ->created_at
-                                    )->diffInDays($fecha_actual)<1) {
+                                    )->diffInDays($fecha_actual)<0) {
                         $H=HistorialSurtido::where("producto_id",$ProductoActualizar->id)->get()->last();
                         $H->numero+=1;
                         $H->save();
