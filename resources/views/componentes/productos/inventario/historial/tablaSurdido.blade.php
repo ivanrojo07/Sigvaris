@@ -3,16 +3,15 @@
         <tr class="info">
             <th>FECHA</th>
             <th>USUARIO</th>
-            <th>STOCK ANTERIOR</th>
-            <th>STOCK NUEVO</th>
-            <th>MOTIVO</th>
+            <th>SKU</th>
+            <th>STOCK AÑADIDO</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($historialModificacionesInventario as $modificacion)
             @if ($modificacion->producto->oficina_id==session('oficina'))
             <tr>
-                <td>{{$modificacion->created_at}}</td>
+                <td>{{\Carbon\Carbon::parse($modificacion->created_at)->formatLocalized('%d de %B de %Y')}}</td>
                 <td>{{$modificacion->producto->sku}}</td>
                 <td>{{$modificacion->user()->first()->name}}</td>
                 <td>{{$modificacion->numero}}</td>
