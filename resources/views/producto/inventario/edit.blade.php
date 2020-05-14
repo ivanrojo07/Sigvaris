@@ -73,8 +73,8 @@
                             {{-- INPUT MOTIVO BAJA --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="">MOTIVO BAJA</label>
-                                    <textarea name="motivoBaja" value="" class="form-control" required></textarea>
+                                    <label for="">MOTIVO </label>
+                                    <textarea name="motivo" value="" class="form-control" required></textarea>
                                 </div>
                             </div>
                         </div>
