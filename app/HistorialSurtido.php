@@ -8,7 +8,7 @@ class HistorialSurtido extends Model
 {
     //
     protected $table = "historial_surtido";
-    protected $fillable = ['producto_id','numero'];
+    protected $fillable = ['producto_id','numero','user_id'];
     protected $hidden=['created_at','updated_at'];
 
     public function producto()
