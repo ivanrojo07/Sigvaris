@@ -21,15 +21,15 @@
             <div class="row">
                 <div class="col-3 form-group">
                     <label class="control-label">✱Nombre:</label>
-                    <input value="{{$paciente->nombre}}" type="text" name="nombre" class="form-control" required="">
+                    <input value="{{$paciente->nombre}}" type="text" name="nombre"  id="nombre"class="form-control" required="">
                 </div>
                 <div class="col-3 form-group">
                     <label class="control-label">✱Apellido Paterno:</label>
-                    <input value="{{$paciente->paterno}}" type="text" name="paterno" class="form-control" required="">
+                    <input value="{{$paciente->paterno}}" type="text" name="paterno" id="paterno" class="form-control" required="">
                 </div>
                 <div class="col-3 form-group">
                     <label class="control-label">✱Apellido Materno:</label>
-                    <input value="{{$paciente->materno}}" type="text" name="materno" class="form-control" required="">
+                    <input value="{{$paciente->materno}}" type="text" name="materno" id="materno" class="form-control" required="">
                 </div>
                 <div class="col-3 form-group">
                     <label class="control-label">Celular:</label>
