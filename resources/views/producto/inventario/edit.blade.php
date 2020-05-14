@@ -67,14 +67,14 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">DESCRIPCIÓN DEL PRODUCTO</label>
-                                    <textarea name="descripcion"value="{{$producto->descripcion}}" class="form-control"></textarea>
+                                    <input type="text" name="descripcion" value="{{$producto->descripcion}}" class="form-control">
                                 </div>
                             </div>
                             {{-- INPUT MOTIVO BAJA --}}
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">MOTIVO </label>
-                                    <textarea name="motivoBaja" value="" class="form-control" required></textarea>
+                                    <input type="text" name="motivoBaja" value="" class="form-control" required>
                                 </div>
                             </div>
                         </div>
