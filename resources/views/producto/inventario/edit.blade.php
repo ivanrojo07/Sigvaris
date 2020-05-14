@@ -74,7 +74,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="form-group">
                                     <label for="">MOTIVO </label>
-                                    <textarea name="motivo" value="" class="form-control" required></textarea>
+                                    <textarea name="motivoBaja" value="" class="form-control" required></textarea>
                                 </div>
                             </div>
                         </div>
