@@ -155,16 +155,25 @@ class ProductoController extends Controller
                     'stock'=>$Producto[0]->stock+1
                 ]);
                 $date = Carbon::now();
-                if (Carbon::parse(HistorialSurtido::where("producto_id",$ProductoActualizar->id)->last()->created_at)->diffInDays($fecha_actual)<1) {
-                    $H=HistorialSurtido::where("producto_id",$ProductoActualizar->id)->last();
-                    $H->numero+=1;
-                    $H->save();
+                if (HistorialSurtido::where("producto_id",$ProductoActualizar->id)
+                                    ->exists()) {
+                    if (Carbon::parse(HistorialSurtido::where("producto_id",$ProductoActualizar->id)->last()->created_at)->diffInDays($fecha_actual)<1) {
+                        $H=HistorialSurtido::where("producto_id",$ProductoActualizar->id)->last();
+                        $H->numero+=1;
+                        $H->save();
+                    }else{
+                        $H=HistorialSurtido::create([
+                            'producto_id'=>$ProductoActualizar->id,
+                            'numero'=>1
+                        ]);
+                    }
                 }else{
                     $H=HistorialSurtido::create([
                         'producto_id'=>$ProductoActualizar->id,
                         'numero'=>1
                     ]);
                 }
+                
                 return $Producto[0];
             }else{
                 return 0;
