@@ -44,7 +44,7 @@ class InventarioController extends Controller
             'producto_id' => $producto->id,
             'stock_anterior' => $producto->stock,
             'stock_nuevo' => $stockNuevo,
-            'motivo' => $request->input('motivo'),
+            'motivo' => $request->input('motivoBaja'),
         ]);
 
         // ACTUALIZAMOS LA INFORMACIÓN DEL PRODUCTO
