@@ -66,10 +66,10 @@
                 <div class="form-group col-3">
                     <label for="doctor_id">Doctor que recomienda:</label>
                     <select class="form-control" name="doctor_id" id="doctor_id" required>
-                        @if($paciente->otro_doctor)
+                        @if(is_null($paciente->otro_doctor))
                             <option value="{{$paciente->doctor_id}}">{{$paciente->doctor->nombre}} {{$paciente->doctor->apellidopaterno}} {{$paciente->doctor->apellidomaterno}}</option disabled>
                         @endif
-                        @if($paciente->otro_doctor)
+                        @if(is_null($paciente->otro_doctor))
                             <option value="otro" disabled>Otro..</option>
                         @else
                             <option value="otro">Otro..</option>
@@ -137,7 +137,7 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-@if($paciente->otro_doctor)
+@if(is_null($paciente->otro_doctor))
 $('#otro_doctor').hide();
 @endif
 $('#otro_doctor').hide();
