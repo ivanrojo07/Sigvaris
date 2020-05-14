@@ -99,6 +99,7 @@ Route::get('obtener_sigpesos/{paciente}','Venta\DescuentoController@getSigpesos'
 Route::get('productos/inventario', 'Inventario\InventarioController@index')->name('productos.inventario');
 Route::get('productos/surtido', 'Inventario\InventarioController@surtido')->name('productos.surtido');
 Route::get('productos/inventario/historial', 'Inventario\InventarioController@historial')->name('productos.inventario.historial');
+Route::get('productos/inventario/historialSurtido', 'Inventario\InventarioController@historialSurtido')->name('productos.inventario.historialSurtido');
 Route::get('productos/inventario/modificar/{id}', 'Inventario\InventarioController@edit')->name('producto.inventario.modificar');
 Route::post('productos/inventario/update', 'Inventario\InventarioController@update')->name('producto.inventario.update');
 Route::resource('contratos','Precargas\TipoContratoController')->middleware('precargas.role');

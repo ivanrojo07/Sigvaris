@@ -15,4 +15,7 @@ class HistorialSurtido extends Model
     {
         return $this->belongsTo('App\Producto', 'producto_id');
     }
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

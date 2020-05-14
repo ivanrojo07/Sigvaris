@@ -106,6 +106,9 @@
                         <a class="dropdown-item" href="{{ route('productos.inventario') }}"><span>Inventario</span><i class="fa fa-history float-right" aria-hidden="true"></i></a>
                         <a class="dropdown-item" href="{{ route('productos.surtido') }}"><span>Surtido de producto</span></a>
                         <a class="dropdown-item" href="{{ route('productos.inventario.historial') }}"><span>Historial</span><i class="fa fa-search float-right"></i></a>
+                        <a class="dropdown-item" href="{{ route('productos.inventario.historialSurtido') }}"><span>Historial de Surtido</span><i class="fa fa-search float-right"></i></a>
+
+                        
                     </div>
                 </li>    
             @endif

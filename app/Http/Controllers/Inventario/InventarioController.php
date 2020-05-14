@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inventario;
 
 use App\HistorialModificacionInventario;
+use App\HistorialSurtido;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateInventario;
@@ -65,5 +66,10 @@ class InventarioController extends Controller
     {
         $historialModificacionesInventario = HistorialModificacionInventario::get();
         return view('producto.inventario.historial', compact('historialModificacionesInventario'));
+    }
+    public function historialSurtido()
+    {
+        $historialModificacionesInventario = HistorialSurtido::get();
+        return view('producto.inventario.historialSurtido', compact('historialModificacionesInventario'));
     }
 }

@@ -13,10 +13,9 @@
             @if ($modificacion->producto->oficina_id==session('oficina'))
             <tr>
                 <td>{{$modificacion->created_at}}</td>
+                <td>{{$modificacion->producto->sku}}</td>
                 <td>{{$modificacion->user()->first()->name}}</td>
-                <td>{{$modificacion->stock_anterior}}</td>
-                <td>{{$modificacion->stock_nuevo}}</td>
-                <td>{{$modificacion->motivo}}</td>
+                <td>{{$modificacion->numero}}</td>
             </tr>
             @endif
         @endforeach
