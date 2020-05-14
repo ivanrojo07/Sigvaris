@@ -212,8 +212,13 @@ $('input').change( function(){
 
     // alert($("#nacimiento").val());
 } );
-
+@if(!is_null($paciente->otro_doctor))
+$('#otro_doctor').show();
+$('#sech_doctor').hide();
+@else
 $('#otro_doctor').hide();
+@endif
+
     $('#doctor_id').change(function () {
         if($(this).val() == 'otro'){
             $(this).attr('name', 'doctor_id_falsa');
