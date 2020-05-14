@@ -193,9 +193,8 @@ $('#otro_doctor').hide();
 </script>
 <script>
 
-$('input').change( function(){
+$('#nacimiento').change( function(){
     
-    if( $('#nacimiento').val() ){
         var date = new Date( $('#nacimiento').val() );
         var dia = ("0" + date.getDate()).slice(-2);
         dia = parseInt(dia)+1;
@@ -208,8 +207,6 @@ $('input').change( function(){
         var rfc_completo = rfc_paterno+rfc_materno+rfc_nombre+anio+mes+dia;
         rfc_completo = rfc_completo.toUpperCase();
         $('#rfc').val( rfc_completo );
-
-    }
 
     // alert($("#nacimiento").val());
 } );
