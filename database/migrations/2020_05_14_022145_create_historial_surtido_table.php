@@ -17,7 +17,7 @@ class CreateHistorialSurtidoTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('producto_id')->unsigned();
-            $table->foreign('producto_id')->references('id')->on('productos');
+            //$table->foreign('producto_id')->references('id')->on('productos');
             $table->integer('numero')->unsigned();
         });
     }
