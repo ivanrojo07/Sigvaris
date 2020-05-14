@@ -67,12 +67,16 @@
                     <label for="doctor_id">Doctor que recomienda:</label>
                     <select class="form-control" name="doctor_id" id="doctor_id" required>
                         @if($paciente->otro_doctor==null)
-                            <option value="{{$paciente->doctor_id}}">{{$paciente->doctor->nombre}} {{$paciente->doctor->apellidopaterno}} {{$paciente->doctor->apellidomaterno}}</option>
+                            <option value="{{$paciente->doctor_id}}">{{$paciente->doctor->nombre}} {{$paciente->doctor->apellidopaterno}} {{$paciente->doctor->apellidomaterno}}</option disabled>
+                        @endif
+                        @if($paciente->otro_doctor==null)
+                            <option value="otro" disabled>Otro..</option>
                         @else
-                            <option value="{{$paciente->otro_doctor}}">{{$paciente->otro_doctor}}</option>
+                            <option value="otro">Otro..</option>
+                            <option >{{$paciente->otro_doctor}}</option>
                         @endif
                         <option value="">Buscar..</option>
-                        <option value="otro">Otro..</option>
+                        
                         
                     </select>
                 </div>
@@ -82,7 +86,7 @@
                 </div>
                 <div class="col-3 form-group" id="otro_doctor">
                     <label class="control-label">Otro doctor nombre:</label>
-                    <input type="text" name="otro_doctor" class="form-control">
+                    <input type="text" name="otro_doctor" class="form-control" value="{{$paciente->otro_doctor}}">
                 </div>
             </div>
             <div class="row">
@@ -133,6 +137,9 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+@if($paciente->otro_doctor==null)
+$('#otro_doctor').hide();
+@endif
 $('#otro_doctor').hide();
     $('#doctor_id').change(function () {
         if($(this).val() == 'otro'){
