@@ -69,11 +69,10 @@
                         @if(is_null($paciente->otro_doctor))
                             <option value="{{$paciente->doctor_id}}">{{$paciente->doctor->nombre}} {{$paciente->doctor->apellidopaterno}} {{$paciente->doctor->apellidomaterno}}</option disabled>
                         @endif
-                        @if(is_null($paciente->otro_doctor))
+                        @if(!is_null($paciente->otro_doctor))
                             <option value="otro" disabled>Otro..</option>
                         @else
                             <option value="otro">Otro..</option>
-                            <option >{{$paciente->otro_doctor}}</option>
                         @endif
                         <option value="">Buscar..</option>
                         
@@ -137,10 +136,11 @@
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-@if(is_null($paciente->otro_doctor))
+@if(!is_null($paciente->otro_doctor))
 $('#otro_doctor').hide();
+@else
+$('#sech_doctor').hide();
 @endif
-$('#otro_doctor').hide();
     $('#doctor_id').change(function () {
         if($(this).val() == 'otro'){
             $(this).attr('name', 'doctor_id_falsa');
