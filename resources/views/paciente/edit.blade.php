@@ -143,6 +143,7 @@
 @if(!is_null($paciente->otro_doctor))
 $('#otro_doctor').show();
 $('#sech_doctor').hide();
+$('#doctor_id').attr('name', 'doctor_id_falsa');
 @else
 $('#otro_doctor').hide();
 @endif
@@ -215,6 +216,7 @@ $('input').change( function(){
 @if(!is_null($paciente->otro_doctor))
 $('#otro_doctor').show();
 $('#sech_doctor').hide();
+$('#doctor_id').attr('name', 'doctor_id_falsa');
 @else
 $('#otro_doctor').hide();
 @endif
