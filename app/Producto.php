@@ -34,4 +34,8 @@ class Producto extends Model
     public function Historial(){
         return $this->hasMany('App\HistorialModificacionInventario');
     }
+    public function HistorialSurtidos()
+    {
+        return $this->hasMany('App\HistorialSurtido');
+    }
 }

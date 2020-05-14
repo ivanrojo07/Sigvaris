@@ -6,6 +6,8 @@ use App\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\HistorialSurtido;
 
 class ProductoController extends Controller
 {
@@ -152,6 +154,17 @@ class ProductoController extends Controller
                 $ProductoActualizar=Producto::updateOrCreate(['id'=>$Producto[0]->id],[
                     'stock'=>$Producto[0]->stock+1
                 ]);
+                $date = Carbon::now();
+                if (Carbon::parse(HistorialSurtido::where("producto_id",$ProductoActualizar->id)->last()->created_at)->diffInDays($fecha_actual)<1) {
+                    $H=HistorialSurtido::where("producto_id",$ProductoActualizar->id)->last();
+                    $H->numero+=1;
+                    $H->save();
+                }else{
+                    $H=HistorialSurtido::create([
+                        'producto_id'=>$ProductoActualizar->id,
+                        'numero'=>1
+                    ]);
+                }
                 return $Producto[0];
             }else{
                 return 0;
