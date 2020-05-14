@@ -168,7 +168,8 @@ class ProductoController extends Controller
                     }else{
                         $H=HistorialSurtido::create([
                             'producto_id'=>$ProductoActualizar->id,
-                            'numero'=>1
+                            'numero'=>1,
+                            'user_id' => Auth::user()->id
                         ]);
                     }
                 }else{
