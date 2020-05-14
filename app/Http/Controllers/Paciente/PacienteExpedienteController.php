@@ -93,6 +93,7 @@ class PacienteExpedienteController extends Controller
         }
 
         if (PacientesExpedientes::where('paciente_id',$paciente->id)->exists()) {
+            $expediente=$paciente->expediente;
             if ($identificacion!=null) {
                 $expediente = PacientesExpedientes::updateOrCreate(['paciente_id'=>$paciente->id],[
                     'identificacion'=>$identificacion
