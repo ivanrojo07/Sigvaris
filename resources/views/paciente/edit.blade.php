@@ -85,7 +85,11 @@
                 </div>
                 <div class="col-3 form-group" id="otro_doctor">
                     <label class="control-label">Otro doctor nombre:</label>
-                    <input type="text" name="otro_doctor" class="form-control" value="{{$paciente->otro_doctor}}">
+                    <input type="text" name="otro_doctor" class="form-control" 
+                    @if(!is_null($paciente->otro_doctor))
+                        value="{{$paciente->otro_doctor}}"
+                    @endif
+                    >
                 </div>
             </div>
             <div class="row">
@@ -138,10 +142,9 @@
 <script>
 @if(!is_null($paciente->otro_doctor))
 $('#otro_doctor').show();
-$('#otro_doctor').find('input').val('');
-$('#otro_doctor').find('input').attr('required', 'true');
-@else
 $('#sech_doctor').hide();
+@else
+$('#otro_doctor').hide();
 @endif
     $('#doctor_id').change(function () {
         if($(this).val() == 'otro'){
