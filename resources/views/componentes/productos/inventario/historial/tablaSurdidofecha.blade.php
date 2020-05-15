@@ -16,7 +16,6 @@
                     </a>
                 </td>
             </tr>
-            @endif
         @endforeach
     </tbody>    
 </table>
