@@ -90,8 +90,6 @@ class InventarioController extends Controller
             }
 
         }
-        echo $index_historialModificacionesInventario;
-                dd($historialModificacionesInventario);
         return view('producto.inventario.historialSurtido', compact('historialModificacionesInventario'));
     }
     public function historialSurtidoFecha($fecha)

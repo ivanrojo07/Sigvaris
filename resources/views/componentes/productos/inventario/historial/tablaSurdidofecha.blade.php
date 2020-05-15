@@ -8,10 +8,10 @@
     <tbody>
         @foreach ($historialModificacionesInventario as $modificacion)
             <tr>
-                <td>{{\Carbon\Carbon::parse($modificacion->fecha)->formatLocalized('%d de %B de %Y')}}</td>
-                <td>{{$modificacion->Total}}</td>
+                <td>{{\Carbon\Carbon::parse($modificacion["fecha"])->formatLocalized('%d de %B de %Y')}}</td>
+                <td>{{$modificacion["Total"]}}</td>
                 <td>
-                    <a class="btn btn-warning" href="{{$modificacion->URL}}">
+                    <a class="btn btn-warning" href="{{$modificacion["URL"]}}">
                         Ver más
                     </a>
                 </td>
