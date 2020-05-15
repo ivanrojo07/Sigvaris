@@ -12,7 +12,7 @@
                 <td>{{\Carbon\Carbon::parse($modificacion["fecha"])->formatLocalized('%d de %B de %Y')}}</td>
                 <td>{{$modificacion["Total"]}}</td>
                 <td>
-                    <a class="btn btn-warning" href="{{route('getCrmsPorCliente', ['fecha' => $modificacion['fecha']])}}">
+                    <a class="btn btn-warning" href="{{route('historialSurtido', ['fecha' => $modificacion['fecha']])}}">
                         Ver más
                     </a>
                 </td>
