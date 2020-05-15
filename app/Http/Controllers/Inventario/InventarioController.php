@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateInventario;
 use App\Producto;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class InventarioController extends Controller
