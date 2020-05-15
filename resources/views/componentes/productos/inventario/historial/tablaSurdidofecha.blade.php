@@ -3,6 +3,7 @@
         <tr class="info">
             <th>FECHA</th>
             <th>STOCK AÑADIDO TOTAL</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -11,7 +12,7 @@
                 <td>{{\Carbon\Carbon::parse($modificacion["fecha"])->formatLocalized('%d de %B de %Y')}}</td>
                 <td>{{$modificacion["Total"]}}</td>
                 <td>
-                    <a class="btn btn-warning" href="{{$modificacion["URL"]}}">
+                    <a class="btn btn-warning" href="{{$modificacion["fecha"]}}">
                         Ver más
                     </a>
                 </td>

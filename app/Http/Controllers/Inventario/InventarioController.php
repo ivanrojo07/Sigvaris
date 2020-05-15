@@ -94,7 +94,15 @@ class InventarioController extends Controller
     }
     public function historialSurtidoFecha($fecha)
     {
-        $historialModificacionesInventario = HistorialSurtido::get();
-        return view('producto.inventario.historialSurtido', compact('historialModificacionesInventario'));
+        $historialModificaciones = HistorialSurtido::get();
+        $fechaAux=Carbon::parse($fecha);
+        $historialModificacionesInventario=[];
+        foreach ($historialModificaciones as $historial) {
+            if (Carbon::parse($historial->created_at)->diffInDays($fechaAux)<1) {
+                rray_push($historialModificacionesInventario,$historial);
+            }
+
+        }
+        return view('producto.inventario.historialSurtidofecha', compact('historialModificacionesInventario','fecha'));
     }
 }
