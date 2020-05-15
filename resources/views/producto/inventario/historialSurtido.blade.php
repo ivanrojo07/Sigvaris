@@ -10,7 +10,7 @@
                 </div>
                 {{-- TABLA DEL HISTORIAL --}}
                 <div class="card-body">
-                    @include('componentes.productos.inventario.historial.tablaSurdido',['historialModificacionesInventario' => $historialModificacionesInventario])
+                    @include('componentes.productos.inventario.historial.tablaSurdidofecha',['historialModificacionesInventario' => $historialModificacionesInventario])
                 </div>
             </div>
         </div>
