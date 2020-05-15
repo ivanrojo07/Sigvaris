@@ -2,8 +2,8 @@
     <thead>
         <tr class="info">
             <th>FECHA</th>
-            <th>USUARIO</th>
             <th>SKU</th>
+            <th>USUARIO</th>
             <th>STOCK AÑADIDO</th>
         </tr>
     </thead>
