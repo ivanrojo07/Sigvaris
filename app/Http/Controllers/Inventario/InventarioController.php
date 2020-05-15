@@ -77,6 +77,7 @@ class InventarioController extends Controller
         $index_historialModificacionesInventario=-1;
         foreach ($historialModificaciones as $historial) {
             if (Carbon::parse($historial->created_at)->diffInDays($fechaAux)<1) {
+                dd($historialModificacionesInventario);
                 $historialModificacionesInventario[$index_historialModificacionesInventario]->Total+=$historial->numero;
             }else{
                 $index_historialModificacionesInventario+=1;
