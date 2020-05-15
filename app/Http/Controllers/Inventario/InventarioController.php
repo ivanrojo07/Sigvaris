@@ -70,7 +70,7 @@ class InventarioController extends Controller
     }
     public function historialSurtido()
     {
-        $historialModificaciones = HistorialSurtido::get();
+        $historialModificaciones = HistorialSurtido::orderBy('created_at')->get();
         $fechaAux=Carbon::parse('3900-07-25 12:45:16');
         $historialModificacionesInventario=[];
         //array_push($historialModificacionesInventario,["fecha"=>$fechaAux,"Total"=>$historialModificaciones[0]->numero,"URL"=>".com"]);
@@ -94,7 +94,7 @@ class InventarioController extends Controller
     }
     public function historialSurtidoFecha($fecha)
     {
-        $historialModificaciones = HistorialSurtido::get();
+        $historialModificaciones = HistorialSurtido::orderBy('created_at')->get();
         $fechaAux=Carbon::parse($fecha);
         $historialModificacionesInventario=[];
         foreach ($historialModificaciones as $historial) {
