@@ -496,9 +496,22 @@
     }
 
     function on(){
+         $('#descuento').val(0);
+         $('#descuento').val(parseFloat(parseFloat($('#subtotal').val())*.05).toFixed(2));
+        var sigpesos=parseInt($('#sigpesos_usar').val());
         var subtotal=parseFloat($('#subtotal').val());
-        $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
-        $('#descuento').val(parseFloat(parseFloat($('#subtotal').val())*.05).toFixed(2));
+        var iva=parseFloat($('#iva').val());
+        var des=parseFloat($('#descuento').val());
+        var desCumple=parseFloat($('#descuentoCumple').val());
+        // console.log(des);
+        console.log('SUBTOTAL', subtotal);
+        console.log('iva', iva);
+        console.log('des', des);
+        console.log('sigpesos', sigpesos);  
+        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos-desCumple);
+        var aux=subtotal+iva-des-sigpesos-desCumple;
+        $('#total').val(aux).toFixed(2);
+        
         $('#PromocionDescuento').hide();
 
     }
