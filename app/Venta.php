@@ -31,7 +31,8 @@ class Venta extends Model
         'mesesPago',
         'requiere_factura',
         'comentario',
-        'oficina_id'
+        'oficina_id',
+        'cumpleDes'
     ];
 
     /**

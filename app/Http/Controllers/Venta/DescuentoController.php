@@ -473,15 +473,21 @@ class DescuentoController extends Controller
         //dd(isset($paciente->nacimiento));
         if (isset($paciente->nacimiento)) {
             if (\Carbon\Carbon::parse($paciente->nacimiento)->month==\Carbon\Carbon::now()->month) {
-                # code...
                 $sigpesosCumpleaños=300;
+                $ventasCumple=$paciente->ventas->whereDateBetween('fecha',(new Carbon)->subDays(31)->toDateString(),(new Carbon)->now()->toDateString() )->get();
+
+                foreach ($ventasCumple as $venta) {
+                    if ($venta->cumpleDes==1) {
+                        $sigpesosCumpleaños=0;
+                    }
+                }
             }else{
                 $sigpesosCumpleaños=0;
             }
         }else{
             $sigpesosCumpleaños=0;
         }
-        
+
         if(isset($paciente->ventas->last()->created_at))
         {
             $intervalo = new DateInterval('P6M');
@@ -490,17 +496,33 @@ class DescuentoController extends Controller
             //dd($intervalo);
             if($expira>$hoy){
                 if (!isset($paciente->ventas->last()->sigpesos)) {
-                    return $sigpesosCumpleaños;
+                    //return $sigpesosCumpleaños;
+                    return response()->json(array(
+                        'cumple'=>$sigpesosCumpleaños,
+                        'sigpesos'=>0
+                    ));
                 }else{
-                    return $sigpesosCumpleaños+$paciente->ventas->last()->sigpesos;
+                    return response()->json(array(
+                        'cumple'=>$sigpesosCumpleaños,
+                        'sigpesos'=>$paciente->ventas->last()->sigpesos
+                    ));
+                    //return $sigpesosCumpleaños+$paciente->ventas->last()->sigpesos;
                 }
                 
             }
             else{
-                return $sigpesosCumpleaños;
+                //return $sigpesosCumpleaños;
+                return response()->json(array(
+                        'cumple'=>$sigpesosCumpleaños,
+                        'sigpesos'=>0
+                    ));
             }
         }
-        return $sigpesosCumpleaños;
+        //return $sigpesosCumpleaños;
+        return response()->json(array(
+                        'cumple'=>$sigpesosCumpleaños,
+                        'sigpesos'=>0
+                    ));
     }
 
 }

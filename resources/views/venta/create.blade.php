@@ -330,10 +330,10 @@
                                         {{-- INPUT DESCUENTO --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
 
-                                            <label for="" class="text-uppercase text-muted">Descuento de INAPAM: $</label>
+                                            <label for="" class="text-uppercase text-muted">Descuento de cumpleaños: $</label>
 
                                             <input type="number" required="" class="form-control" name="descuento"
-                                                id="descuentoInapam" value="0" step="0.01" readonly="">
+                                                id="descuentoCumple" value="0" step="0.01" readonly="">
                                         </div>
                                     </div>
                                     {{-- Comentario --}}
@@ -606,7 +606,6 @@
         });
         $('#promocion_id option:eq(0)').prop('selected',true);
         $('#descuento').val(0);
-        $('#descuentoInapam').val(0);
         $('#PromocionDescuento').show();
         $("#INAPAM").prop("checked", false);
         $('#sigpesos').val(0);
@@ -618,17 +617,19 @@
              $.ajax({
                 url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
                 type:'GET',
+                dataType:'json',
                 success: function(res){
-                   if (!isNaN(res)&&res!="") {
-                        var sigpesos=$('#sigpesos_usar').val(parseInt(res));
-                    console.log('sigpesos peticione4444',res);
-                }else{             
-                    res=0;       
-                    var sigpesos=$('#sigpesos_usar').val(parseInt(res));
-                    console.log('sigpesos peticion5555',res);
+                   if (!isNaN(res.sigpesos)&&res.sigpesos!="") {
+                        var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
+                        console.log('sigpesos peticione4444',res.sigpesos);
+                    }else{             
+                        res=0;       
+                        var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
+                        console.log('sigpesos peticion5555',res.sigpesos);
+                    }   
+                    
+                    $('#descuentoCumple').val(parseInt(res.cumple));
                 }
-                }
-
             });
              console.log('sigpesos3rff', sigpesos);
         }
@@ -671,8 +672,7 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var desinapam=parseInt($('#descuentoInapam').val());
-            var aux=subtotal+iva-des-sigpesos-desinapam;
+            var aux=subtotal+iva-des-sigpesos;
 
             $('#total').val(aux.toFixed(2));
             console.log('TOTAL ACTUALIZADO',$('#total').val());
@@ -752,15 +752,13 @@
         $('#descuento_id').change(function(){            
             var id=$('#descuento_id').val();
             $('#descuento').val(0);
-            $('#descuentoInapam').val(0);
             $("#INAPAM").prop("checked", false);
             $('#sigpesos').val(0);
             var subtotal=parseFloat($('#subtotal').val());
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var desinapam=parseInt($('#descuentoInapam').val());
-            var aux=subtotal+iva-des-sigpesos-desinapam;
+            var aux=subtotal+iva-des-sigpesos;
             $('#total').val(aux.toFixed(2));
             $.ajax({
                 url:"{{ url('/get_promos') }}/"+id,
@@ -768,6 +766,7 @@
                 dataType:'html',
                 success: function(res){
                     $('#promocion_id').html(res);
+
                     $('#sigpesos_usar').prop("disabled", false);
                 }
             });
@@ -790,8 +789,7 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var desinapam=parseInt($('#descuentoInapam').val());
-            var aux=subtotal+iva-des-sigpesos-desinapam;
+            var aux=subtotal+iva-des-sigpesos;
             $('#total').val(aux.toFixed(2));
             var productos_id=[];
             var cantidad_id=[];
@@ -824,7 +822,7 @@
                             $('#descuento').val(res.total);
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
-                            var aux=subtotal+iva-des-sigpesos-desinapam;
+                            var aux=subtotal+iva-des-sigpesos;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
                             {
@@ -834,7 +832,7 @@
                             $('#descuento').val(res.total);
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
-                            var aux=subtotal+iva-des-sigpesos-desinapam;
+                            var aux=subtotal+iva-des-sigpesos;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
                             {
@@ -1099,21 +1097,23 @@
         await $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
             type:'GET',
+            dataType:'json',
             success: function(res){
                  console.log('sigpesos peticion198711',res);
-                if (!isNaN(res)&&res!="") {
-                    var sigpesos=$('#sigpesos_usar').val(parseInt(res));
+                if (!isNaN(res.sigpesos)&&res.sigpesos!="") {
+                    var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion00',res);
                 }else{             
                     res=0;       
-                    var sigpesos=$('#sigpesos_usar').val(parseInt(res));
-                    console.log('sigpesos peticion111',res);
+                    var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
+                    console.log('sigpesos peticion111',res.sigpesos);
                 }
+                $('#descuentoCumple').val(parseInt(res.cumple));
             }
 
         });
-        var desinapam=parseInt($('#descuentoInapam').val());
-        if((subtotal+iva-des-desinapam)<$('#sigpesos_usar').val())
+        
+        if((subtotal+iva-des)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
         }
@@ -1166,20 +1166,21 @@
          $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
             type:'GET',
+            dataType:'json',
             success: function(res34){   
-                if (!isNaN(res34)&&res34!="") {
-                    var sigpesos=$('#sigpesos_usar').val(parseInt(res34));
-                    console.log('sigpesos peticion00',res34);
+                if (!isNaN(res34.sigpesos)&&res34.sigpesos!="") {
+                    var sigpesos=$('#sigpesos_usar').val(parseInt(res34.sigpesos));
+                    console.log('sigpesos peticion00',res34.sigpesos);
                 }else{             
                     res34=0;       
                     var sigpesos=$('#sigpesos_usar').val(0);
                     console.log('sigpesos peticion1199',0);
                 }
+                $('#descuentoCumple').val(parseInt(res34.cumple));
             }
 
         });
-        var desinapam=parseInt($('#descuentoInapam').val());
-        if((subtotal+iva-des-desinapam)<$('#sigpesos_usar').val())
+        if((subtotal+iva-des)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
         }
