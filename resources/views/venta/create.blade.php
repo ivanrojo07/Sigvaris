@@ -332,7 +332,7 @@
 
                                             <label for="" class="text-uppercase text-muted">Descuento de cumpleaños: $</label>
 
-                                            <input type="number" required="" class="form-control" name="descuento"
+                                            <input type="number" required="" class="form-control" name="descuentoCum"
                                                 id="descuentoCumple" value="0" step="0.01" readonly="">
                                         </div>
                                     </div>
