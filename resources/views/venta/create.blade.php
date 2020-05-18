@@ -166,7 +166,7 @@
                                     <hr>
 
                                     {{-- PROMOCIONES Y DESCUENTOS --}}
-                                    <div class="row">
+                                    <div class="row"id="PromocionDescuento" >
                                         {{-- INPUT DESCUENTO --}}
                                         <div class="col-12 col-sm-6 col-md-4 form-group">
                                             <label for="descuento_id"
@@ -497,8 +497,8 @@
     function on(){
         var subtotal=parseFloat($('#subtotal').val());
         $('#total').val(parseFloat($('#total').val()-parseFloat($('#subtotal').val())*.05).toFixed(2));
-        $('#descuentoInapam').val(parseFloat(parseFloat($('#subtotal').val())*.05).toFixed(2));
-
+        $('#descuento').val(parseFloat(parseFloat($('#subtotal').val())*.05).toFixed(2));
+        $('#PromocionDescuento').hide();
 
     }
 
@@ -517,7 +517,8 @@
         if (aux.toFixed(2)!=$('#total').val()) {
             $('#total').val(aux.toFixed(2));
         }
-        $('#descuentoInapam').val(0);
+        $('#descuento').val(0);
+        $('#PromocionDescuento').show();
     }
 
     var checkbox = document.getElementById('INAPAM');
@@ -537,6 +538,7 @@
                             on();
                         } else {
                            $("#INAPAM").prop("checked", false); 
+                           $('#PromocionDescuento').show();
                         }
                     }else{
                         on();
@@ -605,6 +607,7 @@
         $('#promocion_id option:eq(0)').prop('selected',true);
         $('#descuento').val(0);
         $('#descuentoInapam').val(0);
+        $('#PromocionDescuento').show();
         $("#INAPAM").prop("checked", false);
         $('#sigpesos').val(0);
         $('#subtotal').val(total.toFixed(2));
@@ -1075,7 +1078,7 @@
                     $('#ErrorInapam').show();
                 }else{
                     $('#ErrorInapam').hide();
-                }
+                }                
             }
         });
         const nombrePaciente = $(`.nombrePaciente[pacienteId=${pacienteId}]`).html();
