@@ -10,7 +10,7 @@ class CreateHistorialSurtidoTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+     
     public function up()
     {
         Schema::create('historial_surtido', function (Blueprint $table) {
@@ -26,9 +26,10 @@ class CreateHistorialSurtidoTable extends Migration
      * Reverse the migrations.
      *
      * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('_historial_surtido');
     }
+    */
 }
