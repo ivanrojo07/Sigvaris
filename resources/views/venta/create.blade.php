@@ -182,7 +182,7 @@
                                         {{-- INPUT PROMOCIÓN --}}
                                         <div class="col-12 col-sm-6 col-md-4 form-group">
                                             <label for="promocion_id"
-                                                class="text-uppercase text-muted">Promocion</label>
+                                                class="text-uppercase text-muted">Descripción</label>
                                             <select class="form-control" name="promocion_id" id="promocion_id">
                                                 <option value="">Selecciona...</option>
                                             </select>
