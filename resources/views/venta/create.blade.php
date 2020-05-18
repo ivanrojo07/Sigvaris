@@ -1109,6 +1109,7 @@
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion111',res.sigpesos);
                 }
+                console.log('sigpesos peticion198712',res.cumple);
                 $('#descuentoCumple').val(parseInt(res.cumple));
             }
 
