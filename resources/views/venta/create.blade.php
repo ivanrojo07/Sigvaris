@@ -29,6 +29,7 @@
                 <form role="form" id="form-cliente" method="POST" action="{{ route('ventas.store') }}" name="form">
                     {{ csrf_field() }}
                     <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
+                    <input type="hidden" name="cumpleDes" id="cumpleDes" value="0">
                     <div class="row">
                         <div class="col-4 form-group">
                             <label class="control-label">Fitter:</label>
@@ -631,6 +632,9 @@
                     }   
                     
                     $('#descuentoCumple').val(parseInt(res.cumple));
+                    if (res.cumple>0) {
+                        $('#cumpleDes').val(1);
+                    }
                 }
             });
              console.log('sigpesos3rff', sigpesos);
@@ -1119,6 +1123,9 @@
                 }
                 console.log('sigpesos peticion198712',res.cumple);
                 $('#descuentoCumple').val(parseInt(res.cumple));
+                if (res.cumple>0) {
+                        $('#cumpleDes').val(1);
+                    }
             }
 
         });
@@ -1188,6 +1195,9 @@
                     console.log('sigpesos peticion1199',0);
                 }
                 $('#descuentoCumple').val(parseInt(res34.cumple));
+                if (res34.cumple>0) {
+                        $('#cumpleDes').val(1);
+                    }
             }
 
         });
