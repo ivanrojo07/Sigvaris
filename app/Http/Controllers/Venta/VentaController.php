@@ -114,7 +114,7 @@ class VentaController extends Controller
                 ->withErrors(['Error con ultimos 4 digitos de tarjeta'])
                 ->withInput($request->input());
         }*/
-        if (!isset($request->descuentoCum)&&$request->descuentoCum!=0) {
+        if (isset($request->descuentoCum)&&$request->descuentoCum!=0) {
             # code...
             $request->cumpleDes=1;
         }
