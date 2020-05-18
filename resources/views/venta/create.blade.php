@@ -623,7 +623,7 @@
                         var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                         console.log('sigpesos peticione4444',res.sigpesos);
                     }else{             
-                        res=0;       
+                        res.sigpesos=0;       
                         var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                         console.log('sigpesos peticion5555',res.sigpesos);
                     }   
@@ -1101,11 +1101,12 @@
             success: function(res){
                  console.log('sigpesos peticion198711',res);
                  console.log('sigpesos peticion198712',res.cumple);
+                 
                 if (!isNaN(res.sigpesos)&&res.sigpesos!="") {
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion00',res);
                 }else{             
-                    res=0;       
+                    res.sigpesos=0;       
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion111',res.sigpesos);
                 }
