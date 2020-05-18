@@ -474,8 +474,9 @@ class DescuentoController extends Controller
         if (isset($paciente->nacimiento)) {
             if (\Carbon\Carbon::parse($paciente->nacimiento)->month==\Carbon\Carbon::now()->month) {
                 $sigpesosCumpleaños=300;
-                $ventasCumple=$paciente->ventas->whereDateBetween('fecha',(new Carbon)->subDays(31)->toDateString(),(new Carbon)->now()->toDateString() )->get();
-
+                
+                //$ventasCumple=$paciente->ventas->whereDateBetween('fecha',(new Carbon)->subDays(31)->toDateString(),(new Carbon)->now()->toDateString() )->get();
+                $ventasCumple=$paciente->ventas->whereDate('fecha','>=',(new Carbon)->subDays(31) )->get();
                 foreach ($ventasCumple as $venta) {
                     if ($venta->cumpleDes==1) {
                         $sigpesosCumpleaños=0;
