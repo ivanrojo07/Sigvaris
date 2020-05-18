@@ -503,6 +503,7 @@
     }
 
     function off(){
+        $('#descuento').val(0);
         var sigpesos=parseInt($('#sigpesos_usar').val());
         var subtotal=parseFloat($('#subtotal').val());
         var iva=parseFloat($('#iva').val());
@@ -518,7 +519,7 @@
         if (aux.toFixed(2)!=$('#total').val()) {
             $('#total').val(aux.toFixed(2));
         }
-        $('#descuento').val(0);
+        
         $('#PromocionDescuento').show();
     }
 
