@@ -507,13 +507,14 @@
         var subtotal=parseFloat($('#subtotal').val());
         var iva=parseFloat($('#iva').val());
         var des=parseFloat($('#descuento').val());
+        var desCumple=parseFloat($('#descuentoCumple').val());
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos);
-        var aux=subtotal+iva-des-sigpesos;
+        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos-desCumple);
+        var aux=subtotal+iva-des-sigpesos-desCumple;
         if (aux.toFixed(2)!=$('#total').val()) {
             $('#total').val(aux.toFixed(2));
         }
@@ -637,13 +638,14 @@
         var subtotal=parseFloat($('#subtotal').val());
         var iva=parseFloat($('#iva').val());
         var des=parseFloat($('#descuento').val());
+        var desCumple=parseFloat($('#descuentoCumple').val());
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos);
-        var aux=subtotal+iva-des-sigpesos;
+        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos-desCumple);
+        var aux=subtotal+iva-des-sigpesos-desCumple;
         $('#total').val(aux.toFixed(2));
         // $('#total').val('ola');
     }
@@ -672,7 +674,8 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var aux=subtotal+iva-des-sigpesos;
+            var desCumple=parseFloat($('#descuentoCumple').val());
+            var aux=subtotal+iva-des-sigpesos-desCumple;
 
             $('#total').val(aux.toFixed(2));
             console.log('TOTAL ACTUALIZADO',$('#total').val());
@@ -758,7 +761,8 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var aux=subtotal+iva-des-sigpesos;
+            var desCumple=parseFloat($('#descuentoCumple').val());
+            var aux=subtotal+iva-des-sigpesos-desCumple;
             $('#total').val(aux.toFixed(2));
             $.ajax({
                 url:"{{ url('/get_promos') }}/"+id,
@@ -789,7 +793,8 @@
             var iva=parseFloat($('#iva').val());
             var des=parseFloat($('#descuento').val());
             var sigpesos=parseInt($('#sigpesos_usar').val());
-            var aux=subtotal+iva-des-sigpesos;
+            var desCumple=parseFloat($('#descuentoCumple').val());
+            var aux=subtotal+iva-des-sigpesos-desCumple;
             $('#total').val(aux.toFixed(2));
             var productos_id=[];
             var cantidad_id=[];
@@ -822,7 +827,7 @@
                             $('#descuento').val(res.total);
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
-                            var aux=subtotal+iva-des-sigpesos;
+                            var aux=subtotal+iva-des-sigpesos-desCumple;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
                             {
@@ -832,7 +837,7 @@
                             $('#descuento').val(res.total);
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
-                            var aux=subtotal+iva-des-sigpesos;
+                            var aux=subtotal+iva-des-sigpesos-desCumple;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
                             {
@@ -1094,6 +1099,7 @@
         var subtotal=parseFloat($('#subtotal').val());
         var iva=parseFloat($('#iva').val());
         var des=parseFloat($('#descuento').val());
+        var desCumple=parseFloat($('#descuentoCumple').val());
         await $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
             type:'GET',
@@ -1101,7 +1107,7 @@
             success: function(res){
                  console.log('sigpesos peticion198711',res);
                  console.log('sigpesos peticion198712',res.cumple);
-                 
+
                 if (!isNaN(res.sigpesos)&&res.sigpesos!="") {
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion00',res);
@@ -1116,13 +1122,13 @@
 
         });
         
-        if((subtotal+iva-des)<$('#sigpesos_usar').val())
+        if((subtotal+iva-des-desCumple)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
         }
         else
         {
-            var aux=subtotal+iva-des-$('#sigpesos_usar').val();
+            var aux=subtotal+iva-des-desCumple-$('#sigpesos_usar').val();
             $('#total').val(aux.toFixed(2));
             console.log('total',$('#sigpesos_usar').val())
         }
@@ -1166,6 +1172,7 @@
         var subtotal=parseFloat($('#subtotal').val());
         var iva=parseFloat($('#iva').val());
         var des=parseFloat($('#descuento').val());
+        var desCumple=parseFloat($('#descuentoCumple').val());
          $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
             type:'GET',
@@ -1183,13 +1190,13 @@
             }
 
         });
-        if((subtotal+iva-des)<$('#sigpesos_usar').val())
+        if((subtotal+iva-des-desCumple)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
         }
         else
         {
-            var aux=subtotal+iva-des-$('#sigpesos_usar').val();
+            var aux=subtotal+iva-des-desCumple-$('#sigpesos_usar').val();
             $('#total').val(aux.toFixed(2));
             console.log('total',$('#sigpesos_usar').val())
         }
