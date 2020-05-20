@@ -217,6 +217,7 @@
                                                 <option value="1">Efectivo</option>
                                                 <option value="2">Tajeta</option>
                                                 <option value="3">Combinado</option>
+                                                <option value="4">Sigpesos</option>
                                             </select>
                                         </div>
                                         {{-- INPUT tarjeta --}}
@@ -481,7 +482,7 @@
     function sendFormValidador() {
         console.log("empleado",$('#empleado_id').val());
     if ($('#empleado_id').val()!="") {
-        if ($('#total').val()==($('#PagoTarjeta').val()+$('#PagoEfectivo').val())) {
+    if (true) {
         document.getElementById("form-cliente").submit();
       } else {
         alert("Valida los campos de forma de pago");
