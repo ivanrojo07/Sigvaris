@@ -513,8 +513,8 @@
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos-desCumple);
-        var aux=subtotal+iva-des-sigpesos-desCumple;
+        console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
+        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
         $('#total').val(aux.toFixed(2));
         
         $('#PromocionDescuento').hide();
@@ -537,8 +537,8 @@
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos-desCumple);
-        var aux=subtotal+iva-des-sigpesos-desCumple;
+        console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
+        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
         if (aux.toFixed(2)!=$('#total').val()) {
             $('#total').val(aux.toFixed(2));
         }
