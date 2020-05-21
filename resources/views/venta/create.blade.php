@@ -504,7 +504,7 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-        var iva=parseFloat($('#iva').val(getIva));
+        var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
@@ -526,7 +526,7 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-        var iva=parseFloat($('#iva').val(getIva));
+        var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
         console.log('iva', iva);
@@ -662,7 +662,7 @@
         var desCumple=parseFloat($('#descuentoCumple').val());
 
         getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-        var iva=parseFloat($('#iva').val(getIva));
+        var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
         console.log('iva', iva);
@@ -699,7 +699,7 @@
             var sigpesos=parseInt($('#sigpesos_usar').val());
             var desCumple=parseFloat($('#descuentoCumple').val());
             let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-            var iva=parseFloat($('#iva').val(getIva));
+            var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
             var aux=subtotal+iva-des-sigpesos-desCumple;
 
             $('#total').val(aux.toFixed(2));
@@ -787,7 +787,7 @@
             var sigpesos=parseInt($('#sigpesos_usar').val());
             var desCumple=parseFloat($('#descuentoCumple').val());
             let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-            var iva=parseFloat($('#iva').val(getIva));
+            var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
             var aux=subtotal+iva-des-sigpesos-desCumple;
             $('#total').val(aux.toFixed(2));
             $.ajax({
@@ -820,7 +820,7 @@
             var sigpesos=parseInt($('#sigpesos_usar').val());
             var desCumple=parseFloat($('#descuentoCumple').val());
             let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-            var iva=parseFloat($('#iva').val(getIva));
+            var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
             var aux=subtotal+iva-des-sigpesos-desCumple;
             $('#total').val(aux.toFixed(2));
             var productos_id=[];
@@ -855,7 +855,7 @@
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
                             let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-                            var iva=parseFloat($('#iva').val(getIva));
+                            var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                             var aux=subtotal+iva-des-sigpesos-desCumple;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
@@ -867,7 +867,7 @@
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
                             let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-                            var iva=parseFloat($('#iva').val(getIva));
+                            var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                             var aux=subtotal+iva-des-sigpesos-desCumple;
                             $('#total').val(aux.toFixed(2));
                             if($('#total').val()<0)
@@ -1131,7 +1131,7 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
         let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-        var iva=parseFloat($('#iva').val(getIva));
+        var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         await $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
             type:'GET',
@@ -1155,7 +1155,7 @@
                     }
                 var desCumple=parseFloat($('#descuentoCumple').val());
                 let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-                var iva=parseFloat($('#iva').val(getIva));
+                var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
 
 
 
@@ -1216,7 +1216,7 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
         let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-        var iva=parseFloat($('#iva').val(getIva));
+        var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
          $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
             type:'GET',
@@ -1236,7 +1236,7 @@
                 }
                 var desCumple=parseFloat($('#descuentoCumple').val());
                 let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-                var iva=parseFloat($('#iva').val(getIva));
+                var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
 
             }
 
