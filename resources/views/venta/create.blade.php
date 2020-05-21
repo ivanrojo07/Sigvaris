@@ -664,6 +664,7 @@
         getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         // console.log(des);
+        console.log('getIva', getIva);
         console.log('SUBTOTAL', subtotal);
         console.log('iva999', iva);
         console.log('des', des);
