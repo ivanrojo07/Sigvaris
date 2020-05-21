@@ -661,8 +661,8 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
 
-        getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-        var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+        getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+        var iva=parseFloat($('#iva').val(getIva));
         // console.log(des);
         console.log('getIva', getIva);
         console.log('SUBTOTAL', subtotal);
