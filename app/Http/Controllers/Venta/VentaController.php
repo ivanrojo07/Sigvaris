@@ -143,6 +143,7 @@ class VentaController extends Controller
             DatoFiscal::updateOrCreate(
                 ['paciente_id' => $request->paciente_id],
                 [
+                    'calle'=>$request->calle,
                     'tipo_persona' => $request->tipo_persona,
                     'nombre_o_razon_social' => $request->nombre_o_razon_social,
                     'regimen_fiscal' => $request->regimen_fiscal,
