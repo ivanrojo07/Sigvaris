@@ -674,7 +674,7 @@
         console.log('sigpesos', sigpesos);  
         console.log('desCumple', desCumple);  
         console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
-        var aux=subtotal+iva-des-sigpesos-desCumple;
+        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
         $('#total').val(aux.toFixed(2));
         // $('#total').val('ola');
     }
