@@ -665,7 +665,7 @@
         var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
-        console.log('iva', iva);
+        console.log('iva999', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
         console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos-desCumple);
