@@ -504,6 +504,7 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+        $('#iva').val(getIva);
         var iva=getIva;
         //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         
@@ -529,6 +530,7 @@
         //var getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+        $('#iva').val(getIva);
         var iva=getIva;
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
@@ -665,6 +667,7 @@
         var desCumple=parseFloat($('#descuentoCumple').val());
 
         getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+        $('#iva').val(getIva);
         var iva=getIva;
         // console.log(des);
         console.log('getIva', getIva);
@@ -706,6 +709,7 @@
             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
             //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+            $('#iva').val(getIva);
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
 
@@ -796,6 +800,7 @@
             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
             //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+            $('#iva').val(getIva);
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
             $('#total').val(aux.toFixed(2));
@@ -831,6 +836,7 @@
             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
             //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+            $('#iva').val(getIva);
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
             $('#total').val(aux.toFixed(2));
@@ -868,6 +874,7 @@
                             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                             //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+                            $('#iva').val(getIva);
                             var iva=getIva;
                             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
                             $('#total').val(aux.toFixed(2));
@@ -882,6 +889,7 @@
                             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                             //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+                            $('#iva').val(getIva);
                             var iva=getIva;
                             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
                             $('#total').val(aux.toFixed(2));
@@ -1148,6 +1156,7 @@
         //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+        $('#iva').val(getIva);
         var iva=getIva;
         await $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
@@ -1174,6 +1183,7 @@
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+                $('#iva').val(getIva);
                 var iva=getIva;
 
 
@@ -1236,6 +1246,7 @@
         //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+        $('#iva').val(getIva);
         var iva=getIva; 
         $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
@@ -1258,6 +1269,7 @@
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+                $('#iva').val(getIva);
                 var iva=getIva;
 
             }
