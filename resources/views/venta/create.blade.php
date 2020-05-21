@@ -672,6 +672,7 @@
         console.log('iva999', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
+        console.log('sigpesos', desCumple);  
         console.log('TOTAL ACTUALIZADO',subtotal+iva-des-sigpesos-desCumple);
         var aux=subtotal+iva-des-sigpesos-desCumple;
         $('#total').val(aux.toFixed(2));
