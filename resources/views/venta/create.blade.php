@@ -503,7 +503,7 @@
         var subtotal=parseFloat($('#subtotal').val());
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
-        let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
+        var getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         var iva=parseFloat($('#iva').val(getIva));
         
         // console.log(des);
@@ -525,7 +525,7 @@
         var subtotal=parseFloat($('#subtotal').val());
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
-        let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
+        var getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         var iva=parseFloat($('#iva').val(getIva));
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
@@ -661,7 +661,7 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
 
-        let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
+        getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         var iva=parseFloat($('#iva').val(getIva));
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
