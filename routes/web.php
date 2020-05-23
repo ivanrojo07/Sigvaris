@@ -107,6 +107,7 @@ Route::post('productos/inventario/update', 'Inventario\InventarioController@upda
 Route::resource('contratos','Precargas\TipoContratoController')->middleware('precargas.role');
 Route::resource('descuentos', 'Venta\DescuentoController')->middleware('productos.rol');
 Route::resource('productos', 'Producto\ProductoController')->middleware('productos.rol');
+Route::resource('foliosSigpesos', 'Venta\FoliosSigpesosController')->middleware('productos.rol');
 
 
 

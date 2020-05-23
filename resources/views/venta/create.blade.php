@@ -276,15 +276,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                                <label for="">✱ Folio</label>
+                                                <label for=""> Folio</label>
                                                 <input type="number" class="form-control folio" name="folio[]" required="" >
                                             </div>
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                                <label for="">* Monto</label>
+                                                <label for=""> Monto</label>
                                                 <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
                                             </div>
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                                <label for="">✱ Lista Folio</label>
+                                                <label for=""> Lista Folio</label>
                                                 <select   name="lista[]" class="form-control lista" required>
                                                     <option value="">Seleccionar</option>
                                                     @foreach ($Folios as $Folio1)
@@ -588,15 +588,15 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="">✱ Folio</label>
+                <label for=""> Folio</label>
                 <input type="text" class="form-control folio" name="folio[]" required="" >
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="">* Monto</label>
+                <label for=""> Monto</label>
                 <input type="text" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" >
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="">✱ Lista Folio</label>
+                <label for=""> Lista Folio</label>
                 <select   name="lista[]" class="form-control lista" required>
                     <option value="">Seleccionar</option>
                     @foreach ($Folios as $Folio)
