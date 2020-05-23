@@ -263,48 +263,50 @@
                                     </div>
                                     {{--Sigpesos--}}
 
-
-                                    <div class="row" id="PagoSigpesos" style="display: none;">
-                                        <div class="col-12">
-                                            <div class="d-flex bd-highlight">
-                                                <div class="p-2 w-100 bd-highlight">
-                                                    <label>Cupones de Sigpesos</label>
-                                                </div>
-                                                <div class="p-2 flex-shrink-1 bd-highlight">
-                                                    <a href="javascript:void(0);" class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
+                                    <div  id="PagoSigpesos" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="d-flex bd-highlight">
+                                                    <div class="p-2 w-100 bd-highlight">
+                                                        <label>Cupones de Sigpesos</label>
+                                                    </div>
+                                                    <div class="p-2 flex-shrink-1 bd-highlight">
+                                                        <a href="javascript:void(0);" class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                            <label for="">✱ Folio</label>
-                                            <input type="number" class="form-control" name="folio[]" required="" >
-                                        </div>
-                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                            <label for="">* Monto</label>
-                                            <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
-                                        </div>
-                                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                            <label for="">✱ Lista Folio</label>
-                                            <select   name="lista" class="form-control" required>
-                                                <option value="">Seleccionar</option>
-                                                @foreach ($Folios as $Folio1)
-                                                <option value="{{$Folio1->id}}">
-                                                    {{$Folio1->descripcion}}
-                                                </option>
-                                                @endforeach
-                                            </select>
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for="">✱ Folio</label>
+                                                <input type="number" class="form-control" name="folio[]" required="" >
+                                            </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for="">* Monto</label>
+                                                <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
+                                            </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for="">✱ Lista Folio</label>
+                                                <select   name="lista" class="form-control" required>
+                                                    <option value="">Seleccionar</option>
+                                                    @foreach ($Folios as $Folio1)
+                                                    <option value="{{$Folio1->id}}">
+                                                        {{$Folio1->descripcion}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
                                         </div>
                                         <div class="field_wrapper"></div>
-                                        <div class="col-12 col-sm-6 col-md-4 form-group">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6 col-md-4 form-group">
 
-                                            <label for="" class="text-uppercase text-muted">Sigpesos a usar: </label>
+                                                <label for="" class="text-uppercase text-muted">Sigpesos a usar: </label>
 
-                                            <input type="number" class="form-control" name="sigpesos_usar"
-                                                id="sigpesos_usar" value="0" min="0" step="0.01">
+                                                <input type="number" class="form-control" name="sigpesos_usar"
+                                                    id="sigpesos_usar" value="0" min="0" step="0.01">
+                                            </div>
                                         </div>
                                     </div>
-                                    
-
                                     <hr>
                                     <input type="hidden" name="paciente_id" id="paciente_id" required>
                                     <div class="row">
