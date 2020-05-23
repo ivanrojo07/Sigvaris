@@ -13,6 +13,7 @@ use App\Empleado;
 use App\Crm;
 use App\DatoFiscal;
 use App\Folio;
+use App\Sigpesosventa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -188,6 +189,24 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
+        //Sigpesos 
+        
+        if ($request->input('tipoPago')==4||$request->input('tipoPago')==3) {
+            # code...
+            foreach ($request->folio as $key => $folio) {
+                # code...
+                $Sigpesos= new Sigpesosventa([
+                    'venta_id'=> $venta->id, 
+                    'monto'=>$request->monto[$key], 
+                    'folio'=> $folio,
+                    'folio_id'=>$request->lista[$key]
+                ]);
+
+            }
+
+        }
+
+
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
     }
