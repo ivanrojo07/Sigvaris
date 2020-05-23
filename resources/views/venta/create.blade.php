@@ -815,7 +815,7 @@
             $('#iva').val(getIva);
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
-            if (aux<0) {
+            if (aux>0) {
                 $('#total').val(aux.toFixed(2));
             }else{
                 $('#total').val(0);
