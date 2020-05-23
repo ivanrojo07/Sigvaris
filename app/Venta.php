@@ -79,6 +79,11 @@ class Venta extends Model
         return $this->belongsTo('App\Empleado', 'empleado_id');
     }
 
+    public function SigpesosVenta()
+    {
+        return $this->hasMany('App\Sigpesosventa');
+    }
+
     /**
      * ==========
      * ATTRIBUTES

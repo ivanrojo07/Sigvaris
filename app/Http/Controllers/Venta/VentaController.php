@@ -12,6 +12,7 @@ use App\Doctor;
 use App\Empleado;
 use App\Crm;
 use App\DatoFiscal;
+use App\Folio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -64,7 +65,8 @@ class VentaController extends Controller
             'descuentos' => $descuentos,
             'productos' => $productos,
             'folio' => Venta::count() + 1,
-            'empleadosFitter' => $empleadosFitter
+            'empleadosFitter' => $empleadosFitter,
+            'folios' => Folio::get()
         ]);
     }
 
@@ -83,7 +85,8 @@ class VentaController extends Controller
             'descuentos' => $descuentos,
             'productos' => $productos,
             'folio' => Venta::count() + 1,
-            'empleadosFitter' => $empleadosFitter
+            'empleadosFitter' => $empleadosFitter,
+            'folios' => Folio::get()
         ]);
     }
     /**
