@@ -43,15 +43,9 @@
                         <td>
                             <div class="row">
                                 <div class="col-2">
-                                    <a class="btn btn-info" href="{{ route('foliosSigpesos.show',['folio'=>$folio]) }}">
-                                        <strong>
-                                            <i class="far fa-eye"></i>
-                                        </strong>
-                                    </a>
-                                </div>
-                                <div class="col-2">
                                     <form role="form" method="POST" action="{{ route('foliosSigpesos.destroy',['folio'=>$folio]) }}">
                                         {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="submit" class="btn btn-danger" role="button">
                                             <strong>
