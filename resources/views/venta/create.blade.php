@@ -514,6 +514,73 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        var maxField = 100; //Input fields increment limitation
+        var addButton = $('.add_button'); //Add button selector
+        var wrapper = $('.field_wrapper'); //Input field wrapper
+        var fieldHTML = `
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex bd-highlight">
+                    <div class="p-2 w-100 bd-highlight">
+                        <label>Cupones de Sigpesos</label>
+                    </div>
+                    <div class="p-2 flex-shrink-1 bd-highlight">
+                        <a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="">✱ Folio</label>
+                <input type="text" class="form-control" name="folio[]" required="" >
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="">* Monto</label>
+                <input type="text" class="form-control" name="monto[]" >
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for="">✱ Lista Folio</label>
+                <select   name="lista" class="form-control" required>
+                    <option value="">Seleccionar</option>
+                    @foreach ($Folios as $Folio)
+                    <option value="{{$Folio->id}}">
+                        {{$Folio->descripcion}}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        `;
+
+
+
+
+
+        // '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option></select><input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div></div>'; //New input field html 
+        var x = 1; //Initial field counter is 1
+        
+        //Once add button is clicked
+        $(addButton).click(function(){
+            //Check maximum number of input fields
+
+            if(x < maxField){ 
+                x++; //Increment field counter
+                $(wrapper).append(fieldHTML); //Add field html
+            }
+        });
+        
+        //Once remove button is clicked
+        $(wrapper).on('click', '.remove_button', function(e){
+            e.preventDefault();
+            $(this).parent('div').parent('div').parent('div').parent('div').remove(); //Remove field html
+            x--; //Decrement field counter
+        });
+    });
+</script>
+
+
 <script type="text/javascript">
     function sendFormValidador() {
         console.log("empleado",$('#empleado_id').val());
@@ -1339,73 +1406,7 @@
    
 
 </script>
+
 @endif
 @endsection
 
-@push('scripts')
-<script>
-    $(document).ready(function(){
-        var maxField = 100; //Input fields increment limitation
-        var addButton = $('.add_button'); //Add button selector
-        var wrapper = $('.field_wrapper'); //Input field wrapper
-        var fieldHTML = `
-        <div class="row">
-            <div class="col-12">
-                <div class="d-flex bd-highlight">
-                    <div class="p-2 w-100 bd-highlight">
-                        <label>Cupones de Sigpesos</label>
-                    </div>
-                    <div class="p-2 flex-shrink-1 bd-highlight">
-                        <a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="">✱ Folio</label>
-                <input type="text" class="form-control" name="folio[]" required="" >
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="">* Monto</label>
-                <input type="text" class="form-control" name="monto[]" >
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for="">✱ Lista Folio</label>
-                <select   name="lista" class="form-control" required>
-                    <option value="">Seleccionar</option>
-                    @foreach ($Folios as $Folio)
-                    <option value="{{$Folio->id}}">
-                        {{$Folio->descripcion}}
-                    </option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        `;
-
-
-
-
-
-        // '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option></select><input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div></div>'; //New input field html 
-        var x = 1; //Initial field counter is 1
-        
-        //Once add button is clicked
-        $(addButton).click(function(){
-            //Check maximum number of input fields
-
-            if(x < maxField){ 
-                x++; //Increment field counter
-                $(wrapper).append(fieldHTML); //Add field html
-            }
-        });
-        
-        //Once remove button is clicked
-        $(wrapper).on('click', '.remove_button', function(e){
-            e.preventDefault();
-            $(this).parent('div').parent('div').parent('div').parent('div').remove(); //Remove field html
-            x--; //Decrement field counter
-        });
-    });
-</script>
-
-@endpush
