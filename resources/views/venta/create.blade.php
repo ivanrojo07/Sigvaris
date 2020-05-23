@@ -187,13 +187,7 @@
                                                 <option value="">Selecciona...</option>
                                             </select>
                                         </div>
-                                        <div class="col-12 col-sm-6 col-md-4 form-group">
-
-                                            <label for="" class="text-uppercase text-muted">Sigpesos a usar: </label>
-
-                                            <input type="number" class="form-control" name="sigpesos_usar"
-                                                id="sigpesos_usar" value="0" min="0" step="0.01">
-                                        </div>
+                                        
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
@@ -287,7 +281,7 @@
                                         </div>
                                         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                             <label for="">* Monto</label>
-                                            <input type="number" class="form-control" name="monto[]" >
+                                            <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
                                         </div>
                                         <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                             <label for="">✱ Lista Folio</label>
@@ -300,8 +294,16 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="field_wrapper"></div>
+                                        <div class="col-12 col-sm-6 col-md-4 form-group">
+
+                                            <label for="" class="text-uppercase text-muted">Sigpesos a usar: </label>
+
+                                            <input type="number" class="form-control" name="sigpesos_usar"
+                                                id="sigpesos_usar" value="0" min="0" step="0.01">
+                                        </div>
                                     </div>
-                                    <div class="field_wrapper"></div>
+                                    
 
                                     <hr>
                                     <input type="hidden" name="paciente_id" id="paciente_id" required>
@@ -516,6 +518,40 @@
 </div>
 
 <script>
+    class FormValidator{
+
+        static getPorcentajes(){
+            return $('.inputPesos').map( function(){
+                return parseFloat(this.value)
+            } ).get();
+        }
+
+        static getTotalPorcentaje(){
+
+            let porcentajes = this.getPorcentajes()
+
+            let total = 0;
+            for (let i = 0; i < porcentajes.length; i++) {
+                total += porcentajes[i] << 0;
+            }
+
+            console.log(total)
+
+            return total;
+
+        }
+
+        static faltaPorcentaje(){
+            return this.getTotalPorcentaje();
+        }
+
+    }
+
+    function cienporciento(){
+        $('#sigpesos_usar').val(FormValidator.faltaPorcentaje());
+    }
+
+
     $(document).ready(function(){
         var maxField = 100; //Input fields increment limitation
         var addButton = $('.add_button'); //Add button selector
@@ -538,7 +574,7 @@
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for="">* Monto</label>
-                <input type="text" class="form-control" name="monto[]" >
+                <input type="text" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" >
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for="">✱ Lista Folio</label>
