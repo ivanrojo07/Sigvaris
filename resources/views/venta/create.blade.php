@@ -277,7 +277,7 @@
                                                     <label>Cupones de Sigpesos</label>
                                                 </div>
                                                 <div class="p-2 flex-shrink-1 bd-highlight">
-                                                    <a  class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
+                                                    <a href="javascript:void(0);" class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -301,7 +301,7 @@
                                             </select>
                                         </div>
                                     </div>
-
+                                    <div class="field_wrapper"></div>
 
                                     <hr>
                                     <input type="hidden" name="paciente_id" id="paciente_id" required>
@@ -528,7 +528,7 @@
                         <label>Cupones de Sigpesos</label>
                     </div>
                     <div class="p-2 flex-shrink-1 bd-highlight">
-                        <a  class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a>
+                        <a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a>
                     </div>
                 </div>
             </div>
