@@ -106,8 +106,9 @@ class FoliosSigpesosController extends Controller
     public function destroy(Folio $folio)
     {
         //
-         $folio->delete();
-         dd($folio);
+        //$FolioD=Folio::where("id",$folio->id)->get();
+         //$FolioD->delete();
+         dd($folio->id);
          return view('venta.foliosSigpesos.index', ['folios'=>Folio::get()]);
     }
     
