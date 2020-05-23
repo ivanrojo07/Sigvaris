@@ -388,6 +388,14 @@
                                         </div>
                                         
                                     </div>
+                                    <div class="row">
+                                        <div  class="col-12 col-sm-12 col-md-12 form-group">
+                                            <label for="" class="text-uppercase text-muted">Comentario</label>
+                                            <button type="submit" class="btn btn-success rounded-0" onclick="javascript:sendFormValidador();">
+                                                <i class="fa fa-check"></i> Finalizar comprar
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -637,6 +645,9 @@
 
 
 <script type="text/javascript">
+    function redondear(){
+        $('#total').val(parseFloat($('#total').val()).toFixed(0));
+    }
     function sendFormValidador() {
         console.log("empleado",$('#empleado_id').val());
     if ($('#empleado_id').val()!="") {
