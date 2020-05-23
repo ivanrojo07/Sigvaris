@@ -50,6 +50,7 @@
                                 action="{{ route('productos.destroy', ['producto'=>$producto]) }}" name="form">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
+                                        <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i><strong> Borrar</strong></button>
                             </form>
                         </td>

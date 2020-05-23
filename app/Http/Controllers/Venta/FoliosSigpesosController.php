@@ -69,7 +69,7 @@ class FoliosSigpesosController extends Controller
      * @param  \App\Descuento  $descuento
      * @return \Illuminate\Http\Response
      */
-    public function show(Descuento $descuento)
+    public function show(Folio $descuento)
     {
         
     }
@@ -80,7 +80,7 @@ class FoliosSigpesosController extends Controller
      * @param  \App\Descuento  $descuento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Descuento $descuento)
+    public function edit(Folio $descuento)
     {
         
     }
@@ -92,7 +92,7 @@ class FoliosSigpesosController extends Controller
      * @param  \App\Descuento  $descuento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Descuento $descuento)
+    public function update(Request $request, Folio $descuento)
     {
         
     }
@@ -108,7 +108,7 @@ class FoliosSigpesosController extends Controller
         //
         //$FolioD=Folio::where("id",$folio->id)->get();
          //$FolioD->delete();
-         dd($folio->id);
+         dd($folio->descripcion);
          return view('venta.foliosSigpesos.index', ['folios'=>Folio::get()]);
     }
     
