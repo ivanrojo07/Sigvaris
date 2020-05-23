@@ -285,7 +285,7 @@
                                             </div>
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                                 <label for="">✱ Lista Folio</label>
-                                                <select   name="lista" class="form-control" required>
+                                                <select   name="lista[]" class="form-control" required>
                                                     <option value="">Seleccionar</option>
                                                     @foreach ($Folios as $Folio1)
                                                     <option value="{{$Folio1->id}}">
@@ -597,7 +597,7 @@
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for="">✱ Lista Folio</label>
-                <select   name="lista" class="form-control" required>
+                <select   name="lista[]" class="form-control" required>
                     <option value="">Seleccionar</option>
                     @foreach ($Folios as $Folio)
                     <option value="{{$Folio->id}}">
