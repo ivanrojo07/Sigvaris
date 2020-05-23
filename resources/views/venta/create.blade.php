@@ -271,13 +271,13 @@
                                                         <label>Cupones de Sigpesos</label>
                                                     </div>
                                                     <div class="p-2 flex-shrink-1 bd-highlight">
-                                                        <a href="javascript:void(0);" class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
+                                                        <a href="javascript:void(0);" id="agregarCupon" class="add_button" title="Agregar cupon"><i class="fas fa-plus"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                                 <label for="">✱ Folio</label>
-                                                <input type="number" class="form-control" name="folio[]" required="" >
+                                                <input type="number" class="form-control folio" name="folio[]" required="" >
                                             </div>
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                                 <label for="">* Monto</label>
@@ -285,7 +285,7 @@
                                             </div>
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                                 <label for="">✱ Lista Folio</label>
-                                                <select   name="lista[]" class="form-control" required>
+                                                <select   name="lista[]" class="form-control lista" required>
                                                     <option value="">Seleccionar</option>
                                                     @foreach ($Folios as $Folio1)
                                                     <option value="{{$Folio1->id}}">
@@ -589,7 +589,7 @@
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for="">✱ Folio</label>
-                <input type="text" class="form-control" name="folio[]" required="" >
+                <input type="text" class="form-control folio" name="folio[]" required="" >
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for="">* Monto</label>
@@ -597,7 +597,7 @@
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for="">✱ Lista Folio</label>
-                <select   name="lista[]" class="form-control" required>
+                <select   name="lista[]" class="form-control lista" required>
                     <option value="">Seleccionar</option>
                     @foreach ($Folios as $Folio)
                     <option value="{{$Folio->id}}">
@@ -608,7 +608,7 @@
             </div>
         </div>
         `;
-
+  
 
 
 
@@ -1065,6 +1065,10 @@
                     $('#promocion_id').html(res);
 
                     $('#sigpesos_usar').prop("disabled", false);
+                    $('#agregarCupon').show();
+                    $('.folio').prop("disabled", false);
+                    $('.inputPesos').prop("disabled", false);
+                    $('.lista').prop("disabled", false);
                 }
             });
         });
@@ -1155,9 +1159,20 @@
                         if (res.aceptsp==0) {
                             $('#sigpesos_usar').val(0);
                             $('#sigpesos_usar').prop("disabled", true);
+
+                            $('#agregarCupon').hide();
+                            $('.folio').prop("disabled", true);
+                            $('.inputPesos').prop("disabled", true);
+                            $('.lista').prop("disabled", true);
+                              
                             
                         }else if (res.aceptsp==1) {
                             $('#sigpesos_usar').prop("disabled", false);
+
+                            $('#agregarCupon').show();
+                            $('.folio').prop("disabled", false);
+                            $('.inputPesos').prop("disabled", false);
+                            $('.lista').prop("disabled", false);
                         }
                         //$('#total').val()
                     }
@@ -1166,12 +1181,20 @@
                         swal("No aplica el descuento");
                         $('#promocion_id option:eq(0)').prop('selected',true);
                         $('#sigpesos_usar').prop("disabled", false);
+                        $('#agregarCupon').show();
+                        $('.folio').prop("disabled", false);
+                        $('.inputPesos').prop("disabled", false);
+                        $('.lista').prop("disabled", false);
                     }
                 },
                 error: function(e){
                     alert('No se aplicó la promoción');
                     console.log(e);
                     $('#sigpesos_usar').prop("disabled", false);
+                    $('#agregarCupon').show();
+                    $('.folio').prop("disabled", false);
+                    $('.inputPesos').prop("disabled", false);
+                    $('.lista').prop("disabled", false);
                 }
 
             });
