@@ -15,11 +15,11 @@
                         <input type="text" class="form-control" id="descripcion" name="descripcion" required autofocus>
                     </div>
                     <div class="form-group col-6">
-                        <label class="control-label" for="rango_superior">Rango superior:</label>
+                        <label class="control-label" for="rango_superior"><i class="fa fa-asterisk" aria-hidden="true"></i> Rango superior:</label>
                         <input type="number" class="form-control" id="rango_superior" name="rango_superior" required>
                     </div>
                     <div class="form-group col-6">
-                        <label class="control-label" for="rango_inferior">Rango inferior:</label>
+                        <label class="control-label" for="rango_inferior"><i class="fa fa-asterisk" aria-hidden="true"></i> Rango inferior:</label>
                         <input type="number" class="form-control" id="rango_inferior" name="rango_inferior" required>
                     </div>
                 </div>
