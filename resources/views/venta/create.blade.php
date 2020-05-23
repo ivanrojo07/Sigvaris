@@ -277,7 +277,7 @@
                                                     <label>Cupones de Sigpesos</label>
                                                 </div>
                                                 <div class="p-2 flex-shrink-1 bd-highlight">
-                                                    <a href="javascript:void(0);" class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
+                                                    <a  class="add_button" title="Agregar beneficiario"><i class="fas fa-plus"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -528,7 +528,7 @@
                         <label>Cupones de Sigpesos</label>
                     </div>
                     <div class="p-2 flex-shrink-1 bd-highlight">
-                        <a href="javascript:void(0);" class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a>
+                        <a  class="remove_button" title="Add field"><i class="fas fa-minus-circle"></i></a>
                     </div>
                 </div>
             </div>
