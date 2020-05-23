@@ -391,9 +391,9 @@
                                     <div class="row">
                                         <div  class="col-12 col-sm-12 col-md-12 form-group">
                                             
-                                            <button type="submit" class="btn btn-success rounded-0" onclick="javascript:redondear();">
+                                            <a class="btn btn-success rounded-0" onclick="javascript:redondear();">
                                                 <i class="fa fa-check"></i>Redondear
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
