@@ -201,7 +201,7 @@ class VentaController extends Controller
                     'folio'=> $folio,
                     'folio_id'=>$request->lista[$key]
                 ]);
-
+                $Sigpesos->save();
             }
 
         }
