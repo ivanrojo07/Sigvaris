@@ -66,7 +66,7 @@ class VentaController extends Controller
             'productos' => $productos,
             'folio' => Venta::count() + 1,
             'empleadosFitter' => $empleadosFitter,
-            'folios' => Folio::get()
+            'Folios' => Folio::get()
         ]);
     }
 
@@ -86,7 +86,7 @@ class VentaController extends Controller
             'productos' => $productos,
             'folio' => Venta::count() + 1,
             'empleadosFitter' => $empleadosFitter,
-            'folios' => Folio::get()
+            'Folios' => Folio::get()
         ]);
     }
     /**
