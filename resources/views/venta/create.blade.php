@@ -242,14 +242,14 @@
                                             style="display: none;">
                                             <label for="" class="text-uppercase text-muted">Monto de pago en
                                                 efectivo</label>
-                                            <input type="text" class="form-control" id="PagoEfectivo"
+                                            <input type="number" class="form-control" id="PagoEfectivo"
                                                 name="PagoEfectivo">
                                         </div>
                                         <div id="tar5" class="col-12 col-sm-6 col-md-4 form-group"
                                             style="display: none;">
                                             <label for="" class="text-uppercase text-muted">Monto de pago con
                                                 tarjeta</label>
-                                            <input type="text" class="form-control" id="PagoTarjeta" name="PagoTarjeta">
+                                            <input type="number" class="form-control" id="PagoTarjeta" name="PagoTarjeta">
                                         </div>
                                         <div id="tar10" class="col-12 col-sm-6 col-md-4 form-group"
                                             style="display: none;">
@@ -300,7 +300,7 @@
                                         <div class="row">
                                             <div class="col-12 col-sm-6 col-md-4 form-group">
 
-                                                <label for="" class="text-uppercase text-muted">Sigpesos a usar: </label>
+                                                <label for="" class="text-uppercase text-muted">Total de sigpesos a usar: </label>
 
                                                 <input type="number" class="form-control" name="sigpesos_usar"
                                                     id="sigpesos_usar" value="0" min="0" step="0.01">
@@ -551,6 +551,24 @@
 
     function cienporciento(){
         $('#sigpesos_usar').val(FormValidator.faltaPorcentaje());
+        var subtotal=parseFloat($('#subtotal').val());
+        var des=parseFloat($('#descuento').val());
+        var sigpesos=parseInt($('#sigpesos_usar').val());
+        var desCumple=parseFloat($('#descuentoCumple').val());
+        //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
+        //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+        var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+        $('#iva').val(getIva);
+        var iva=getIva;
+        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
+        if (aux>0) {
+            $('#total').val(aux.toFixed(2));
+        }else{
+            $('#total').val(0);
+        }
+        
+        console.log('TOTAL ACTUALIZADO',$('#total').val());
+
     }
 
 
@@ -865,6 +883,9 @@
         $('#tipoPago').change(function(){  
             console.log('Entra');
             if ($('#tipoPago').val()==2){
+                $('#PagoEfectivo').val(0);
+                $('#PagoTarjeta').val(0);
+                
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar5').show();
@@ -872,8 +893,11 @@
                 $('#tar4').hide();
                 $('#PagoSigpesos').hide();
                 $('#digitos_targeta').required;
-
+                $('#PagoTarjeta').val($('#Total').val());
             }else if ($('#tipoPago').val()==3) {
+                $('#PagoEfectivo').val(0);
+                $('#PagoTarjeta').val(0);
+
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar4').show();
@@ -882,6 +906,9 @@
                 $('#PagoSigpesos').show();
                 $('#digitos_targeta').required;
             }else if ($('#tipoPago').val()==1) {
+                $('#PagoEfectivo').val(0);
+                $('#PagoTarjeta').val(0);
+
                $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#tar1').hide();
@@ -890,7 +917,12 @@
                 $('#tar5').hide();
                 $('#tar10').hide();
                 $('#PagoSigpesos').hide();
+
+                $('#PagoEfectivo').val($('#Total').val());
             }else if($('#tipoPago').val()==4){
+                $('#PagoEfectivo').val(0);
+                $('#PagoTarjeta').val(0);
+
                 $('#PagoSigpesos').show();
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
@@ -900,6 +932,9 @@
                 $('#tar5').hide();
                 $('#tar10').hide();
             }else{
+                $('#PagoEfectivo').val(0);
+                $('#PagoTarjeta').val(0);
+
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#tar1').hide();
