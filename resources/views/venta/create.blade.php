@@ -585,7 +585,7 @@
     function sendFormValidador() {
         console.log("empleado",$('#empleado_id').val());
     if ($('#empleado_id').val()!="") {
-    if ($('#total').val()==($('#PagoTarjeta').val()+$('#PagoEfectivo').val())) {
+    if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
         document.getElementById("form-cliente").submit();
       } else {
         alert("Valida los campos de forma de pago");
@@ -815,8 +815,12 @@
             $('#iva').val(getIva);
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple);
-
-            $('#total').val(aux.toFixed(2));
+            if (aux<0) {
+                $('#total').val(aux.toFixed(2));
+            }else{
+                $('#total').val(0);
+            }
+            
             console.log('TOTAL ACTUALIZADO',$('#total').val());
          });
 
