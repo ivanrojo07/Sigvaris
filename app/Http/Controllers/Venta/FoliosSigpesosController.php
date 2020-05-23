@@ -107,6 +107,7 @@ class FoliosSigpesosController extends Controller
     {
         //
          $folio->delete();
+         dd($folio);
          return view('venta.foliosSigpesos.index', ['folios'=>Folio::get()]);
     }
     
