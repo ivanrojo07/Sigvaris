@@ -293,9 +293,9 @@
                                             <label for="">✱ Lista Folio</label>
                                             <select   name="lista" class="form-control" required>
                                                 <option value="">Seleccionar</option>
-                                                @foreach ($Folios as $Folio)
-                                                <option value="{{$Folio->id}}">
-                                                    {{$Folio->descripcion}}
+                                                @foreach ($Folios as $Folio1)
+                                                <option value="{{$Folio1->id}}">
+                                                    {{$Folio1->descripcion}}
                                                 </option>
                                                 @endforeach
                                             </select>
