@@ -37,6 +37,7 @@
                                 <input type="date" name="fecha" id="fechaFactura" style="display:none">
                                 <button type="submit" class="btn btn-primary rounded-0">FACTURA MOSTRADOR</button>
                             </form>
+                            <br><br><br>
                             <form action="{{route('facturas.download2')}}" method="POST" class="form-inline float-right">
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
