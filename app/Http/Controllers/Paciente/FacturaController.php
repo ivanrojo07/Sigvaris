@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Paciente;
 
 use App\Exports\FacturasExport;
+use App\Exports\Facturas2Export;
 use App\Factura;
 use App\Paciente;
 use Illuminate\Http\Request;
