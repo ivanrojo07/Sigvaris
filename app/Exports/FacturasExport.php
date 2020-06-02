@@ -50,7 +50,7 @@ class FacturasExport implements FromCollection, WithHeadings
                     'fecha_entrega' => date('d-m-Y'),
                     'fecha_vencimiento' => date('d-m-Y'),
                     'precio_producto' => $producto->precio_publico_iva,
-                    'descuento' => $venta->promocion ? (1-($venta->subtotal/$venta->TotalVentasinDescuento)) * 100 : '0.00',
+                    'descuento' => $venta->promocion ? (1-($venta->subtotal/TotalVentasinDescuento($venta->id))) * 100 : '0.00',
                     'descuento_02' => '',
                     'descuento_03' => '',
                     'comision' => '',
@@ -97,5 +97,18 @@ class FacturasExport implements FromCollection, WithHeadings
             'NÚM. DE ALMACÉN',
             'OBSEREVACIONES DE PARTIDA'
         ];
+    }
+
+    //TOTAL de la venta 
+    public function TotalVentasinDescuento($id)
+    {
+        $Venta=Venta::where('id',$id)->get();
+        $Total=0;
+        foreach ($Venta[0]->productos as $Producto) {
+            $Total=$Total+($Producto->precio*$Producto->cantidad);
+            # code...
+        }
+        return $Total; 
+        # code...
     }
 }
