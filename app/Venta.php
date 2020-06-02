@@ -94,4 +94,16 @@ class Venta extends Model
     {
         return $this->productos->pluck('pivot')->flatten()->pluck('cantidad')->flatten()->sum();
     }
+
+    //TOTAL de la venta 
+    public function TotalVentasinDescuento()
+    {
+        $Total=0;
+        foreach ($this->productos as $Producto) {
+            $Total=$Total+($Producto->precio*$Producto->cantidad);
+            # code...
+        }
+        return $Total; 
+        # code...
+    }
 }

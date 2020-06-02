@@ -50,7 +50,7 @@ class FacturasExport implements FromCollection, WithHeadings
                     'fecha_entrega' => date('d-m-Y'),
                     'fecha_vencimiento' => date('d-m-Y'),
                     'precio_producto' => $producto->precio_publico_iva,
-                    'descuento' => $venta->promocion ? $producto->precio_publico_iva / $venta->promocion->descuento_de * 100 : '0.00',
+                    'descuento' => $venta->promocion ? (1-($venta->subtotal/$venta->TotalVentasinDescuento)) * 100 : '0.00',
                     'descuento_02' => '',
                     'descuento_03' => '',
                     'comision' => '',
