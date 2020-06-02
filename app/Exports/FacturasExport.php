@@ -29,7 +29,7 @@ class FacturasExport implements FromCollection, WithHeadings
         if ($Total==0) {
             return 1; 
         }
-        return $Total; 
+        return $Total+($Total*.16); 
         # code...
     }
 
@@ -66,7 +66,7 @@ class FacturasExport implements FromCollection, WithHeadings
                     'fecha_entrega' => date('d-m-Y'),
                     'fecha_vencimiento' => date('d-m-Y'),
                     'precio_producto' => $producto->precio_publico_iva,
-                    'descuento' => $venta->promocion ? (($this->TotalVentasinDescuento($venta->id)-$venta->subtotal)/$this->TotalVentasinDescuento($venta->id)) * 100 : '0.00',
+                    'descuento' => $venta->promocion ? (($this->TotalVentasinDescuento($venta->id)-$venta->total)/$this->TotalVentasinDescuento($venta->id)) * 100 : '0.00',
                     'descuento_02' => '',
                     'descuento_03' => '',
                     'comision' => '',
