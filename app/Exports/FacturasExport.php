@@ -22,7 +22,7 @@ class FacturasExport implements FromCollection, WithHeadings
     {
         $Venta=Venta::where('id',$id)->first();
         $Total=0;
-        dd($Venta);
+        dd($Venta->productos);
         foreach ($Venta->productos as $Producto) {
             $Total=$Total+($Producto->precio*$Producto->cantidad);
             # code...
