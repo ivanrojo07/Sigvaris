@@ -21,7 +21,7 @@ class FacturasExport implements FromCollection, WithHeadings
     public function TotalVentasinDescuento($id)
     {
         $Venta=Venta::where('id',$id)->get();
-        $Total=0;
+        $Total=1;
         foreach ($Venta[0]->productos as $Producto) {
             $Total=$Total+($Producto->precio*$Producto->cantidad);
             # code...
