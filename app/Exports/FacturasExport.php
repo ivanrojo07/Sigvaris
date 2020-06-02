@@ -36,7 +36,7 @@ class FacturasExport implements FromCollection, WithHeadings
     public function collection()
     {
 
-        $ventas = Venta::where('requiere_factura', 0);
+        $ventas = Venta::where('requiere_factura', 1);
 
         if (!is_null($this->fecha)) {
             $ventas = $ventas->where('fecha', "=", $this->fecha);
