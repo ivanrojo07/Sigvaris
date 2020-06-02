@@ -7,7 +7,7 @@ use App\Venta;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class FacturasExport implements FromCollection, WithHeadings
+class Facturas2Export implements FromCollection, WithHeadings
 {
     public function __construct($fecha, $oficina_id)
     {
