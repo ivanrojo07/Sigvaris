@@ -89,7 +89,10 @@ Route::post('getTabla_modalidad', 'Paciente\PacienteCrmController@getCrmClienteC
 Route::post('getTabla_modalidad_ventas', 'Paciente\PacienteCrmController@getTabla_modalidad_ventas')->name('getTabla_modalidad_ventas');
 //FACTURAS
 Route::resource('facturas','Paciente\FacturaController');
+
 Route::post('facturas.download', 'Paciente\FacturaController@download')->name('facturas.download');
+Route::post('facturas.download2', 'Paciente\FacturaController@download2')->name('facturas.download2');
+
 Route::get('ventas_from/{paciente}','Paciente\FacturaController@getVentas');
 Route::get('get_paciente/{paciente}','Paciente\FacturaController@getPaciente');
 Route::get('get_promos/{descuento}','Venta\DescuentoController@getPromos');

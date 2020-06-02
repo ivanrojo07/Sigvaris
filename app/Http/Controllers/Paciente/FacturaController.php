@@ -126,6 +126,9 @@ class FacturaController extends Controller
     public function download(Request $request){
         return Excel::download(new FacturasExport($request->fecha, $request->oficina_id), 'facturas-mostrador.xlsx');
     }
+    public function download2(Request $request){
+        return Excel::download(new Facturas2Export($request->fecha, $request->oficina_id), 'facturas-mostrador2.xlsx');
+    }
 
     public function getVentas(Paciente $paciente)
     {

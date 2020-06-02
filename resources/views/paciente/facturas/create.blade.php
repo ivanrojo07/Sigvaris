@@ -37,6 +37,12 @@
                                 <input type="date" name="fecha" id="fechaFactura" style="display:none">
                                 <button type="submit" class="btn btn-primary rounded-0">FACTURA MOSTRADOR</button>
                             </form>
+                            <form action="{{route('facturas.download2')}}" method="POST" class="form-inline float-right">
+                                @csrf
+                                <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
+                                <input type="date" name="fecha" id="fechaFactura" style="display:none">
+                                <button type="submit" class="btn btn-primary rounded-0">FACTURA MOSTRADOR DE CLIENTES</button>
+                            </form>
                             <form action="{{route('corte-caja.export.datos-fiscales')}}" method="GET"
                                 class="form-inline">
                                 @csrf
