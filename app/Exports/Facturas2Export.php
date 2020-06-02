@@ -71,7 +71,7 @@ class Facturas2Export implements FromCollection, WithHeadings
                     'descuento_03' => '',
                     'comision' => '',
                     'esquema_impuestos' => 1,
-                    'clave_articulo' => $producto->sku." total ".$venta->total." subtotal ".$venta->subtotal." TOTAL ".$this->TotalVentasinDescuento($venta->id),
+                    'clave_articulo' => $producto->sku,
                     'cantidad' => $producto->pivot->cantidad,
                     'ieps' => '',
                     'impuesto_02' => '',
