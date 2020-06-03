@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('productos/negados/folios/next', 'Producto\ApiProductoNegadoController@getNextFolio');
 Route::get('productos/sku/{sku}', 'Producto\ApiProductoController@getProductoBySku');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

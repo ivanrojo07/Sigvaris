@@ -1,6 +1,6 @@
 @extends('principal')
 @section('content')
-<meta name="csrf-token" content="{{ Session::token() }}"> 
+<meta name="csrf-token" content="{{ Session::token() }}">
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -14,7 +14,7 @@
                     </a>
                 </div>
             </div>
-            
+
         </div>
         <div class="card-body">
             {{-- TABLA DE PACIENTES --}}
@@ -27,7 +27,8 @@
                                     <h3>Pacientes</h3>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <label>Buscar:<input type="search" id="BuscarPaciente" onkeypress="return event.keyCode!=13">
+                                    <label>Buscar:<input type="search" id="BuscarPaciente"
+                                            onkeypress="return event.keyCode!=13">
                                     </label>
                                 </div>
                             </div>
@@ -63,7 +64,8 @@
                                     <h3>Productos</h3>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <label>Buscar:<input type="text" id="BuscarProducto" onkeypress="return event.keyCode!=13">
+                                    <label>Buscar:<input type="text" id="BuscarProducto"
+                                            onkeypress="return event.keyCode!=13">
                                     </label>
                                 </div>
                             </div>
@@ -94,45 +96,76 @@
                     </div>
                 </div>
             </div>
+
             <form role="form" id="form-cliente" method="POST" action="{{route('negado.create')}}" name="form">
+
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="inputGenerarFolio">
+                                        <label class="form-check-label" for="exampleCheck1">¿Generar folio?</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Folio :</label>
+                                    <input type="number" name="folio" class="form-control" step="1" id="folio" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label id="No_repetido" class="control-label">✱ SKU producto devuelto:</label>
+                                    <select class="form-control" name="producto_id" id="producto_id" required>
+                                        <option value="">Buscar..</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">SKU producto entregado:</label>
+                                    <input type="text" name="producto2" class="form-control" id="precio">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label id="No_repetido" class="control-label">✱Paciente:</label>
+                                    <select class="form-control" name="paciente_id" id="paciente_id" required>
+                                        <option value="">Buscar..</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label"><br>Comentarios :</label>
+                                    <input type="text" name="comentarios" class="form-control" step="1"
+                                        id="comentarios">
+                                </div>
+                                <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="actual">✱Fecha actual</label>
+                                    <input type="date" class="form-control" id="fecha" name="fecha"
+                                        value="{{date('Y-m-d')}}" readonly="" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="actual">Fecha posible entrega:</label>
+                                    <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega"
+                                        value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-3 form-group">
-                            <label id="No_repetido" class="control-label">✱SKU:</label>
-                            <select class="form-control" name="producto_id" id="producto_id" required>
-                                <option value="">Buscar..</option>                                
-                            </select>
-                        </div>
-                        <div class="col-3 form-group">
-                            <label id="No_repetido" class="control-label">✱Paciente:</label>
-                            <select class="form-control" name="paciente_id" id="paciente_id" required>
-                                <option value="">Buscar..</option>                                
-                            </select>
-                        </div>
-                        <div class="col-3 form-group">
-                            <label for="actual">✱Fecha actual</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" value="{{date('Y-m-d')}}"
-                                readonly="" required="">
-                        </div>
-                        <div class="col-3 form-group">
-                            <label for="actual">Fecha posible entrega:</label>
-                            <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" value=""
-                                >
-                        </div>
-                        <div class="col-3 form-group">
-                            <label class="control-label">Producto que se entrego en lugar del negado:</label>
-                            <input type="text" name="producto2" class="form-control"  id="precio">
-                        </div>
-                        <div class="col-3 form-group">
-                            <label class="control-label"><br>Comentarios :</label>
-                            <input type="text" name="comentarios" class="form-control" step="1"  id="comentarios">
-                        </div>
-                        <div class="col-3 form-group">
-                            <label class="control-label"><br>✱Folio :</label>
-                            <input type="number" name="folio" class="form-control" step="1"  id="folio" required>
-                        </div>
-                        <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
+
                     </div>
                 </div>
                 <div class="card-footer">
@@ -152,6 +185,29 @@
     </div>
 </div>
 <script type="text/javascript">
+
+    class Folio{
+
+        static obtenerElUltimoFolio(){
+
+            $.ajax('/api/productos/negados/folios/next', {
+                success: function(response){
+                    console.log(response.folio)
+                    $('#folio').val(response.folio)
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            });
+
+        }
+
+        static eliminarFolio(){
+            $('#folio').val('')
+        }
+
+    }
+
     $(document).ready(function(){
         $("#BuscarPaciente").on('keyup', function (e) {
           var keycode = e.keyCode || e.which;
@@ -252,6 +308,21 @@
         $('#paciente_id').val(paciente_id);
     /* Act on the event */
     });
+
+    $(document).on('click', '#inputGenerarFolio', function(){
+        generarFolio = $(this).is(':checked')
+
+        if( generarFolio ){
+            Folio.obtenerElUltimoFolio()
+            return;
+        }
+
+        Folio.eliminarFolio()
+
+
+
+    });
+
     function agregarProducto(p){
         let producto = JSON.parse($(p).val());
         // alert(producto);

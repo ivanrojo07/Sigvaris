@@ -46,6 +46,7 @@
                         <th>Folio</th>
                         <th>Cliente</th>
                         <th>Producto negado</th>
+                        <th>Producto entregado</th>
                         <th>Fecha</th>
                         <th>Fecha entrega</th>
                         <th>Comentarios</th>
@@ -60,7 +61,8 @@
                     <tr>
                         <td>{{$negado->folio}}</td>
                         <td>{{$negado->paciente->fullname}}</td>
-                        <td>{{$negado->producto->descripcion}}</td>
+                        <td>{{$negado->producto->sku}}</td>
+                        <td>{{$negado->productoEntregado->sku}}</td>
                         <td>{{\Carbon\Carbon::parse($negado->fecha)->format('m/d/Y')}}</td>
                         <td>{{\Carbon\Carbon::parse($negado->fecha_entrega)->format('m/d/Y')}}</td>
                         <td>{{$negado->comentarios}}</td>
@@ -68,7 +70,7 @@
                             <div class="row">
                                 <div class="col-auto pr-2">
                                     <a href="{{route('negado.edit', ['negado'=>$negado])}}"
-                                        class="btn btn-primary"><i class="fas fa-eye"></i><strong> editar</strong></a>
+                                        class="btn btn-primary"><i class="fas fa-eye"></i><strong> ver</strong></a>
                                 </div>
 
                             </div>

@@ -15,7 +15,7 @@ class AddProducto2ToNegadosTable extends Migration
     {
         Schema::table('negados', function (Blueprint $table) {
             //
-            $table->integer('producto2')->unsigned()->nullable();
+            $table->integer('producto_entregado_id')->unsigned()->nullable();
         });
     }
 
@@ -27,7 +27,7 @@ class AddProducto2ToNegadosTable extends Migration
     public function down()
     {
         Schema::table('negados', function (Blueprint $table) {
-            $table->dropColumn('producto2');
+            $table->dropColumn('producto_entregado_id');
         });
     }
 }

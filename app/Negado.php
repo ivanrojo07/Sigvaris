@@ -17,7 +17,8 @@ class Negado extends Model
         'fecha',
         'fecha_entrega',
         'comentarios',
-        'folio'
+        'folio',
+        'producto_entregado_id'
     ];
 
     public function paciente()
@@ -29,5 +30,8 @@ class Negado extends Model
         return $this->belongsTo(Producto::class, 'producto_id');
     }
 
+    public function productoEntregado(){
+        return $this->belongsTo(Producto::class, 'producto_entregado_id');
+    }
 
 }

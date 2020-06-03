@@ -6,6 +6,7 @@ use UxWeb\SweetAlert\SweetAlert as Alert;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Negado;
+use App\Producto;
 
 class NegadoController extends Controller
 {
@@ -27,8 +28,9 @@ class NegadoController extends Controller
      */
     public function create(Request $request)
     {
-        //dd($request->all());
+        $productoEntregado = Producto::where('sku', $request->producto2 )->first();
         $negado = new Negado($request->all());
+        $negado->producto_entregado_id = is_null($productoEntregado) ? null : $productoEntregado->id;
         $negado->save();
         return view('negado.create');
     }
