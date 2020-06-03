@@ -6,10 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateHistorialSurtidoTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
      
     public function up()
     {
@@ -22,14 +18,8 @@ class CreateHistorialSurtidoTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-    
     public function down()
     {
-        Schema::dropIfExists('_historial_surtido');
+        Schema::dropIfExists('historial_surtido');
     }
-    */
 }

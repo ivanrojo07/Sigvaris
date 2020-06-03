@@ -13,7 +13,7 @@ class CreateNegadosTable extends Migration
      */
     public function up()
     {
-        /*Schema::create('negados', function (Blueprint $table) {
+        Schema::create('negados', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('paciente_id')->unsigned();
             $table->foreign('paciente_id')->references('id')->on('pacientes');
@@ -22,8 +22,9 @@ class CreateNegadosTable extends Migration
             $table->date('fecha');
             $table->date('fecha_entrega')->nullable();
             $table->string('comentarios')->nullable();
+            $table->string('folio')->nullable();
             $table->timestamps();
-        });*/
+        });
     }
 
     /**

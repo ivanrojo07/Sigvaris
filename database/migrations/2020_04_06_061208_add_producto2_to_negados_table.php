@@ -27,7 +27,7 @@ class AddProducto2ToNegadosTable extends Migration
     public function down()
     {
         Schema::table('negados', function (Blueprint $table) {
-            //
+            $table->dropColumn('producto2');
         });
     }
 }

@@ -27,7 +27,7 @@ class AddCumpleDesToVentasTable extends Migration
     public function down()
     {
         Schema::table('ventas', function (Blueprint $table) {
-            //
+            $table->dropColumn('cumpleDes');
         });
     }
 }

@@ -4,23 +4,23 @@
 
 <div class="container">
 
-    
+
     <div class="card">
         <div class="card-header">
             <h4>Historial Ventas</h4>
         </div>
-            
+
         <div class="card-body">
             <div class="row">
                 <div class="input-group m-auto col-sm-6">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Desde</span>              
+                        <span class="input-group-text" id="basic-addon3">Desde</span>
                         <input type="date" class="form-control" id="desde" aria-describedby="basic-addon3">
-                    </div>            
+                    </div>
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">Hasta</span>
                         <input type="date" class="form-control" id="hasta" aria-describedby="basic-addon3">
-                    </div>                
+                    </div>
                 </div>
             </div>
             <br><br>
@@ -41,7 +41,6 @@
                             <th>Operación</th>
                             <th>Damage</th>
                             <th>Cambio físico</th>
-                            <th>Damage OOT</th>
                             <th>Devolución</th>
                         </tr>
                     </thead>
@@ -50,52 +49,43 @@
                         <h3>No hay ventas registrados</h3>
                         @else
                         @foreach($ventas as $venta)
-                            <tr>
-                                <td nowrap>{{$venta->id}}</td>
-                                <td nowrap>{{$venta->paciente['nombre']." ".$venta->paciente['paterno']." ".$venta->paciente['materno']}}</td>
-                                <td nowrap>${{$venta->subtotal}}</td>
-                                @if($venta->descuento)
-                                    <td nowrap>{{$venta->descuento->nombre}}</td>
-                                @else
-                                    <td nowrap></td>
-                                @endif
-                                <td nowrap>{{$venta->fecha}}</td>
-                                <td nowrap>
-                                    <div class="row">
-                                        <div class="col-auto pr-2">
-                                            <a href="{{route('ventas.show', ['venta'=>$venta])}}"
-                                                class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a>
-                                        </div>
+                        <tr>
+                            <td nowrap>{{$venta->id}}</td>
+                            <td nowrap>
+                                {{$venta->paciente['nombre']." ".$venta->paciente['paterno']." ".$venta->paciente['materno']}}
+                            </td>
+                            <td nowrap>${{$venta->subtotal}}</td>
+                            @if($venta->descuento)
+                            <td nowrap>{{$venta->descuento->nombre}}</td>
+                            @else
+                            <td nowrap></td>
+                            @endif
+                            <td nowrap>{{$venta->fecha}}</td>
+                            <td nowrap>
+                                <div class="row">
+                                    <div class="col-auto pr-2">
+                                        <a href="{{route('ventas.show', ['venta'=>$venta])}}" class="btn btn-primary"><i
+                                                class="fas fa-eye"></i><strong> Ver</strong></a>
                                     </div>
-                                </td>
-                                @if(\Carbon\Carbon::parse($venta->fecha)->diffInDays(\Carbon\Carbon::parse(date('Y-m-d')))<31)
-                                    <td nowrap>
-                                        <div class="row">
-                                            <div class="col-auto pr-2">
-                                                <a href="{{url('ventas/'.$venta->id.'/damage')}}"
-                                                    class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                     @else
-                                      <td nowrap>
-                                        <div class="row">
-                                            <div class="col-auto pr-2">
-                                                
-                                            </div>
-                                        </div>
-                                    </td>
-                                @endif
-                                <td nowrap>
-                                    <a href="{{route('ventas.cambio-fisico.create',['venta'=>$venta])}}" class="btn btn-warning">Cambio fisico</a>
-                                </td>
-                                <td nowrap>
-                                    <a href="{{route('ventas.damage-oot.create',['venta'=>$venta])}}" class="btn btn-info">Damage OOT</a>
-                                </td>
-                                <td nowrap>
-                                    <a href="{{route('ventas.devoluciones.create',['venta'=>$venta])}}" class="btn btn-info">Devolución</a>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                            <td nowrap>
+                                <div class="row">
+                                    <div class="col-auto pr-2">
+                                        <a href="{{url('ventas/'.$venta->id.'/damage')}}" class="btn btn-primary"><i
+                                                class="fas fa-eye"></i><strong> Damage</strong></a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td nowrap>
+                                <a href="{{route('ventas.cambio-fisico.create',['venta'=>$venta])}}"
+                                    class="btn btn-warning">Cambio fisico</a>
+                            </td>
+                            <td nowrap>
+                                <a href="{{route('ventas.devoluciones.create',['venta'=>$venta])}}"
+                                    class="btn btn-info">Devolución</a>
+                            </td>
+                        </tr>
                         @endforeach
                         {{-- <thead>
                             <tr>
@@ -107,17 +97,17 @@
                         <tbody id="resultados">
                             <tr>
                                 <td>{{count($ventas)}}</td>
-                                <td>{{count($sumatoria_pacientes)}}</td>
-                                <td>${{$sumatoria_ventas}}</td>
-                            </tr>
-                        </tbody>                           --}}
-                        @endif
+                        <td>{{count($sumatoria_pacientes)}}</td>
+                        <td>${{$sumatoria_ventas}}</td>
+                        </tr>
+                    </tbody> --}}
+                    @endif
                     </tbody>
                 </table>
             </div>
 
             {{$ventas->links()}}
-            
+
             {{--<div class="row m-3">
                 <div class="col-sm-9 offset-sm-2">
                     <h3 style="display: none;" id="tituloP">Prendas Vendidas</h3>
