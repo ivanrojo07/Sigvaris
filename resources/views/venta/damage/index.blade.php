@@ -51,6 +51,7 @@
                                 <th>Precio Individual</th>
                                 <th>Cantidad</th>
                                 <th>Precio total</th>
+                                <th>Quitar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,6 +62,16 @@
                                 <td>{{$producto->precio_publico_iva}}</td>
                                 <td>{{$producto->pivot->cantidad}}</td>
                                 <td>{{$producto->precio_publico_iva * $producto->pivot->cantidad}}</td>
+                                <td>
+                                    <form action="{{route('devolucion.damage')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id_venta" value="{{$venta->id}}">
+                                        <input type="hidden" name="sku" value="{{$producto->sku}}">
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -94,7 +105,7 @@
                     <input type="number" class="form-control" value="{{$venta->total}}" readonly="">
                 </div>
             </div>
-            
+
         </div>
         </form>
 

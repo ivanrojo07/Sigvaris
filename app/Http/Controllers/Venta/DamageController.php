@@ -35,22 +35,26 @@ class DamageController extends Controller
     public function Devolucion_Damage(Request $request)
     {
         
+        $venta = Venta::find( $request->id_venta );
+        $producto = Producto::where("sku",$request->input("sku"))->first();
+
         $HistorialCambioVenta=new HistorialCambioVenta(
              array(
             'tipo_cambio'=>"Damage",
             'responsable_id'=>Auth::user()->id, 
-            'venta_id' => $request->input("id_venta"), 
-            'observaciones' => $request->input("damage"),
-            'producto_devuelto_id' => Producto::where("sku",$request->input("sku"))->value('id')
+            'venta_id' => $venta->id, 
+            'observaciones' => '',
+            'producto_devuelto_id' => $producto->id,
         )
 
         );
-        $Producto=Producto::where('sku',$request->input("sku"))->get();
 
-        Producto::where('sku',$request->input("sku"))
-                  ->update(['stock'=>$Producto[0]->stock-1]);
+        $producto->update(['stock'=>$producto->stock-1]);
 
         $HistorialCambioVenta->save();
+
+        $venta->productos()->detach( $producto->id );
+
         $medicos = Doctor::get();
         $ventas = Venta::orderBy('fecha','desct')->paginate(5);
         return view('venta.index_all', ['ventas' => $ventas, 'medicos' => $medicos]);

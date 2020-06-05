@@ -1,178 +1,171 @@
 @extends('principal')
 @section('content')
-
 <div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h4 class="text-center text-uppercase text-muted">CAMBIO FÍSICO DE PRODUCTO</h4>
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{route('ventas.cambio-fisico.store',['venta'=>$venta->id])}}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-12 col-md-6 mt-2">
-                                <label for="" class="text-uppercase text-muted">SKU PRODUCTO QUE SE REGRESA</label>
-                                <input name="skuProductoRegresado" id="skuProductoRegresado" type="text"
-                                    class="form-control" required>
-                            </div>
-                            <div class="col-12 col-md-6 mt-2">
-                                <label for="" class="text-uppercase text-muted">SKU PRODUCTO QUE SE ENTREGA</label>
-                                <input name="skuProductoEntregado" id="skuProductoEntregado" type="text"
-                                    class="form-control" required>
-                            </div>
-
-                            {{-- CONTENEDOR PRODUCTO DEVUELTO --}}
-                            <div class="col-12 col-md-6 mt-2">
-                                <h5 class="text-center text-uppercase text-muted"> PRODUCTO DEVUELTO</h5>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 col-lg-4">
-                                                <label for="" class="text-uppercase text-muted">SKU</label>
-                                                <input type="text" value="N/D" class="form-control" readonly
-                                                    id="inputSkuProductoDevuelto">
-                                            </div>
-                                            <div class="col-12 col-lg-4">
-                                                <label for="" class="text-uppercase text-muted">PRECIO</label>
-                                                <input type="text" value="N/D" class="form-control" readonly
-                                                    id="inputPrecioProductoDevuelto">
-                                            </div>
-                                            <div class="col-12 col-lg-4">
-                                                <label for="" class="text-uppercase text-muted">DESCRIPCION</label>
-                                                <input type="text" value="N/D" class="form-control" readonly
-                                                    id="inputDescripcionProductoDevuelto">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- CONTENEDOR PRODUCTO ENTREGADO --}}
-                            <div class="col-12 col-md-6 mt-2">
-                                <h5 class="text-center text-uppercase text-muted"> PRODUCTO ENTREGADO</h5>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-12 col-lg-4">
-                                                <label for="" class="text-uppercase text-muted">SKU</label>
-                                                <input type="text" value="N/D" class="form-control" readonly
-                                                    id="inputSkuProductoEntregado">
-                                            </div>
-                                            <div class="col-12 col-lg-4">
-                                                <label for="" class="text-uppercase text-muted">PRECIO</label>
-                                                <input type="text" value="N/D" class="form-control" readonly
-                                                    id="inputPrecioProductoEntregado">
-                                            </div>
-                                            <div class="col-12 col-lg-4">
-                                                <label for="" class="text-uppercase text-muted">DESCRIPCION</label>
-                                                <input type="text" value="N/D" class="form-control" readonly
-                                                    id="inputDescripcionProductoEntregado">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-4 col-lg-3 mt-2">
-                                <label for="" class="text-uppercase text-muted">OBSERVACIONES</label>
-                                <textarea name="observaciones" id="" cols="30" rows="4" class="form-control"></textarea>
-                            </div>
-                            <div class="col-12 col-md-4 col-lg-3 mt-2">
-                                <label for="" class="text-uppercase text-muted">DIFERENCIA</label>
-                                <input type="text" readonly class="form-control" id="diferenciaDinero">
-                            </div>
-
-                            <div class="col-12 mt-2">
-                                <button type="submit" class="btn btn-success rounded-0">GUARDAR</button>
-                            </div>
-                        </div>
-                    </form>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-4">
+                    <h4>Venta</h4>
+                </div>
+                <div class="col-4 text-center">
+                    <a href="{{ route('ventas.index') }}" class="btn btn-primary">
+                        <i class="fa fa-bars"></i><strong> Lista de Ventas</strong>
+                    </a>
                 </div>
             </div>
         </div>
+        <div class="card-body">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-3 form-group">
+                        <label class="control-label">Fecha:</label>
+                        <input type="text" class="form-control" value="{{$venta->fecha}}" readonly="">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label class="control-label">Cliente:</label>
+                        <input type="text" class="form-control" value="{{$venta->paciente->fullname}}" readonly="">
+                    </div>
+                    <div class="col-3 form-group">
+                        <label class="control-label">Folio:</label>
+                        <input type="number" class="form-control" value="{{$venta->id}}" readonly="">
+                    </div>
+                    @if ($venta->oficina_id)
+                    <div class="col-3 form-group">
+                        <label class="control-label">Tienda:</label>
+                        <input type="text" class="form-control" value="{{$venta->oficina->nombre}}" readonly="">
+                    </div>
+                    @endif
+                    {{-- <div class="col-4 form-group">
+                        <label class="control-label">Oficina:</label>
+                        <input type="text" class="form-control" value="{{$venta->oficina->nombre}}" readonly="">
+                </div> --}}
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h5>Productos</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>sku</th>
+                                <th>Nombre</th>
+                                <th>Precio Individual</th>
+                                <th>Cantidad</th>
+                                <th>Precio total</th>
+                                <th>Cambiar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($venta->productos as $producto)
+                            <tr>
+                                <td>{{$producto->sku}}</td>
+                                <td>{{$producto->descripcion}}</td>
+                                <td>{{$producto->precio_publico_iva}}</td>
+                                <td>{{$producto->pivot->cantidad}}</td>
+                                <td>{{$producto->precio_publico_iva * $producto->pivot->cantidad}}</td>
+                                <td>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#modal-{{$producto->id}}">
+                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modal-{{$producto->id}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cambio de producto:
+                                                        {{$producto->sku}}</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{route('ventas.cambio-fisico.store', ['venta' => $venta->id])}}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <label for="" class="text-uppercase text-muted mt-2">SKU
+                                                                    PRODUCTO DEVUELTO</label>
+                                                                <input type="text" name="skuProductoRegresado"
+                                                                    class="form-control" value="{{$producto->sku}}"
+                                                                    readonly>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label for="" class="text-uppercase text-muted mt-2">SKU
+                                                                    PRODUCTO ENTREGADO</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="skuProductoEntregado">
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label for=""
+                                                                    class="text-uppercase text-muted mt-2">DESCRIPCIÓN</label>
+                                                                <textarea name="observaciones" id="" rows="5"
+                                                                    class="form-control"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">CAMBIAR</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label class="control-label">Subtotal:</label>
+                    <input type="number" class="form-control" value="{{$venta->subtotal}}" readonly="">
+                </div>
+                <div class="col-4 form-group">
+                    <label class="control-label">Descuento:</label>
+                    <input type="text" class="form-control"
+                        value="{{round($venta->subtotal-$venta->total+($venta->subtotal*0.16))}}" readonly="">
+                    {{-- @if ($venta->descuento)
+                            @if ($venta->promocion->tipo=='E')
+                                <input type="text" class="form-control" value="0" readonly="">
+                            @else
+                                <input type="text" class="form-control" value="{{ $venta->subtotal-$venta->total+($venta->subtotal*0.16) }}"
+                    readonly="">
+                    @endif
+
+                    @else
+                    <input type="text" class="form-control" value="0" readonly="">
+                    @endif --}}
+
+                </div>
+                <div class="col-4 form-group">
+                    <label class="control-label">Total:</label>
+                    <input type="number" class="form-control" value="{{$venta->total}}" readonly="">
+                </div>
+            </div>
+
+        </div>
+        </form>
+
     </div>
+
+</div>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script>
-    /**
-    * ======
-    * EVENTS
-    * ======
-    */
-
-    $(document).ready( function(){
-
+    $(document).ready(function() {
+        $('#tablaHistorialCambios').DataTable();
     } );
-
-    $(document).on('change', '#skuProductoRegresado', async function(){
-
-        const skuProducto = $(this).val()
-        producto = await getProducto(skuProducto)
-
-        console.log({
-            mensaje: 'REGRESADO',
-            producto: producto
-        })
-
-        $('#inputSkuProductoDevuelto').val(producto.sku  == null ? 'N/D' : producto.sku)
-        $('#inputPrecioProductoDevuelto').val(producto.precio_publico_iva  == null ? 'N/D' : producto.precio_publico_iva)
-        $('#inputDescripcionProductoDevuelto').val(producto.descripcion == null ? 'N/D' : producto.descripcion)
-
-        calcularDiferenciaCosto()
-
-    });
-
-    $(document).on('change', '#skuProductoEntregado', async function(){
-        const skuProducto = $(this).val()
-        producto = await getProducto(skuProducto)
-        console.log({
-            mensaje: 'ENTREGADO',
-            producto: producto
-        })
-
-        $('#inputSkuProductoEntregado').val(producto.sku  == null ? 'N/D' : producto.sku)
-        $('#inputPrecioProductoEntregado').val(producto.precio_publico_iva  == null ? 'N/D' : producto.precio_publico_iva)
-        $('#inputDescripcionProductoEntregado').val(producto.descripcion == null ? 'N/D' : producto.descripcion)
-
-        calcularDiferenciaCosto()
-    });
-
-    /**
-    * =========
-    * FUNCIONES
-    * =========
-    */
-
-    function calcularDiferenciaCosto(){
-        const precioProductoEntregado = $('#inputPrecioProductoEntregado').val()
-        const precioProductoDevuelto = $('#inputPrecioProductoDevuelto').val()
-        const diferencia = parseFloat(precioProductoEntregado) - parseFloat(precioProductoDevuelto)
-
-        console.log({
-            message: 'CALCULAR DIFERENCIA',
-            precioProductoEntregado,
-            precioProductoDevuelto,
-            diferencia: parseFloat(precioProductoEntregado) - parseFloat(precioProductoDevuelto)
-        });
-
-        $('#diferenciaDinero').val(diferencia)
-
-    }
-
-    async function getProducto(skuProducto){
-
-        producto = await $.ajax({
-            method: "GET",
-            url: `/api/productos/sku/${skuProducto}`,
-        })
-        .done(function( msg ) {
-            console.log(msg);
-        });
-
-        return producto;
-
-    }
-
 </script>
 
 @endsection

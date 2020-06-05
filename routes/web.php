@@ -217,7 +217,7 @@ Route::post('reportes/metas','Reporte\ReporteController@reporteVentasfitter')->n
 //Productos con daño
 Route::get('ventas/{id}/damage','Venta\DamageController@index');
 Route::post('SerchProductoExit','Venta\DamageController@SerchProductoExit');
-Route::post('Devolucion_Damage','Venta\DamageController@Devolucion_Damage');
+Route::post('Devolucion_Damage','Venta\DamageController@Devolucion_Damage')->name('devolucion.damage');
 
 
 Route::get('pruebas','Prueba\PruebaController@index');

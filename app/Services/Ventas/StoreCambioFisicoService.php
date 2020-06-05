@@ -12,6 +12,7 @@ class StoreCambioFisicoService
 
     protected $productoEntregado;
     protected $productoDevuelto;
+    protected $venta;
 
     public function __construct(Request $request, $venta)
     {
@@ -21,6 +22,7 @@ class StoreCambioFisicoService
         $this->setProductoDevuelto($request);
         $this->actualizarInventario();
         $this->anadirCambioProductoAHistorial($request);
+        $this->actualizarVenta();
         // dd($this->productoDevuelto);
     }
 
@@ -29,6 +31,15 @@ class StoreCambioFisicoService
      * METHODS
      * =======
      */
+
+    public function actualizarVenta()
+    {
+        $this->venta->productos()->detach( $this->productoDevuelto->id );
+        $this->venta->productos()->attach( $this->productoEntregado, [
+            'cantidad' => 1,
+            'precio' => $this->productoEntregado->precio_publico_iva
+        ] );
+    }
 
     public function actualizarInventario()
     {
@@ -40,7 +51,8 @@ class StoreCambioFisicoService
         ]);
     }
 
-    public function anadirCambioProductoAHistorial($request){
+    public function anadirCambioProductoAHistorial($request)
+    {
         // dd($request);
         HistorialCambioVenta::create([
             'tipo_cambio' => 'CAMBIO PRODUCTO',
@@ -58,7 +70,8 @@ class StoreCambioFisicoService
      * =======
      */
 
-    public function setVenta($venta){
+    public function setVenta($venta)
+    {
         $this->venta = $venta;
     }
 
