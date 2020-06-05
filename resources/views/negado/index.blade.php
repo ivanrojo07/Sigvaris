@@ -62,7 +62,7 @@
                         <td>{{$negado->folio}}</td>
                         <td>{{$negado->paciente->fullname}}</td>
                         <td>{{$negado->producto->sku}}</td>
-                        <td>{{$negado->productoEntregado->sku}}</td>
+                        <td>{{$negado->productoEntregado ? $negado->productoEntregado->sku : ''}}</td>
                         <td>{{\Carbon\Carbon::parse($negado->fecha)->format('m/d/Y')}}</td>
                         <td>{{\Carbon\Carbon::parse($negado->fecha_entrega)->format('m/d/Y')}}</td>
                         <td>{{$negado->comentarios}}</td>
