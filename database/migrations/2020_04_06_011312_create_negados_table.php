@@ -16,9 +16,9 @@ class CreateNegadosTable extends Migration
         Schema::create('negados', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('paciente_id')->unsigned();
-            $table->foreign('paciente_id')->references('id')->on('pacientes');
+            // $table->foreign('paciente_id')->references('id')->on('pacientes');
             $table->integer('producto_id')->unsigned()->nullable();
-            $table->foreign('producto_id')->references('id')->on('productos');
+            // $table->foreign('producto_id')->references('id')->on('productos');
             $table->date('fecha');
             $table->date('fecha_entrega')->nullable();
             $table->string('comentarios')->nullable();
