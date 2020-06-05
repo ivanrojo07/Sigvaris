@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\Auth;
 class RealizarDevolucionService
 {
 
+    protected $producto;
+
     public function __construct(Request $request, Venta $venta)
     {
         $this->setVenta($venta);
-        $this->setProductos($request);
-        $this->anadirProductosAStock();
-        $this->eliminarProductosDeLaVenta();
+        $this->setProducto($request);
+        $this->anadirProductoAStock();
+        $this->eliminarProductoDeLaVenta();
         $this->anadirHistorialCambio();
     }
 
@@ -26,36 +28,30 @@ class RealizarDevolucionService
      * =======
      */
 
-    public function eliminarProductosDeLaVenta()
+    public function eliminarProductoDeLaVenta()
     {
-        foreach ($this->productos as $producto) {
-            $this->venta
-                ->productos()
-                ->wherePivot('producto_id', $producto->id)
-                ->detach();
-        }
+        $this->venta
+            ->productos()
+            ->wherePivot('producto_id', $this->producto->id)
+            ->detach();
     }
 
     public function anadirHistorialCambio()
     {
-        foreach($this->productos as $producto){
             HistorialCambioVenta::create([
                 'tipo_cambio' => 'DEVOLUCIÓN',
                 'responsable_id' => Auth::user()->id,
                 'venta_id' => $this->venta->id,
                 'producto_entregado_id' => null,
-                'producto_devuelto_id' => $producto->id
+                'producto_devuelto_id' => $this->producto->id
             ]);
-        }
     }
 
-    public function anadirProductosAStock()
+    public function anadirProductoAStock()
     {
-        foreach ($this->productos as $producto) {
-            $producto->update([
-                'stock' => $producto->stock + 1
+            $this->producto->update([
+                'stock' => $this->producto->stock + 1
             ]);
-        }
     }
 
     /**
@@ -69,8 +65,8 @@ class RealizarDevolucionService
         $this->venta = $venta;
     }
 
-    public function setProductos($request)
+    public function setProducto($request)
     {
-        $this->productos = Producto::find($request->idProductosSeleccionados);
+        $this->producto = Producto::where('sku', $request->skuProductoDevuelto)->first();
     }
 }

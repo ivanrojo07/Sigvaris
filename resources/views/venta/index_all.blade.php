@@ -11,102 +11,124 @@
         </div>
 
         <div class="card-body">
+
             <div class="row">
-                <div class="input-group m-auto col-sm-6">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Desde</span>
-                        <input type="date" class="form-control" id="desde" aria-describedby="basic-addon3">
-                    </div>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Hasta</span>
-                        <input type="date" class="form-control" id="hasta" aria-describedby="basic-addon3">
+                <div class="col-12 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 mt-3">
+                                    <span class="input-group-text" id="basic-addon3">Desde</span>
+                                    <input type="date" class="form-control" id="desde" aria-describedby="basic-addon3">
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <span class="input-group-text" id="basic-addon3">Hasta</span>
+                                    <input type="date" class="form-control" id="hasta" aria-describedby="basic-addon3">
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button class="btn btn-success btn-block" type="button" id="reporte">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br><br>
-            <div class="row">
-                <div class="col-sm-2 m-auto">
-                    <button class="btn btn-outline-secondary" type="button" id="reporte">Buscar</button>
+                <div class="col-12 col-md-9">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th nowrap>Folio</th>
+                                            <th nowrap>Cliente</th>
+                                            <th nowrap>Total (sin IVA)</th>
+                                            <th nowrap>Descuento</th>
+                                            <th nowrap>Fecha</th>
+                                            <th nowrap>Ver</th>
+                                            <th nowrap>Damage</th>
+                                            <th nowrap>Cambio físico</th>
+                                            <th nowrap>Devolución</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ventas">
+                                        @if(!$ventas)
+                                        <h3>No hay ventas registrados</h3>
+                                        @else
+                                        @foreach($ventas as $venta)
+                                        <tr>
+                                            <td nowrap>{{$venta->id}}</td>
+                                            <td nowrap>
+                                                {{$venta->paciente['nombre']." ".$venta->paciente['paterno']." ".$venta->paciente['materno']}}
+                                            </td>
+                                            <td nowrap>${{$venta->subtotal}}</td>
+                                            @if($venta->descuento)
+                                            <td nowrap>{{$venta->descuento->nombre}}</td>
+                                            @else
+                                            <td nowrap></td>
+                                            @endif
+                                            <td nowrap>{{$venta->fecha}}</td>
+                                            <td nowrap class="text-center">
+                                                <div class="row">
+                                                    <div class="col-auto pr-2">
+                                                        <a href="{{route('ventas.show', ['venta'=>$venta])}}"
+                                                            class="btn btn-primary">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td nowrap class="text-center">
+                                                <div class="row">
+                                                    <div class="col-auto pr-2">
+                                                        <a href="{{url('ventas/'.$venta->id.'/damage')}}"
+                                                            class="btn btn-primary">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td nowrap class="text-center">
+                                                <a href="{{route('ventas.cambio-fisico.create',['venta'=>$venta])}}"
+                                                    class="btn btn-primary">
+                                                    <i class="fa fa-arrows-alt" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                            <td nowrap class="text-center">
+                                                <a href="{{route('ventas.devoluciones.create',['venta'=>$venta])}}"
+                                                    class="btn btn-primary">
+                                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        {{-- <thead>
+                                                    <tr>
+                                                        <th>Total ventas</th>
+                                                        <th>Total clientes</th>
+                                                        <th>Total $</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="resultados">
+                                                    <tr>
+                                                        <td>{{count($ventas)}}</td>
+                                        <td>{{count($sumatoria_pacientes)}}</td>
+                                        <td>${{$sumatoria_ventas}}</td>
+                                        </tr>
+                                    </tbody> --}}
+                                    @endif
+                                    </tbody>
+                                </table>
+                                {{$ventas->links()}}
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Folio</th>
-                            <th>Cliente</th>
-                            <th>Total (sin IVA)</th>
-                            <th>Descuento</th>
-                            <th>Fecha</th>
-                            <th>Operación</th>
-                            <th>Damage</th>
-                            <th>Cambio físico</th>
-                            <th>Devolución</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ventas">
-                        @if(!$ventas)
-                        <h3>No hay ventas registrados</h3>
-                        @else
-                        @foreach($ventas as $venta)
-                        <tr>
-                            <td nowrap>{{$venta->id}}</td>
-                            <td nowrap>
-                                {{$venta->paciente['nombre']." ".$venta->paciente['paterno']." ".$venta->paciente['materno']}}
-                            </td>
-                            <td nowrap>${{$venta->subtotal}}</td>
-                            @if($venta->descuento)
-                            <td nowrap>{{$venta->descuento->nombre}}</td>
-                            @else
-                            <td nowrap></td>
-                            @endif
-                            <td nowrap>{{$venta->fecha}}</td>
-                            <td nowrap>
-                                <div class="row">
-                                    <div class="col-auto pr-2">
-                                        <a href="{{route('ventas.show', ['venta'=>$venta])}}" class="btn btn-primary"><i
-                                                class="fas fa-eye"></i><strong> Ver</strong></a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td nowrap>
-                                <div class="row">
-                                    <div class="col-auto pr-2">
-                                        <a href="{{url('ventas/'.$venta->id.'/damage')}}" class="btn btn-primary"><i
-                                                class="fas fa-eye"></i><strong> Damage</strong></a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td nowrap>
-                                <a href="{{route('ventas.cambio-fisico.create',['venta'=>$venta])}}"
-                                    class="btn btn-warning">Cambio fisico</a>
-                            </td>
-                            <td nowrap>
-                                <a href="{{route('ventas.devoluciones.create',['venta'=>$venta])}}"
-                                    class="btn btn-info">Devolución</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                        {{-- <thead>
-                            <tr>
-                                <th>Total ventas</th>
-                                <th>Total clientes</th>
-                                <th>Total $</th>
-                            </tr>
-                        </thead>
-                        <tbody id="resultados">
-                            <tr>
-                                <td>{{count($ventas)}}</td>
-                        <td>{{count($sumatoria_pacientes)}}</td>
-                        <td>${{$sumatoria_ventas}}</td>
-                        </tr>
-                    </tbody> --}}
-                    @endif
-                    </tbody>
-                </table>
             </div>
 
-            {{$ventas->links()}}
+
+
+
 
             {{--<div class="row m-3">
                 <div class="col-sm-9 offset-sm-2">
