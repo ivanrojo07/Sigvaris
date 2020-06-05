@@ -24,7 +24,7 @@ class CreateNegadosTable extends Migration
             $table->string('comentarios')->nullable();
             $table->string('folio')->nullable();
             $table->integer('oficina_id')->unsigned();
-            $table->foreign('oficina_id')->references('id')->on('productos');
+            // $table->foreign('oficina_id')->references('id')->on('productos');
             $table->timestamps();
         });
     }
