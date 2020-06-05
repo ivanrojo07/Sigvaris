@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Negado;
 use App\Producto;
+use Illuminate\Support\Facades\Auth;
 
 class NegadoController extends Controller
 {
@@ -15,10 +16,10 @@ class NegadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        return view('negado.create');
+        $oficina_id = $request->session()->get('oficina');
+        return view('negado.create', compact('oficina_id'));
     }
 
     /**
@@ -28,11 +29,12 @@ class NegadoController extends Controller
      */
     public function create(Request $request)
     {
-        $productoEntregado = Producto::where('sku', $request->producto2 )->first();
+        $productoEntregado = Producto::where('sku', $request->producto2)->first();
         $negado = new Negado($request->all());
         $negado->producto_entregado_id = is_null($productoEntregado) ? null : $productoEntregado->id;
+        $negado->oficina_id = $request->session()->get('oficina');
         $negado->save();
-        return view('negado.create');
+        return redirect()->route('negado.index');
     }
 
     /**
@@ -56,24 +58,21 @@ class NegadoController extends Controller
     public function show()
     {
         //
-        $negados=Negado::get();
-        
-        return view('negado.index', ['negados' => $negados]);
+        $negados = Negado::get();
 
+        return view('negado.index', ['negados' => $negados]);
     }
 
     public function show2(request $request)
     {
         //
-        $negados=Negado::
-            where('fecha', '>=', $request->fechaInicioBusqueda)
+        $negados = Negado::where('fecha', '>=', $request->fechaInicioBusqueda)
             ->where('fecha', '<=', $request->fechaFinBusqueda)
             ->get();
         //dd($request->fechaInicioBusqueda);
 
-        
-        return view('negado.index', ['negados' => $negados]);
 
+        return view('negado.index', ['negados' => $negados]);
     }
 
     /**
@@ -82,7 +81,7 @@ class NegadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function edit(Negado $negado)
     {
         //
@@ -100,7 +99,7 @@ class NegadoController extends Controller
     {
         //
         $negado->update($request->all());
-        $negados=Negado::get();
+        $negados = Negado::get();
         return view('negado.index', ['negados' => $negados]);
     }
 

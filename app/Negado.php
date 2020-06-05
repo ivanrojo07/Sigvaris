@@ -8,7 +8,7 @@ class Negado extends Model
 {
     protected $table = 'negados';
     public $timestamps = true;
-    
+
     protected $fillable = [
         'id',
         'paciente_id',
@@ -18,7 +18,8 @@ class Negado extends Model
         'fecha_entrega',
         'comentarios',
         'folio',
-        'producto_entregado_id'
+        'producto_entregado_id',
+        'oficina_id',
     ];
 
     public function paciente()
@@ -30,8 +31,13 @@ class Negado extends Model
         return $this->belongsTo(Producto::class, 'producto_id');
     }
 
-    public function productoEntregado(){
+    public function productoEntregado()
+    {
         return $this->belongsTo(Producto::class, 'producto_entregado_id');
     }
 
+    public function oficina()
+    {
+        return $this->belongsTo('App\Oficina');
+    }
 }

@@ -109,6 +109,8 @@
                                         <label class="form-check-label" for="exampleCheck1">¿Generar folio?</label>
                                     </div>
                                 </div>
+                                <input type="hidden" name="oficina_id" class="form-control" step="1" id="inputOficinaId"
+                                    value="{{$oficina_id}}" readonly>
                                 <div class="form-group">
                                     <label class="control-label">Folio :</label>
                                     <input type="number" name="folio" class="form-control" step="1" id="folio" readonly>
@@ -185,14 +187,18 @@
     </div>
 </div>
 <script type="text/javascript">
-
     class Folio{
 
         static obtenerElUltimoFolio(){
 
+            console.log('oficina_id', $('#inputOficinaId').val() );
+
             $.ajax('/api/productos/negados/folios/next', {
+                data: {
+                    oficina_id: $('#inputOficinaId').val()
+                },
+                dataType: 'json',
                 success: function(response){
-                    console.log(response.folio)
                     $('#folio').val(response.folio)
                 },
                 error: function(error){

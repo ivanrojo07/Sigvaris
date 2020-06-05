@@ -17,9 +17,9 @@ class DamageController extends Controller
 
     public function index($id)
     {
-        $Venta=Venta::where('id',$id)->get();
-        $Productos=$Venta[0]->productos;
-    	return view('venta.damage.index', ['Productos'=>$Productos,'Venta'=>$Venta[0]]);
+        $venta=Venta::where('id',$id)->first();
+        $productos=$venta->productos;
+    	return view('venta.damage.index', ['productos'=>$productos,'venta'=>$venta]);
     }
 
     public function SerchProductoExit(Request $request){
