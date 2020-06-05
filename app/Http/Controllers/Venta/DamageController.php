@@ -57,7 +57,6 @@ class DamageController extends Controller
 
         $medicos = Doctor::get();
         $ventas = Venta::orderBy('fecha','desct')->paginate(5);
-        return redirect()
-        return view('venta.index_all', ['ventas' => $ventas, 'medicos' => $medicos]);
+        return redirect()->route('ventas.index');
     }
 }
