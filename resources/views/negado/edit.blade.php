@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-3 form-group">
                             <label class="control-label">Producto que se entrego en lugar del negado:</label>
-                            <input type="text" name="producto2" class="form-control"  id="producto2"  value="{{$negado->productoEntregado->sku}}" readonly>
+                            <input type="text" name="producto2" class="form-control"  id="producto2"  value="{{$negado->productoEntregado ? $negado->productoEntregado->sku : ''}}" readonly>
                         </div>
                         <div class="col-3 form-group">
                             <label class="control-label"><br>Comentarios :</label>
