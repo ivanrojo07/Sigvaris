@@ -73,6 +73,7 @@
                         <th scope="col">SKU</th>
                         <th scope="col">TIPO DAMAGE</th>
                         <th scope="col">RESPONSABLE</th>
+                        <th scope="col">DESCRIPCION</th>
                         <th scope="col">FECHA </th>
                     </tr>
                 </thead>
@@ -82,6 +83,8 @@
                         <th scope="row">{{$productoDamage->id}}</th>
                         <td>{{$productoDamage->producto->sku}}</td>
                         <td>{{$productoDamage->tipo_damage}}</td>
+                        <td>{{$productoDamage->user ? $productoDamage->user->name : ''}}</td>
+                        <td>{{$productoDamage->descripcion}}</td>
                         <td>{{$productoDamage->created_at}}</td>
                     </tr>
                     @endforeach

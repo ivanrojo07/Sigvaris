@@ -12,4 +12,8 @@ class ProductoDamage extends Model
     public function producto(){
         return $this->belongsTo('App\Producto');
     }
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
