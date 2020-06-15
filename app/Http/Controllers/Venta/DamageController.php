@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\ProductoDamage;
+use App\Services\Damage\AnadirProductoAlAmacenDamageService;
 
 class DamageController extends Controller
 {
@@ -38,15 +40,17 @@ class DamageController extends Controller
         $venta = Venta::find( $request->id_venta );
         $producto = Producto::where("sku",$request->input("sku"))->first();
 
+        $anadirProductoAlAlmacenDamageService = new AnadirProductoAlAmacenDamageService($producto, 'paciente');
+        $anadirProductoAlAlmacenDamageService->execute();
+
         $HistorialCambioVenta=new HistorialCambioVenta(
              array(
-            'tipo_cambio'=>"Damage",
-            'responsable_id'=>Auth::user()->id, 
-            'venta_id' => $venta->id, 
-            'observaciones' => '',
-            'producto_devuelto_id' => $producto->id,
-        )
-
+                'tipo_cambio'=>"Damage",
+                'responsable_id'=>Auth::user()->id, 
+                'venta_id' => $venta->id, 
+                'observaciones' => '',
+                'producto_devuelto_id' => $producto->id,
+            )
         );
 
         $producto->update(['stock'=>$producto->stock-1]);

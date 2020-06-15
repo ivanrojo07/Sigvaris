@@ -14,7 +14,7 @@ class AddCumpleDesToVentasTable extends Migration
     public function up()
     {
         Schema::table('ventas', function (Blueprint $table) {
-            //
+            $table->text('comentario')->nullable();
             $table->integer('cumpleDes')->nullable();
         });
     }
@@ -28,6 +28,7 @@ class AddCumpleDesToVentasTable extends Migration
     {
         Schema::table('ventas', function (Blueprint $table) {
             $table->dropColumn('cumpleDes');
+            $table->dropColumn('comentario');
         });
     }
 }

@@ -126,6 +126,8 @@ class VentaController extends Controller
         $venta = new Venta($request->all());
         $venta->oficina_id = session()->get('oficina');
 
+        // dd($venta);
+
         // GUARDAMOS EL FITTER DE LA VENTA
         if ($request->empleado_id) {
             $venta->empleado_id = $request->empleado_id;

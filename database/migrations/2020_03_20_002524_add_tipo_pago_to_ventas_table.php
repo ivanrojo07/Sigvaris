@@ -14,9 +14,9 @@ class AddTipoPagoToVentasTable extends Migration
     public function up()
     {
         Schema::table('ventas', function (Blueprint $table) {
-            // $table->integer('PagoTarjeta')->unsigned()->nullable();
-            // $table->integer('PagoEfectivo')->unsigned()->nullable();
-            // $table->integer('mesesPago')->unsigned()->nullable();
+            $table->integer('PagoTarjeta')->unsigned()->nullable();
+            $table->integer('PagoEfectivo')->unsigned()->nullable();
+            $table->integer('mesesPago')->unsigned()->nullable();
         });
     }
 
@@ -28,9 +28,9 @@ class AddTipoPagoToVentasTable extends Migration
     public function down()
     {
         Schema::table('ventas', function (Blueprint $table) {
-            // $table->dropColumn('pagoTarjeta');
-            // $table->dropColumn('pagoEfectivo');
-            // $table->dropColumn('mesesPago');
+            $table->dropColumn('pagoTarjeta');
+            $table->dropColumn('pagoEfectivo');
+            $table->dropColumn('mesesPago');
         });
     }
 }

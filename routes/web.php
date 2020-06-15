@@ -100,6 +100,8 @@ Route::post('calcular_descuento/{promocion}','Venta\DescuentoController@getDescu
 Route::get('obtener_sigpesos/{paciente}','Venta\DescuentoController@getSigpesos');
 
 Route::get('productos/inventario', 'Inventario\InventarioController@index')->name('productos.inventario');
+Route::get('productos/damage', 'Damage\DamageController@index')->name('productos.damage');
+Route::post('productos/damage', 'Damage\DamageController@store')->name('productos.damage.store');
 Route::get('productos/surtido', 'Inventario\InventarioController@surtido')->name('productos.surtido');
 Route::get('productos/inventario/historial', 'Inventario\InventarioController@historial')->name('productos.inventario.historial');
 Route::get('productos/inventario/historialSurtido', 'Inventario\InventarioController@historialSurtido')->name('productos.inventario.historialSurtido');

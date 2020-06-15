@@ -10,6 +10,11 @@ class ApiProductoController extends Controller
 {
     public function getProductoBySku($sku){
         $producto = Producto::where('sku',$sku)->first();
+
+        return is_null($producto) ? 
+            response()->json($producto, 404) :
+            response()->json($producto, 200);
+
         return response()->json($producto);
     }
 }
