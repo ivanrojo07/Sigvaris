@@ -9,7 +9,10 @@ class ApiPacienteDatosFiscalesController extends Controller
 {
     public function get(Paciente $paciente)
     {
-        return response()->json($paciente->datoFiscal);
+        return response()->json([
+            'datosFiscales' => $paciente->datoFiscal,
+            'saldo_a_favor' => $paciente->saldo_a_favor
+        ]);
     }
     public function getinapam(Paciente $paciente)
     {

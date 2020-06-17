@@ -83,27 +83,45 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{route('ventas.cambio-fisico.store', ['venta' => $venta->id])}}" method="POST">
+                                                <form
+                                                    action="{{route('ventas.cambio-fisico.store', ['venta' => $venta->id])}}"
+                                                    method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <div class="col-12">
+                                                            <div class="col-12 col-md-6">
                                                                 <label for="" class="text-uppercase text-muted mt-2">SKU
                                                                     PRODUCTO DEVUELTO</label>
                                                                 <input type="text" name="skuProductoRegresado"
-                                                                    class="form-control" value="{{$producto->sku}}"
+                                                                    class="form-control inputSkuProductoDevuelto" value="{{$producto->sku}}" productoId="{{$producto->id}}"
                                                                     readonly>
                                                             </div>
-                                                            <div class="col-12">
+                                                            <div class="col-12 col-md-6">
                                                                 <label for="" class="text-uppercase text-muted mt-2">SKU
                                                                     PRODUCTO ENTREGADO</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="skuProductoEntregado">
+                                                                <input type="text" class="form-control inputSkuProductoEntregado"
+                                                                    name="skuProductoEntregado" productoId="{{$producto->id}}" ventaId="{{$venta->id}}">
+                                                            </div>
+
+                                                            <div class="col-12 col-md-6">
+                                                                <label for="" class="text-uppercase text-muted mt-2">$
+                                                                    PRODUCTO DEVUELTO</label>
+                                                                <input type="text" class="form-control inputPrecioProductoDevuelto"
+                                                                    value="{{ $producto->pivot->precio }}" productoId="{{$producto->id}}" readonly>
+                                                            </div>
+                                                            <div class="col-12 col-md-6">
+                                                                <label for="" class="text-uppercase text-muted mt-2">$
+                                                                    PRODUCTO ENTREGADO</label>
+                                                                <input type="text" class="form-control inputPrecioProductoEntregado" productoId="{{$producto->id}}" readonly>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label for="" class="text-uppercase text-muted mt-2">DIFERENCIA</label>
+                                                                <input type="text" name="diferenciaPrecios" class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}" readonly>
                                                             </div>
                                                             <div class="col-12">
                                                                 <label for=""
                                                                     class="text-uppercase text-muted mt-2">DESCRIPCIÓN</label>
-                                                                <textarea name="observaciones" id="" rows="5"
+                                                                <textarea name="observaciones" rows="5"
                                                                     class="form-control"></textarea>
                                                             </div>
                                                         </div>
@@ -163,9 +181,71 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 <script>
+
+    async function updatePrecioProductoEntregado( skuProducto, idProducto ){
+        await $.ajax( {
+            url: `/api/productos/sku/${skuProducto}`,
+            success: function( response ){
+                console.table( response )
+                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( response.precio_publico )
+                // const precioProductoDevuelto = $(`.inputPrecioProductoDevuelto[productoId=${idProducto}]`).val()
+                // $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat( precioProductoDevuelto ) - parseFloat(response.precio_publico) )
+            },
+            error: function( e ){
+                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( 'N/E' )
+            }
+        } )
+    }
+
+    async function updateDiferenciaDePrecios( idProducto, ventaId, precioProductoDevuelto, skuProductoEntregado ){
+
+        console.log('======================')
+
+        console.table({
+            ventaId,
+            skuProductoDevuelto,
+            skuProductoEntregado
+        })
+
+        await $.ajax( {
+            url: `/api/ventas/calcular-diferencia`,
+            data: {
+                ventaId,
+                precioProductoDevuelto,
+                skuProductoEntregado
+            },
+            success: function( response ){
+                console.log('RESPONSE')
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( response.diferencia )
+            },
+            error: function( e ){
+                console.table(e)
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( 0 )
+            }
+        } )
+    }
+
     $(document).ready(function() {
         $('#tablaHistorialCambios').DataTable();
     } );
+
+
+
+    $(document).on('keyup', '.inputSkuProductoEntregado', async function(){
+        skuProductoEntregado = $(this).val()
+        idProducto = $(this).attr('productoId')
+        skuProductoDevuelto = $(`.inputSkuProductoDevuelto[productoId=${idProducto}]`).val();
+        precioProductoDevuelto = $(`.inputPrecioProductoDevuelto[productoId=${idProducto}]`).val();
+        ventaId = $(this).attr('ventaId');
+
+        await updatePrecioProductoEntregado( skuProductoEntregado, idProducto );
+        await updateDiferenciaDePrecios( idProducto, ventaId, precioProductoDevuelto, skuProductoEntregado );
+
+    });
+
 </script>
+
+
+
 
 @endsection

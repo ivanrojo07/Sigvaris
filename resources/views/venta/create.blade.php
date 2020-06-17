@@ -335,6 +335,15 @@
                                             <input type="number" class="form-control" name="sigpesos" id="sigpesos"
                                                 value="0" min="0" step="0.01" readonly="">
                                         </div>
+
+                                        {{-- INPUT SALDO A FAVOR --}}
+                                        <div class="col-12 col-sm-6 col-md-4 mt-2">
+
+                                            <label for="" class="text-uppercase text-muted">Saldo a favor: </label>
+
+                                            <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
+                                                value="" min="0" step="0.01" readonly="">
+                                        </div>
                                         {{-- INPUT SIGPESOS A USAR --}}
 
                                         {{-- INPUT SUBTOTAL --}}
@@ -1399,18 +1408,24 @@
                     pacienteId,
                     datos_fiscales
                 });
-                $('#tipoPersona').val(datos_fiscales.tipo_persona);
-                $('#nombreORazonSocial').val(datos_fiscales.nombre_o_razon_social);
-                $('#regimeFiscal').val(datos_fiscales.regimen_fiscal);
-                $('#correo').val(datos_fiscales.correo);
-                $('#rfc').val(datos_fiscales.rfc);
-                $('#calle').val(datos_fiscales.calle);
-                $('#num_ext').val(datos_fiscales.num_ext);
-                $('#num_int').val(datos_fiscales.num_int);
-                $('#codigo_postal').val(datos_fiscales.codigo_postal);
-                $('#ciudad').val(datos_fiscales.ciudad);
-                $('#alcaldia_o_municipio').val(datos_fiscales.alcaldia_o_municipio);
-                $('#uso_cfdi').val(datos_fiscales.uso_cfdi);
+
+                if(datos_fiscales.datosFiscales != null){
+                $('#tipoPersona').val(datos_fiscales.datosFiscales.tipo_persona);
+                $('#nombreORazonSocial').val(datos_fiscales.datosFiscales.nombre_o_razon_social);
+                $('#regimeFiscal').val(datos_fiscales.datosFiscales.regimen_fiscal);
+                $('#correo').val(datos_fiscales.datosFiscales.correo);
+                $('#rfc').val(datos_fiscales.datosFiscales.rfc);
+                $('#calle').val(datos_fiscales.datosFiscales.calle);
+                $('#num_ext').val(datos_fiscales.datosFiscales.num_ext);
+                $('#num_int').val(datos_fiscales.datosFiscales.num_int);
+                $('#codigo_postal').val(datos_fiscales.datosFiscales.codigo_postal);
+                $('#ciudad').val(datos_fiscales.datosFiscales.ciudad);
+                $('#alcaldia_o_municipio').val(datos_fiscales.datosFiscales.alcaldia_o_municipio);
+                $('#uso_cfdi').val(datos_fiscales.datosFiscales.uso_cfdi);
+                }
+
+                $('#saldoAFavor').val(datos_fiscales.saldo_a_favor);
+                console.table(datos_fiscales)
             }
         });
 

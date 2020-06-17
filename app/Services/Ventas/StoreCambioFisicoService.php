@@ -13,16 +13,19 @@ class StoreCambioFisicoService
     protected $productoEntregado;
     protected $productoDevuelto;
     protected $venta;
+    protected $paciente;
 
     public function __construct(Request $request, $venta)
     {
         // dd($request->input());
         $this->setVenta($venta);
+        $this->setPaciente($venta->paciente);
         $this->setProductoEntregado($request);
         $this->setProductoDevuelto($request);
         $this->actualizarInventario();
         $this->anadirCambioProductoAHistorial($request);
         $this->actualizarVenta();
+        $this->actualizarSaldoAFavorPaciente($request->diferenciaPrecios);
         // dd($this->productoDevuelto);
     }
 
@@ -32,13 +35,21 @@ class StoreCambioFisicoService
      * =======
      */
 
+    public function actualizarSaldoAFavorPaciente($saldo)
+    {
+        if ($saldo > 0) {
+            $this->paciente->saldo_a_favor += $saldo;
+            $this->paciente->save();
+        }
+    }
+
     public function actualizarVenta()
     {
-        $this->venta->productos()->detach( $this->productoDevuelto->id );
-        $this->venta->productos()->attach( $this->productoEntregado, [
+        $this->venta->productos()->detach($this->productoDevuelto->id);
+        $this->venta->productos()->attach($this->productoEntregado, [
             'cantidad' => 1,
             'precio' => $this->productoEntregado->precio_publico_iva
-        ] );
+        ]);
     }
 
     public function actualizarInventario()
@@ -69,6 +80,11 @@ class StoreCambioFisicoService
      * SETTERS
      * =======
      */
+
+    public function setPaciente($paciente)
+    {
+        $this->paciente = $paciente;
+    }
 
     public function setVenta($venta)
     {
