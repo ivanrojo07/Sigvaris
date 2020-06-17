@@ -22,23 +22,23 @@
                                     <div class="col-12 mt-3">
                                         <span class="text-uppercase text-muted" id="basic-addon3">Desde</span>
                                         <input type="date" class="form-control" id="desde" name="fecha_inicio"
-                                            aria-describedby="basic-addon3">
+                                            aria-describedby="basic-addon3" value="{{ request()->input('fecha_inicio') }}">
                                     </div>
                                     <div class="col-12 mt-3">
                                         <span class="text-uppercase text-muted" id="basic-addon3">Hasta</span>
                                         <input type="date" class="form-control" id="hasta" name="fecha_fin"
-                                            aria-describedby="basic-addon3">
+                                            aria-describedby="basic-addon3" value="{{ request()->input('fecha_fin') }}">
                                     </div>
                                     <div class="col-12 mt-3">
                                         <span class="text-uppercase text-muted" id="basic-addon3">Número de folio</span>
                                         <input type="number" min="0" class="form-control" id="hasta" name="numero_folio"
-                                            aria-describedby="basic-addon3">
+                                            aria-describedby="basic-addon3" value="{{ request()->input('numero_folio') }}">
                                     </div>
                                     <div class="col-12 mt-3">
                                         <span class="text-uppercase text-muted" id="basic-addon3">Apellido
                                             Paterno</span>
                                         <input type="text" class="form-control" id="hasta"
-                                            aria-describedby="basic-addon3" name="apellido_paterno">
+                                            aria-describedby="basic-addon3" name="apellido_paterno" value="{{ request()->input('apellido_paterno') }}" >
                                     </div>
                                     <div class="col-12 mt-3">
                                         <button class="btn btn-success btn-block" type="submit"

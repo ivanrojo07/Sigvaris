@@ -59,7 +59,7 @@ class VentaController extends Controller
         //Poner ventas en historial cortes de caja 
         $ventas = $ventas->where('oficina_id', session('oficina'));
         $ventas = $ventas->orderBy('fecha', 'desct')->paginate(5);
-        return view('venta.index_all', ['ventas' => $ventas, 'medicos' => $medicos]);
+        return view('venta.index_all', ['ventas' => $ventas, 'medicos' => $medicos])->withInput($request->input());
     }
 
     public function indexConPaciente(Paciente $paciente)
