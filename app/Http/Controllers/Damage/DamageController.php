@@ -18,7 +18,7 @@ class DamageController extends Controller
      */
     public function index()
     {
-        $productosDamage = ProductoDamage::get();
+        $productosDamage = ProductoDamage::orderBy('id','desc')->get();
         return view('damages.index', compact('productosDamage'));
     }
 

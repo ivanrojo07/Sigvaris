@@ -51,7 +51,7 @@
                                 <th>Precio Individual</th>
                                 <th>Cantidad</th>
                                 <th>Precio total</th>
-                                <th>Quitar</th>
+                                <th>Damage</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,53 +63,134 @@
                                 <td>{{$producto->pivot->cantidad}}</td>
                                 <td>{{$producto->precio_publico_iva * $producto->pivot->cantidad}}</td>
                                 <td>
-                                    <form action="{{route('devolucion.damage')}}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="id_venta" value="{{$venta->id}}">
-                                        <input type="hidden" name="sku" value="{{$producto->sku}}">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                        data-target="#damage-{{$producto->id}}">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="damage-{{$producto->id}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">NUEVO DAMAGE DE
+                                                        PACIENTE</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="{{route('devolucion.damage')}}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id_venta" value="{{$venta->id}}">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12 mt-2">
+                                                                <label for=""
+                                                                    class="text-uppercase text-muted">FECHA</label>
+                                                                <input value="{{ date('Y-m-d') }}" id="inputFecha"
+                                                                    type="date" class="form-control" readonly>
+                                                            </div>
+                                                            <div class="col-12 mt-2">
+                                                                <label for=""
+                                                                    class="text-uppercase text-muted">RESPONSABLE</label>
+                                                                <input value="{{ Auth::user()->name }}"
+                                                                    id="inputResponsable" type="text"
+                                                                    class="form-control" readonly>
+                                                            </div>
+                                                            {{--  --}}
+                                                            {{-- <div class="col-12 mt-2">
+                                                                <label for="" class="text-uppercase text-muted">SUCURSAL</label>
+                                                                <input id="inputNombreProducto" type="text"
+                                                                    class="form-control"
+                                                                    value="{{Auth::user()->id}}" readonly>
+                                                        </div> --}}
+                                                        {{--  --}}
+                                                        <div class="col-12 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">NOMBRE
+                                                                DEL PRODUCTO</label>
+                                                            <input id="inputNombreProducto" type="text"
+                                                                class="form-control" value="{{$producto->descripcion}}"
+                                                                readonly>
+                                                        </div>
+                                                        {{--  --}}
+                                                        <div class="col-12 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">SKU
+                                                                PRODUCTO DAÑADO</label>
+                                                            <input id="inputSkuProductoDaniado" type="text" name="sku"
+                                                                class="form-control" value="{{$producto->sku}}"
+                                                                readonly>
+                                                        </div>
+                                                        {{--  --}}
+                                                        <div class="col-12 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">DESCRIPCIÓN
+                                                                DEL
+                                                                DAÑO</label>
+                                                            <textarea name="descripcion" id="" class="form-control"
+                                                                rows="5"></textarea>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">GUARDAR</button>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
                 </div>
+
+
+                {{-- <form action="{{route('devolucion.damage')}}" method="POST">
+                @csrf
+                <input type="hidden" name="id_venta" value="{{$venta->id}}">
+                <input type="hidden" name="sku" value="{{$producto->sku}}">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                </form> --}}
+                </td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
             </div>
-            <div class="row">
-                <div class="col-4 form-group">
-                    <label class="control-label">Subtotal:</label>
-                    <input type="number" class="form-control" value="{{$venta->subtotal}}" readonly="">
-                </div>
-                <div class="col-4 form-group">
-                    <label class="control-label">Descuento:</label>
-                    <input type="text" class="form-control"
-                        value="{{round($venta->subtotal-$venta->total+($venta->subtotal*0.16))}}" readonly="">
-                    {{-- @if ($venta->descuento)
+        </div>
+        <div class="row">
+            <div class="col-4 form-group">
+                <label class="control-label">Subtotal:</label>
+                <input type="number" class="form-control" value="{{$venta->subtotal}}" readonly="">
+            </div>
+            <div class="col-4 form-group">
+                <label class="control-label">Descuento:</label>
+                <input type="text" class="form-control"
+                    value="{{round($venta->subtotal-$venta->total+($venta->subtotal*0.16))}}" readonly="">
+                {{-- @if ($venta->descuento)
                             @if ($venta->promocion->tipo=='E')
                                 <input type="text" class="form-control" value="0" readonly="">
                             @else
                                 <input type="text" class="form-control" value="{{ $venta->subtotal-$venta->total+($venta->subtotal*0.16) }}"
-                    readonly="">
-                    @endif
+                readonly="">
+                @endif
 
-                    @else
-                    <input type="text" class="form-control" value="0" readonly="">
-                    @endif --}}
+                @else
+                <input type="text" class="form-control" value="0" readonly="">
+                @endif --}}
 
-                </div>
-                <div class="col-4 form-group">
-                    <label class="control-label">Total:</label>
-                    <input type="number" class="form-control" value="{{$venta->total}}" readonly="">
-                </div>
             </div>
-
+            <div class="col-4 form-group">
+                <label class="control-label">Total:</label>
+                <input type="number" class="form-control" value="{{$venta->total}}" readonly="">
+            </div>
         </div>
-        </form>
 
     </div>
+    </form>
+
+</div>
 
 </div>
 </div>
