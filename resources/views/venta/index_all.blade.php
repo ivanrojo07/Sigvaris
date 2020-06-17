@@ -17,17 +17,35 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12 mt-3">
-                                    <span class="input-group-text" id="basic-addon3">Desde</span>
-                                    <input type="date" class="form-control" id="desde" aria-describedby="basic-addon3">
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <span class="input-group-text" id="basic-addon3">Hasta</span>
-                                    <input type="date" class="form-control" id="hasta" aria-describedby="basic-addon3">
-                                </div>
-                                <div class="col-12 mt-3">
-                                    <button class="btn btn-success btn-block" type="button" id="reporte">Buscar</button>
-                                </div>
+                                <form action="{{route('ventas.index')}}" method="GET">
+                                    @csrf
+                                    <div class="col-12 mt-3">
+                                        <span class="text-uppercase text-muted" id="basic-addon3">Desde</span>
+                                        <input type="date" class="form-control" id="desde" name="fecha_inicio"
+                                            aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <span class="text-uppercase text-muted" id="basic-addon3">Hasta</span>
+                                        <input type="date" class="form-control" id="hasta" name="fecha_fin"
+                                            aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <span class="text-uppercase text-muted" id="basic-addon3">Número de folio</span>
+                                        <input type="number" min="0" class="form-control" id="hasta" name="numero_folio"
+                                            aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <span class="text-uppercase text-muted" id="basic-addon3">Apellido
+                                            Paterno</span>
+                                        <input type="text" class="form-control" id="hasta"
+                                            aria-describedby="basic-addon3" name="apellido_paterno">
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <button class="btn btn-success btn-block" type="submit"
+                                            id="reporte">Buscar</button>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -219,121 +237,121 @@
             $('#Checkbox2').prop('value', '');
     });
 
-    $('#reporte').click(function(){  
-        $(".pagination").hide();      
-        $.ajax({
-            url:"{{ url('/get_ventas') }}",
-            type: "POST",
-            data:{
-                "_token": "{{CSRF_TOKEN()}}",
-                "desde":$('#desde').val(),
-                "hasta":$('#hasta').val()
-            },
-            dataType:"json",
-            success:function(res){
-                //console.log(res);
-                $('#ventas').find("tr").remove();
-                var ventas_total=0;
-                var total_realizadas=0;
-                var total_clientes=[];
-                var val=1;
-                let tbody = '';
-                $.each(res.ventas,function(i,item){
-                    //console.log(item.id); 
-                    val=1;
-                    var textapp = "";
-                    textapp += "<tr>";
-                    textapp +="<td>"+item.id+"</td>";
-                    textapp +="<td>"+item.paciente.nombre+` `+ item.paciente.paterno+` `+item.paciente.materno+"</td>";
-                    textapp +="<td>"+item.total+"</td>";
-                    if (item.descuento!=null) {
-                        textapp +="<td>"+item.descuento.descripcion+"</td>";
-                    }else{
-                        textapp +="<td></td>";
-                    }
-                    textapp +="<td>"+item.fecha+"</td>";
-                    textapp +=`<td> <div class="row"> <div class="col-auto pr-2"> <a href="{{ url('/ventas') }}/`+item.id+`" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a> </div>   </div></td>`;
-                    var  fecha = new Date(Date.parse(item.fecha.substr(0,10)));
-                    var fecha2 = new Date();
-                    if ( ((fecha2.getTime()-fecha.getTime())/(1000*60*60*24)) < 31) {
-                        textapp +=`<td nowrap><div class="row"><div class="col-auto pr-2"><a href="{{url('ventas/')}}`+item.id+`/damage" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a></div></div></td>`;
-                    }else{
-                        textapp +="<td></td>";
-                    }
+    // $('#reporte').click(function(){  
+    //     $(".pagination").hide();      
+    //     $.ajax({
+    //         url:"{{ url('/get_ventas') }}",
+    //         type: "POST",
+    //         data:{
+    //             "_token": "{{CSRF_TOKEN()}}",
+    //             "desde":$('#desde').val(),
+    //             "hasta":$('#hasta').val()
+    //         },
+    //         dataType:"json",
+    //         success:function(res){
+    //             //console.log(res);
+    //             $('#ventas').find("tr").remove();
+    //             var ventas_total=0;
+    //             var total_realizadas=0;
+    //             var total_clientes=[];
+    //             var val=1;
+    //             let tbody = '';
+    //             $.each(res.ventas,function(i,item){
+    //                 //console.log(item.id); 
+    //                 val=1;
+    //                 var textapp = "";
+    //                 textapp += "<tr>";
+    //                 textapp +="<td>"+item.id+"</td>";
+    //                 textapp +="<td>"+item.paciente.nombre+` `+ item.paciente.paterno+` `+item.paciente.materno+"</td>";
+    //                 textapp +="<td>"+item.total+"</td>";
+    //                 if (item.descuento!=null) {
+    //                     textapp +="<td>"+item.descuento.descripcion+"</td>";
+    //                 }else{
+    //                     textapp +="<td></td>";
+    //                 }
+    //                 textapp +="<td>"+item.fecha+"</td>";
+    //                 textapp +=`<td> <div class="row"> <div class="col-auto pr-2"> <a href="{{ url('/ventas') }}/`+item.id+`" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a> </div>   </div></td>`;
+    //                 var  fecha = new Date(Date.parse(item.fecha.substr(0,10)));
+    //                 var fecha2 = new Date();
+    //                 if ( ((fecha2.getTime()-fecha.getTime())/(1000*60*60*24)) < 31) {
+    //                     textapp +=`<td nowrap><div class="row"><div class="col-auto pr-2"><a href="{{url('ventas/')}}`+item.id+`/damage" class="btn btn-primary"><i class="fas fa-eye"></i><strong> Damage</strong></a></div></div></td>`;
+    //                 }else{
+    //                     textapp +="<td></td>";
+    //                 }
                     
-                    textapp +=`<td nowrap>
-                        <a href="{{url('ventas')}}/`+item.id+`/cambio-fisico/create" class="btn btn-warning">Cambio fisico</a>
-                    </td>`;
-                    textapp +=`<td nowrap>
-                        <a href="{{url('ventas')}}/`+item.id+`/damage-oot/create" class="btn btn-info">Damage OOT</a>
-                    </td>`;
-                    textapp +=`<td nowrap>
-                        <a href="{{url('ventas')}}/`+item.id+`/devoluciones/create"  class="btn btn-info">Devolución</a>
-                    </td>`
-                    textapp +="</tr>";  
-                    $('#ventas').append(textapp);    
-                    /*$('#ventas').append(`
-                    <tr>
-                        <td>`+item.id+`</td>
-                        <td>`+item.paciente.nombre+` `+ item.paciente.paterno+` `+item.paciente.materno+`</td>
-                        <td>$`+item.subtotal+`</td>
-                        <td>`+(item.descuento_id?item.descuento.nombre:``)+`</td>
-                        <td>`+item.fecha+`</td>
-                        <td>
-                            <div class="row">
-                                <div class="col-auto pr-2">
-                                    <a href="{{ url('/ventas') }}/`+item.id+`"
-                                        class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    `); */
-                    ventas_total+=parseFloat(item.total);
-                    total_realizadas++;
-                    $.each(total_clientes,function(e,element){
-                        if(element==item.paciente_id)
-                        {
-                            val=0;
-                        }
-                    });
-                    if(val)
-                    {
-                        total_clientes.push(item.paciente_id);
-                    }
-                });
-                $('#resultados').append(`
-                    <tr>
-                        <td>`+total_realizadas+`</td>
-                        <td>`+total_clientes.length+`</td>
-                        <td>$`+ventas_total+`</td>
-                    </tr>
-                    `);
-                /**$.each(res.consulta, function(index, el) {
-                    tbody += `<tr>
-                        <td>${el[0].sku}</td>
-                        <td>${el[0].descripcion}</td>
-                        <td>${el[1]}</td>
-                    </tr>`;
-                });**/
-                let tabla = `<thead>
-                                <tr>
-                                    <th>SKU</th>
-                                    <th>Descripción</th>
-                                    <th>Cantidad</th>
-                                </tr>
-                            </thead>
-                        <tbody>` + tbody + `</tbody>`;
-                //$('#PrendasVen').text('');
-                //$('#PrendasVen').append(tabla);
+    //                 textapp +=`<td nowrap>
+    //                     <a href="{{url('ventas')}}/`+item.id+`/cambio-fisico/create" class="btn btn-warning">Cambio fisico</a>
+    //                 </td>`;
+    //                 textapp +=`<td nowrap>
+    //                     <a href="{{url('ventas')}}/`+item.id+`/damage-oot/create" class="btn btn-info">Damage OOT</a>
+    //                 </td>`;
+    //                 textapp +=`<td nowrap>
+    //                     <a href="{{url('ventas')}}/`+item.id+`/devoluciones/create"  class="btn btn-info">Devolución</a>
+    //                 </td>`
+    //                 textapp +="</tr>";  
+    //                 $('#ventas').append(textapp);    
+    //                 /*$('#ventas').append(`
+    //                 <tr>
+    //                     <td>`+item.id+`</td>
+    //                     <td>`+item.paciente.nombre+` `+ item.paciente.paterno+` `+item.paciente.materno+`</td>
+    //                     <td>$`+item.subtotal+`</td>
+    //                     <td>`+(item.descuento_id?item.descuento.nombre:``)+`</td>
+    //                     <td>`+item.fecha+`</td>
+    //                     <td>
+    //                         <div class="row">
+    //                             <div class="col-auto pr-2">
+    //                                 <a href="{{ url('/ventas') }}/`+item.id+`"
+    //                                     class="btn btn-primary"><i class="fas fa-eye"></i><strong> Ver</strong></a>
+    //                             </div>
+    //                         </div>
+    //                     </td>
+    //                 </tr>
+    //                 `); */
+    //                 ventas_total+=parseFloat(item.total);
+    //                 total_realizadas++;
+    //                 $.each(total_clientes,function(e,element){
+    //                     if(element==item.paciente_id)
+    //                     {
+    //                         val=0;
+    //                     }
+    //                 });
+    //                 if(val)
+    //                 {
+    //                     total_clientes.push(item.paciente_id);
+    //                 }
+    //             });
+    //             $('#resultados').append(`
+    //                 <tr>
+    //                     <td>`+total_realizadas+`</td>
+    //                     <td>`+total_clientes.length+`</td>
+    //                     <td>$`+ventas_total+`</td>
+    //                 </tr>
+    //                 `);
+    //             /**$.each(res.consulta, function(index, el) {
+    //                 tbody += `<tr>
+    //                     <td>${el[0].sku}</td>
+    //                     <td>${el[0].descripcion}</td>
+    //                     <td>${el[1]}</td>
+    //                 </tr>`;
+    //             });**/
+    //             let tabla = `<thead>
+    //                             <tr>
+    //                                 <th>SKU</th>
+    //                                 <th>Descripción</th>
+    //                                 <th>Cantidad</th>
+    //                             </tr>
+    //                         </thead>
+    //                     <tbody>` + tbody + `</tbody>`;
+    //             //$('#PrendasVen').text('');
+    //             //$('#PrendasVen').append(tabla);
                 
-                $('#tituloP').prop('style', '');
-            },
-            error:function(error){
-                console.log("error");
-            }
-        });
-    });
+    //             $('#tituloP').prop('style', '');
+    //         },
+    //         error:function(error){
+    //             console.log("error");
+    //         }
+    //     });
+    // });
 
     $('#reporteClientes').click(function(event) {
         let tipo = $('input:radio[name=tipoCliente]:checked').val();

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\Ventas\RealizarVentaProductosService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class VentaController extends Controller
@@ -34,11 +35,29 @@ class VentaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
         $medicos = Doctor::get();
+
+        $ventas = Venta::orderBy('id', 'desc');
+
+        if ($request->fecha_inicio) {
+            $ventas = $ventas->where('fecha', '>=', $request->fecha_inicio);
+        }
+        if ($request->fecha_fin) {
+            $ventas = $ventas->where('fecha', '<=', $request->fecha_fin);
+        }
+        if ($request->numero_folio) {
+            $ventas = $ventas->where('id', $request->numero_folio);
+        }
+        if ($request->apellido_paterno) {
+            $ventas = $ventas->whereHas('paciente', function(Builder $query) use ($request){
+                $query->where('paterno', 'LIKE', '%' . $request->apellido_paterno .'%');
+            } );
+        }
+
         //Poner ventas en historial cortes de caja 
-        $ventas =Venta::where('oficina_id',session('oficina'));
+        $ventas = $ventas->where('oficina_id', session('oficina'));
         $ventas = $ventas->orderBy('fecha', 'desct')->paginate(5);
         return view('venta.index_all', ['ventas' => $ventas, 'medicos' => $medicos]);
     }
@@ -149,7 +168,7 @@ class VentaController extends Controller
             DatoFiscal::updateOrCreate(
                 ['paciente_id' => $request->paciente_id],
                 [
-                    'calle'=>$request->calle,
+                    'calle' => $request->calle,
                     'tipo_persona' => $request->tipo_persona,
                     'nombre_o_razon_social' => $request->nombre_o_razon_social,
                     'regimen_fiscal' => $request->regimen_fiscal,
@@ -192,20 +211,19 @@ class VentaController extends Controller
         );
         $CRM->save();
         //Sigpesos 
-        
-        if ($request->input('tipoPago')==4||$request->input('tipoPago')==3) {
+
+        if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
             # code...
             foreach ($request->folio as $key => $folio) {
                 # code...
-                $Sigpesos= new Sigpesosventa([
-                    'venta_id'=> $venta->id, 
-                    'monto'=>$request->monto[$key], 
-                    'folio'=> $folio,
-                    'folio_id'=>$request->lista[$key]
+                $Sigpesos = new Sigpesosventa([
+                    'venta_id' => $venta->id,
+                    'monto' => $request->monto[$key],
+                    'folio' => $folio,
+                    'folio_id' => $request->lista[$key]
                 ]);
                 $Sigpesos->save();
             }
-
         }
 
 
@@ -276,8 +294,8 @@ class VentaController extends Controller
             foreach ($ventasxprenda as $v)
                 $ventas[] = $v;
         } else*/
-        $ventas =Venta::where('oficina_id',session('oficina'));
-            $ventas = $ventas->with('paciente', 'descuento')->where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
+        $ventas = Venta::where('oficina_id', session('oficina'));
+        $ventas = $ventas->with('paciente', 'descuento')->where('fecha', '<=', $request->hasta)->where('fecha', '>=', $request->desde)->get();
 
         // Obtención de Las ventas que contengan la prenda o prendas que se introdujeron en el campo prenda
         $arr = [];
