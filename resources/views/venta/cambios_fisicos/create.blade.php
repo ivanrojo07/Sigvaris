@@ -216,6 +216,7 @@
             },
             success: function( response ){
                 console.log('RESPONSE')
+                console.table( response )
                 $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( response.diferencia )
             },
             error: function( e ){
