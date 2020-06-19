@@ -186,8 +186,9 @@
         await $.ajax( {
             url: `/api/productos/sku/${skuProducto}`,
             success: function( response ){
-                console.table( response )
-                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( response.precio_publico )
+                console.log( response )
+                
+                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( parseFloat(response.precio_publico).toFixed(2); )
                 // const precioProductoDevuelto = $(`.inputPrecioProductoDevuelto[productoId=${idProducto}]`).val()
                 // $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat( precioProductoDevuelto ) - parseFloat(response.precio_publico) )
             },
