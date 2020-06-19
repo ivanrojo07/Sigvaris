@@ -17,8 +17,6 @@ class ApiVentaController extends Controller
 
         $arrayPreciosProductos = $this->getArrayPreciosProductos($venta);
 
-        return response()->json($arrayPreciosProductos);
-
         $totalVentaOriginal = $this->calcularTotalVentaOriginal($venta, $arrayPreciosProductos);
 
 
@@ -99,8 +97,7 @@ class ApiVentaController extends Controller
     {
         $productosDeVentaOriginal = collect();
 
-        return $venta->productos;
-
+        
         foreach ($venta->productos as $producto) {
 
             for ($i = 0; $i < $producto->pivot->cantidad; $i++) {
