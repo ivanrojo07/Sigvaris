@@ -186,9 +186,8 @@
         await $.ajax( {
             url: `/api/productos/sku/${skuProducto}`,
             success: function( response ){
-                console.log( response )
-                
-                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( parseFloat(response.precio_publico).toFixed(2) )
+                console.table( response )
+                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( response.precio_publico )
                 // const precioProductoDevuelto = $(`.inputPrecioProductoDevuelto[productoId=${idProducto}]`).val()
                 // $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat( precioProductoDevuelto ) - parseFloat(response.precio_publico) )
             },
@@ -217,8 +216,9 @@
             },
             success: function( response ){
                 console.log('RESPONSE')
-                console.table( response )
-                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( response.diferencia )
+                console.log( response )
+                
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) )
             },
             error: function( e ){
                 console.table(e)
