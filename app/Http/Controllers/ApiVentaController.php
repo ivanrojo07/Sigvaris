@@ -97,6 +97,8 @@ class ApiVentaController extends Controller
     {
         $productosDeVentaOriginal = collect();
 
+        return $venta->productos;
+
         foreach ($venta->productos as $producto) {
 
             for ($i = 0; $i < $producto->pivot->cantidad; $i++) {
