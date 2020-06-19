@@ -45,8 +45,6 @@ class ApiVentaController extends Controller
             return $item['precio'];
         } )->sum();
 
-        return $totalNuevaVentaSinHacerDescuento;
-
         if (!is_null($venta->promocion) && $venta->promocion->unidad_descuento == 'Pieza') {
             $precioMenor = $arrayPreciosProductosNuevos->map( function($item){
                 return $item['precio'];
@@ -55,7 +53,8 @@ class ApiVentaController extends Controller
 
 
 
-        return $totalNuevaVentaSinHacerDescuento - $precioMenor;
+        return $totalNuevaVentaSinHacerDescuento - $totalVentaOriginal;
+        // return $totalNuevaVentaSinHacerDescuento - $precioMenor;
 
     }
 
