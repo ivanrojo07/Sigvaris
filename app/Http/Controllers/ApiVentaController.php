@@ -37,16 +37,16 @@ class ApiVentaController extends Controller
         return response()->json($request->input());
     }
 
-    public function calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductos){
+    public function calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosNuevos){
 
         $precioMenor = 0;
 
-        $totalNuevaVentaSinHacerDescuento = $arrayPreciosProductos->map( function($item){
+        $totalNuevaVentaSinHacerDescuento = $arrayPreciosProductosNuevos->map( function($item){
             return $item['precio'];
         } )->sum();
 
         if (!is_null($venta->promocion) && $venta->promocion->unidad_descuento == 'Pieza') {
-            $precioMenor = $arrayPreciosProductos->map( function($item){
+            $precioMenor = $arrayPreciosProductosNuevos->map( function($item){
                 return $item['precio'];
             } )->min();
         }
