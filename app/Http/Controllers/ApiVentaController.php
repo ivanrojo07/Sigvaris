@@ -17,6 +17,8 @@ class ApiVentaController extends Controller
 
         $arrayPreciosProductos = $this->getArrayPreciosProductos($venta);
 
+        return response()->json($arrayPreciosProductos);
+
         $totalVentaOriginal = $this->calcularTotalVentaOriginal($venta, $arrayPreciosProductos);
 
 
