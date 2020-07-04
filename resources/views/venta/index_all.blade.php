@@ -100,7 +100,7 @@
                                                     <div class="col-auto pr-2">
                                                         <a href="{{url('ventas/'.$venta->id.'/damage')}}"
                                                             class="btn btn-primary">
-                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            <i class="fas fa-dolly-flatbed" aria-hidden="true"></i>
                                                         </a>
                                                     </div>
                                                 </div>
