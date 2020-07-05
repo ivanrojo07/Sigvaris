@@ -41,8 +41,8 @@ class DamageController extends Controller
         $venta = Venta::find($request->id_venta);
         $producto = Producto::where("sku", $request->input("sku"))->first();
 
-        $anadirProductoAlAlmacenDamageService = new AnadirProductoAlAmacenDamageService($producto, $request->tipo);
-        $anadirProductoAlAlmacenDamageService->execute();
+        //$anadirProductoAlAlmacenDamageService = new AnadirProductoAlAmacenDamageService($producto, $request->tipo);
+        //$anadirProductoAlAlmacenDamageService->execute();
 
         $HistorialCambioVenta = new HistorialCambioVenta(
             array(
@@ -57,12 +57,12 @@ class DamageController extends Controller
 
         $productosDamage = new ProductoDamage;
         $productosDamage->producto_id = $producto->id;
-        $productosDamage->tipo_damage = 'paciente';
+        $productosDamage->tipo_damage = $request->tipo;
         $productosDamage->user_id = Auth::user()->id;
         $productosDamage->descripcion = $request->descripcion;
         $productosDamage->save();
 
-        $producto->update(['stock' => $producto->stock - 1]);
+        //$producto->update(['stock' => $producto->stock - 1]);
 
         $HistorialCambioVenta->save();
 
