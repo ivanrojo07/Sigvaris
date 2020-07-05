@@ -125,6 +125,13 @@
                                                                 class="form-control" value="{{$producto->sku}}"
                                                                 readonly>
                                                         </div>
+                                                        <div class="col-12 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">TIPO DAMAGE</label>
+                                                            <select name="tipo" id="tipo" class="form-control" required>
+                                                                <option value="fabrica">por fábrica</option>
+                                                                <option value="paciente">por paciente</option>
+                                                            </select>
+                                                        </div>
                                                         {{--  --}}
                                                         <div class="col-12 mt-2">
                                                             <label for="" class="text-uppercase text-muted">DESCRIPCIÓN

@@ -41,7 +41,7 @@ class DamageController extends Controller
         $venta = Venta::find($request->id_venta);
         $producto = Producto::where("sku", $request->input("sku"))->first();
 
-        $anadirProductoAlAlmacenDamageService = new AnadirProductoAlAmacenDamageService($producto, 'paciente');
+        $anadirProductoAlAlmacenDamageService = new AnadirProductoAlAmacenDamageService($producto, $request->tipo);
         $anadirProductoAlAlmacenDamageService->execute();
 
         $HistorialCambioVenta = new HistorialCambioVenta(
