@@ -118,7 +118,7 @@ class ApiVentaController extends Controller
     {
         $descuento=$venta->descuento();
         //$promocion=$promocion[0];
-        dd($descuento);
+        dd($descuento->id);
         
     }
 }
