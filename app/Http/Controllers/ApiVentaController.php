@@ -121,6 +121,7 @@ class ApiVentaController extends Controller
         //$promocion=$promocion[0];
         $promocion=Promocion::where('descuento_id',$venta->descuento_id)->get();
         $promocion=$promocion[0];
+        dd($arregloProdctuos);
         switch ($promocion->tipo) {
             case 'A':
                 if (count($arregloProdctuos)>=$promocion->compra_min) {
