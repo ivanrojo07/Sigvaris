@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Producto;
 use App\Venta;
+use App\Descuento;
+use App\Promocion;
 use Illuminate\Http\Request;
 
 class ApiVentaController extends Controller
@@ -25,7 +27,7 @@ class ApiVentaController extends Controller
 
 
         $diferencia = $totalVentaOriginal - $totalVentaBueva;
-
+        $this->ObtenerDescuento($venta,$arrayPreciosProductosConNuevoProducto);
         return response()->json([
             'arrayViejosProductos' => $arrayPreciosProductos,
             'arrayNuevoProdutos' => $arrayPreciosProductosConNuevoProducto,
@@ -111,5 +113,12 @@ class ApiVentaController extends Controller
         }
 
         return $productosDeVentaOriginal;
+    }
+    public function ObtenerDescuento(Venta $venta,$arregloProdctuos )
+    {
+        $promocion=$venta->descuento()->promociones();
+        $promocion=$promocion[0];
+        dd($promocion);
+        
     }
 }

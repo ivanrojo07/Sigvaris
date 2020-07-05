@@ -72,4 +72,6 @@ class DamageController extends Controller
         $ventas = Venta::orderBy('fecha', 'desct')->paginate(5);
         return redirect()->route('ventas.index');
     }
+
+    
 }
