@@ -132,6 +132,12 @@
                                                             <input type="text" class="form-control inputSkuProductoEntregado"
                                                                     name="skuProductoEntregado" productoId="{{$producto->id}}" ventaId="{{$venta->id}}">
                                                         </div>
+                                                        <div class="col-12 col-md-6">
+                                                                <label for="" class="text-uppercase text-muted mt-2">$
+                                                                    PRODUCTO DEVUELTO</label>
+                                                                <input type="text" class="form-control inputPrecioProductoDevuelto"
+                                                                    value="{{ $producto->pivot->precio }}" productoId="{{$producto->id}}" readonly>
+                                                            </div>
                                                         <div class="col-12">
                                                                 <label for="" class="text-uppercase text-muted mt-2">DIFERENCIA</label>
                                                                 <input type="text" name="diferenciaPrecios" class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}" readonly>
