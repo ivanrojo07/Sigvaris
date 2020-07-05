@@ -116,9 +116,9 @@ class ApiVentaController extends Controller
     }
     public function ObtenerDescuento(Venta $venta,$arregloProdctuos )
     {
-        $promocion=$venta->descuento()->promociones();
-        $promocion=$promocion[0];
-        dd($promocion);
+        $descuento=$venta->descuento();
+        //$promocion=$promocion[0];
+        dd($descuento);
         
     }
 }
