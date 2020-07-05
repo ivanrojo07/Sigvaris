@@ -47,7 +47,7 @@ class ApiVentaController extends Controller
             return $item['precio'];
         } )->sum();
         $Descuento=$this->ObtenerDescuento($venta,$arrayPreciosProductosNuevos,$totalNuevaVentaSinHacerDescuento);
-        dd($Descuento);
+        //dd($Descuento);
         return $totalNuevaVentaSinHacerDescuento-$Descuento;
 
         if (!is_null($venta->promocion) && $venta->promocion->unidad_descuento == 'Pieza') {
