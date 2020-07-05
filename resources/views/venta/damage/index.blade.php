@@ -122,7 +122,8 @@
                                                             <label for="" class="text-uppercase text-muted">SKU
                                                                 PRODUCTO DAÑADO</label>
                                                             <input id="inputSkuProductoDaniado" type="text" name="sku"
-                                                                class="form-control" value="{{$producto->sku}}"
+                                                                class="form-control inputSkuProductoDevuelto" value="{{$producto->sku}}"
+                                                                productoId="{{$producto->id}}"
                                                                 readonly>
                                                         </div>
                                                         <div class="col-6 mt-2">
