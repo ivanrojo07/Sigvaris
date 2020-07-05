@@ -118,13 +118,24 @@
                                                                 readonly>
                                                         </div>
                                                         {{--  --}}
-                                                        <div class="col-12 mt-2">
+                                                        <div class="col-6 mt-2">
                                                             <label for="" class="text-uppercase text-muted">SKU
                                                                 PRODUCTO DAÑADO</label>
                                                             <input id="inputSkuProductoDaniado" type="text" name="sku"
                                                                 class="form-control" value="{{$producto->sku}}"
                                                                 readonly>
                                                         </div>
+                                                        <div class="col-6 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">SKU
+                                                                PRODUCTO ENTREGADO</label>
+                                                            <input type="text" class="form-control inputSkuProductoEntregado"
+                                                                    name="skuProductoEntregado" productoId="{{$producto->id}}" ventaId="{{$venta->id}}">
+                                                        </div>
+                                                        <div class="col-12">
+                                                                <label for="" class="text-uppercase text-muted mt-2">DIFERENCIA</label>
+                                                                <input type="text" name="diferenciaPrecios" class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}" readonly>
+                                                            </div>
+
                                                         <div class="col-12 mt-2">
                                                             <label for="" class="text-uppercase text-muted">TIPO DAMAGE</label>
                                                             <select name="tipo" id="tipo" class="form-control" required>
@@ -210,6 +221,68 @@
     $(document).ready(function() {
         $('#tablaHistorialCambios').DataTable();
     } );
+    async function updatePrecioProductoEntregado( skuProducto, idProducto ){
+        await $.ajax( {
+            url: `/api/productos/sku/${skuProducto}`,
+            success: function( response ){
+                console.table( response )
+                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( response.precio_publico )
+                // const precioProductoDevuelto = $(`.inputPrecioProductoDevuelto[productoId=${idProducto}]`).val()
+                // $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat( precioProductoDevuelto ) - parseFloat(response.precio_publico) )
+            },
+            error: function( e ){
+                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( 'N/E' )
+            }
+        } )
+    }
+
+    async function updateDiferenciaDePrecios( idProducto, ventaId, precioProductoDevuelto, skuProductoEntregado ){
+
+        console.log('======================')
+
+        console.table({
+            ventaId,
+            skuProductoDevuelto,
+            skuProductoEntregado
+        })
+
+        await $.ajax( {
+            url: `/api/ventas/calcular-diferencia`,
+            data: {
+                ventaId,
+                precioProductoDevuelto,
+                skuProductoEntregado
+            },
+            success: function( response ){
+                console.log('RESPONSE')
+                console.log( response )
+                
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) )
+            },
+            error: function( e ){
+                console.table(e)
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( 0 )
+            }
+        } )
+    }
+
+    $(document).ready(function() {
+        $('#tablaHistorialCambios').DataTable();
+    } );
+
+
+
+    $(document).on('keyup', '.inputSkuProductoEntregado', async function(){
+        skuProductoEntregado = $(this).val()
+        idProducto = $(this).attr('productoId')
+        skuProductoDevuelto = $(`.inputSkuProductoDevuelto[productoId=${idProducto}]`).val();
+        precioProductoDevuelto = $(`.inputPrecioProductoDevuelto[productoId=${idProducto}]`).val();
+        ventaId = $(this).attr('ventaId');
+
+        await updatePrecioProductoEntregado( skuProductoEntregado, idProducto );
+        await updateDiferenciaDePrecios( idProducto, ventaId, precioProductoDevuelto, skuProductoEntregado );
+
+    });
 </script>
 
 @endsection
