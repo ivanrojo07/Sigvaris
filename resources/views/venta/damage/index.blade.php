@@ -132,7 +132,7 @@
                                                             <input type="text" class="form-control inputSkuProductoEntregado"
                                                                     name="skuProductoEntregado" productoId="{{$producto->id}}" ventaId="{{$venta->id}}">
                                                         </div>
-                                                        <div class="col-12 col-md-6">
+                                                        <div class="col-12 col-md-12">
                                                                 <label for="" class="text-uppercase text-muted mt-2">$
                                                                     PRODUCTO DEVUELTO</label>
                                                                 <input type="text" class="form-control inputPrecioProductoDevuelto"
