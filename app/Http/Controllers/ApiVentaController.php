@@ -118,7 +118,9 @@ class ApiVentaController extends Controller
     {
         $descuento=$venta->descuento();
         //$promocion=$promocion[0];
-        dd($descuento->id);
+        $promocion=Promocion::where('descuento_id',$venta->descuento_id)->get();
+        $promocion=$promocion[0];
+        dd($promocion);
         
     }
 }
