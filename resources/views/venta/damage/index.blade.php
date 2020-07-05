@@ -103,11 +103,11 @@
                                                                     class="form-control" readonly>
                                                             </div>
                                                             {{--  --}}
-                                                            {<div class="col-12 mt-2">
+                                                            <div class="col-12 mt-2">
                                                                 <label for="" class="text-uppercase text-muted">SUCURSAL</label>
                                                                 <input id="sucursal" type="text"
                                                                     class="form-control"
-                                                                    value="{{session('oficina')}}" readonly>
+                                                                    value="{{\App\Oficina::where('id',session('oficina'))->value('nombre')}}" readonly>
                                                             </div> 
                                                         {{--  --}}
                                                         <div class="col-12 mt-2">
