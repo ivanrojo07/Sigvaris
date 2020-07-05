@@ -103,12 +103,12 @@
                                                                     class="form-control" readonly>
                                                             </div>
                                                             {{--  --}}
-                                                            {{-- <div class="col-12 mt-2">
+                                                            {<div class="col-12 mt-2">
                                                                 <label for="" class="text-uppercase text-muted">SUCURSAL</label>
-                                                                <input id="inputNombreProducto" type="text"
+                                                                <input id="sucursal" type="text"
                                                                     class="form-control"
-                                                                    value="{{Auth::user()->id}}" readonly>
-                                                        </div> --}}
+                                                                    value="{{session('oficina')}}" readonly>
+                                                            </div> 
                                                         {{--  --}}
                                                         <div class="col-12 mt-2">
                                                             <label for="" class="text-uppercase text-muted">NOMBRE
