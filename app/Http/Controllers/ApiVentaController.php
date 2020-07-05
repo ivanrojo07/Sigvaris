@@ -133,8 +133,8 @@ class ApiVentaController extends Controller
                         case 'Procentaje1':
                             $CostoProductoBarato=999999999;
                             foreach ($arregloProdctuos as $producto) {
-                                if($CostoProductoBarato>$producto->precio){
-                                    $CostoProductoBarato=$producto->precio;
+                                if($CostoProductoBarato>$producto["precio"]){
+                                    $CostoProductoBarato=$producto["precio"];
                                 }
                             }
                             $descuento=$CostoProductoBarato*($promocion->descuento_de/100);
@@ -147,8 +147,8 @@ class ApiVentaController extends Controller
                          case 'Pieza':
                             $CostoProductoBarato=999999999;
                             foreach ($arregloProdctuos as $producto) {
-                                if($CostoProductoBarato>$producto->precio){
-                                    $CostoProductoBarato=$producto->precio;
+                                if($CostoProductoBarato>$producto["precio"]){
+                                    $CostoProductoBarato=$producto["precio"];
                                 }
                             }
                             $descuento=$CostoProductoBarato;
@@ -169,8 +169,8 @@ class ApiVentaController extends Controller
                         case 'Procentaje1':
                             $CostoProductoBarato=999999999;
                             foreach ($arregloProdctuos as $producto) {
-                                if($CostoProductoBarato>$producto->precio){
-                                    $CostoProductoBarato=$producto->precio;
+                                if($CostoProductoBarato>$producto["precio"]){
+                                    $CostoProductoBarato=$producto["precio"];
                                 }
                             }
                             $descuento=$CostoProductoBarato*($promocion->descuento_de/100);
@@ -183,8 +183,8 @@ class ApiVentaController extends Controller
                          case 'Pieza':
                             $CostoProductoBarato=999999999;
                             foreach ($arregloProdctuos as $producto) {
-                                if($CostoProductoBarato>$producto->precio){
-                                    $CostoProductoBarato=$producto->precio;
+                                if($CostoProductoBarato>$producto["precio"]){
+                                    $CostoProductoBarato=$producto["precio"];
                                 }
                             }
                             $descuento=$CostoProductoBarato;
@@ -208,8 +208,8 @@ class ApiVentaController extends Controller
                          case 'Pieza':
                             $CostoProductoBarato=999999999;
                             foreach ($arregloProdctuos as $producto) {
-                                if($CostoProductoBarato>$producto->precio){
-                                    $CostoProductoBarato=$producto->precio;
+                                if($CostoProductoBarato>$producto["precio"]){
+                                    $CostoProductoBarato=$producto["precio"];
                                 }
                             }
                             $descuento=$CostoProductoBarato;
