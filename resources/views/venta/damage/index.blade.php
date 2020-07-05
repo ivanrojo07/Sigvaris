@@ -134,7 +134,7 @@
                                                         </div>
                                                         <div class="col-12 col-md-12">
                                                                 <label for="" class="text-uppercase text-muted mt-2">$
-                                                                    PRODUCTO DEVUELTO</label>
+                                                                    PRODUCTO DAÑADO</label>
                                                                 <input type="text" class="form-control inputPrecioProductoDevuelto"
                                                                     value="{{ $producto->pivot->precio }}" productoId="{{$producto->id}}" readonly>
                                                             </div>
