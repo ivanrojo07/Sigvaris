@@ -27,7 +27,7 @@ class ApiVentaController extends Controller
 
 
         $diferencia = $totalVentaOriginal - $totalVentaBueva;
-        $this->ObtenerDescuento($venta,$arrayPreciosProductosConNuevoProducto);
+        
         return response()->json([
             'arrayViejosProductos' => $arrayPreciosProductos,
             'arrayNuevoProdutos' => $arrayPreciosProductosConNuevoProducto,
@@ -46,8 +46,9 @@ class ApiVentaController extends Controller
         $totalNuevaVentaSinHacerDescuento = $arrayPreciosProductosNuevos->map( function($item){
             return $item['precio'];
         } )->sum();
-
-        return $totalNuevaVentaSinHacerDescuento;
+        $Descuento=$this->ObtenerDescuento($venta,$arrayPreciosProductosConNuevoProducto,$totalNuevaVentaSinHacerDescuento);
+        dd($Descuento);
+        return $totalNuevaVentaSinHacerDescuento-$Descuento;
 
         if (!is_null($venta->promocion) && $venta->promocion->unidad_descuento == 'Pieza') {
             $precioMenor = $arrayPreciosProductosNuevos->map( function($item){
@@ -114,13 +115,116 @@ class ApiVentaController extends Controller
 
         return $productosDeVentaOriginal;
     }
-    public function ObtenerDescuento(Venta $venta,$arregloProdctuos )
+    public function ObtenerDescuento(Venta $venta,$arregloProdctuos,$totalNuevaVentaSinHacerDescuento)
     {
-        $descuento=$venta->descuento();
+        //$descuento=$venta->descuento();
         //$promocion=$promocion[0];
         $promocion=Promocion::where('descuento_id',$venta->descuento_id)->get();
         $promocion=$promocion[0];
-        dd($promocion);
-        
+        switch ($promocion->tipo) {
+            case 'A':
+                if (count($arregloProdctuos)>=$promocion->compra_min) {
+                    switch ($promocion->unidad_descuento) {
+                        case 'Pesos':
+                            $descuento=$promocion->descuento_de;
+                            break;
+
+                        case 'Procentaje1':
+                            $CostoProductoBarato=999999999;
+                            foreach ($arregloProdctuos as $producto) {
+                                if($CostoProductoBarato>$producto->precio){
+                                    $CostoProductoBarato=$producto->precio
+                                }
+                            }
+                            $descuento=$CostoProductoBarato*($promocion->descuento_de/100);
+                            break;
+
+                        case 'Procentaje2':
+                            $descuento=$request->subtotal*($promocion->descuento_de/100);
+                            break;
+
+                         case 'Pieza':
+                            $CostoProductoBarato=999999999;
+                            foreach ($arregloProdctuos as $producto) {
+                                if($CostoProductoBarato>$producto->precio){
+                                    $CostoProductoBarato=$producto->precio
+                                }
+                            }
+                            $descuento=$CostoProductoBarato;
+                            break;
+                        default:
+                            $descuento=0;
+                            break;
+                    }
+                }
+                break;
+            case 'B':
+            if ($totalNuevaVentaSinHacerDescuento>=$promocion->compra_min) {
+                    switch ($promocion->unidad_descuento) {
+                       case 'Pesos':
+                            $descuento=$promocion->descuento_de;
+                            break;
+
+                        case 'Procentaje1':
+                            $CostoProductoBarato=999999999;
+                            foreach ($arregloProdctuos as $producto) {
+                                if($CostoProductoBarato>$producto->precio){
+                                    $CostoProductoBarato=$producto->precio
+                                }
+                            }
+                            $descuento=$CostoProductoBarato*($promocion->descuento_de/100);
+                            break;
+
+                        case 'Procentaje2':
+                            $descuento=$request->subtotal*($promocion->descuento_de/100);
+                            break;
+
+                         case 'Pieza':
+                            $CostoProductoBarato=999999999;
+                            foreach ($arregloProdctuos as $producto) {
+                                if($CostoProductoBarato>$producto->precio){
+                                    $CostoProductoBarato=$producto->precio
+                                }
+                            }
+                            $descuento=$CostoProductoBarato;
+                            break;
+                        default:
+                            $descuento=0;
+                            break;
+                    }
+                }
+                break;
+            case 'C':
+             switch ($promocion->unidad_descuento) {
+                       case 'Pesos':
+                            $descuento=$promocion->descuento_de;
+                            break;
+
+                        case 'Procentaje':
+                            $descuento=$request->subtotal*($promocion->descuento_de/100);
+                            break;
+
+                         case 'Pieza':
+                            $CostoProductoBarato=999999999;
+                            foreach ($arregloProdctuos as $producto) {
+                                if($CostoProductoBarato>$producto->precio){
+                                    $CostoProductoBarato=$producto->precio
+                                }
+                            }
+                            $descuento=$CostoProductoBarato;
+                            break;
+                        default:
+                            $descuento=0;
+                            break;
+                    }
+                break;
+            default:
+                $descuento=0;
+                break;
+            }
+
+        return $descuento;
+
+
     }
 }
