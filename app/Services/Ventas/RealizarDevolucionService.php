@@ -83,7 +83,7 @@ class RealizarDevolucionService
     public function setProducto($request)
     {
         $this->producto = Producto::where('id', $request->input("skuProductoDevuelto"))->first();
-        dd($this->producto);
+        //dd($this->producto);
     }
     
 
