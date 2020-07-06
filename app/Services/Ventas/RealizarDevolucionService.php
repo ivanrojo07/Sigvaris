@@ -41,7 +41,7 @@ class RealizarDevolucionService
     public function anadirHistorialCambio(Venta $venta)
     {
         if ($venta->promocion_id) {
-            
+
             HistorialCambioVenta::create([
                 'tipo_cambio' => 'DEVOLUCIÓN',
                 'responsable_id' => Auth::user()->id,
@@ -83,6 +83,7 @@ class RealizarDevolucionService
     public function setProducto($request)
     {
         $this->producto = Producto::where('sku', $request->input("skuProductoDevuelto"))->first();
+        dd($this->producto);
     }
     
 
