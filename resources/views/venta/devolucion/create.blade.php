@@ -91,7 +91,7 @@
                                                                 <label for="" class="text-uppercase text-muted mt-2">SKU
                                                                     PRODUCTO DEVUELTO</label>
                                                                 <input type="text" name="skuProductoDevuelto"
-                                                                    class="form-control" value="{{$producto->sku}}"
+                                                                    class="form-control" value="{{$producto->id}}"
                                                                     readonly>
                                                             </div>
                                                             <div class="col-12">
@@ -107,7 +107,7 @@
                                                             <div class="col-12">
                                                                 <label for=""
                                                                     class="text-uppercase text-muted mt-2">MONTO DEVUELTO</label>
-                                                                <input type="text" name="skuProductoDevuelto"
+                                                                <input type="text" name="MONTO"
                                                                     class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}"
                                                                     readonly>
                                                             </div>
