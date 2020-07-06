@@ -192,6 +192,7 @@ class DevolucionController extends Controller
         $promocion=Promocion::where('descuento_id',$venta->descuento_id)->get();
         $promocion=$promocion[0];
         //dd($arregloProdctuos);
+        $descuento=0;
         switch ($promocion->tipo) {
             case 'A':
                 if (count($arregloProdctuos)>=$promocion->compra_min) {
