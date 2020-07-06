@@ -43,7 +43,7 @@ class DamageController extends Controller
 
         //$anadirProductoAlAlmacenDamageService = new AnadirProductoAlAmacenDamageService($producto, $request->tipo);
         //$anadirProductoAlAlmacenDamageService->execute();
-        $productoQueSeraEntregado = Producto::where('sku', $request->->input("skuProductoEntregado"))->first();
+        $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->first();
 
         $HistorialCambioVenta = new HistorialCambioVenta(
             array(
