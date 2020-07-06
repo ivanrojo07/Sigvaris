@@ -66,7 +66,7 @@
 
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-{{$producto->id}}" onclick="updateDiferenciaDePrecios({{$producto->id}},{{$venta->id}},{{$producto->precio_publico}})">
+                                        data-target="#modal-{{$producto->id}}" onclick="updateDiferenciaDePrecios({{$producto->id}},{{$venta->id}},{{$producto->pivot->precio }})">
                                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     </button>
 
