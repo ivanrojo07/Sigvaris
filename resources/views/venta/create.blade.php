@@ -342,7 +342,7 @@
                                             <label for="" class="text-uppercase text-muted">Saldo a favor: </label>
 
                                             <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
-                                                value="" min="0" step="0.01" readonly="">
+                                                value="0" min="0" step="0.01" readonly="">
                                         </div>
                                         {{-- INPUT SIGPESOS A USAR --}}
 

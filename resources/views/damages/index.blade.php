@@ -75,6 +75,9 @@
                         <th scope="col">RESPONSABLE</th>
                         <th scope="col">DESCRIPCION</th>
                         <th scope="col">FECHA </th>
+                        <th scope="col">ACTUALIZACIÓN</th>
+                        <th scope="col">Tienda</th>
+                        <th scope="col">ACCIÓN </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,6 +89,20 @@
                         <td>{{$productoDamage->user ? $productoDamage->user->name : ''}}</td>
                         <td>{{$productoDamage->descripcion}}</td>
                         <td>{{$productoDamage->created_at}}</td>
+                        <td>{{$productoDamage->created_at}}</td>
+                        <td>{{\App\Oficina::where('id',$productoDamage->producto->oficina_id)->value('nombre') }}</td>
+                        <td>
+
+                            @if($productoDamage->tipo_damage=="fabrica")
+                            <form action="{{route('productos.damage.reemplazo')}}" method="POST">
+                                <input type="hidden" name="producto_id" value="{{$productoDamage->producto_id}}">
+                                <input type="hidden" name="idDamag" value="{{$productoDamage->id}}">
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Envío de reemplazo</button>
+                                </div>
+                            </form>
+                            @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

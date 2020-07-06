@@ -62,6 +62,10 @@ class DamageController extends Controller
         $productosDamage->descripcion = $request->descripcion;
         $productosDamage->save();
 
+
+        $venta->paciente->saldo_a_favor += $saldo;
+        $venta->paciente->save();
+
         //$producto->update(['stock' => $producto->stock - 1]);
 
         $HistorialCambioVenta->save();
@@ -73,5 +77,5 @@ class DamageController extends Controller
         return redirect()->route('ventas.index');
     }
 
-    
+
 }

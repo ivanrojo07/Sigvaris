@@ -98,4 +98,16 @@ class DamageController extends Controller
     {
         //
     }
+    public function reemplazo(Request $request)
+    {
+        $producto=Producto::where('id',$request->input('producto_id'))->get();
+        $producto=$producto[0];
+        $producto->update(['stock' => $producto->stock+1]);
+        $productoDamage=ProductoDamage::where('id',$request->input('idDamag'))->get();
+        $productoDamage=$productoDamage[0];
+        $productoDamage->update(['tipo_damage' => 'Reemplazado']);
+        
+        $productosDamage = ProductoDamage::orderBy('id','desc')->get();
+        return view('damages.index', compact('productosDamage'));
+    }
 }
