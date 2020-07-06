@@ -46,7 +46,12 @@ class ApiVentaController extends Controller
         $totalNuevaVentaSinHacerDescuento = $arrayPreciosProductosNuevos->map( function($item){
             return $item['precio'];
         } )->sum();
-        $Descuento=$this->ObtenerDescuento($venta,$arrayPreciosProductosNuevos,$totalNuevaVentaSinHacerDescuento);
+        if ($venta->descuento_id) {
+            $Descuento=$this->ObtenerDescuento($venta,$arrayPreciosProductosNuevos,$totalNuevaVentaSinHacerDescuento);
+        }else{
+            $Descuento=0;
+        }
+        
         //dd($Descuento);
         return $totalNuevaVentaSinHacerDescuento-$Descuento;
 
