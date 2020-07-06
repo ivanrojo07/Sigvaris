@@ -103,6 +103,7 @@ Route::get('productos/inventario', 'Inventario\InventarioController@index')->nam
 Route::get('productos/damage', 'Damage\DamageController@index')->name('productos.damage');
 Route::post('productos/damage', 'Damage\DamageController@store')->name('productos.damage.store');
 Route::post('productos/damage/reemplazo', 'Damage\DamageController@reemplazo')->name('productos.damage.reemplazo');
+Route::post('productos/damage/busqueda', 'Damage\DamageController@busqueda')->name('productos.damage.busqueda');
 
 Route::get('productos/surtido', 'Inventario\InventarioController@surtido')->name('productos.surtido');
 Route::get('productos/inventario/historial', 'Inventario\InventarioController@historial')->name('productos.inventario.historial');

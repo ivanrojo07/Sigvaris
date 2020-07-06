@@ -4,13 +4,26 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                DAMAGE FÁBRICA
-            </button>
-
+            <div class="row">
+                <div class="col-3 mt-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        DAMAGE FÁBRICA
+                    </button>
+                </div>
+                <div class="col-6 mt-2">
+                    <form action="{{route('productos.damage.busqueda')}}" method="POST">
+                        @csrf
+                        <select name="tipo" class="form-control" required>
+                            <option value="fabrica">de fabrica </option>
+                            <option value="paciente">Por Paciente</option>
+                            <option value="Reemplazado">Reemplazados</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </form>
+                </div>
+            </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -22,6 +35,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                         <form action="{{route('productos.damage.store')}}" method="POST">
                             @csrf
                             <div class="modal-body">

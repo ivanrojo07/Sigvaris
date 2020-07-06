@@ -110,4 +110,13 @@ class DamageController extends Controller
         $productosDamage = ProductoDamage::orderBy('id','desc')->get();
         return view('damages.index', compact('productosDamage'));
     }
+    public function busqueda(Request $request)
+    {
+        
+        
+        $productosDamage = ProductoDamage::where("tipo_damage",$request->input('tipo'))
+                            ->orderBy('id','desc')->get();
+        return view('damages.index', compact('productosDamage'));
+    }
+    
 }
