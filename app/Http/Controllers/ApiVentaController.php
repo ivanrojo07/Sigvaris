@@ -146,7 +146,7 @@ class ApiVentaController extends Controller
                             break;
 
                         case 'Procentaje2':
-                            $descuento=$request->subtotal*($promocion->descuento_de/100);
+                            $descuento=$venta->subtotal*($promocion->descuento_de/100);
                             break;
 
                          case 'Pieza':
@@ -182,7 +182,7 @@ class ApiVentaController extends Controller
                             break;
 
                         case 'Procentaje2':
-                            $descuento=$request->subtotal*($promocion->descuento_de/100);
+                            $descuento=$venta->subtotal*($promocion->descuento_de/100);
                             break;
 
                          case 'Pieza':
@@ -207,7 +207,7 @@ class ApiVentaController extends Controller
                             break;
 
                         case 'Procentaje':
-                            $descuento=$request->subtotal*($promocion->descuento_de/100);
+                            $descuento=$venta->subtotal*($promocion->descuento_de/100);
                             break;
 
                          case 'Pieza':

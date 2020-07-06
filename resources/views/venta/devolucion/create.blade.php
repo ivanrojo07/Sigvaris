@@ -66,7 +66,7 @@
 
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#modal-{{$producto->id}}">
+                                        data-target="#modal-{{$producto->id}}" onclick="updateDiferenciaDePrecios({{$producto->id}},{{$venta->id}},{{$producto->precio_publico}})">
                                         <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     </button>
 
@@ -102,6 +102,14 @@
                                                                     <option value="Cliente enojado">Cliente enojado</option>
                                                                     <option value="Amenaza">Amenaza</option>
                                                                 </select>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <label for=""
+                                                                    class="text-uppercase text-muted mt-2">MONTO DEVUELTO</label>
+                                                                <input type="text" name="skuProductoDevuelto"
+                                                                    class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}"
+                                                                    readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -163,6 +171,29 @@
     $(document).ready(function() {
         $('#tablaHistorialCambios').DataTable();
     } );
+
+    async function updateDiferenciaDePrecios( idProducto,ventaId, precioProductoDevuelto){
+
+        
+
+        await $.ajax( {
+            url: `devoluciones/calcular-diferencia`,
+            data: {
+                ventaId,
+                precioProductoDevuelto
+            },
+            success: function( response ){
+                console.log('RESPONSE')
+                console.log( response )
+                
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) )
+            },
+            error: function( e ){
+                console.table(e)
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( 0 )
+            }
+        } )
+    }
 </script>
 
 @endsection

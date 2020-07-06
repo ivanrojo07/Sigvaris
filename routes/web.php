@@ -146,6 +146,8 @@ Route::resource('corte-caja', 'CorteCaja\CorteCajaController');
 Route::resource('ventas.cambio-fisico', 'Venta\CambioFisicoController');
 Route::resource('ventas.damage-oot', 'Venta\DamageOOTController');
 Route::resource('ventas.devoluciones', 'Venta\DevolucionController');
+Route::get('devoluciones/calcular-diferencia', 'Venta\DevolucionController@calcularDiferencia')->name('devoluciones/calcular-diferencia');
+
 Route::resource('ventas', 'Venta\VentaController');
 
 Route::resource('negado', 'Venta\NegadoController');
