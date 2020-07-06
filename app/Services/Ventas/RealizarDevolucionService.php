@@ -5,6 +5,8 @@ namespace App\Services\Ventas;
 use App\HistorialCambioVenta;
 use App\Producto;
 use App\Venta;
+use App\Descuento;
+use App\Promocion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

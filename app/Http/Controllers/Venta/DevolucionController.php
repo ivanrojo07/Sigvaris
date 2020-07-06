@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Venta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Ventas\RealizarDevolucionService;
+use App\Producto;
 use App\Venta;
+use App\Descuento;
+use App\Promocion;
 
 class DevolucionController extends Controller
 {
