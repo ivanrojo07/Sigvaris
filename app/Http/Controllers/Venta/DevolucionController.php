@@ -107,7 +107,9 @@ class DevolucionController extends Controller
 
         $diferencia = $totalVentaOriginal - $totalVentaBueva;
         
-        return $diferencia;
+        return response()->json([
+            'diferencia' => $diferencia
+        ]);
     }
 
     public function calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosNuevos){
