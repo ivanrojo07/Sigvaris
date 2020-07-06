@@ -62,7 +62,7 @@ class DamageController extends Controller
         $productosDamage->descripcion = $request->descripcion;
         $productosDamage->save();
 
-
+        $saldo=$request->input("diferenciaPrecios");
         $venta->paciente->saldo_a_favor += $saldo;
         $venta->paciente->save();
 
