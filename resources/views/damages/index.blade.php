@@ -89,7 +89,7 @@
                         <td>{{$productoDamage->user ? $productoDamage->user->name : ''}}</td>
                         <td>{{$productoDamage->descripcion}}</td>
                         <td>{{$productoDamage->created_at}}</td>
-                        <td>{{$productoDamage->created_at}}</td>
+                        <td>{{$productoDamage->updated_at}}</td>
                         <td>{{\App\Oficina::where('id',$productoDamage->producto->oficina_id)->value('nombre') }}</td>
                         <td>
 
