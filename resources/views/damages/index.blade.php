@@ -97,9 +97,7 @@
                             <form action="{{route('productos.damage.reemplazo')}}" method="POST">
                                 <input type="hidden" name="producto_id" value="{{$productoDamage->producto_id}}">
                                 <input type="hidden" name="idDamag" value="{{$productoDamage->id}}">
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Envío de reemplazo</button>
-                                </div>
+                                <button type="submit" class="btn btn-primary">Envío de reemplazo</button>
                             </form>
                             @endif
                         </td>
