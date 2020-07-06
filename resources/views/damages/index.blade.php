@@ -15,6 +15,7 @@
                 <div class="col-6 mt-2">
                     <form action="{{route('productos.damage.busqueda')}}" method="POST">
                         @csrf
+                        <label for="" class="text-uppercase text-muted">Busqueda por tipo de Damage</label>
                         <select name="tipo" class="form-control" required>
                             <option value="fabrica">de fabrica </option>
                             <option value="paciente">Por Paciente</option>
