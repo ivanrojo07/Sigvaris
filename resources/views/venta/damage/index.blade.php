@@ -87,6 +87,7 @@
                                                 <form action="{{route('devolucion.damage')}}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="id_venta" value="{{$venta->id}}">
+                                                    
                                                     <div class="modal-body">
                                                         <div class="row">
                                                             <div class="col-12 mt-2">
@@ -265,6 +266,9 @@
                 console.log( response )
                 
                 $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) )
+                $(`.inputPrecioDiferencia_id_pro[productoId=${idProducto}]`).val()
+               
+
             },
             error: function( e ){
                 console.table(e)
