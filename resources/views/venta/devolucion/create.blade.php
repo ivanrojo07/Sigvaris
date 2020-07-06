@@ -177,7 +177,7 @@
         
 
         await $.ajax( {
-            url: `devoluciones/calcular-diferencia`,
+            url: `{{url('calcular-diferencia-devolucion')}}`,
             data: {
                 ventaId,
                 precioProductoDevuelto
