@@ -108,6 +108,7 @@
                                             <th>RESPONSABLE</th>
                                             <th>PRODUCTO ENTREGADO</th>
                                             <th>PRODUCTO DEVUELTO</th>
+                                            <th>Observaciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -117,6 +118,7 @@
                                             <td>{{$cambio->responsable->name}}</td>
                                             <td>{{$cambio->productoEntregado ? $cambio->productoEntregado->sku : 'N/D'}}</td>
                                             <td>{{$cambio->productoEntregado ? $cambio->productoDevuelto->sku : 'N/D'}}</td>
+                                            <td>{{$cambio->observaciones}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
