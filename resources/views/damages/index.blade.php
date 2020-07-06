@@ -76,7 +76,7 @@
                         <th scope="col">DESCRIPCION</th>
                         <th scope="col">FECHA </th>
                         <th scope="col">ACTUALIZACIÓN</th>
-                        <th scope="col">Tienda</th>
+                        <th scope="col">TIENDA</th>
                         <th scope="col">ACCIÓN </th>
                     </tr>
                 </thead>
