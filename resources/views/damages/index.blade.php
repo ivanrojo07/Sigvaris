@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-3 mt-2">
                     <!-- Button trigger modal -->
-                    <br><br>
+                    <br>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         DAMAGE FÁBRICA
