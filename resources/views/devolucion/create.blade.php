@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">REFERENCIA: </label>
-                    <input type="text" class="form-control" id="referencia" value="referencia" required >
+                    <input type="text" class="form-control" id="referencia" name="referencia" required >
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">CLAVE: </label>
