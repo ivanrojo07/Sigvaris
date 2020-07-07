@@ -48,7 +48,7 @@ class RealizarDevolucionService
                 'venta_id' => $this->venta->id,
                 'producto_entregado_id' => null,
                 'producto_devuelto_id' => $this->producto->id,
-                'observaciones'=> "Monto devuelto: ".calcularDiferencia($venta,$this->producto->precio_publico)
+                'observaciones'=> "Monto devuelto: ".$this->calcularDiferencia($venta,$this->producto->precio_publico)
             ]);
         }else{
             HistorialCambioVenta::create([
