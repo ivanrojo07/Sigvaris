@@ -9,7 +9,7 @@
                 </div>
         </div>
         <div class="card-body">
-            <table class="table table-bordered mt-3">
+            <table class="table table-bordered mt-3" id="Devolucionesid">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -45,5 +45,11 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Devolucionesid').DataTable();
+        });
+
+</script>
 
 @endsection
