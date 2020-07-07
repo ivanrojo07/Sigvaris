@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">BENEFICIARIO: </label>
-                    <input type="text" class="form-control" id="beneficiario" value="beneficiario" required >
+                    <input type="text" class="form-control" id="beneficiario" name="beneficiario" required >
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">REFERENCIA: </label>
