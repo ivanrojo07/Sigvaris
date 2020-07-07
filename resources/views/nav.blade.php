@@ -145,7 +145,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('facturas.index')}}"><span>Buscar</span><i class="fa fa-search float-right"></i></a>
                         <a class="dropdown-item" href="{{route('facturas.create')}}"><span>Crear</span><i class="fa fa-plus float-right"></i></a>
-                        <a class="dropdown-item" href="{{route('devolucion.indexall')}}"><span>Devolucion de dinero</span></a>
+                        <a class="dropdown-item" href="{{route('devolucion.indexall')}}"><span>Devolución de dinero</span></a>
                     </div>
                 </li>    
             @endif
