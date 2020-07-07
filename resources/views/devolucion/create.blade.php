@@ -11,7 +11,7 @@
 
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">Paciente: </label>
-                    <input type="text" class="form-control" id="nombre" value="{{$venta->paciente()->getFullnameAttribute()}}" required readonly>
+                    <input type="text" class="form-control" id="nombre" value="{{$venta->paciente()->nombre." "$venta->paciente()->materno." ".$venta->paciente()->paterno}}" required readonly>
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">Monto: </label>
