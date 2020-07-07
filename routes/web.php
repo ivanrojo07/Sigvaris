@@ -147,7 +147,7 @@ Route::resource('ventas.cambio-fisico', 'Venta\CambioFisicoController');
 Route::resource('ventas.damage-oot', 'Venta\DamageOOTController');
 Route::resource('ventas.devoluciones', 'Venta\DevolucionController');
 
-Route::get('devolucion/indexall','Devolucion\DevolucionController@index')->name('devolucion.indexall');
+Route::get('devolucion/indexall','Devolucion\DevolucionController@indexall')->name('devolucion.indexall');
 Route::post('devolucion/index','Devolucion\DevolucionController@index')->name('devolucion.index');
 Route::post('devolucion/cargarDevolucion','Devolucion\DevolucionController@cargarDevolucion')->name('devolucion.cargarDevolucion');
 
