@@ -27,6 +27,7 @@ class DevolucionController extends Controller
     			'banco' => $request->input("banco")
     		)
     	);
+    	$Devolucion->save();
     	$Devoluciones=Devolucion::get();
     	return view('devolucion.index', compact('Devoluciones'));
     }
