@@ -103,7 +103,14 @@
                                                                     <option value="Amenaza">Amenaza</option>
                                                                 </select>
                                                             </div>
-
+                                                            <div class="col-12">
+                                                                <label for=""
+                                                                    class="text-uppercase text-muted mt-2">Tipo de cambio</label>
+                                                                <select name="tipo_cambio" id="" class="form-control">
+                                                                    <option value="1">Saldo a favor</option>
+                                                                    <option value="2">Devolución de dinero</option>
+                                                                </select>
+                                                            </div>
                                                             <div class="col-12">
                                                                 <label for=""
                                                                     class="text-uppercase text-muted mt-2">MONTO DEVUELTO</label>

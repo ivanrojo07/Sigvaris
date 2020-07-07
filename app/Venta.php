@@ -83,6 +83,10 @@ class Venta extends Model
     {
         return $this->hasMany('App\Sigpesosventa');
     }
+    public function debolucion()
+    {
+        return $this->hasMany('App\Devolucion');
+    }
 
     /**
      * ==========
