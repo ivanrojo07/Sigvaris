@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{$Devolucion->id}}</td>
                         <td>{{$Devolucion->venta->paciente->nombre." ".$Devolucion->venta->paciente->materno." ".$Devolucion->venta->paciente->paterno}}</td>
-                        <td>{{$Devolucion->venta()->id}}</td>
+                        <td>{{$Devolucion->venta->id}}</td>
                         <td>{{$Devolucion->monto}}</td>
                         <td>{{$Devolucion->cuenta}}</td>
                         <td>{{$Devolucion->beneficiario}}</td>
