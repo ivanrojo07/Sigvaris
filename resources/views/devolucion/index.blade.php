@@ -23,7 +23,7 @@
                     @foreach ($Devoluciones as $Devolucion)
                     <tr>
                         <td>{{$Devolucion->id}}</td>
-                        <td>{{$Devolucion->venta()->paciente()->getFullnameAttribute()}}</td>
+                        <td>{{$venta->paciente->nombre." ".$venta->paciente->materno." ".$venta->paciente->paterno}}</td>
                         <td>{{$Devolucion->venta()->id}}</td>
                         <td>{{$Devolucion->monto}}</td>
                         <td>{{$Devolucion->cuenta}}</td>
