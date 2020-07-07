@@ -3,6 +3,11 @@
 
 <div class="container">
     <div class="card">
+        <div class="card-header ">
+            <div class="col-4">
+                    <h4>Devoluciones Ecónomicas</h4>
+                </div>
+        </div>
         <div class="card-body">
             <table class="table table-bordered mt-3">
                 <thead class="thead-dark">
