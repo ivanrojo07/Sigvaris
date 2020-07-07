@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">NUMERO DE CUENTA: </label>
-                    <input type="number" class="form-control" id="cuenta" name="cuenta" value="" required >
+                    <input type="text" class="form-control" id="cuenta" name="cuenta" value="" required >
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">BENEFICIARIO: </label>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">CLAVE: </label>
-                    <input type="number" class="form-control" id="clave" name="clave" value="" required >
+                    <input type="text" class="form-control" id="clave" name="clave" value="" required >
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">BANCO: </label>
