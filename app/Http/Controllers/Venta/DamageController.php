@@ -64,9 +64,26 @@ class DamageController extends Controller
         $productosDamage->descripcion = $request->descripcion;
         $productosDamage->save();
 
-        $saldo=$request->input("diferenciaPrecios");
+        if ($request->input("diferenciaPrecios")==0) {
+            $saldo=$productoQueSeraEntregado->precio_publico_iva;
+        }else{
+            if ($request->input("diferenciaPrecios")<0) {
+                # code...
+                $saldo=$request->input("diferenciaPrecios")-($request->input("diferenciaPrecios")*0.16);
+                $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
+            }else{
+                $saldo=$request->input("diferenciaPrecios")+($request->input("diferenciaPrecios")*0.16);
+                $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
+            }
+        }
+
+        
+       
+
         $venta->paciente->saldo_a_favor += $saldo;
         $venta->paciente->save();
+
+        
 
         //$producto->update(['stock' => $producto->stock - 1]);
 
