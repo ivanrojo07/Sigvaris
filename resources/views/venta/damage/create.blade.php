@@ -731,12 +731,12 @@
 
         var nombrePaciente = "{{ $paciente->nombre }}";
         var apellidosPaciente = "{{ $paciente->paterno.' '.$paciente->materno }}";
-        var saldoAFavor=parseFloat("{{$paciente->saldo_a_favor}}");
+        var saldoAFavor=parseFloat("{{$paciente->saldo_a_favor+$saldo}}");
 
         console.log('datosPAciente: ',nombrePaciente,apellidosPaciente);
         
         $('#inputNombrePaciente').val( nombrePaciente + " " + apellidosPaciente );
-        
+        $('#saldoAFavor').val("{{$paciente->saldo_a_favor+$saldo}}");
         $('#paciente_id').val(pacienteId);
         console.log( 'Cliente seleccionado: ', pacienteId );
         $('#promocion_id option:eq(0)').prop('selected',true);
