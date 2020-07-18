@@ -117,7 +117,7 @@ class DamageController extends Controller
             }
         }
 
-        return view('venta.damage.create',['productoEntregado'=>$productoQueSeraEntregado,'productoDebuelto'=>$producto,'ventaAnterior'=>$venta,'paciente'=>$paciente,'saldo'=>$saldo]);
+        return view('venta.damage.create',['producto'=>$productoQueSeraEntregado,'productoDebuelto'=>$producto,'ventaAnterior'=>$venta,'paciente'=>$venta->paciente,'saldo'=>$saldo]);
     }
 
 
