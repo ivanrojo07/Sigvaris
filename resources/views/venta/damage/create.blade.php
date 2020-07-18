@@ -736,7 +736,7 @@
         console.log('datosPAciente: ',nombrePaciente,apellidosPaciente);
         
         $('#inputNombrePaciente').val( nombrePaciente + " " + apellidosPaciente );
-        $('#saldoAFavor').val(saldoAFavor);
+        
         $('#paciente_id').val(pacienteId);
         console.log( 'Cliente seleccionado: ', pacienteId );
         $('#promocion_id option:eq(0)').prop('selected',true);
@@ -755,7 +755,7 @@
         //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
-        $('#iva').val(getIva);
+        
         var iva=getIva;
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
         
