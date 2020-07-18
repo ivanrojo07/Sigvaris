@@ -727,11 +727,11 @@
 <script type="text/javascript">
     $(document).ready(function(){
         
-        const pacienteId = {{$paciente->id}};
+        var pacienteId = {{$paciente->id}};
 
-        const nombrePaciente = "{{ $paciente->nombre }}";
-        const apellidosPaciente = "{{ $paciente->paterno.' '.$paciente->materno }}";
-        const saldoAFavor=parseFloat("{{$paciente->saldo_a_favor}}");
+        var nombrePaciente = "{{ $paciente->nombre }}";
+        var apellidosPaciente = "{{ $paciente->paterno.' '.$paciente->materno }}";
+        var saldoAFavor=parseFloat("{{$paciente->saldo_a_favor}}");
 
         console.log('datosPAciente: ',nombrePaciente,apellidosPaciente);
         
