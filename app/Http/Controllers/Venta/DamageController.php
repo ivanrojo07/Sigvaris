@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Venta;
 use App\Producto;
 use App\Venta;
 use App\Doctor;
+use App\Empleado;
+use App\Folio;
 use App\HistorialCambioVenta;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ProductoDamage;
+
 use App\Services\Damage\AnadirProductoAlAmacenDamageService;
 
 class DamageController extends Controller
@@ -102,7 +105,7 @@ class DamageController extends Controller
         $venta = Venta::find($request->id_venta);
         $producto = Producto::where("sku", $request->input("sku"))->first();
         $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->first();
-
+        $empleadosFitter = Empleado::fitters()->get();
 
         if ($request->input("diferenciaPrecios")==0) {
             $saldo=$productoQueSeraEntregado->precio_publico_iva;
@@ -117,7 +120,15 @@ class DamageController extends Controller
             }
         }
 
-        return view('venta.damage.create',['producto'=>$productoQueSeraEntregado,'productoDebuelto'=>$producto,'ventaAnterior'=>$venta,'paciente'=>$venta->paciente,'saldo'=>$saldo]);
+        return view('venta.damage.create',['producto'=>$productoQueSeraEntregado,
+                                           'productoDebuelto'=>$producto,
+                                           'ventaAnterior'=>$venta,
+                                           'paciente'=>$venta->paciente,
+                                           'saldo'=>$saldo,
+                                           'folio' => Venta::count() + 1,
+                                           'empleadosFitter' => $empleadosFitter,
+                                           'Folios' => Folio::get()
+                                       ]);
     }
 
 
