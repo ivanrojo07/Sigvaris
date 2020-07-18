@@ -766,34 +766,7 @@
 
 
 
-        $.ajax({
-            url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
-            type:'GET',
-            dataType:'json',
-            success: function(res34){   
-                if (!isNaN(res34.sigpesos)&&res34.sigpesos!="") {
-                    var sigpesos=$('#sigpesos_usar').val(parseInt(res34.sigpesos));
-                    console.log('sigpesos peticion00',res34.sigpesos);
-                }else{             
-                    res34=0;       
-                    var sigpesos=$('#sigpesos_usar').val(0);
-                    console.log('sigpesos peticion1199',0);
-                }
-                $('#descuentoCumple').val(parseInt(res34.cumple));
-                if (res34.cumple>0) {
-                    $('#cumpleDes').val(1);
-                }
-                var desCumple=parseFloat($('#descuentoCumple').val());
-                //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
-                var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
-
-                $('#iva').val(getIva);
-                var iva=getIva;
-                console.log(getIva);
-            }
-
-        });
+        
         $.ajax({
             url:`{{ url('/api/pacientes/${pacienteId}/datos_fiscales') }}`,
             type: 'GET',
