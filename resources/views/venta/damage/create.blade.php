@@ -79,21 +79,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbody_productos">
-                                                    <tr id="producto_agregado{{producto->id}}">
+                                                    <tr id="producto_agregado{{$producto->id}}">
                                                         <td>
 
-                                                            <input class="form-control cantidad" min="1"  type="number" name="cantidad[]" value="1" stock="{{producto->stock}}" iva="{{producto->precio_publico_iva}}" readonly>
+                                                            <input class="form-control cantidad" min="1"  type="number" name="cantidad[]" value="1" stock="{{$producto->stock}}" iva="{{$producto->precio_publico_iva}}" readonly>
 
-                                                            <input class="form-control" type="hidden" name="producto_id[]" value="{{producto->id}}" iva={{producto->precio_publico_iva}}>
+                                                            <input class="form-control" type="hidden" name="producto_id[]" value="{{$producto->id}}" iva={{$producto->precio_publico_iva}}>
 
                                                         </td>
                                                         <td>
-                                                            {{producto->descripcion}}
+                                                            {{$producto->descripcion}}
                                                         </td>
                                                         <td class="precio_individual">
-                                                            {{producto->precio_publico}}
+                                                            {{$producto->precio_publico}}
                                                         </td>
-                                                        <td class="precio_individual_iva">{{producto->precio_publico_iva}}</td>
+                                                        <td class="precio_individual_iva">{{$producto->precio_publico_iva}}</td>
                                                         <td class="precio_total">
                                                             {{$producto->precio_publico}}
                                                         </td>
