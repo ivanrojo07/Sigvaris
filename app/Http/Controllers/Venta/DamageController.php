@@ -37,7 +37,7 @@ class DamageController extends Controller
     }
     public function Devolucion_Damage(Request $request)
     {
-
+        /*
         $venta = Venta::find($request->id_venta);
         $producto = Producto::where("sku", $request->input("sku"))->first();
 
@@ -68,7 +68,6 @@ class DamageController extends Controller
             $saldo=$productoQueSeraEntregado->precio_publico_iva;
         }else{
             if ($request->input("diferenciaPrecios")<0) {
-                # code...
                 $saldo=$request->input("diferenciaPrecios")-($request->input("diferenciaPrecios")*0.16);
                 $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
             }else{
@@ -94,6 +93,31 @@ class DamageController extends Controller
         $medicos = Doctor::get();
         $ventas = Venta::orderBy('fecha', 'desct')->paginate(5);
         return redirect()->route('ventas.index');
+        */
+
+
+
+
+
+        $venta = Venta::find($request->id_venta);
+        $producto = Producto::where("sku", $request->input("sku"))->first();
+        $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->first();
+
+
+        if ($request->input("diferenciaPrecios")==0) {
+            $saldo=$productoQueSeraEntregado->precio_publico_iva;
+        }else{
+            if ($request->input("diferenciaPrecios")<0) {
+                # code...
+                $saldo=$request->input("diferenciaPrecios")-($request->input("diferenciaPrecios")*0.16);
+                $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
+            }else{
+                $saldo=$request->input("diferenciaPrecios")+($request->input("diferenciaPrecios")*0.16);
+                $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
+            }
+        }
+
+        return view('venta.damage.create',['productoEntregado'=>$productoQueSeraEntregado,'productoDebuelto'=>$producto,'ventaAnterior'=>$venta,'paciente'=>$paciente,'saldo'=>$saldo]);
     }
 
 

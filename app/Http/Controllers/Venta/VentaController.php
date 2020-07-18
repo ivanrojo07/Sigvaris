@@ -390,6 +390,85 @@ class VentaController extends Controller
         $totalClientes = count($sumatoria_pacientes);
         return response()->json(["ventas" => $ventas, 'total' => $suma_ventas, 'suma_pacientes' => $totalClientes]);
     }
+    public function ventaDamage(Request $request)
+    {
+        if (!isset($request->producto_id) || is_null($request->producto_id)) {
+            return redirect()
+                ->back()
+                ->withErrors(['No se seleccionó ningún producto.'])
+                ->withInput($request->input());
+        }
+        //dd($request->PagoEfectivo+$request->PagoTarjeta==$request->total);
+        if (!($request->PagoEfectivo + $request->PagoTarjeta == round($request->total, 2))) {
+            return redirect()
+                ->back()
+                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+                ->withInput($request->input());
+        }
+        
+        // PREPARAR DATOS DE LA VENTA
+        $venta = new Venta($request->all());
+        $venta->oficina_id = session()->get('oficina');
+
+        // GUARDAMOS EL FITTER DE LA VENTA
+        if ($request->empleado_id) {
+            $venta->empleado_id = $request->empleado_id;
+        } else {
+            $venta->empleado_id = Auth::user()->empleado->id;
+            // dd('Empleado fitter'.Auth::user()->empleado );
+        }
+
+        // dd('VENTA QUE SERÁ GUARDADA'.$venta);
+
+        $productos = Producto::find($request->producto_id);
+        //agrgar codigo para hacer crm 
+
+        // REALIZAR VENTA
+        $this->realizarVentaProductosService->make($venta, $productos, $request);
+
+        if ($request->facturar == "1") {
+            $venta->update(['requiere_factura' => 1]);
+            DatoFiscal::updateOrCreate(
+                ['paciente_id' => $request->paciente_id],
+                [
+                    'calle' => $request->calle,
+                    'tipo_persona' => $request->tipo_persona,
+                    'nombre_o_razon_social' => $request->nombre_o_razon_social,
+                    'regimen_fiscal' => $request->regimen_fiscal,
+                    'correo' => $request->correo,
+                    'rfc' => $request->rfc,
+                    'num_ext' => $request->num_ext,
+                    'num_int' => $request->num_int,
+                    'codigo_postal' => $request->codigo_postal,
+                    'ciudad' => $request->ciudad,
+                    'alcaldia_o_municipio' => $request->alcaldia_o_municipio,
+                    'uso_cfdi' => $request->uso_cfdi
+                ]
+            );
+        }
+
+       
+
+        if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
+            # code...
+            foreach ($request->folio as $key => $folio) {
+                # code...
+                $Sigpesos = new Sigpesosventa([
+                    'venta_id' => $venta->id,
+                    'monto' => $request->monto[$key],
+                    'folio' => $folio,
+                    'folio_id' => $request->lista[$key]
+                ]);
+                $Sigpesos->save();
+            }
+        }
+
+        
+        $Paciente=Paciente::where("id",$request->paciente_id)->first();
+        $Paciente->update(['saldo_a_favor' => 0]);
+        // REDIRIGIR A LAS VENTAS REALIZADAS
+        return redirect()->route('ventas.index');
+    }
 }
 
 
