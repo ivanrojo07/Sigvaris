@@ -787,9 +787,10 @@
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+
                 $('#iva').val(getIva);
                 var iva=getIva;
-
+                console.log(getIva);
             }
 
         });
@@ -797,11 +798,7 @@
             url:`{{ url('/api/pacientes/${pacienteId}/datos_fiscales') }}`,
             type: 'GET',
             success: function(datos_fiscales){
-                console.log({
-                    pacienteId,
-                    datos_fiscales
-                });
-
+                
                 if(datos_fiscales.datosFiscales != null){
                 $('#tipoPersona').val(datos_fiscales.datosFiscales.tipo_persona);
                 $('#nombreORazonSocial').val(datos_fiscales.datosFiscales.nombre_o_razon_social);
@@ -817,8 +814,6 @@
                 $('#uso_cfdi').val(datos_fiscales.datosFiscales.uso_cfdi);
                 }
 
-                $('#saldoAFavor').val(datos_fiscales.saldo_a_favor);
-                console.table(datos_fiscales)
             }
         });
         
