@@ -116,7 +116,7 @@ class DamageController extends Controller
                 # code...
                 $saldo=$request->input("diferenciaPrecios")-($request->input("diferenciaPrecios")*0.16);
                 $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
-                dd(array('diferenciaPrecios'=>$request->input("diferenciaPrecios"),'saldo'=>$saldo,'iva'=>-($request->input("diferenciaPrecios")*0.16)));
+                dd(array('diferenciaPrecios'=>$request->input("diferenciaPrecios"),'saldo'=>$saldo,'iva'=>-($request->input("diferenciaPrecios")*0.16),"producto"=>$productoQueSeraEntregado->precio_publico_iva));
             }else{
                 $saldo=$request->input("diferenciaPrecios")+($request->input("diferenciaPrecios")*0.16);
                 $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
