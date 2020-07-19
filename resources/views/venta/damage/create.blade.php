@@ -493,7 +493,13 @@
         var iva=getIva;
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-saldoAFavor;
         
-        $('#total').val(aux.toFixed(2));
+        if (aux>0) {
+            $('#total').val(aux.toFixed(2));
+        }else{
+            $('#total').val(0);
+            $('#montonegativo').val(-aux.toFixed(2));
+            
+        }
         console.log('TOTAL ACTUALIZADO',$('#total').val());
 
     }
@@ -596,7 +602,13 @@
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
            
-            $('#total').val(aux.toFixed(2));
+            if (aux>0) {
+                $('#total').val(aux.toFixed(2));
+            }else{
+                $('#total').val(0);
+                $('#montonegativo').val(-aux.toFixed(2));
+                
+            }
             console.log('TOTAL ACTUALIZADO',$('#total').val());
          });
 
@@ -627,7 +639,13 @@
                 $('#iva').val(getIva);
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
-                $('#total').val(aux.toFixed(2));
+                if (aux>0) {
+                    $('#total').val(aux.toFixed(2));
+                }else{
+                    $('#total').val(0);
+                    $('#montonegativo').val(-aux.toFixed(2));
+                    
+                }
                 console.log('TOTAL ACTUALIZADO',$('#total').val());
 
 
@@ -671,7 +689,13 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
                
-                $('#total').val(aux.toFixed(2));
+                if (aux>0) {
+                    $('#total').val(aux.toFixed(2));
+                }else{
+                    $('#total').val(0);
+                    $('#montonegativo').val(-aux.toFixed(2));
+                    
+                }
                 console.log('TOTAL ACTUALIZADO',$('#total').val());
 
 
@@ -715,7 +739,12 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
                 
-                $('#total').val(aux.toFixed(2));
+                if (aux>0) {
+                    $('#total').val(aux.toFixed(2));
+                }else{
+                    $('#total').val(0);
+                    $('#montonegativo').val(-aux.toFixed(2));
+                }                
                 console.log('TOTAL ACTUALIZADO',$('#total').val());
 
             }
