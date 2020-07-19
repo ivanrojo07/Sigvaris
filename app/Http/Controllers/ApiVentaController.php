@@ -52,7 +52,7 @@ class ApiVentaController extends Controller
             $Descuento=0;
         }
         
-        //dd($Descuento);
+        dd($Descuento);
         return $totalNuevaVentaSinHacerDescuento-$Descuento;
 
         if (!is_null($venta->promocion) && $venta->promocion->unidad_descuento == 'Pieza') {
