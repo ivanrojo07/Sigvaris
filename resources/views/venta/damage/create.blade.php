@@ -294,7 +294,7 @@
 
                                             <input type="number" required="" class="form-control" name="total"
                                                 id="total" value="0" min="1" step="0.01" value="
-                                                @if($producto->precio_publico_iva-$saldo<0)
+                                                @if($producto->precio_publico_iva-$saldo>0)
                                                 {{$producto->precio_publico_iva-$saldo}}
                                                 @else
                                                     0
