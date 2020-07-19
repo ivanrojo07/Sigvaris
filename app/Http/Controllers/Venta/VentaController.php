@@ -14,6 +14,8 @@ use App\Crm;
 use App\DatoFiscal;
 use App\Folio;
 use App\Sigpesosventa;
+use App\HistorialCambioVenta;
+use App\ProductoDamage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
