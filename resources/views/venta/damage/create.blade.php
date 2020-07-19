@@ -33,6 +33,16 @@
                     <input type="hidden" name="TipoDamage" id="TipoDamage" value="{{$TipoDamage}}">
                     <input type="hidden" name="DesDamage" id="DesDamage" value="{{$DesDamage}}">
                     <input type="hidden" name="VentaAnterior" id="VentaAnterior" value="{{$VentaA}}">
+
+                    <input type="number" required="" class="form-control" name="montonegativo"
+                                                id="montonegativo" value="0" min="1" step="0.01" value="
+                                                @if($producto->precio_publico_iva-$saldo<0)
+                                                {{$saldo-$producto->precio_publico_iva}}
+                                                @else
+                                                    0
+                                                @endif
+                                                " readonly>
+
                     <div class="row">
                         <div class="col-4 form-group">
                             <label class="control-label">Fitter:</label>
@@ -283,7 +293,13 @@
                                             <label for="" class="text-uppercase text-muted">Total: $ </label>
 
                                             <input type="number" required="" class="form-control" name="total"
-                                                id="total" value="0" min="1" step="0.01" value="{{$producto->precio_publico_iva-$saldo}}" readonly>
+                                                id="total" value="0" min="1" step="0.01" value="
+                                                @if($producto->precio_publico_iva-$saldo>0)
+                                                {{$producto->precio_publico_iva-$saldo}}
+                                                @else
+                                                    0
+                                                @endif
+                                                " readonly>
                                         </div>
                                         {{-- INPUT DESCUENTO --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">

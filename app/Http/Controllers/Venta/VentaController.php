@@ -395,12 +395,7 @@ class VentaController extends Controller
 
     public function ventaDamage(Request $request)
     {
-       if ($request->input('total')<0) {
-           $saldo_a_favor=$request->input('total');
-           $request->input('total')=0;
-       }else{
-            $saldo_a_favor=0;
-       }
+        $saldo_a_favor=$request->input('montonegativo');
         
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
