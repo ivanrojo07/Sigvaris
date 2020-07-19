@@ -106,6 +106,8 @@ class DamageController extends Controller
         $producto = Producto::where("sku", $request->input("sku"))->first();
         $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->first();
         $empleadosFitter = Empleado::fitters()->get();
+        $TipoDamage =$request->tipo;
+        $DesDamage =$request->descripcion;
 
         if ($request->input("diferenciaPrecios")==0) {
             $saldo=$productoQueSeraEntregado->precio_publico_iva;
@@ -127,7 +129,10 @@ class DamageController extends Controller
                                            'saldo'=>$saldo,
                                            'folio' => Venta::count() + 1,
                                            'empleadosFitter' => $empleadosFitter,
-                                           'Folios' => Folio::get()
+                                           'Folios' => Folio::get(),
+                                           'TipoDamage'=>$TipoDamage,
+                                           'DesDamage'=>$DesDamage,
+                                           'VentaA'=>$venta->id
                                        ]);
     }
 

@@ -390,21 +390,17 @@ class VentaController extends Controller
         $totalClientes = count($sumatoria_pacientes);
         return response()->json(["ventas" => $ventas, 'total' => $suma_ventas, 'suma_pacientes' => $totalClientes]);
     }
+
+
+
     public function ventaDamage(Request $request)
     {
-        if (!isset($request->producto_id) || is_null($request->producto_id)) {
-            return redirect()
-                ->back()
-                ->withErrors(['No se seleccionó ningún producto.'])
-                ->withInput($request->input());
-        }
-        //dd($request->PagoEfectivo+$request->PagoTarjeta==$request->total);
-        if (!($request->PagoEfectivo + $request->PagoTarjeta == round($request->total, 2))) {
-            return redirect()
-                ->back()
-                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
-                ->withInput($request->input());
-        }
+       if ($request->input('total')<0) {
+           $saldo_a_favor=$request->input('total');
+           $request->input('total')=0;
+       }else{
+            $saldo_a_favor=0;
+       }
         
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
@@ -463,9 +459,31 @@ class VentaController extends Controller
             }
         }
 
+
+        $HistorialCambioVenta = new HistorialCambioVenta(
+            array(
+                'tipo_cambio' => "Damage",
+                'responsable_id' => Auth::user()->id,
+                'venta_id' => $request->VentaAnterior,
+                'observaciones' => '',
+                'producto_devuelto_id' => $request->productoDevuelto,
+                'producto_entregado_id' => $productos[0]->id
+            )
+        );
+
+
+        $productosDamage = new ProductoDamage;
+        $productosDamage->producto_id = $request->productoDevuelto;
+        $productosDamage->tipo_damage = $request->TipoDamage;
+        $productosDamage->user_id = Auth::user()->id;
+        $productosDamage->descripcion = $request->DesDamage;
+        $productosDamage->save();
+
+        $HistorialCambioVenta->save();
         
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        $Paciente->update(['saldo_a_favor' => 0]);
+        $Paciente->update(['saldo_a_favor' => $saldo_a_favor]);
+
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
     }

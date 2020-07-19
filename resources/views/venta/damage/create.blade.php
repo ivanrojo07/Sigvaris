@@ -25,10 +25,14 @@
         </div>
         <div class="card-body">
             <div class="card-body">
-                <form role="form" id="form-cliente" method="POST" action="" name="form">
+                <form role="form" id="form-cliente" method="POST" action="{{route('ventaDamage.create')}}" name="form">
                     {{ csrf_field() }}
                     <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                     <input type="hidden" name="cumpleDes" id="cumpleDes" value="0">
+                    <input type="hidden" name="productoDevuelto" id="productoDevuelto" value="{{$productoDebuelto->id}}">
+                    <input type="hidden" name="TipoDamage" id="TipoDamage" value="{{$TipoDamage}}">
+                    <input type="hidden" name="DesDamage" id="DesDamage" value="{{$DesDamage}}">
+                    <input type="hidden" name="VentaAnterior" id="VentaAnterior" value="{{$VentaA}}">
                     <div class="row">
                         <div class="col-4 form-group">
                             <label class="control-label">Fitter:</label>
@@ -50,8 +54,6 @@
                             @endif
                         </div>
                     </div>
-
-                    <hr>
 
                     
 
@@ -532,9 +534,6 @@
   
 
 
-
-
-        // '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option></select><input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div></div>'; //New input field html 
         var x = 1; //Initial field counter is 1
         
         //Once add button is clicked
@@ -761,12 +760,6 @@
         
         $('#total').val(aux.toFixed(2));
 
-
-
-
-
-
-        
         $.ajax({
             url:`{{ url('/api/pacientes/${pacienteId}/datos_fiscales') }}`,
             type: 'GET',

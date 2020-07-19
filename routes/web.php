@@ -155,6 +155,8 @@ Route::get('calcular-diferencia-devolucion', 'Venta\DevolucionController@calcula
 
 Route::resource('ventas', 'Venta\VentaController');
 
+Route::post('ventaDamage','Venta\VentaController@ventaDamage')->name('ventaDamage.create');
+
 Route::resource('negado', 'Venta\NegadoController');
 Route::post('negado/create', 'Venta\NegadoController@create');
 Route::post('negado/{negado}/editar', 'Venta\NegadoController@editar');
