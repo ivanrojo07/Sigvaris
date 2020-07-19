@@ -19,14 +19,14 @@ class ApiVentaController extends Controller
 
         $arrayPreciosProductos = $this->getArrayPreciosProductos($venta);
 
-        $totalVentaOriginal = $this->calcularTotalVentaOriginal($venta, $arrayPreciosProductos);
+        $totalVentaOriginal = $venta->total;
 
 
         $arrayPreciosProductosConNuevoProducto = $this->getArrayPreciosProductosConNuevo($arrayPreciosProductos, $productoQueSeraEntregado, $precioProductoQueSeraDevuelto);
         $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
 
 
-        $diferencia = $totalVentaOriginal - $totalVentaBueva;
+        $diferencia = $totalVentaOriginal - $totalVentaBueva -($totalVentaBueva*.16);
         
         return response()->json([
             'arrayViejosProductos' => $arrayPreciosProductos,
