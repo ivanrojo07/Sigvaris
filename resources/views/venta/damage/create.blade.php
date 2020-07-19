@@ -35,12 +35,7 @@
                     <input type="hidden" name="VentaAnterior" id="VentaAnterior" value="{{$VentaA}}">
 
                     <input type="hidden" class="form-control" name="montonegativo"
-                                                id="montonegativo" value="0" min="1" step="0.01" value="
-                                                @if($producto->precio_publico_iva-$saldo>0)
-                                                {{$saldo-$producto->precio_publico_iva}}
-                                                @else
-                                                    0
-                                                @endif
+                                                id="montonegativo" value="0" min="1" step="0.01" value="{{$saldo-$producto->precio_publico_iva}}
                                                 " >
 
                     <div class="row">
@@ -293,13 +288,7 @@
                                             <label for="" class="text-uppercase text-muted">Total: $ </label>
 
                                             <input type="number" required="" class="form-control" name="total"
-                                                id="total" value="0" min="1" step="0.01" value="
-                                                @if($producto->precio_publico_iva-$saldo>0)
-                                                {{$producto->precio_publico_iva-$saldo}}
-                                                @else
-                                                    0
-                                                @endif
-                                                " readonly>
+                                                id="total" value="0" min="1" step="0.01" value="{{$producto->precio_publico_iva-$saldo}}" readonly>
                                         </div>
                                         {{-- INPUT DESCUENTO --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
@@ -773,8 +762,14 @@
         
         var iva=getIva;
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+        if (aux>0) {
+            $('#total').val(aux.toFixed(2));
+        }else{
+            $('#total').val(0);
+            $('#montonegativo').val(-aux.toFixed(2));
+            
+        }
         
-        $('#total').val(aux.toFixed(2));
 
         $.ajax({
             url:`{{ url('/api/pacientes/${pacienteId}/datos_fiscales') }}`,
