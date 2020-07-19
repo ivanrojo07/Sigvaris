@@ -34,14 +34,14 @@
                     <input type="hidden" name="DesDamage" id="DesDamage" value="{{$DesDamage}}">
                     <input type="hidden" name="VentaAnterior" id="VentaAnterior" value="{{$VentaA}}">
 
-                    <input type="number" required="" class="form-control" name="montonegativo"
+                    <input type="hidden" class="form-control" name="montonegativo"
                                                 id="montonegativo" value="0" min="1" step="0.01" value="
-                                                @if($producto->precio_publico_iva-$saldo<0)
+                                                @if($producto->precio_publico_iva-$saldo>0)
                                                 {{$saldo-$producto->precio_publico_iva}}
                                                 @else
                                                     0
                                                 @endif
-                                                " readonly>
+                                                " >
 
                     <div class="row">
                         <div class="col-4 form-group">
@@ -294,7 +294,7 @@
 
                                             <input type="number" required="" class="form-control" name="total"
                                                 id="total" value="0" min="1" step="0.01" value="
-                                                @if($producto->precio_publico_iva-$saldo>0)
+                                                @if($producto->precio_publico_iva-$saldo<0)
                                                 {{$producto->precio_publico_iva-$saldo}}
                                                 @else
                                                     0
