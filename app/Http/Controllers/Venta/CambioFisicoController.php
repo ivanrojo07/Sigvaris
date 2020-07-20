@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Ventas\StoreCambioFisicoService;
 use App\Venta;
+use App\Producto;
+use App\Empleado;
+use App\Folio;
 
 class CambioFisicoController extends Controller
 {
