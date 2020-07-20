@@ -37,8 +37,34 @@ class CambioFisicoController extends Controller
      */
     public function store(Request $request, Venta $venta)
     {
-        $storeCambioFisicoService = new StoreCambioFisicoService($request, $venta);
-        return redirect()->route('ventas.index');
+
+        $producto = Producto::where("sku", $request->input("skuProductoRegresado"))->where("oficina_id",session('oficina'))->first();
+        $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->where("oficina_id",session('oficina'))->first();
+
+        $empleadosFitter = Empleado::fitters()->get();
+        $ObserDevuelto =$request->observaciones;
+
+        if ($request->input("diferenciaPrecios")==0) {
+            $saldo=$productoQueSeraEntregado->precio_publico_iva;
+        }else{
+            $saldo=$request->input("diferenciaPrecios");
+            $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;            
+        }
+
+        return view('venta.cambios_fisicos.concluir',['producto'=>$productoQueSeraEntregado,
+                                           'productoDebuelto'=>$producto,
+                                           'ventaAnterior'=>$venta,
+                                           'paciente'=>$venta->paciente,
+                                           'saldo'=>$saldo,
+                                           'folio' => Venta::count() + 1,
+                                           'empleadosFitter' => $empleadosFitter,
+                                           'Folios' => Folio::get(),
+                                           'ObserDevuelto'=>$ObserDevuelto,
+                                           'VentaA'=>$venta->id
+                                       ]);
+
+        //$storeCambioFisicoService = new StoreCambioFisicoService($request, $venta);
+        //return redirect()->route('ventas.index');
     }
 
     /**

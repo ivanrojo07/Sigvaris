@@ -103,8 +103,8 @@ class DamageController extends Controller
 
 
         $venta = Venta::find($request->id_venta);
-        $producto = Producto::where("sku", $request->input("sku"))->first();
-        $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->first();
+        $producto = Producto::where("sku", $request->input("sku"))->where("oficina_id",session('oficina'))->first();
+        $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->where("oficina_id",session('oficina'))->first();
         $empleadosFitter = Empleado::fitters()->get();
         $TipoDamage =$request->tipo;
         $DesDamage =$request->descripcion;

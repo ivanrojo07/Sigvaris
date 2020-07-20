@@ -484,6 +484,92 @@ class VentaController extends Controller
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
     }
+
+
+    public function ventaCambio(Request $request)
+    {
+        $saldo_a_favor=$request->input('montonegativo');
+        
+        // PREPARAR DATOS DE LA VENTA
+        $venta = new Venta($request->all());
+        $venta->oficina_id = session()->get('oficina');
+
+        // GUARDAMOS EL FITTER DE LA VENTA
+        if ($request->empleado_id) {
+            $venta->empleado_id = $request->empleado_id;
+        } else {
+            $venta->empleado_id = Auth::user()->empleado->id;
+            // dd('Empleado fitter'.Auth::user()->empleado );
+        }
+
+        // dd('VENTA QUE SERÁ GUARDADA'.$venta);
+
+        $productos = Producto::find($request->producto_id);
+        //agrgar codigo para hacer crm 
+
+        // REALIZAR VENTA
+        $this->realizarVentaProductosService->make($venta, $productos, $request);
+
+        if ($request->facturar == "1") {
+            $venta->update(['requiere_factura' => 1]);
+            DatoFiscal::updateOrCreate(
+                ['paciente_id' => $request->paciente_id],
+                [
+                    'calle' => $request->calle,
+                    'tipo_persona' => $request->tipo_persona,
+                    'nombre_o_razon_social' => $request->nombre_o_razon_social,
+                    'regimen_fiscal' => $request->regimen_fiscal,
+                    'correo' => $request->correo,
+                    'rfc' => $request->rfc,
+                    'num_ext' => $request->num_ext,
+                    'num_int' => $request->num_int,
+                    'codigo_postal' => $request->codigo_postal,
+                    'ciudad' => $request->ciudad,
+                    'alcaldia_o_municipio' => $request->alcaldia_o_municipio,
+                    'uso_cfdi' => $request->uso_cfdi
+                ]
+            );
+        }
+
+       
+
+        if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
+            # code...
+            foreach ($request->folio as $key => $folio) {
+                # code...
+                $Sigpesos = new Sigpesosventa([
+                    'venta_id' => $venta->id,
+                    'monto' => $request->monto[$key],
+                    'folio' => $folio,
+                    'folio_id' => $request->lista[$key]
+                ]);
+                $Sigpesos->save();
+            }
+        }
+
+
+        
+        HistorialCambioVenta::create([
+            'tipo_cambio' => 'CAMBIO PRODUCTO',
+            'responsable_id' => Auth::user()->id,
+            'venta_id' => $request->VentaAnterior,
+            'producto_entregado_id' =>  $productos[0]->id,
+            'producto_devuelto_id' => $request->productoDevuelto,
+            'observaciones' => $request->observacionesDevuelto
+        ]);
+
+        $ProductoDevuelto = Producto::where('id', $request->productoDevuelto)->first();
+
+        $ProductoDevuelto->update([
+            'stock' => $ProductoDevuelto->stock + 1
+        ]);
+
+        $Paciente=Paciente::where("id",$request->paciente_id)->first();
+        $Paciente->update(['saldo_a_favor' => $saldo_a_favor]);
+
+        // REDIRIGIR A LAS VENTAS REALIZADAS
+        return redirect()->route('ventas.index');
+    }
 }
 
 
