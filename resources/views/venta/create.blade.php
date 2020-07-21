@@ -776,7 +776,10 @@
         // alert(producto);
         if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
             let cant = parseFloat( $(`#producto_agregado_cantadad${producto.id}`).val());
-            $(`#producto_agregado_cantadad${producto.id}`).val(cant++);
+            console.log('----------',cant);
+            console.log('----------',cant++);
+            $(`#producto_agregado_cantadad${producto.id}`).val(cant);
+            
             cambiarTotal2($(`#producto_agregado_cantidad${producto.id}`), $(`#producto_agregado${producto.id}`));
         }else{
             if (producto.stock>0) {
@@ -886,7 +889,7 @@
     function cambiarTotal2(a, p){
 
         let cant = parseFloat(a.val());
-        console.log('----------',cant);
+        
         if (a.attr("stock")>cant) {
             let cantiva = parseFloat(a.attr("iva"));
             let ind = parseFloat($(p).find('.precio_individual').first().text());
