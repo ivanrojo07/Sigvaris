@@ -775,7 +775,7 @@
         let producto = JSON.parse($(p).val());
         // alert(producto);
         if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
-            $(`#producto_agregado_cantadad${producto.id}`).value($(`#producto_agregado_cantadad${producto.id}`).value()+1);
+            $(`#producto_agregado_cantadad${producto.id}`).val($(`#producto_agregado_cantadad${producto.id}`).val()+1);
             cambiarTotal($(`#producto_agregado_cantadad${producto.id}`), '#producto_agregado${producto.id}');
         }else{
             if (producto.stock>0) {
