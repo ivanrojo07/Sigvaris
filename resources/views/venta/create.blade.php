@@ -885,7 +885,7 @@
     function cambiarTotal2(a, p){
 
         let cant = parseFloat(a.value);
-        console.log('----------',a.attr("stock"));
+        console.log('----------',cant);
         if (a.attr("stock")>cant) {
             let cantiva = parseFloat(a.attr("iva"));
             let ind = parseFloat($(p).find('.precio_individual').first().text());
