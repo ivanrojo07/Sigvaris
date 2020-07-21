@@ -559,16 +559,17 @@ class VentaController extends Controller
        
 
         if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
-            # code...
-            foreach ($request->folio as $key => $folio) {
-                # code...
-                $Sigpesos = new Sigpesosventa([
-                    'venta_id' => $venta->id,
-                    'monto' => $request->monto[$key],
-                    'folio' => $folio,
-                    'folio_id' => $request->lista[$key]
-                ]);
-                $Sigpesos->save();
+            if ($request->input('sigpesos_usar')>0) {
+                foreach ($request->folio as $key => $folio) {
+                    # code...
+                    $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => $request->monto[$key],
+                        'folio' => $folio,
+                        'folio_id' => $request->lista[$key]
+                    ]);
+                    $Sigpesos->save();
+                }
             }
         }
 
