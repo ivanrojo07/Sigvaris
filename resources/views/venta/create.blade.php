@@ -774,38 +774,42 @@
     function agregarProducto(p){
         let producto = JSON.parse($(p).val());
         // alert(producto);
-        if (producto.stock>0) {
-            $('#tbody_productos')
-        .append(`
-        <tr id="producto_agregado${producto.id}">
-            <td>
+        if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
+            $(`#producto_agregado_cantadad${producto.id}`).value($(`#producto_agregado_cantadad${producto.id}`).value()+1);
+            cambiarTotal($(`#producto_agregado_cantadad${producto.id}`), '#producto_agregado${producto.id}');
+        }else{
+            if (producto.stock>0) {
+                $('#tbody_productos')
+                .append(`
+                <tr id="producto_agregado${producto.id}">
+                    <td>
 
-                <input class="form-control cantidad" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1" stock="${producto.stock}" iva=${producto.precio_publico_iva}>
-                <input class="form-control" type="hidden" name="producto_id[]" value="${producto.id}" iva=${producto.precio_publico_iva}>
+                        <input class="form-control cantidad" id="producto_agregado_cantadad${producto.id}" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1" stock="${producto.stock}" iva=${producto.precio_publico_iva}>
+                        <input class="form-control" type="hidden" name="producto_id[]" value="${producto.id}" iva=${producto.precio_publico_iva}>
 
-            </td>
-            <td>
-                ${producto.descripcion}
-            </td>
-            <td class="precio_individual">
-                ${producto.precio_publico}
-            </td>
-            <td class="precio_individual_iva">${producto.precio_publico_iva}</td>
-            <td class="precio_total">
-                ${producto.precio_publico}
-            </td>
-            <td>
-                <button onclick="quitarProducto('#producto_agregado${producto.id}')" type="button" class="btn btn-danger boton_quitar">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </td>
-        </tr>`);
-        cambiarTotalVenta();
-        $('#BuscarProducto').val("");
-    }else{
-        alert('Producto sin stock');
-    }
-        
+                    </td>
+                    <td>
+                        ${producto.descripcion}
+                    </td>
+                    <td class="precio_individual">
+                        ${producto.precio_publico}
+                    </td>
+                    <td class="precio_individual_iva">${producto.precio_publico_iva}</td>
+                    <td class="precio_total">
+                        ${producto.precio_publico}
+                    </td>
+                    <td>
+                        <button onclick="quitarProducto('#producto_agregado${producto.id}')" type="button" class="btn btn-danger boton_quitar">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </td>
+                </tr>`);
+                cambiarTotalVenta();
+                $('#BuscarProducto').val("");
+            }else{
+                alert('Producto sin stock');
+            }
+        } 
     }
 
     function quitarProducto(p){
