@@ -775,12 +775,6 @@
         let producto = JSON.parse($(p).val());
         // alert(producto);
         if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
-            var input=$(`#producto_agregado_cantadad${producto.id}`);
-            let cant = parseFloat( input.val());
-            console.log('----------',cant);
-            console.log('----------',cant++);
-            $(`#producto_agregado_cantadad${producto.id}`).val(cant);
-            
             cambiarTotal2($(`#producto_agregado_cantidad${producto.id}`), $(`#producto_agregado${producto.id}`));
         }else{
             if (producto.stock>0) {
@@ -890,7 +884,7 @@
     function cambiarTotal2(a, p){
 
         let cant = parseFloat(a.val());
-        
+        cant=cant+1;
         if (a.attr("stock")>cant) {
             let cantiva = parseFloat(a.attr("iva"));
             let ind = parseFloat($(p).find('.precio_individual').first().text());
@@ -899,6 +893,7 @@
             console.log('----------',ind);
             $(p).find('.precio_total').text(total);
             $(p).find('.precio_individual_iva').text(parseFloat(totaliva).toFixed(2));
+            a.val(parseFloat(cant));
             cambiarTotalVenta();
         }else{
         alert('Producto sin stock necesario');
