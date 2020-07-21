@@ -775,7 +775,8 @@
         let producto = JSON.parse($(p).val());
         // alert(producto);
         if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
-            let cant = parseFloat( $(`#producto_agregado_cantadad${producto.id}`).val());
+            var input=$(`#producto_agregado_cantadad${producto.id}`);
+            let cant = parseFloat( input.val());
             console.log('----------',cant);
             console.log('----------',cant++);
             $(`#producto_agregado_cantadad${producto.id}`).val(cant);
