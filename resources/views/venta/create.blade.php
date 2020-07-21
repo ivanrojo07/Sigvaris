@@ -776,7 +776,7 @@
         // alert(producto);
         if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
             $(`#producto_agregado_cantadad${producto.id}`).val(parseInt($(`#producto_agregado_cantadad${producto.id}`).val())+1);
-            cambiarTotal2($(`#producto_agregado_cantadad${producto.id}`), '#producto_agregado${producto.id}');
+            cambiarTotal2($(`#producto_agregado_cantidad${producto.id}`), '#producto_agregado${producto.id}');
         }else{
             if (producto.stock>0) {
                 $('#tbody_productos')
@@ -784,7 +784,7 @@
                 <tr id="producto_agregado${producto.id}">
                     <td>
 
-                        <input class="form-control cantidad" id="producto_agregado_cantadad${producto.id}" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1" stock="${producto.stock}" iva=${producto.precio_publico_iva}>
+                        <input class="form-control cantidad" id="producto_agregado_cantidad${producto.id}" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1" stock="${producto.stock}" iva=${producto.precio_publico_iva}>
                         <input class="form-control" type="hidden" name="producto_id[]" value="${producto.id}" iva=${producto.precio_publico_iva}>
 
                     </td>
@@ -885,6 +885,7 @@
     function cambiarTotal2(a, p){
 
         let cant = parseFloat(a.value);
+        console.log('----------',a.attr("stock"));
         if (a.attr("stock")>cant) {
             let cantiva = parseFloat(a.attr("iva"));
             let ind = parseFloat($(p).find('.precio_individual').first().text());
