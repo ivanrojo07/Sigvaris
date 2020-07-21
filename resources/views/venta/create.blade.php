@@ -775,8 +775,8 @@
         let producto = JSON.parse($(p).val());
         // alert(producto);
         if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
-            $(`#producto_agregado_cantadad${producto.id}`).val($(`#producto_agregado_cantadad${producto.id}`).val()+1);
-            cambiarTotal($(`#producto_agregado_cantadad${producto.id}`), '#producto_agregado${producto.id}');
+            $(`#producto_agregado_cantadad${producto.id}`).val(parseInt($(`#producto_agregado_cantadad${producto.id}`).val())+1);
+            cambiarTotal2($(`#producto_agregado_cantadad${producto.id}`), '#producto_agregado${producto.id}');
         }else{
             if (producto.stock>0) {
                 $('#tbody_productos')
@@ -882,6 +882,23 @@
         // $('#total').val('ola');
     }
 
+    function cambiarTotal2(a, p){
+
+        let cant = parseFloat(a.value);
+        if (a.attr("stock")>cant) {
+            let cantiva = parseFloat(a.attr("iva"));
+            let ind = parseFloat($(p).find('.precio_individual').first().text());
+            let total = cant*ind;
+            let totaliva = cantiva*cant;
+            console.log('----------',ind);
+            $(p).find('.precio_total').text(total);
+            $(p).find('.precio_individual_iva').text(parseFloat(totaliva).toFixed(2));
+            cambiarTotalVenta();
+        }else{
+        alert('Producto sin stock necesario');
+    }
+        
+    }
     function cambiarTotal(a, p){
 
         let cant = parseFloat(a.value);
@@ -899,6 +916,7 @@
     }
         
     }
+
 
     $(document).ready(function () {
         $('#sigpesos_usar').change(function(){
