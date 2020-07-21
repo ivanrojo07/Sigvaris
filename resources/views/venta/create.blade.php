@@ -884,7 +884,7 @@
 
     function cambiarTotal2(a, p){
 
-        let cant = parseFloat(a.value);
+        let cant = parseFloat(a.val());
         console.log('----------',cant);
         if (a.attr("stock")>cant) {
             let cantiva = parseFloat(a.attr("iva"));
