@@ -776,7 +776,7 @@
         // alert(producto);
         if ( $(`#producto_agregado${producto.id}`).length > 0 ) {
             $(`#producto_agregado_cantadad${producto.id}`).val(parseInt($(`#producto_agregado_cantadad${producto.id}`).val())+1);
-            cambiarTotal(`#producto_agregado_cantidad${producto.id}`, `#producto_agregado${producto.id}`);
+            cambiarTotal2($(`#producto_agregado_cantidad${producto.id}`), $(`#producto_agregado${producto.id}`));
         }else{
             if (producto.stock>0) {
                 $('#tbody_productos')
