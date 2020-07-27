@@ -51,10 +51,15 @@
                                     value=" {{Auth::user()->empleado->nombre}} {{Auth::user()->empleado->appaterno}} {{Auth::user()->empleado->apmaterno}}">
                                 @endif
                             @else
-                                <input type="text" class="form-control" id="empleado_id" required readonly
-                                    value="{{Auth::user()->empleado->id}}" style="display: none;">
-                                <input type="text" class="form-control" required readonly
-                                    value=" {{Auth::user()->empleado->nombre}} {{Auth::user()->empleado->appaterno}} {{Auth::user()->empleado->apmaterno}}">
+                                <select name="empleado_id" id="empleado_id" class="form-control" required>
+                                    <option value="">Seleccionar</option>
+                                    @foreach ($empleadosFitter as $empleadoFitter)
+                                    <option value="{{$empleadoFitter->id}}">
+                                        {{$empleadoFitter->nombre}} {{$empleadoFitter->appaterno}}
+                                        {{$empleadoFitter->apmaterno}}
+                                    </option>
+                                    @endforeach
+                                </select>
                             @endif
                         </div>
                     </div>
