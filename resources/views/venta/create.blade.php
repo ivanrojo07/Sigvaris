@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-4 form-group">
                             <label class="control-label">Fitter:</label>
-                            @if (isset(Auth::user()->empleado->->datosLaborales()->orderBy('id', 'desc')->first()))
+                            @if (isset(Auth::user()->empleado->datosLaborales()->orderBy('id', 'desc')->first()))
                                 @if (Auth::user()->id == 1 || Auth::user()->empleado->puesto->nombre != "fitter")
                                 <select name="empleado_id" id="empleado_id" class="form-control" required>
                                     <option value="">Seleccionar</option>
