@@ -133,7 +133,7 @@
                                             <label for="banco" class="text-uppercase text-muted">Banco</label>
                                             <select class="form-control" name="banco" id="banco">
                                                 <option value="">Selecciona...</option>
-                                                <option value="SANTANDER">Banco</option>
+                                                <option value="BANCO">Banco</option>
                                                 <option value="AMEX">Amex</option>
                                             </select>
                                         </div>
