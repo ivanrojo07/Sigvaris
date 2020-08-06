@@ -13,6 +13,7 @@ use App\Empleado;
 use App\Crm;
 use App\DatoFiscal;
 use App\Folio;
+use App\Banco;
 use App\Sigpesosventa;
 use App\HistorialCambioVenta;
 use App\ProductoDamage;
@@ -81,6 +82,7 @@ class VentaController extends Controller
         $productos = Producto::where('id', '<', 1)->get();
         $pacientes = Paciente::where('id', '<', 1)->get();
         $empleadosFitter = Empleado::fitters()->get();
+        $Bancos = Banco::get();
         return view('venta.create', [
             'pacientes' => null,
             'paciente' => null,
@@ -88,7 +90,8 @@ class VentaController extends Controller
             'productos' => $productos,
             'folio' => Venta::count() + 1,
             'empleadosFitter' => $empleadosFitter,
-            'Folios' => Folio::get()
+            'Folios' => Folio::get(),
+            'Bancos' => $Bancos
         ]);
     }
 
@@ -100,6 +103,7 @@ class VentaController extends Controller
         $productos = Producto::where('id', '<', 1)->get();
         $pacientes = Paciente::get();
         $empleadosFitter = Empleado::fitters()->get();
+        $Bancos = Banco::get();
         //dd($pacientes);
         return view('venta.create', [
             'pacientes' => $pacientes,
@@ -108,7 +112,8 @@ class VentaController extends Controller
             'productos' => $productos,
             'folio' => Venta::count() + 1,
             'empleadosFitter' => $empleadosFitter,
-            'Folios' => Folio::get()
+            'Folios' => Folio::get(),
+            'Bancos' => $Bancos
         ]);
     }
     /**

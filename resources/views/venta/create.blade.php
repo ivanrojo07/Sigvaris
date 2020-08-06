@@ -245,9 +245,9 @@
                                             style="display: none;">
                                             <label for="banco" class="text-uppercase text-muted">Banco</label>
                                             <select class="form-control" name="banco" id="banco">
-                                                <option value="">Selecciona...</option>
-                                                <option value="SANTANDER">Banco</option>
-                                                <option value="AMEX">Amex</option>
+                                                @foreach ($Bancos as $Banco)
+                                                <option value="{{$Banco->nombre}}">{{$Banco->nombre}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         {{-- INPUT numeros de  tarjeta --}}
