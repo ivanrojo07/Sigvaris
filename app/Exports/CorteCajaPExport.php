@@ -47,11 +47,11 @@ class CorteCajaPExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->sigpesos,
 
 
-                    $Venta->banco!= null ? $Venta->banco =="BANCO"? $Venta->PagoTarjeta:"" :"",
-                    $Venta->banco!= null ? $Venta->banco =="BANCO"? $Venta->digitos_targeta:"" :"",
-
                     $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->PagoTarjeta:"" :"",
                     $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->digitos_targeta:"" :"",
+
+                    $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->PagoTarjeta:"" :"",
+                    $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->digitos_targeta:"" :"",
 
                     "",
 
