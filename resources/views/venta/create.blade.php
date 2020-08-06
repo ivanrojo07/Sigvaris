@@ -343,7 +343,7 @@
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Fecha: </label>
                                             <input type="date" name="fecha" class="form-control" readonly=""
-                                                value="{{date('Y-m-d H:i:s')}}" required="">
+                                                value="{{date('Y-m-d')}}" required="">
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Folio: </label>
