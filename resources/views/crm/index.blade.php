@@ -61,7 +61,7 @@
                                                         <select class="form-control" name="paciente_id" id="paciente_id" required="">
                                                             <option value="">Selecciona paciente...</option>
                                                             @foreach($pacientes as $paciente)
-                                                            <option value="{{$paciente->id}}">{{$paciente->nombre}} {{$paciente->paterno}}</option>
+                                                            <option value="{{$paciente->id}}">{{$paciente->nombre}} {{$paciente->paterno}} {{$paciente->materno}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
