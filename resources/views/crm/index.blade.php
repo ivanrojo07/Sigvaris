@@ -152,7 +152,7 @@
                                             <div class="form-group col-4 offset-4">
                                                     <label for="actual">Paciente</label>
                                                     <input type="text" class="form-control" 
-                                                name="nombre" value="" readonly="" id="nombre_completo"> 
+                                                name="nombre" value="" readonly="" id="nombre"> 
                                                 <input type="text" class="form-control" 
                                                 name="nombre" value="" readonly="" id="paterno">
                                                 <input type="text" class="form-control" 
@@ -510,8 +510,6 @@
         $('#nombre').val(paciente.nombre);
         $('#paterno').val(paciente.paterno);
         $('#materno').val(paciente.materno);
-        $('#nombre_completo').val(paciente.getFullnameAttribute());
-
         $('#telefono').val(paciente.telefono);
         $('#celular').val(paciente.celular);
         $('#mail').val(paciente.mail);
