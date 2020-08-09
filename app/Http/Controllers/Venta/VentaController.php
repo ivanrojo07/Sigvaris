@@ -77,7 +77,7 @@ class VentaController extends Controller
      */
     public function create()
     {
-        $hoy = Carbon::now()->toDateString();
+        $hoy = Carbon::now(new DateTimeZone('America/Mexico_City'))->toDateString();
         $descuentos = Descuento::where('inicio', '<=', $hoy)->where('fin', '>=', $hoy)->get();
         $productos = Producto::where('id', '<', 1)->get();
         $pacientes = Paciente::where('id', '<', 1)->get();
