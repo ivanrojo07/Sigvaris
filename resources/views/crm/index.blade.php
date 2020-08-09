@@ -510,7 +510,7 @@
         $('#nombre').val(paciente.nombre);
         $('#paterno').val(paciente.paterno);
         $('#materno').val(paciente.materno);
-        $('#nombre_completo').val(paciente..getFullnameAttribute());
+        $('#nombre_completo').val(paciente.getFullnameAttribute());
 
         $('#telefono').val(paciente.telefono);
         $('#celular').val(paciente.celular);
