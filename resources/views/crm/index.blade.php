@@ -61,7 +61,7 @@
                                                         <select class="form-control" name="paciente_id" id="paciente_id" required="">
                                                             <option value="">Selecciona paciente...</option>
                                                             @foreach($pacientes as $paciente)
-                                                            <option value="{{$paciente->id}}">{{$paciente->nombre}} {{$paciente->paterno}} {{$paciente->materno}}</option>
+                                                            <option value="{{$paciente->id}}">{{$paciente->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -152,7 +152,7 @@
                                             <div class="form-group col-4 offset-4">
                                                     <label for="actual">Paciente</label>
                                                     <input type="text" class="form-control" 
-                                                name="nombre" value="" readonly="" id="nombre"> 
+                                                name="nombre" value="" readonly="" id="nombre_completo"> 
                                                 <input type="text" class="form-control" 
                                                 name="nombre" value="" readonly="" id="paterno">
                                                 <input type="text" class="form-control" 
@@ -504,12 +504,14 @@
         var crm = JSON.parse(data);
         var paciente = JSON.parse(data2);
         var estado = JSON.parse(data3);
-        
+         
         //$('#estado_id').show();
         $('.paciente_id').val(paciente.id);
         $('#nombre').val(paciente.nombre);
         $('#paterno').val(paciente.paterno);
-         $('#materno').val(paciente.materno);
+        $('#materno').val(paciente.materno);
+        $('#nombre_completo').val(paciente..getFullnameAttribute());
+
         $('#telefono').val(paciente.telefono);
         $('#celular').val(paciente.celular);
         $('#mail').val(paciente.mail);
