@@ -155,6 +155,8 @@
                                                 name="nombre" value="" readonly="" id="nombre"> 
                                                 <input type="text" class="form-control" 
                                                 name="nombre" value="" readonly="" id="paterno">
+                                                <input type="text" class="form-control" 
+                                                name="nombre" value="" readonly="" id="materno">
                                                     
                                                     <input type="text" class="paciente_id form-control" id="paciente_id"
                                                 name="paciente_id" value="" readonly="" style="display: none;">
@@ -507,6 +509,7 @@
         $('.paciente_id').val(paciente.id);
         $('#nombre').val(paciente.nombre);
         $('#paterno').val(paciente.paterno);
+         $('#materno').val(paciente.materno);
         $('#telefono').val(paciente.telefono);
         $('#celular').val(paciente.celular);
         $('#mail').val(paciente.mail);
