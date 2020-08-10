@@ -54,8 +54,8 @@ class CorteCajaPExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->digitos_targeta:"" :"",
 
                     "",
-
                     $Venta->requiere_factura==1? "Si":"No",
+                    //Factura::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
                     "",
                     "0",
