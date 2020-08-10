@@ -205,6 +205,7 @@ class VentaController extends Controller
                     'cp' =>$request->codigo_postal
             )
           );
+          $Factura->save();  
         }
 
         $CRM = new Crm(
