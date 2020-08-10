@@ -507,7 +507,7 @@
          
         //$('#estado_id').show();
         $('.paciente_id').val(paciente.id);
-        $('#nombre').val(paciente.nombre);
+        $('#nombre').val(paciente.fullname);
         $('#paterno').val(paciente.paterno);
         $('#materno').val(paciente.materno);
         $('#telefono').val(paciente.telefono);
