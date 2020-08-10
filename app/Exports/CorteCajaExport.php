@@ -32,8 +32,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                 //dd($Venta->productos()->pluck('cantidad')->sum());
                 $index++;
                 return collect([
-                    date('Y-m-d'),
-                    Carbon::parse($Venta->fecha)->format('h:i:s'),
+                    date('Y-m-d','America/Mexico_City'),
+                    Carbon::parse($Venta->fecha)->format('h:i:s','America/Mexico_City'),
                     $Venta->id,
                     $index,
                     $Venta->paciente->nombre." ".$Venta->paciente->paterno." ".$Venta->paciente->materno,
@@ -55,7 +55,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
 
                     "",
 
-                    Factura::where('venta_id',"=",$Venta->id)->exists()? "Si":"No",
+                    Factura::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
                     "",
                     "0",
