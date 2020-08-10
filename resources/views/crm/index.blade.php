@@ -152,12 +152,7 @@
                                             <div class="form-group col-4 offset-4">
                                                     <label for="actual">Paciente</label>
                                                     <input type="text" class="form-control" 
-                                                name="nombre" value="" readonly="" id="nombre"> 
-                                                <input type="text" class="form-control" 
-                                                name="nombre" value="" readonly="" id="paterno">
-                                                <input type="text" class="form-control" 
-                                                name="nombre" value="" readonly="" id="materno">
-                                                    
+                                                name="nombre" value="" readonly="" id="nombre">                                                  
                                                     <input type="text" class="paciente_id form-control" id="paciente_id"
                                                 name="paciente_id" value="" readonly="" style="display: none;">
                                                 </div>
