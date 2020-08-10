@@ -55,7 +55,7 @@ class CorteCajaPExport implements FromCollection, WithHeadings, WithTitle
 
                     "",
 
-                    $Venta->requiere_factura=1? "Si":"No",
+                    $Venta->requiere_factura==1? "Si":"No",
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
                     "",
                     "0",
