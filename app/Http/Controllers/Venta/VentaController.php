@@ -188,7 +188,22 @@ class VentaController extends Controller
                     'alcaldia_o_municipio' => $request->alcaldia_o_municipio,
                     'uso_cfdi' => $request->uso_cfdi
                 ]
-            );
+             );
+            $Factura = new Factura(
+                    array(
+                    'venta_id'=>$venta->id,
+                    'nombre'=>$venta->paciente->getFullnameAttribute(),
+                    'rfc'=>$request->rfc,
+                    'regimen_fiscal'=> $request->regimen_fiscal,
+                    'correo'=>$request->correo,
+                    'calle'=> $request->calle,
+                    'num_ext'=>$request->num_ext,
+                    'num_int'=>$request->num_int,      
+                    'ciudad'=>$request->ciudad,
+                    'municipio'=>$request->alcaldia_o_municipio,              
+                    'cp' =>$request->codigo_postal
+            )
+          );
         }
 
         $CRM = new Crm(
