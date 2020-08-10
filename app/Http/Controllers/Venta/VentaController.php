@@ -14,6 +14,7 @@ use App\Crm;
 use App\DatoFiscal;
 use App\Folio;
 use App\Banco;
+use App\Factura;
 use App\Sigpesosventa;
 use App\HistorialCambioVenta;
 use App\ProductoDamage;
