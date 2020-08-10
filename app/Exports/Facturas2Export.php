@@ -59,7 +59,7 @@ class Facturas2Export implements FromCollection, WithHeadings
                     'numero_de_moneda' => 1,
                     'tipo_de_cambio' => 1,
                     'tipo_de_cambio_02' => "tienda: " . $venta->oficina->nombre . " fecha venta: " . date('d-m-Y'),
-                    // 'observaciones' => 'tienda: ' . $venta->oficina->nombre . " fecha venta: " . date('d-m-Y'),
+                     'observaciones' => 'Folio: ' . $venta->venta_id ,
                     // 'observaciones' => 'tienda: ' . $venta->oficina->nombre . " fecha venta: " . date('d-m-Y'),
                     'clave_del_vendedor' => strtoupper(substr($venta->oficina->nombre, 0, 3)) . ", " . $venta->oficina->nombre == 'Polanco' ? 8 : 7,
                     'nombre_del_paciente' => $venta->paciente ? $venta->paciente->full_name : '',
