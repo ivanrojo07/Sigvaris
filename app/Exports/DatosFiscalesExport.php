@@ -51,7 +51,7 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
                     'porcentaje_descuento' => '',
                     'nombre_descuento' => '',
                     'uso_cfdi' => $venta->paciente->datoFiscal->uso_cfdi,
-                    'fecha' => date_format($venta->fecha,'Y-m-d'), 
+                    'fecha' => substr($venta->fecha,0,11), 
                     'precio_sin_iva' => $producto->precio_publico,
                     'precio_con_iva' => $producto->precio_publico_iva,
                     'descuento' => $venta->promocion ? $venta->promocion->descuento_de . " (" . $venta->promocion->unidad_descuento . ")" : '',
