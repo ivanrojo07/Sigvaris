@@ -173,7 +173,7 @@ class VentaController extends Controller
 
         if ($request->facturar == "1") {
             $venta->update(['requiere_factura' => 1]);
-            DatoFiscal::updateOrCreate(
+                DatoFiscal::updateOrCreate(
                 ['paciente_id' => $request->paciente_id],
                 [
                     'calle' => $request->calle,
@@ -182,6 +182,7 @@ class VentaController extends Controller
                     'regimen_fiscal' => $request->regimen_fiscal,
                     'correo' => $request->correo,
                     'rfc' => $request->rfc,
+                    'homoclave'=> $request->homoclave,
                     'num_ext' => $request->num_ext,
                     'num_int' => $request->num_int,
                     'codigo_postal' => $request->codigo_postal,

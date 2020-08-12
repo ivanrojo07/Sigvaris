@@ -49,11 +49,7 @@ class PruebaController extends Controller
         }
     }
 
-    public function Fecha_Servidor(){
-        $Fecha_Servidor = Carbon::now();
-
-        return $Fecha_Servidor->sub('hour', 5);
-    }
+   
 
 
 
