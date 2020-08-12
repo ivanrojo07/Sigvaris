@@ -347,7 +347,7 @@
                                                $newDate = strtotime ( '-5 hour' , strtotime ($date));
                                             @endphp
                                             
-                                            <input type="text" name="fecha" class="form-control" readonly=""value="{{echo $newDate }}" required="">
+                                            <input type="text" name="fecha" class="form-control" readonly=""value="{{$newDate}}" required="">
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Folio: </label>
