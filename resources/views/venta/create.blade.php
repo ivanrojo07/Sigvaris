@@ -343,11 +343,11 @@
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Fecha: </label>
                                             @php
-                                               $date= date('Y-m-d H:i:s'); 
+                                               $date = date('Y-m-d H:i:s'); 
                                                $newDate = strtotime ( '-5 hour' , strtotime ($date));
                                             @endphp
                                             
-                                            <input type="text" name="fecha" class="form-control" readonly=""value="{{$newDate}}" required="">
+                                            <input type="text" name="fecha" class="form-control" readonly=""value="{{$newDate}}" required="">{{$date}}
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Folio: </label>
