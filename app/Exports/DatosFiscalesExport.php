@@ -31,6 +31,8 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
         return $ventas->get()->pluck('productos')
             ->flatten()
             ->map(function ($producto) {
+                $array = array($venta->paciente->datoFiscal->rfc,$venta->paciente->datoFiscal->homoclave);
+                $RFC_ = implode(",", $full_rfc)
                 $venta = Venta::find($producto->pivot->venta_id);
                 return [
                     'paciente' => $venta->paciente->datoFiscal->paciente ? $venta->paciente->datoFiscal->paciente->fullname : '',
@@ -39,7 +41,7 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
                     'regimen_fiscal' => $venta->paciente->datoFiscal->regimen_fiscal,
                     //'homoclave' => $venta->paciente->datoFiscal->homoclave,
                     'correo' => $venta->paciente->datoFiscal->correo,
-                    'rfc' => $venta->paciente->datoFiscal->rfc + $venta->paciente->datoFiscal->homoclave,
+                    'rfc' => $RFC_,
                     'calle' => $venta->paciente->datoFiscal->calle,
                     'num_ext' => $venta->paciente->datoFiscal->num_ext,
                     'num_int' => $venta->paciente->datoFiscal->num_int,
