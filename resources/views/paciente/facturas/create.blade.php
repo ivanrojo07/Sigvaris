@@ -34,14 +34,14 @@
                             <form action="{{route('facturas.download')}}" method="POST" class="form-inline float-right">
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
-                                <input type="date" name="fecha" id="fechaFactura" style="display:none">
+                                <input type="text" name="fecha" id="fechaFactura" style="display:none">
                                 <button type="submit" class="btn btn-primary rounded-0">FACTURA MOSTRADOR</button>
                             </form>
                             <br><br><br>
                             <form action="{{route('facturas.download2')}}" method="POST" class="form-inline float-right">
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
-                                <input type="date" name="fecha" id="fechaFactura" style="display:none">
+                                <input type="text" name="fecha" id="fechaFactura" style="display:none">
                                 <button type="submit" class="btn btn-primary rounded-0">FACTURA  CLIENTES</button>
                             </form>
                             <form action="{{route('corte-caja.export.datos-fiscales')}}" method="GET"
