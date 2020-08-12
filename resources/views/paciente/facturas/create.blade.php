@@ -42,14 +42,14 @@
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
                                 <input type="date" name="fecha" id="fechaFactura" style="display:none">
-                                <button type="submit" class="btn btn-primary rounded-0">FACTURA MOSTRADOR DE CLIENTES</button>
+                                <button type="submit" class="btn btn-primary rounded-0">FACTURA  CLIENTES</button>
                             </form>
                             <form action="{{route('corte-caja.export.datos-fiscales')}}" method="GET"
                                 class="form-inline">
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdDatosFiscales" style="display:none">
                                 <input type="date" name="fecha" id="fechaDatosFiscales" style="display:none">
-                                <button type="submit" class="btn btn-primary rounded-0">FACTURA</button>
+                                <button type="submit" class="btn btn-primary rounded-0">DATOS FISCALES</button>
                             </form>
                         </div>
                     </div>
