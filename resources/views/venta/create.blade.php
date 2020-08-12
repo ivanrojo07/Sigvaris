@@ -343,7 +343,7 @@
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Fecha: </label>
                                             @php
-                                               $date = date('Y-m-d H:i:s'); 
+                                               $date = = new DateTime(); 
                                                 $date->modify('-5 hours');
                                                
                                             @endphp
