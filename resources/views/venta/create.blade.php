@@ -343,7 +343,7 @@
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Fecha: </label>
                                             <input type="text" name="fecha" class="form-control" readonly=""
-                                                value="{{Carbon::now()}}" required="">
+                                                value="{{$Fecha_Servidor->toDateTimeString()}}" required="">
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Folio: </label>
