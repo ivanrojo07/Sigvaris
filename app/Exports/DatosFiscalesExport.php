@@ -33,7 +33,7 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
             ->map(function ($producto) {
                 $venta = Venta::find($producto->pivot->venta_id);
                 $array = array($venta->paciente->datoFiscal->rfc,$venta->paciente->datoFiscal->homoclave);
-                $RFC_ = implode(",", $full_rfc)
+                $RFC_ = implode(",", $array);
                 
                 return [
                     'paciente' => $venta->paciente->datoFiscal->paciente ? $venta->paciente->datoFiscal->paciente->fullname : '',
