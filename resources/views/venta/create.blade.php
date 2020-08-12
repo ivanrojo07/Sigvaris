@@ -472,6 +472,10 @@
                                             <input type="text" class="form-control" id="rfc" name="rfc">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
+                                            <label for="" class="text-uppercase text-muted">HOMOCLAVE</label>
+                                            <input type="text" class="form-control" id="homoclave" name="homoclave">
+                                        </div>
+                                        <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">CALLE</label>
                                             <input type="text" class="form-control" id="calle" name="calle">
                                         </div>
@@ -1503,6 +1507,7 @@
                 $('#num_int').val(datos_fiscales.datosFiscales.num_int);
                 $('#codigo_postal').val(datos_fiscales.datosFiscales.codigo_postal);
                 $('#ciudad').val(datos_fiscales.datosFiscales.ciudad);
+                $('#homoclave').val(datos_fiscales.datosFiscales.homoclave);
                 $('#alcaldia_o_municipio').val(datos_fiscales.datosFiscales.alcaldia_o_municipio);
                 $('#uso_cfdi').val(datos_fiscales.datosFiscales.uso_cfdi);
                 }
