@@ -171,7 +171,6 @@
                         <th>Fecha Contacto</th>
                         <th>Forma Contacto</th>
                         <th>Estado</th>
-                        <th>Ultima venta</th>
                         <th>Hora</th>
                         <th>Ver</th>
                     </tr>
