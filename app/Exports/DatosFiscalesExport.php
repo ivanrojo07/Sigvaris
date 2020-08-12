@@ -54,12 +54,12 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
                     'porcentaje_descuento' => '',
                     'nombre_descuento' => '',
                     'uso_cfdi' => $venta->paciente->datoFiscal->uso_cfdi,
-                    'fecha' => substr($venta->fecha,0,11), 
-                    'precio_sin_iva' => $producto->precio_publico,
-                    'precio_con_iva' => $producto->precio_publico_iva,
-                    'descuento' => $venta->promocion ? $venta->promocion->descuento_de . " (" . $venta->promocion->unidad_descuento . ")" : '',
-                    'cantidad' => $producto->pivot->cantidad,
-                    'sku' => $producto->sku,
+                    'fecha' => substr($venta->fecha,0,11)
+                    // 'precio_sin_iva' => $producto->precio_publico,
+                    // 'precio_con_iva' => $producto->precio_publico_iva,
+                    // 'descuento' => $venta->promocion ? $venta->promocion->descuento_de . " (" . $venta->promocion->unidad_descuento . ")" : '',
+                    // 'cantidad' => $producto->pivot->cantidad,
+                    // 'sku' => $producto->sku,
                 ];
             });
     }
@@ -85,12 +85,12 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
             'PORCENTAJE DESCUENTO',
             'NOMBRE DESCUENTO',
             'USO CFDI',
-            'FECHA',
-            'PRECIO SIN IVA',
-            'PRECIO CON IVA',
-            'DESCUENTO',
-            'CANTIDAD',
-            'SKU'
+            'FECHA'
+            // 'PRECIO SIN IVA',
+            // 'PRECIO CON IVA',
+            // 'DESCUENTO',
+            // 'CANTIDAD',
+            // 'SKU'
         ];
     }
 }
