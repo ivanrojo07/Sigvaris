@@ -1507,6 +1507,7 @@
                 $('#regimeFiscal').val(datos_fiscales.datosFiscales.regimen_fiscal);
                 $('#correo').val(datos_fiscales.datosFiscales.correo);
                 $('#rfc').val(datos_fiscales.datosFiscales.rfc);
+                $('#homoclave').val(datos_fiscales.datosFiscales.homoclave);
                 $('#calle').val(datos_fiscales.datosFiscales.calle);
                 $('#num_ext').val(datos_fiscales.datosFiscales.num_ext);
                 $('#num_int').val(datos_fiscales.datosFiscales.num_int);
