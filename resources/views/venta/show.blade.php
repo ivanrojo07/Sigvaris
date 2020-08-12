@@ -26,6 +26,10 @@
                         <input type="text" class="form-control" value="{{$venta->paciente->fullname}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
+                        <label class="control-label">Factura:</label>
+                        <input type="text" class="form-control" value="{{$venta->requiere_factura}}" readonly="">
+                    </div>
+                    <div class="col-4 form-group">
                         <label class="control-label">Folio:</label>
                         <input type="number" class="form-control" value="{{$venta->id}}" readonly="">
                     </div>
