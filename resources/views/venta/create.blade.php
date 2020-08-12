@@ -451,12 +451,7 @@
                                     <div class="row">
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">TIPO PERSONA</label>
-                                            <select name="tipo_persona" class="form-control" id="tipoPersona">
-                                            <option value="">Seleccione el tipo de persona</option>
-                                            <option value="física" {{$paciente->datoFiscal ?        $paciente->datoFiscal->tipo_persona == 'física' ? 'selected' : '' : ''}}>física</option>
-                                            <option value="moral" {{$paciente->datoFiscal ?        $paciente->datoFiscal->tipo_persona == 'moral' ? 'selected' : '' : ''}}>moral</option>
-                                             </select>
-                                           <!--  <input type="text" class="form-control" id="tipoPersona" name="tipo_persona"> -->
+                                            <input type="text" class="form-control" id="tipoPersona" name="tipo_persona">
                                         </div>
                                         <div class="col-12 col-md-3 mt-3">
                                             <label for="" class="text-uppercase text-muted">NOMBRE / RAZÓN
