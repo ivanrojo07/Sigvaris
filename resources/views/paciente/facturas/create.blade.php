@@ -48,7 +48,7 @@
                                 class="form-inline">
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdDatosFiscales" style="display:none">
-                                <input type="date" name="fecha" id="fechaDatosFiscales" style="display:none">
+                                <input type="text" name="fecha" id="fechaDatosFiscales" style="display:none">
                                 <button type="submit" class="btn btn-primary rounded-0">DATOS FISCALES</button>
                             </form>
                         </div>
