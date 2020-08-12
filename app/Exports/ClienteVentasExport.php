@@ -43,6 +43,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                     $SkuRe,
                     "",
                     "",
+                    "",
                     $Venta->paciente->mail,
                     $Venta->paciente->telefono,
                     $Venta->paciente->celular
@@ -63,11 +64,13 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
             'Numero de visita',
             'Cantidad ',
             'Sku Vendido',
+            'damage',
             'Producto negado ',
             'Estilo negado',
             'mail',
             'telefono',
             'celular'
+
 
 
         ];
