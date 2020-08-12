@@ -447,7 +447,7 @@
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="customCheck1"
                                         data-toggle="collapse" href="#collapseExample" role="button"
-                                        aria-expanded="false" aria-controls="collapseExample" name="facturar" value="0">
+                                        aria-expanded="false" aria-controls="collapseExample" name="facturar" value="1">
                                     <label class="custom-control-label" for="customCheck1">FACTURAR</label>
                                 </div>
                             </p>
