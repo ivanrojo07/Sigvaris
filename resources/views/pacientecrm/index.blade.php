@@ -180,22 +180,18 @@
                     @if(empty($paciente->crms))
                     <h5>No hay ningún crm registrado</h5>
                     @else
-
                     @foreach($paciente->crms as $crm)
-                         @if($UltimaVenta=$ventas->where('paciente_id',$crm->paciente_id)->last())
-                         <tr>
+                    <tr>
                         <td>{{$crm->created_at}}</td>
                         <td>{{$crm->fecha_aviso}}</td>
                         <td>{{$crm->fecha_contacto}}</td>
                         <td>{{$crm->forma_contacto}}</td>
                         <td>{{$crm->estado->nombre}}</td>
-                        <td>{{\Carbon\Carbon::parse($UltimaVenta->fecha)->format('m-d-Y')}}</td>
                         <td>{{$crm->hora}}</td>
                         <td>
                             <button type="button" onclick="mostrarCrm('{{$crm}}')" data-toggle="modal" data-target="#ver_crm_modal" class="btn btn-primary">Ver</button>
                         </td>
                     </tr>
-                         @endif
                     @endforeach
                     @endif
                 </tbody>
