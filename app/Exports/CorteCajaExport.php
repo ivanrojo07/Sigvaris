@@ -19,8 +19,10 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
      */
     public function collection()
     {
+            $now = Carbon::now();
         $index=0;
-        return Venta::where('fecha', '>=', Carbon::parse($Venta->fecha)->format('h:i:s'))
+        dd($now);
+        return Venta::where('fecha', '>=', $now->format('h:i:s'))
             ->where('oficina_id',2)
             ->get()
             //->pluck('productos')
