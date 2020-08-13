@@ -20,7 +20,9 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
     public function collection()
     {
         $index=0;
-        return Venta::where('fecha', '>=', date('Y-m-d'))
+        $date =  new DateTime(); 
+        $date->modify('-5 hours');
+        return Venta::where('fecha', '>=', $date->format('Y-m-d'))
             ->where('oficina_id',2)
             ->get()
             //->pluck('productos')
