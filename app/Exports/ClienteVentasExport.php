@@ -32,7 +32,11 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                    // $contador = $Venta->getCantidadProductosAttribute();
                     foreach ($Venta->productos as $producto ) {
                        
-                        $SkuRe.=$producto->sku." - ".$Venta->productos()->pluck('cantidad')."| ";
+                        //$SkuRe.=$producto->sku." - ".$Venta->productos()->pluck('cantidad')."| ";
+                        foreach ($Venta->productos()->pluck('cantidad') as $Count) {
+                            # code...
+                            $SkuRe.=$producto->sku." - ".$Count."| ";
+                        }
                     }
                 return collect([
                     $Venta->id,
