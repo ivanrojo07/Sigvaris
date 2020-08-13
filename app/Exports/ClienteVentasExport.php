@@ -18,7 +18,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
      * @return \Illuminate\Support\Collection
      */
     public function collection()
-    {   
+    {
         $now = Carbon::now('America/Mexico_City');
         return Venta::where('fecha', '>=',$now->format('Y-m-d'))
             ->where('oficina_id',2)
@@ -30,7 +30,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                 function ($Venta) {
                     $SkuRe="";
                     foreach ($Venta->productos as $producto ) {
-                        $SkuRe.=$producto->sku." - ".$producto->pluck('cantidad')->sum()." | ";
+                        $SkuRe.=$producto->sku." ";
                     }
                 return collect([
                     $Venta->id,
