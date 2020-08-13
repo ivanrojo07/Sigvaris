@@ -8,7 +8,6 @@ use App\HistorialCambioVenta;
 use Carbon\Carbon;
 use App\Descuento;
 use App\Promocion;
-use Faker\Provider\DateTime;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
@@ -21,9 +20,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
     public function collection()
     {
         $index=0;
-        $date =  new DateTime(); 
-        $date->modify('-5 hours');
-        return Venta::where('fecha', '>=', $date->format('Y-m-d'))
+        return Venta::where('fecha', '>=', Carbon::parse($Venta->fecha)->format('h:i:s'))
             ->where('oficina_id',2)
             ->get()
             //->pluck('productos')
