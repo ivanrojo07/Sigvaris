@@ -8,6 +8,7 @@ use App\HistorialCambioVenta;
 use Carbon\Carbon;
 use App\Descuento;
 use App\Promocion;
+use Faker\Provider\DateTime;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
