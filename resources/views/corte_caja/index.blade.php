@@ -21,7 +21,7 @@
                             <label for="" class="text-uppercase text-muted">Usuario</label>
                             <input type="text" value="{{Auth::user()->name}}" class="form-control" readonly>
                         </div>
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-5">
                             <label for="" class="text-uppercase text-muted">Fecha</label>
                             <input type="date" value="{{$date->format('Y-m-d')}}" class="form-control" readonly>
                         </div>
