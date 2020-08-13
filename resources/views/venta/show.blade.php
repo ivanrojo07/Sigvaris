@@ -30,6 +30,10 @@
                         <input type="text" class="form-control" value="{{ $venta->requiere_factura =  1 ? 'SI' : 'NO' }}" readonly="">
                     </div>
                     <div class="col-4 form-group">
+                        <label class="control-label">Comentario:</label>
+                        <input type="text" class="form-control" value="{{ $venta->Comentario}}" readonly="">
+                    </div>
+                    <div class="col-4 form-group">
                         <label class="control-label">Folio:</label>
                         <input type="number" class="form-control" value="{{$venta->id}}" readonly="">
                     </div>
