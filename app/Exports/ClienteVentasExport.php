@@ -30,7 +30,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                 function ($Venta) {
                     $SkuRe="";
                     foreach ($Venta->productos as $producto ) {
-                        $SkuRe.=$producto->sku." - "$producto->cantidad."| ";
+                        $SkuRe.=$producto->sku." - ".$producto->cantidad."| ";
                     }
                 return collect([
                     $Venta->id,
