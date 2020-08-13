@@ -5,7 +5,7 @@ namespace App\Http\Controllers\CorteCaja;
 use App\Exports\CorteCajaExport;
 use App\Exports\TotalVentasExport;
 use App\Exports\ClienteVentasExport;
-
+use Carbon\Carbon;
 use App\Exports\SheetsExport;
 
 use App\Exports\CorteCajaPExport;
@@ -31,7 +31,8 @@ class CorteCajaController extends Controller
      */
     public function index()
     {
-        $ventasDeHoy = Venta::where('fecha', '>=', date('Y-m-d'))->get();
+        $now = Carbon::now('America/Mexico_City');
+        $ventasDeHoy = Venta::where('fecha', '>=', $now->format('Y-m-d'))->get();
         // return 
         return view('corte_caja.index', compact('ventasDeHoy'));
     }
