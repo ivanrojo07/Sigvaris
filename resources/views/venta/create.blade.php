@@ -234,7 +234,7 @@
                                             <select class="form-control" name="tipoPago" id="tipoPago">
                                                 <option value="0">Selecciona...</option>
                                                 <option value="1">Efectivo</option>
-                                                <option value="2">Tajeta</option>
+                                                <option value="2">Tarjeta</option>
                                                 <option value="3">Combinado</option>
                                                 <option value="4">Sigpesos</option>
                                             </select>
