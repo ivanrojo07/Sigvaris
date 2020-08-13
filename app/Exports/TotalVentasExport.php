@@ -19,7 +19,8 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
      */
     public function collection()
     {
-        $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
+        $now = Carbon::now('America/Mexico_City');
+        $Ventas=Venta::where('fecha', '>=', $now->format('Y-m-d'))
             ->where('oficina_id',2)
             ->get();
         $TotalVentas=$Ventas->count();
