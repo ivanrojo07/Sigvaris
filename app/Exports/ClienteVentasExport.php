@@ -18,8 +18,9 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
      * @return \Illuminate\Support\Collection
      */
     public function collection()
-    {
-        return Venta::where('fecha', '>=', date('Y-m-d'))
+    {   
+        $now = Carbon::now('America/Mexico_City');
+        return Venta::where('fecha', '>=',$now->format('Y-m-d'))
             ->where('oficina_id',2)
             ->get()
             //->pluck('productos')
