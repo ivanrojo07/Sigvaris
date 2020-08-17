@@ -809,18 +809,7 @@
         }
     }
 
-</script>
-         <script type="text/javascript">
-               if ($('#inputNombrePaciente').val()="" || $('#paciente_id').val() == null ) {
-
-                alert("No has llenado el campo paciente");
-                return false;
-
-               }if(document.getElementById('inputNombrePaciente').value = ""){
-                alert("No has llenado el campo paciente");
-                return false;
-               }
-           </script>
+</script>       
 <script>
     
     function agregarProducto(p){
