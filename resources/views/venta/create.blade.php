@@ -990,7 +990,7 @@
                 $('#digitos_targeta').required;
                 
                 
-                $('#sigpesos_usar').val(0);
+                //$('#sigpesos_usar').val(0);
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
                 var sigpesos=parseInt($('#sigpesos_usar').val());
@@ -1024,6 +1024,7 @@
                 $('#tar10').show();
                 $('#PagoSigpesos').show();
                 $('#digitos_targeta').required;
+                var sigpesos=parseInt($('#sigpesos_usar').val());
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
                 console.log('Sipesos:',sigpesos);
                
@@ -1042,7 +1043,7 @@
                 $('#PagoSigpesos').hide();
 
 
-                $('#sigpesos_usar').val(0);
+                //$('#sigpesos_usar').val(0);
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
                 var sigpesos=parseInt($('#sigpesos_usar').val());
@@ -1098,7 +1099,7 @@
                     $('#total').val(0);
                 }
                 console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
-                console.log('Sipesos:',sigpesos);
+                console.log('Sigpesos:',sigpesos);
               
 
 
