@@ -29,7 +29,7 @@ class HistorialCambioVenta extends Model
     {
         return $this->belongsTo('App\Producto', 'producto_devuelto_id', 'id');
     }
-    public function idDeLaVenta($Fecha string)
+    public function idDeLaVenta($Fecha)
     {       
             $fecha_bu = '';
             $fecha_bu = this->Fecha;
