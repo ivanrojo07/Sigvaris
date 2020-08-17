@@ -1079,8 +1079,7 @@
                 $('#tar5').hide();
                 $('#tar10').hide();
 
-                    //Agregando lineas para actualizar el sigpesos
-                    $('#sigpesos_usar').val(0);
+                    //Agregando lineas para actualizar el sigpesos                   
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
                 var sigpesos=parseInt($('#sigpesos_usar').val());
