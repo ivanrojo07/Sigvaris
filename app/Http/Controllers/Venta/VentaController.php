@@ -210,7 +210,8 @@ class VentaController extends Controller
         }
 
             if ($request->saldo_a_favor >0) {
-               $venta->paciente()->update(['saldo_a_favor' => $request->saldoAFavor]);
+                $Paciente=Paciente::where("id",$request->paciente_id)->first();
+                $Paciente->update(['saldo_a_favor' => $request->saldoAFavor]);               
             }
         $CRM = new Crm(
             array(
