@@ -698,16 +698,12 @@
     if ($('#empleado_id').val()!="") {
     if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
         document.getElementById("form-cliente").submit();
-      } else if ($('#paciente_id').val()!="") {
-            alert("Valida el campo paciente");
-             return false;
-        }else {
+      } else {
         alert("Valida los campos de forma de pago");
         return false;
       }
 
-      }
-       else{
+    }else{
         alert("Valida el campo de empleado");
         return false;
     }
@@ -1746,7 +1742,6 @@
             }
             console.log('total',$('#sigpesos_usar').val())
         }
-
     });
 
    
@@ -1754,7 +1749,7 @@
 </script>
 @else{
            <script type="text/javascript">
-               if ($('#paciente_id').val()="") {
+               if ($('#paciente_id').val()="" || $('#paciente_id').val() == null ) {
 
                 alert("No has llenado el campo paciente");
                 return false;
