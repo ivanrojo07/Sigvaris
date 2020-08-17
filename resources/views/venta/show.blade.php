@@ -33,7 +33,7 @@
                         <label class="control-label">Damage:</label>
                         @php
                         $Folio = $venta->productos()->pluck('venta_id');
-                        $FechaHistorial = $venta->historialCambios()->last();
+                       
                         @endphp
                         <input type="text" class="form-control" value="{{$Folio}}" readonly="">
                     </div>
