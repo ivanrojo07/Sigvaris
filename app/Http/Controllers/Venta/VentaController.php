@@ -209,10 +209,7 @@ class VentaController extends Controller
           $Factura->save();  
         }
 
-            if ($request->saldoAFavor >0) {
-                $Paciente=Paciente::where("id",$request->paciente_id)->first();
-                $Paciente->update(['saldo_a_favor' => $request->saldoAFavor]);               
-            }
+            
         $CRM = new Crm(
             array(
                 'paciente_id' => $request->input('paciente_id'),
@@ -259,7 +256,7 @@ class VentaController extends Controller
 
         
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        $Paciente->update(['saldo_a_favor' => 0]);
+        $Paciente->update(['saldo_a_favor' => $request->saldoAFavor]);
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
     }
