@@ -1749,7 +1749,7 @@
 </script>
 @else{
            <script type="text/javascript">
-               if ($('#paciente_id').val()="") {
+               if ($('#inputNombrePaciente').val()="") {
 
                 alert("No has llenado el campo paciente");
                 return false;
