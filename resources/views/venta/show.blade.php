@@ -32,9 +32,9 @@
                     <div class="col-4 form-group">
                         <label class="control-label">Damage:</label>
                         @php
-                        $Folio = $venta->productos()->pluck('venta_id');
+                        $Folio = $venta->productos()->pluck('created_at');
                         @endphp
-                        {{$venta->historialCambios()->pluck('venta_id')}} <br>
+                        {{$venta->historialCambios()->pluck('created_at')}} <br>
                         @php
                         echo $Folio ;
                         @endphp
