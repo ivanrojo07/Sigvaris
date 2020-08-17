@@ -32,9 +32,8 @@
                     <div class="col-4 form-group">
                         <label class="control-label">Damage:</label>
                         @php
-                        $Folio = $venta->productos()->venta_id;
-                        @endphp                       
-                       
+                        $Folio = $venta->productos()->pluck('venta_id');
+                        @endphp
                         <input type="text" class="form-control" value="{{ $Folio}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
