@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Factura:</label>
-                        <input type="text" class="form-control" value="{{ $venta->requiere_factura =  1 ? 'SI' : 'NO' }}" readonly="">
+                        <input type="text" class="form-control" value="{{ $venta->requiere_factura == 1 ? 'SI' : 'NO' }}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
