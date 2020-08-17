@@ -698,16 +698,16 @@
     if ($('#empleado_id').val()!="") {
     if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
         document.getElementById("form-cliente").submit();
-      } else {
+      } else if {
         alert("Valida los campos de forma de pago");
         return false;
-      }
-
       }else if ($('#paciente_id').val()!="") {
             alert("Valida el campo paciente");
              return false;
+        }
 
-        } else{
+      }
+       else{
         alert("Valida el campo de empleado");
         return false;
     }
@@ -1752,21 +1752,6 @@
    
 
 </script>
-    
-           <script type="text/javascript">
-               if ($('#paciente_id').val()="") {
-
-                alert("No has llenado el campo paciente");
-                return false;
-
-               }
-
-
-
-
-           </script>
-         
-
 @else{
            <script type="text/javascript">
                if ($('#paciente_id').val()="") {
