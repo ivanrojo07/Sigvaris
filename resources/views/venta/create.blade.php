@@ -703,7 +703,11 @@
         return false;
       }
 
-    }else{
+      }else if ($('#paciente_id').val()!="") {
+            alert("Valida el campo paciente");
+             return false;
+
+        } else{
         alert("Valida el campo de empleado");
         return false;
     }
@@ -1742,25 +1746,14 @@
             }
             console.log('total',$('#sigpesos_usar').val())
         }
+
     });
 
    
 
 </script>
 @else{
-           <script type="text/javascript">
-               if ($('#inputNombrePaciente').val()="") {
-
-                alert("No has llenado el campo paciente");
-                return false;
-
-               }
-
-
-
-
-           </script>
-         }
+          
 @endif
 @endsection
 
