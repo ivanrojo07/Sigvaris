@@ -700,11 +700,7 @@
         console.log("empleado",$('#empleado_id').val());
     if ($('#empleado_id').val()!="") {
         if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
-                document.getElementById("form-cliente").submit();
-                if($('#paciente_id').val() =="") {
-                alert("El campo paciente esta vacio");
-                 return false;
-                }
+                document.getElementById("form-cliente").submit();        
             }
             else {
                  alert("Valida los campos de forma de pago");
@@ -714,7 +710,11 @@
                  else{
                  alert("Valida el campo de empleado");
                  return false;
-      }
+             }
+                if($('#paciente_id').val() =="") {
+                alert("El campo paciente esta vacio");
+                 return false;
+                }
       
     }
 
