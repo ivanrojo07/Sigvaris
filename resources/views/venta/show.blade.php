@@ -30,6 +30,15 @@
                         <input type="text" class="form-control" value="{{ $venta->requiere_factura == 1 ? 'SI' : 'NO' }}" readonly="">
                     </div>
                     <div class="col-4 form-group">
+                        <label class="control-label">Damage:</label>
+                        @php
+                        $Folio = $Venta->productos()->pluck('venta_id');
+                        @endphp
+                       
+
+                        <input type="text" class="form-control" value="{{$venta->historialCambios->venta_id == $folio ? Viene de .$folio.' ' : 'No es damage'}}" readonly="">
+                    </div>
+                    <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
                         <input type="text" class="form-control" value="{{ $venta->comentario}}" readonly="">
                     </div>
