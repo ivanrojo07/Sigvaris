@@ -33,8 +33,9 @@
                         <label class="control-label">Damage:</label>
                         @php
                         $Folio = $venta->productos()->pluck('venta_id');
+                        $FechaHistorial = $venta->historialCambios()->created_at->last();
                         @endphp
-                        <input type="text" class="form-control" value="{{ $Folio}}" readonly="">
+                        <input type="text" class="form-control" value="{{$FechaHistorial}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
@@ -120,7 +121,6 @@
                                     <thead>
                                         <tr class="info">
                                             <th>TIPO CAMBIO</th>
-                                            <th>FECHA</th>
                                             <th>RESPONSABLE</th>
                                             <th>PRODUCTO ENTREGADO</th>
                                             <th>PRODUCTO DEVUELTO</th>
@@ -131,7 +131,6 @@
                                         @foreach ($venta->historialCambios as $cambio)
                                         <tr>
                                             <td>{{$cambio->tipo_cambio}}</td>
-                                            <td>{{$cambio->created_at}}</td>
                                             <td>{{$cambio->responsable->name}}</td>
                                             <td>{{$cambio->productoEntregado ? $cambio->productoEntregado->sku : 'N/D'}}</td>
                                             <td>{{$cambio->productoDevuelto ? $cambio->productoDevuelto->sku : 'N/D'}}</td>
