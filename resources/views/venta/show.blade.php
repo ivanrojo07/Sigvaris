@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
-                        <input type="text" class="form-control" value="{{ $venta->comentari$Folioo}}" readonly="">
+                        <input type="text" class="form-control" value="{{$venta->comentario}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Folio:</label>
