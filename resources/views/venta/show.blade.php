@@ -34,7 +34,7 @@
                         @php
                         $Folio = $venta->productos()->pluck('venta_id');
                         @endphp
-                        {$venta->historialCambios->venta_id}} <br>
+                        {{$venta->historialCambios->venta_id}} <br>
                         @php
                         echo $Folio ;
                         @endphp
