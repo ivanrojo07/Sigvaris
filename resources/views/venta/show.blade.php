@@ -32,11 +32,11 @@
                     <div class="col-4 form-group">
                         <label class="control-label">Damage:</label>
                         @php
-                        $Folio = $venta->productos()->created_at;
+                        
                         @endphp
-                        {{$venta->historialCambios()->created_at}} <br>
+                        {{$venta->historialCambios()->idDeLaVenta('2020-08-17 05:21:32')}} <br>
                         @php
-                        echo $Folio ;
+                        
                         @endphp
                        
 

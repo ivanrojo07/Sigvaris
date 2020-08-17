@@ -29,4 +29,12 @@ class HistorialCambioVenta extends Model
     {
         return $this->belongsTo('App\Producto', 'producto_devuelto_id', 'id');
     }
+    public function idDeLaVenta($Fecha string)
+    {       
+            $fecha_bu = '';
+            $fecha_bu = this->Fecha;
+            $indice = DB::table('historial_cambios_venta')->select('venta_id')->where('created_at','=',$fecha_bu);
+
+            return $indice;
+    }
 }
