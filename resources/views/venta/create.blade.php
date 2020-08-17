@@ -758,7 +758,6 @@
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        var aux_sigPesos = sigpesos;
         console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
         if (aux.toFixed(2)!=$('#total').val()) {
@@ -1027,7 +1026,7 @@
                 $('#digitos_targeta').required;
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
                 console.log('Sipesos:',sigpesos);
-                console.log(aux_sigPesos);
+               
             }
             else if ($('#tipoPago').val()==1) {
                 $('#PagoEfectivo').val(0);
@@ -1062,7 +1061,7 @@
                 }
                 console.log('TOTAL ACTUALIZADO DESDE EFECTIVO',$('#total').val());
                 console.log('Sipesos:',sigpesos);
-                console.log(aux_sigPesos);
+                
 
                 $('#PagoEfectivo').val($('#total').val());
 
@@ -1079,7 +1078,36 @@
                 $('#tar4').hide();
                 $('#tar5').hide();
                 $('#tar10').hide();
-            }else{
+
+                    //Agregando lineas para actualizar el sigpesos
+                    $('#sigpesos_usar').val(0);
+                var subtotal=parseFloat($('#subtotal').val());
+                var des=parseFloat($('#descuento').val());
+                var sigpesos=parseInt($('#sigpesos_usar').val());
+                var desCumple=parseFloat($('#descuentoCumple').val());
+                var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
+                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+                var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+                console.log(sigpesos);
+                $('#iva').val(getIva);
+                var iva=getIva;
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+                if (aux>0) {
+                    $('#total').val(aux.toFixed(2));
+                }else{
+                    $('#total').val(0);
+                }
+                console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
+                console.log('Sipesos:',sigpesos);
+              
+
+
+            }
+
+            else
+
+            {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
 
@@ -1112,7 +1140,7 @@
                 }
                 console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
                 console.log('Sipesos:',sigpesos);
-                console.log(aux_sigPesos);
+             
 
             }
 
