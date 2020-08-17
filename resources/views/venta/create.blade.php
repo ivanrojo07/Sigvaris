@@ -703,7 +703,7 @@
                 document.getElementById("form-cliente").submit();
                 if($('#paciente_id').val() =="") {
                 alert("El campo paciente esta vacio");
-                 return false;
+                 
                 }
             }
             else {
