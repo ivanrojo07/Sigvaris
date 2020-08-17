@@ -32,7 +32,7 @@
                     <div class="col-4 form-group">
                         <label class="control-label">Damage:</label>
                         @php
-                        $Folio = $Venta->productos()->pluck('venta_id');
+                        $Folio = $venta->productos()->pluck('venta_id');
                         @endphp
                        
 
