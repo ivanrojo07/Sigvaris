@@ -35,11 +35,11 @@
                         $Folio = $venta->productos()->pluck('venta_id');
                         $FechaHistorial = $venta->historialCambios()->last();
                         @endphp
-                        <input type="text" class="form-control" value="{{$FechaHistorial}}" readonly="">
+                        <input type="text" class="form-control" value="{{$Folio}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
-                        <input type="text" class="form-control" value="{{ $venta->comentario}}" readonly="">
+                        <input type="text" class="form-control" value="{{ $venta->comentari$Folioo}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Folio:</label>
