@@ -209,7 +209,7 @@ class VentaController extends Controller
           $Factura->save();  
         }
 
-            if ($request->saldo_a_favor >0) {
+            if ($request->saldoAFavor >0) {
                 $Paciente=Paciente::where("id",$request->paciente_id)->first();
                 $Paciente->update(['saldo_a_favor' => $request->saldoAFavor]);               
             }
