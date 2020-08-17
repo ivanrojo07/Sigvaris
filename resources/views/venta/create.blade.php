@@ -1007,7 +1007,7 @@
                 }else{
                     $('#total').val(0);
                 }
-                console.log('TOTAL ACTUALIZADO',$('#total').val());
+                console.log('TOTAL ACTUALIZADO DESDE TARJETA',$('#total').val());
 
 
                 $('#PagoTarjeta').val($('#total').val());
@@ -1024,6 +1024,7 @@
                 $('#tar10').show();
                 $('#PagoSigpesos').show();
                 $('#digitos_targeta').required;
+                console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
             }
             else if ($('#tipoPago').val()==1) {
                 $('#PagoEfectivo').val(0);
@@ -1056,7 +1057,7 @@
                 }else{
                     $('#total').val(0);
                 }
-                console.log('TOTAL ACTUALIZADO',$('#total').val());
+                console.log('TOTAL ACTUALIZADO DESDE EFECTIVO',$('#total').val());
 
 
                 $('#PagoEfectivo').val($('#total').val());
@@ -1105,7 +1106,7 @@
                 }else{
                     $('#total').val(0);
                 }
-                console.log('TOTAL ACTUALIZADO',$('#total').val());
+                console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
 
             }
 
