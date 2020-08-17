@@ -960,6 +960,7 @@
             var sigpesos=parseInt($('#sigpesos_usar').val());
             var desCumple=parseFloat($('#descuentoCumple').val());
             var saldoAFavor=parseFloat($('#saldoAFavor').val());
+             saldoAFavor = sigpesos;
             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
             //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
@@ -996,6 +997,7 @@
                 var sigpesos=parseInt($('#sigpesos_usar').val());
                 var desCumple=parseFloat($('#descuentoCumple').val());
                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                 saldoAFavor = sigpesos;
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
@@ -1025,6 +1027,8 @@
                 $('#PagoSigpesos').show();
                 $('#digitos_targeta').required;
                 var sigpesos=parseInt($('#sigpesos_usar').val());
+                var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                saldoAFavor = sigpesos;
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
                 console.log('Sipesos:',sigpesos);
                
@@ -1051,6 +1055,7 @@
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));                   
                  var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                 saldoAFavor = sigpesos;
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
                 $('#iva').val(getIva);
                 var iva=getIva;
@@ -1086,6 +1091,7 @@
                 var sigpesos=parseInt($('#sigpesos_usar').val());
                 var desCumple=parseFloat($('#descuentoCumple').val());
                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                saldoAFavor = sigpesos;
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
@@ -1126,6 +1132,7 @@
                 var sigpesos=parseInt($('#sigpesos_usar').val());
                 var desCumple=parseFloat($('#descuentoCumple').val());
                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                saldoAFavor = sigpesos;
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
