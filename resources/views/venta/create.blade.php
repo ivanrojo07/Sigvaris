@@ -1563,7 +1563,7 @@
                  console.log('sigpesos peticion198711',res);
                  console.log('sigpesos peticion198712',res.cumple);
 
-                if (isNaN(res.sigpesos)&&res.sigpesos!="") {
+                if (!isNaN(res.sigpesos)&&res.sigpesos!="") {
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion00',res);
                 }else{             
