@@ -1012,7 +1012,8 @@
 
                 $('#PagoTarjeta').val($('#total').val());
 
-            }else if ($('#tipoPago').val()==3) {
+            }
+            else if ($('#tipoPago').val()==3) {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
 
@@ -1023,7 +1024,8 @@
                 $('#tar10').show();
                 $('#PagoSigpesos').show();
                 $('#digitos_targeta').required;
-            }else if ($('#tipoPago').val()==1) {
+            }
+            else if ($('#tipoPago').val()==1) {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
 
@@ -1059,7 +1061,8 @@
 
                 $('#PagoEfectivo').val($('#total').val());
 
-            }else if($('#tipoPago').val()==4){
+            }
+            else if($('#tipoPago').val()==4){
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
 
@@ -1093,6 +1096,7 @@
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
+                console.log(sigpesos);
                 $('#iva').val(getIva);
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
