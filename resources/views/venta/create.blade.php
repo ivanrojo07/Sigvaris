@@ -1084,7 +1084,7 @@
                 $('#tar10').hide();
                 $('#PagoSigpesos').hide();
 
-                $('#sigpesos_usar').val(0);
+                //$('#sigpesos_usar').val(0);
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
                 var sigpesos=parseInt($('#sigpesos_usar').val());
