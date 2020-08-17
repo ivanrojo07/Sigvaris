@@ -209,6 +209,9 @@ class VentaController extends Controller
           $Factura->save();  
         }
 
+            if ($request->saldo_a_favor >0) {
+               $request->('paciente_id')->update(['saldo_a_favor' => $request->saldoAFavor]);
+            }
         $CRM = new Crm(
             array(
                 'paciente_id' => $request->input('paciente_id'),
