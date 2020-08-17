@@ -40,7 +40,7 @@
                         @endphp
                        
 
-                        <input type="text" class="form-control" value="{{$venta->historialCambios->venta_id}}" readonly="">
+                        <input type="text" class="form-control" value="{{ $venta->comentario}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
