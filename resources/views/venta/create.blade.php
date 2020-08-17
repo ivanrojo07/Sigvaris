@@ -1752,8 +1752,35 @@
    
 
 </script>
+    
+           <script type="text/javascript">
+               if ($('#paciente_id').val()="") {
+
+                alert("No has llenado el campo paciente");
+                return false;
+
+               }
+
+
+
+
+           </script>
+         
+
 @else{
-          
+           <script type="text/javascript">
+               if ($('#paciente_id').val()="") {
+
+                alert("No has llenado el campo paciente");
+                return false;
+
+               }
+
+
+
+
+           </script>
+         }
 @endif
 @endsection
 
