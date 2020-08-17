@@ -693,20 +693,27 @@
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));
     }
+
+
+
     function sendFormValidador() {
         console.log("empleado",$('#empleado_id').val());
     if ($('#empleado_id').val()!="") {
-    if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
+        if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
         document.getElementById("form-cliente").submit();
-      } else {
-        alert("Valida los campos de forma de pago");
-        return false;
+            }else if($('#paciente_id').val()!="") {
+                alert("El campo paciente esta vacio");
+                 return false;
+            }
+            else {
+                 alert("Valida los campos de forma de pago");
+                 return false;
+                 }
+               }
+             else{
+                 alert("Valida el campo de empleado");
+                 return false;
       }
-
-    }else{
-        alert("Valida el campo de empleado");
-        return false;
-    }
       
     }
 
