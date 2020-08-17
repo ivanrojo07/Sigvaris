@@ -1049,7 +1049,7 @@
                 var sigpesos=parseInt($('#sigpesos_usar').val());
                 var desCumple=parseFloat($('#descuentoCumple').val());
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));                   
                  var saldoAFavor=parseFloat($('#saldoAFavor').val());
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
                 $('#iva').val(getIva);
@@ -1061,7 +1061,7 @@
                     $('#total').val(0);
                 }
                 console.log('TOTAL ACTUALIZADO DESDE EFECTIVO',$('#total').val());
-                console.log('Sipesos:',sigpesos);
+                console.log('Saldo a favor:',saldoAFavor);
                 
 
                 $('#PagoEfectivo').val($('#total').val());
@@ -1099,7 +1099,7 @@
                     $('#total').val(0);
                 }
                 console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
-                console.log('Sigpesos:',sigpesos);
+               console.log('Saldo a favor:',saldoAFavor);
               
 
 
@@ -1139,8 +1139,7 @@
                     $('#total').val(0);
                 }
                 console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
-                console.log('Sipesos:',sigpesos);
-             
+                console.log('Saldo a favor:',saldoAFavor);
 
             }
 
