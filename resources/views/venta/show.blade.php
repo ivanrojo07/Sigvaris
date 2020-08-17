@@ -32,15 +32,10 @@
                     <div class="col-4 form-group">
                         <label class="control-label">Damage:</label>
                         @php
-                        
-                        @endphp
-                        {{$venta->historialCambios()->idDeLaVenta("2020-08-17 05:21:32")}} <br>
-                        @php
-                        
-                        @endphp
+                        $Folio = $venta->productos()->venta_id;
+                        @endphp                       
                        
-
-                        <input type="text" class="form-control" value="{{ $venta->comentario}}" readonly="">
+                        <input type="text" class="form-control" value="{{ $Folio}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
