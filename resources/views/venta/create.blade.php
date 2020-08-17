@@ -715,9 +715,6 @@
                 if(value.length>0) {
                 alert("El campo paciente esta vacio");
                  return false;
-                }else{
-                    alert("El campo paciente esta chido");
-                    return true;
                 }
       
     }
