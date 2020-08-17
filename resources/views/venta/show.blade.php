@@ -36,7 +36,7 @@
                         @endphp
                        
 
-                        <input type="text" class="form-control" value="{{$venta->historialCambios->venta_id == $folio ? Viene de .$folio.' ' : 'No es damage'}}" readonly="">
+                        <input type="text" class="form-control" value="{{$venta->historialCambios->venta_id == $folio ? 'Viene de '.$folio.' ' : 'No es damage'}}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
