@@ -698,13 +698,13 @@
     if ($('#empleado_id').val()!="") {
     if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
         document.getElementById("form-cliente").submit();
-      } else if {
-        alert("Valida los campos de forma de pago");
-        return false;
-      }else if ($('#paciente_id').val()!="") {
+      } else if ($('#paciente_id').val()!="") {
             alert("Valida el campo paciente");
              return false;
-        }
+        }else {
+        alert("Valida los campos de forma de pago");
+        return false;
+      }
 
       }
        else{
