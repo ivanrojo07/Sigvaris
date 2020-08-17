@@ -210,7 +210,7 @@ class VentaController extends Controller
         }
 
             if ($request->saldo_a_favor >0) {
-               $request->('paciente_id')->update(['saldo_a_favor' => $request->saldoAFavor]);
+               $venta->paciente()->update(['saldo_a_favor' => $request->saldoAFavor]);
             }
         $CRM = new Crm(
             array(
