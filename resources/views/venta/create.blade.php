@@ -758,6 +758,7 @@
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
+        var aux_sigPesos = sigpesos;
         console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
         if (aux.toFixed(2)!=$('#total').val()) {
@@ -1025,6 +1026,8 @@
                 $('#PagoSigpesos').show();
                 $('#digitos_targeta').required;
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
+                console.log('Sipesos:',sigpesos);
+                console.log(aux_sigPesos);
             }
             else if ($('#tipoPago').val()==1) {
                 $('#PagoEfectivo').val(0);
@@ -1058,7 +1061,8 @@
                     $('#total').val(0);
                 }
                 console.log('TOTAL ACTUALIZADO DESDE EFECTIVO',$('#total').val());
-
+                console.log('Sipesos:',sigpesos);
+                console.log(aux_sigPesos);
 
                 $('#PagoEfectivo').val($('#total').val());
 
@@ -1107,6 +1111,8 @@
                     $('#total').val(0);
                 }
                 console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
+                console.log('Sipesos:',sigpesos);
+                console.log(aux_sigPesos);
 
             }
 
