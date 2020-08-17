@@ -120,6 +120,7 @@
                                     <thead>
                                         <tr class="info">
                                             <th>TIPO CAMBIO</th>
+                                            <th>FOLIO ORIGINAL</th>
                                             <th>RESPONSABLE</th>
                                             <th>PRODUCTO ENTREGADO</th>
                                             <th>PRODUCTO DEVUELTO</th>
@@ -130,6 +131,7 @@
                                         @foreach ($venta->historialCambios as $cambio)
                                         <tr>
                                             <td>{{$cambio->tipo_cambio}}</td>
+                                            <td>{{$cambio->venta_id}}</td>
                                             <td>{{$cambio->responsable->name}}</td>
                                             <td>{{$cambio->productoEntregado ? $cambio->productoEntregado->sku : 'N/D'}}</td>
                                             <td>{{$cambio->productoDevuelto ? $cambio->productoDevuelto->sku : 'N/D'}}</td>
