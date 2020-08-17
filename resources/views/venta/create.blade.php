@@ -711,9 +711,12 @@
                  alert("Valida el campo de empleado");
                  return false;
              }
-                if($('#paciente_id').val() =="") {
+                if($('#paciente_id').val() !="") {
                 alert("El campo paciente esta vacio");
                  return false;
+                }else{
+                    alert("El campo paciente esta chido");
+                    return true;
                 }
       
     }
