@@ -256,7 +256,7 @@ class VentaController extends Controller
 
         
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        $Paciente->update(['saldo_a_favor' => $request->saldoAFavor]);
+        $Paciente->update(['saldo_a_favor' => $request->saldo_a_favor]);
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
     }
