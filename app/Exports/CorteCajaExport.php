@@ -96,8 +96,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Pago depósito',
             
             'FACTURA',
-            'Genero',
-            'Envio',
+            'Generó',
+            'Envió',
 
             'Devolución en efectivo',
             'Cambio fisico',
