@@ -337,7 +337,7 @@
                                     <div class="row">
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Paciente: </label>
-                                            <input type="text" class="form-control" id="inputNombrePaciente" required
+                                        <input type="text" class="form-control" id="inputNombrePaciente" required
                                                 readonly>
                                         </div>
                                         <div class="col-4 form-group">
@@ -1749,15 +1749,15 @@
 </script>
 @else{
            <script type="text/javascript">
-               if ($('#paciente_id').val()="" || $('#paciente_id').val() == null ) {
+               if ($('#inputNombrePaciente').val()="" || $('#paciente_id').val() == null ) {
 
                 alert("No has llenado el campo paciente");
                 return false;
 
+               }if(document.getElementById('inputNombrePaciente').value = ""){
+                alert("No has llenado el campo paciente");
+                return false;
                }
-
-
-
 
            </script>
          }
