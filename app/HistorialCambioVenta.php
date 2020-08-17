@@ -32,7 +32,7 @@ class HistorialCambioVenta extends Model
     public function idDeLaVenta($Fecha)
     {       
             $fecha_bu = '';
-            $fecha_bu = this->Fecha;
+            $fecha_bu = $Fecha;
             $indice = DB::table('historial_cambios_venta')->select('venta_id')->where('created_at','=',$fecha_bu);
 
             return $indice;
