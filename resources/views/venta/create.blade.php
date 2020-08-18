@@ -692,23 +692,23 @@
 <script type="text/javascript">
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));
+        
     }
-
-
-
     function sendFormValidador() {
-        console.log("empleado",$('#empleado_id').val());
-    if ($('#empleado_id').val()!="") {
+        console.log("empleado",$('#empleado_id').val());  
+        console.log("id del paciente: ",$('#empleado_id').val());
+        
+    if ($('#empleado_id').val()!="" && $('#paciente_id').val()) {
         if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
                 document.getElementById("form-cliente").submit();        
-            }
+            } 
             else {
                  alert("Valida los campos de forma de pago");
                  return false;
                  }
                }
                  else{
-                 alert("Valida el campo de empleado");
+                 alert("Valida el campo de empleado o paciente");
                  return false;
              }
                    
