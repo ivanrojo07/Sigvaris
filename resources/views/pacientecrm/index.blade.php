@@ -176,15 +176,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $ventas = $paciente->ventas();
-                        $UltimaVenta = $ventas->where($paciente->id,$crm->paciente_id)->last();
-                    @endphp
+
                     @if(empty($paciente->crms))
                     <h5>No hay ningún crm registrado</h5>
                     @else
                     @foreach($paciente->crms as $crm)
-                        
+                             @php
+                                $ventas = $paciente->ventas();
+                                $UltimaVenta = $ventas->where($paciente->id,$crm->paciente_id)->last();
+                             @endphp
                     
                            <tr>
                                  <td>{{$crm->created_at}}</td>
