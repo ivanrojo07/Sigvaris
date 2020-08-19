@@ -182,8 +182,8 @@
                     @else
                     @foreach($paciente->crms as $crm)
                              @php
-                                $ventas = $crm->paciente()->ventas();
-                                $UltimaVenta = $ventas->where($paciente->id,$crm->paciente_id)->last();
+                                $ventas = $crm->ventas();
+                            $UltimaVenta =ventas->where($crm->paciente()->id,$crm->paciente_id)->last();
                              @endphp
                     
                            <tr>
