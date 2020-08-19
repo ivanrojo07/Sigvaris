@@ -688,7 +688,7 @@
     });
 </script>
 
-
+   
 <script type="text/javascript">
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));
@@ -712,7 +712,7 @@
                  return false;
              }
                    
-    }
+    } 
 
     function on(){
          $('#descuento').val(0);
