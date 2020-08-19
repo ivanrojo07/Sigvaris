@@ -177,6 +177,7 @@
                 </thead>
                 <tbody>
                     @php
+                        $ventas = $paciente->ventas();
                         $UltimaVenta = $ventas->where($paciente->id,$crm->paciente_id)->last();
                     @endphp
                     @if(empty($paciente->crms))
