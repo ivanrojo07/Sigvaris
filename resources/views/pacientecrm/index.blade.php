@@ -170,7 +170,8 @@
                         <th>Fecha Aviso</th>
                         <th>Fecha Contacto</th>
                         <th>Forma Contacto</th>
-                        <th>Estado</th>
+                        <th>Ultima compra</th>
+                        <th>Comentarios</th>        
                         <th>Hora</th>
                         <th>Ver</th>
                     </tr>
@@ -184,8 +185,8 @@
                         <td>{{$crm->created_at}}</td>
                         <td>{{$crm->fecha_aviso}}</td>
                         <td>{{$crm->fecha_contacto}}</td>
-                        <td>{{$crm->forma_contacto}}</td>
-                        <td>{{$crm->estado->nombre}}</td>
+                        <td>{{$crm->paciente['telefono']}}</td>
+                        <td>{{$crm->comentarios}}</td>
                         <td>{{$crm->hora}}</td>
                         <td>
                             <button type="button" onclick="mostrarCrm('{{$crm}}')" data-toggle="modal" data-target="#ver_crm_modal" class="btn btn-primary">Ver</button>
