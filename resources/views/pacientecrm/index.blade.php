@@ -181,7 +181,7 @@
                     @else
                     @foreach($paciente->crms as $crm)
                         @php
-                        {{var $UltimaVenta=$ventas->where($paciente->id,$crm->paciente_id)->last()}}
+                        {{$UltimaVenta=$ventas->where($paciente->id,$crm->paciente_id)->last()}}
                         @endphp
                     
                            <tr>
