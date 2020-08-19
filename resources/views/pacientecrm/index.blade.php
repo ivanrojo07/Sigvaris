@@ -176,10 +176,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if(empty($crms))
+                    @if(empty($paciente->crms))
                     <h5>No hay ningún crm registrado</h5>
                     @else
-                    @foreach($crms as $crm)
+                    @foreach($paciente->crms as $crm)
                         @if($UltimaVenta=$ventas->where('paciente_id',$crm->paciente_id)->last())
                        
                         <tr class="active tupla" >
