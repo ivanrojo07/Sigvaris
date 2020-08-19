@@ -187,7 +187,7 @@
                                  <td>{{$crm->fecha_contacto}}</td>
                                  <td>{{$crm->paciente['telefono']}}</td>
                                  <td>{{$crm->comentarios}}</td>
-                                 <td>{{$crm->hora}}</td>
+                                 
                          <td>
                             <button type="button" onclick="mostrarCrm('{{$crm}}')" data-toggle="modal" data-target="#ver_crm_modal" class="btn btn-primary">Ver</button>
                         </td>
