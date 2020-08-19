@@ -177,7 +177,7 @@
                 </thead>
                 <tbody>
                     @php
-                        {{$UltimaVenta=$ventas->where($paciente->id,$crm->paciente_id)->last()}}
+                        $UltimaVenta = $ventas->where($paciente->id,$crm->paciente_id)->last();
                     @endphp
                     @if(empty($paciente->crms))
                     <h5>No hay ningún crm registrado</h5>
