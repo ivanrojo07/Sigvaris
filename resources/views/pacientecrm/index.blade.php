@@ -172,7 +172,6 @@
                         <th>Forma Contacto</th>
                         <th>Ultima compra</th>
                         <th>Comentarios</th>        
-                        <th>Hora</th>
                         <th>Ver</th>
                     </tr>
                 </thead>
