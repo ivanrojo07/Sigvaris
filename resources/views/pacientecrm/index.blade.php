@@ -184,7 +184,7 @@
                              @php
                             
                             
-                            $UltimaVenta=$ventas->where('paciente_id',$crm->paciente_id)->last();
+                            $UltimaVenta=$paciente->ventas()->where('paciente_id',$crm->paciente_id)->last();
                              @endphp
                     
                            <tr>
