@@ -183,7 +183,7 @@
                     @foreach($paciente->crms as $crm)
                              @php
                                 $ventas = $crm->ventas();
-                            $UltimaVenta =ventas->where($crm->paciente()->id,$crm->paciente_id)->last();
+                            $UltimaVenta =ventas->where($paciente->id,$crm->paciente_id)->last();
                              @endphp
                     
                            <tr>
