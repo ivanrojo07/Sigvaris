@@ -176,30 +176,51 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    @if(empty($paciente->crms))
+                    @if(empty($crms))
                     <h5>No hay ningún crm registrado</h5>
                     @else
-                    @foreach($paciente->crms as $crm)
-                             @php
+                    @foreach($crms as $crm)
+                        @if($UltimaVenta=$ventas->where('paciente_id',$crm->paciente_id)->last())
+                       
+                        <tr class="active tupla" >
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['nombre']}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($crm->created_at)->format('m-d-Y')}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($crm->fecha_aviso)->format('m-d-Y')}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($crm->fecha_contacto)->format('m-d-Y')}}</td>
+
+                            @if($crm->forma_contacto=="Telefono")
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['telefono']}}</td>
+                            @elseif($crm->forma_contacto=="Mail")
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['mail']}}</td>
+                            @elseif($crm->forma_contacto=="Celular")
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->paciente['celular']}}</td>
+
+                            @else
+                                <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')"></td>
+                            @endif
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($UltimaVenta->fecha)->format('m-d-Y')}}</td>
+                            <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->comentarios}}</td>
                             
-                            
-                            $UltimaVenta=$paciente->ventas()->where('paciente_id',$crm->paciente_id)->last();
-                             @endphp
-                    
-                           <tr>
-                                 <td>{{$crm->created_at}}</td>
-                                 <td>{{$crm->fecha_aviso}}</td>
-                                 <td>{{$crm->fecha_contacto}}</td>
-                                 <td>{{$crm->paciente['telefono']}}</td>
-                                 <td>{{\Carbon\Carbon::parse($UltimaVenta->fecha)->format('Y-M-D')}}</td>
-                                 <td>{{$crm->comentarios}}</td>
-                                 <td>{{$crm->hora}}</td>
-                         <td>
-                            <button type="button" onclick="mostrarCrm('{{$crm}}')" data-toggle="modal" data-target="#ver_crm_modal" class="btn btn-primary">Ver</button>
-                        </td>
-                    </tr>
-                    
+                            {{--<td>
+                                    <a  class="btn btn-primary" onclick="generarHistorialVentas('{{ $pacientes->find($crm->paciente_id) }}')">
+                                    <strong>Ver Historial de ventas</strong>
+                                </a>
+                                <button id="crear_crm_boton" type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#crear_crm_modal">
+                            <strong>Crear <i class="fa fa-plus"></i></strong>
+                        </button>
+                                 <button id="crear_crm_boton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ver_crm_modal"onclick="mostrarCrm('{{$crm}}')">
+                                    <button type="button" onclick="mostrarCrm('{{$crm}}')" class="btn btn-primary botonMostrarCrm">Ver</button> 
+                            </td>--}}
+                            <td class="text-center">
+                                <button id="crear_crm_boton" type="button" class="btn btn-success" data-toggle="modal" onclick="generarHistorial('{{ $pacientes->find($crm->paciente_id) }}')">
+                                    <strong>Ver Historial </strong>
+                                </button>    
+                                {{-- <button id="crear_crm_boton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ver_crm_modal"onclick="mostrarCrm('{{$crm}}')">
+                                    <button type="button" onclick="mostrarCrm('{{$crm}}')" class="btn btn-primary botonMostrarCrm">Ver</button> --}}
+                            </td>
+                        </tr>
+                        @endif
                     @endforeach
                     @endif
                 </tbody>
