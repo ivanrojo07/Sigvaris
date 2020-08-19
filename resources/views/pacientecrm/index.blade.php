@@ -153,7 +153,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" form="ver_crm" id="cerrar_ver_crm_modal" class="btn btn-danger">Cerrar</button>
+                                        <button type="submit" form="ver_crm" id="cerrar_ver_crm_modal" class="close">Cerrar</button>
                                     </div>
                                 </div>
                             </div>
