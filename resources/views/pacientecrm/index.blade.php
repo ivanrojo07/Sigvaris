@@ -180,6 +180,9 @@
                     <h5>No hay ningún crm registrado</h5>
                     @else
                     @foreach($paciente->crms as $crm)
+                        @php
+                        {{var $UltimaVenta=$ventas->where('paciente_id',$crm->paciente_id)->last()}}
+                        @endphp
                     
                            <tr>
                                  <td>{{$crm->created_at}}</td>
