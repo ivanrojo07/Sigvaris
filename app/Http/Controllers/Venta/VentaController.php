@@ -269,7 +269,9 @@ class VentaController extends Controller
      */
     public function show(Venta $venta)
     {
-        return view('venta.show', ['venta' => $venta]);
+        $origen = DB::table('productos_damage')->select('origin_id')->where('destinate_id',$venta->id)->get();
+
+        return view('venta.show', ['venta' => $venta,'origen'=>$origen]);
     }
 
     /**
@@ -526,6 +528,8 @@ class VentaController extends Controller
         $productosDamage->producto_id = $request->productoDevuelto;
         $productosDamage->tipo_damage = $request->TipoDamage;
         $productosDamage->user_id = Auth::user()->id;
+        $productosDamage->destinate_id =$request->folio_nuevo;
+        $productosDamage->origin_id = $request->VentaAnterior;
         $productosDamage->descripcion = $request->DesDamage;
         $productosDamage->save();
 
