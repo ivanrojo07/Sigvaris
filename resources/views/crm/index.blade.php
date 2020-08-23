@@ -352,7 +352,7 @@
                 </tbody>
             </table>
             {{ $crms->links() }}
-            <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" >
+            <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" style="display: none;" >
                  <h4>Historial Ventas</h4>
                 <table class="table table-striped table-bordered table-hover" id="tablaPacientesV">
                     <thead>
@@ -369,7 +369,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tablaUsuario_Crm" id="tablaUsuario_Crm" >
+            <div class="tablaUsuario_Crm" id="tablaUsuario_Crm" style="display: none;" >
                  <h4>C.R.M. Historial</h4>
                 <table class="table table-striped table-bordered table-hover" id="tablaPacientes">
                     <thead>
@@ -552,7 +552,7 @@ $(document).on('click', '.botonMostrarCrm', function(){
       // Obtener la referencia del elemento body
       // Crea un elemento <table> y un elemento <tbody>
       //var crm = JSON.parse(data3);
-      $('#tablaUsuario_Crm').show();
+      $('#tablaUsuario_Crm').show("slow");
       var paciente = JSON.parse(data1);
       // Obtener la referencia del elemento body
      $.ajax({
