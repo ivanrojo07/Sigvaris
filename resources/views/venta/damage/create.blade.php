@@ -32,6 +32,7 @@
                     <input type="hidden" name="productoDevuelto" id="productoDevuelto" value="{{$productoDebuelto->id}}">
                     <input type="hidden" name="TipoDamage" id="TipoDamage" value="{{$TipoDamage}}">
                     <input type="hidden" name="DesDamage" id="DesDamage" value="{{$DesDamage}}">
+                    <input type="hidden" name="folio_nuevo" id="folio_nuevo" value="{{$folio+4}}">
                     <input type="hidden" name="VentaAnterior" id="VentaAnterior" value="{{$VentaA}}">
 
                     <input type="hidden" class="form-control" name="montonegativo"
