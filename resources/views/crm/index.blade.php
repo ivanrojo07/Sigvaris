@@ -352,7 +352,7 @@
                 </tbody>
             </table>
             {{ $crms->links() }}
-            <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" style="display: none;" >
+            <div class="tablaUsuario_Ventas" id="tablaUsuario_Ventas" >
                  <h4>Historial Ventas</h4>
                 <table class="table table-striped table-bordered table-hover" id="tablaPacientesV">
                     <thead>
@@ -369,7 +369,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tablaUsuario_Crm" id="tablaUsuario_Crm" style="display: none;" >
+            <div class="tablaUsuario_Crm" id="tablaUsuario_Crm" >
                  <h4>C.R.M. Historial</h4>
                 <table class="table table-striped table-bordered table-hover" id="tablaPacientes">
                     <thead>
