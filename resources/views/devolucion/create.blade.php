@@ -34,8 +34,8 @@
                     <input type="text" class="form-control" id="referencia" name="referencia" required >
                 </div>
                 <div class="col-4 form-group">
-                    <label for="" class="text-uppercase text-muted">CLAVE: </label>
-                    <input type="text" class="form-control" id="clave" name="clave" value="" required >
+                    <label for="" class="text-uppercase text-muted">CLABE INTERBANCARIA: </label>
+        <input type="number" class="form-control" id="clave" name="clave" value="" required maxlength="18">
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">BANCO: </label>
