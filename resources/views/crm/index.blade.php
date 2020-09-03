@@ -552,6 +552,8 @@ $(document).on('click', '.botonMostrarCrm', function(){
       // Obtener la referencia del elemento body
       // Crea un elemento <table> y un elemento <tbody>
       //var crm = JSON.parse(data3);
+      //
+      alert("Se genero el historial correctamente en la parte inferior \n ");
       $('#tablaUsuario_Crm').show("slow");
       var paciente = JSON.parse(data1);
       // Obtener la referencia del elemento body
