@@ -7,8 +7,11 @@
             <div class="col-4">
                     <h4>Devoluciones Ecónomicas</h4>
                 </div>
+
         </div>
         <div class="card-body">
+            <a href="#" class="btn btn-primary">Exportar Excel</a>
+            <br> <br>
             <table class="table table-bordered mt-3" id="Devolucionesid">
                 <thead class="thead-dark">
                     <tr>
