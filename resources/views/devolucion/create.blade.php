@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <form action="{{route('devolucion.cargarDevolucion')}}" method="POST">
+            <form action="{{route('devolucion.cargarDevolucion')}}" method="POST" id="miForm" name="fvalida"  onsubmit="return validar()">
                 @csrf
                 <input type="hidden" name="venta_id" id="venta_id" value="{{$venta->id}}">
             <div class="row">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">CLABE INTERBANCARIA: </label>
-        <input type="number" class="form-control" id="clave" name="clave" value="" required maxlength="18">
+        <input type="number" class="form-control" id="clave" name="clave" value="" required maxlength="18" minlength="17">
                 </div>
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">BANCO: </label>
@@ -58,7 +58,23 @@
 <script type="text/javascript">
 
 
-
+  function validar(){
+                        var clave = document.fvalida.clave.value.length;
+                            //var apellidos = document.fvalida.apellidos.value.length;
+                            // var celular = document.fvalida.celular.value.length;
+                            //     var correo = document.fvalida.correo.value.length;
+                                 if (clave != 18 ) {
+                                     alert("La clabe interbacaria debe tener 18 digitos \n *Sin espacios*");
+                                     document.fvalida.clave.focus();
+                                     /* document.fvalida.nombre.focus();
+                                     document.fvalida.apellidos.focus();
+                                     document.fvalida.celular.focus();
+                                     document.fvalida.correo.focus(); */
+                                     return false;
+                                             }else{ return true;
+                                        }
+                                        
+                                    }
 
 
 </script>

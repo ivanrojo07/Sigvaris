@@ -22,7 +22,7 @@
                         <th scope="col">Numero de cuenta</th>
                         <th scope="col">Beneficiario </th>
                         <th scope="col">Referencia </th>
-                        <th scope="col">Clave</th>
+                        <th scope="col">Clabe</th>
                         <th scope="col">Banco </th>
                         <th scope="col">Fecha </th>
                     </tr>
