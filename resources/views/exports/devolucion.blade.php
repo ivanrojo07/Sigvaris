@@ -19,7 +19,7 @@
             <td>{{ $dev->monto }}</td>
             <td>{{ $dev->cuenta }}</td>
             <td>{{ $dev->beneficiario }}</td>
-            <td>{{ $dev->referebcia }}</td>
+            <td>{{ $dev->referencia }}</td>
             <td>{{ $dev->clave }}</td>
             <td>{{ $dev->banco }}</td>
             
