@@ -237,7 +237,7 @@ Route::post('Devolucion_Damage','Venta\DamageController@Devolucion_Damage')->nam
 
 Route::get('pruebas','Prueba\PruebaController@index');
 Route::get('pruebasJC','Prueba\PruebaController@FacturasRFC');
-
+Route::get('/Devoluciones', 'Devolucion\DevolucionController@export')->name('export2');
 
 // APIS
 Route::get('api/empleados/fitters/','Empleado\EmpleadoController@getEmpleadosFitters');

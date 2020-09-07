@@ -197,10 +197,10 @@
                                         <div class="col-12 col-sm-6 col-md-4 form-group">
                                             <label for="descuento_id"
                                                 class="text-uppercase text-muted">Descuento</label>
-                                            <select class="form-control" name="descuento_id" id="descuento_id">
-                                                <option value="">Selecciona...</option>
+                                            <select class="form-control" name="descuento_id" id="descuento_id"  onchange="ShowSelected();">
+                                                <option value="0" >Selecciona...</option>
                                                 @foreach ($descuentos as $descuento)
-                                                <option value="{{$descuento->id}}">{{$descuento->nombre}}</option>
+                                                <option value="{{$descuento->id}}" >{{$descuento->nombre}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -624,6 +624,9 @@
     }
 
 
+
+
+
     $(document).ready(function(){
         var maxField = 100; //Input fields increment limitation
         var addButton = $('.add_button'); //Add button selector
@@ -690,13 +693,40 @@
 
    
 <script type="text/javascript">
+    var cantidad = 0;
     function redondear(){
-        $('#total').val(parseFloat($('#total').val()).toFixed(0));
-        
+        $('#total').val(parseFloat($('#total').val()).toFixed(0));    
     }
+     
+    function ShowSelected(){
+                    /* Para obtener el valor */
+            // var cod = document.getElementById("descuento_id").value;
+            // alert(cod);
+
+             $("input[name='cantidad[]']").each(function() {
+                  cantidad = $(this).val();
+                         });
+             var combo = document.getElementById("descuento_id");
+             var selected = combo.options[combo.selectedIndex].text;
+             // alert(selected);
+            if (cantidad < 5  &&  selected == "Esencial") {
+                    alert("Descuento esencial solo esta dispobile en la compra de 5 prendas");
+                    $( "#descuento_id" ).focus();
+                    $( "#descuento_id" ).val(0);
+
+            }
+            
+            /* Para obtener el texto */
+             // var combo = document.getElementById("descuento_id");
+             // var selected = combo.options[combo.selectedIndex].text;
+            // 
+    }
+   
+
     function sendFormValidador() {
         console.log("empleado",$('#empleado_id').val());  
         console.log("id del paciente: ",$('#empleado_id').val());
+
         
     if ($('#empleado_id').val()!="" && $('#paciente_id').val()) {
         if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
@@ -1362,8 +1392,7 @@
                 }
 
             });
-        });
-       
+        });     
         $('#paciente_id').change( async function(){
             var pacienteId=$(this).val();
             

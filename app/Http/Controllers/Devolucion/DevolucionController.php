@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Devolucion;
 use App\Devolucion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Exports\DevolucionExport;
+/* use App\Exports\SheetsDExport; */
+use SheetsDExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DevolucionController extends Controller
 {
@@ -35,5 +39,9 @@ class DevolucionController extends Controller
     {
     	$Devoluciones=Devolucion::get();
     	return view('devolucion.index', compact('Devoluciones'));
+	}
+	public function export() 
+    {
+        return Excel::download(new DevolucionExport, 'devoluciones.xlsx');
     }
 }

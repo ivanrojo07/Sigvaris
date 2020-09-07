@@ -10,7 +10,7 @@
 
         </div>
         <div class="card-body">
-            <a href="#" class="btn btn-primary">Exportar Excel</a>
+            <a href="{{route('export2')}}" class="btn btn-primary">Exportar Excel</a>
             <br> <br>
             <table class="table table-bordered mt-3" id="Devolucionesid">
                 <thead class="thead-dark">

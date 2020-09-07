@@ -270,8 +270,9 @@ class VentaController extends Controller
     public function show(Venta $venta)
     {
         $origen = DB::table('productos_damage')->select('origin_id')->where('destinate_id',$venta->id)->get();
-
-        return view('venta.show', ['venta' => $venta,'origen'=>$origen]);
+        $cambio = DB::table('historial_cambios_venta')->select('venta_id')->where('destinate_id',$venta->id)->get();
+        
+        return view('venta.show', ['venta' => $venta,'origen'=>$origen,'cambio'=>$cambio]);
     }
 
     /**
@@ -636,6 +637,7 @@ class VentaController extends Controller
             'tipo_cambio' => 'CAMBIO PRODUCTO',
             'responsable_id' => Auth::user()->id,
             'venta_id' => $request->VentaAnterior,
+            'destinate_id'=>$venta->id,
             'producto_entregado_id' =>  $productos[0]->id,
             'producto_devuelto_id' => $request->productoDevuelto,
             'observaciones' => $request->observacionesDevuelto

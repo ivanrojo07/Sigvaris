@@ -45,6 +45,14 @@
                                      $resultado = preg_replace("/[^a-zA-Z0-9]+/", "", $resultado);
                                      
                                 }
+
+                        @endphp
+                        @php
+                        $texto = strval($cambio);
+                        $resultado = str_replace("venta_id", "Folio de origen", $texto);
+                            $resultado = substr($resultado,20,-2);
+                                    $resultado = preg_replace("/[^a-zA-Z0-9]+/", "", $resultado);
+                       
                         @endphp
                         <input type="text" class="form-control" value="{{$resultado}}" readonly="">
                     </div>
