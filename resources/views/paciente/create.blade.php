@@ -173,8 +173,16 @@ $('input').change( function(){
         var dia = ("0" + date.getDate()).slice(-2);
         dia = parseInt(dia)+1;
         dia = dia.toString();
+        if(parseInt(dia)<10){
+            dia = ("0"+ dia.toString());
+            console.log('Entre en el if');
+        }
+
         const mes = ("0" + (date.getMonth() + 1)).slice(-2);
         const anio = date.getFullYear().toString().substr(-2);
+        console.log(anio);
+        console.log(mes);
+        console.log(dia);
         const rfc_paterno = $('#paterno').val().substr(0,2);
         const rfc_materno = $('#materno').val().substr(0,1);
         const rfc_nombre = $('#nombre').val().substr(0,1);
