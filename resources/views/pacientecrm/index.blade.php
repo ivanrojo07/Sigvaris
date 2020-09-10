@@ -179,7 +179,7 @@
                     @if(empty($paciente->crms))
                     <h5>No hay ningún crm registrado</h5>
                     @else
-                    @foreach($paciente->crms as $crm)
+                    @foreach($paciente->crms()->orderBy('id', 'desc')->get() as $crm)
 
                            <tr>
                                  <td>{{$crm->created_at}}</td>

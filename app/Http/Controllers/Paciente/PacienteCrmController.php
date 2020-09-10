@@ -196,6 +196,8 @@ class PacienteCrmController extends Controller
     public function getCrmCliente(Paciente $paciente)
     {
         $estados = Estado::get();
+        $pac = $paciente->crms();
+      /*   dd($pac->orderBy('id', 'desc')->get()); */
         return view('pacientecrm.index', ['paciente' => $paciente, 'estados' => $estados]);
     }
     
