@@ -101,5 +101,10 @@
             $('#'+submenu).addClass('active')
         });
     </script>
+    <script>
+        $(function(){
+      $('#mi-tabla').tablesorter(); 
+    });
+    </script>
 </div>
 @endsection

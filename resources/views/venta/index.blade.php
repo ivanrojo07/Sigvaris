@@ -8,7 +8,7 @@
             <h4>Historial Ventas</h4>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table" id="mi-tabla">
                 <thead>
                     <tr>
                         <th>Folio</th>
@@ -51,5 +51,11 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript" src="/path/to/jquery-latest.js"></script>
+<script type="text/javascript" src="/path/to/jquery.tablesorter.js"></script>
+<script>
+    $(function(){
+  $('#mi-tabla').tablesorter(); 
+});
+</script>
 @endsection
