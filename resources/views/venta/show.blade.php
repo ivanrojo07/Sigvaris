@@ -37,13 +37,13 @@
                         $id=$venta->paciente_id ;
                          $texto = strval($origen);
                          $resultado = str_replace("origin_id", "Folio de origen", $texto);
-
+                                     
                                 if($resultado =='[{"Folio de origen":null}]'){
                                     $resultado='No es de Damage';
                                 }else{
                                      $resultado = substr($resultado,20,-2);
                                      $resultado = preg_replace("/[^a-zA-Z0-9]+/", "", $resultado);
-                                     
+                                      $damage = $resultado; 
                                 }
 
                         @endphp
@@ -54,7 +54,7 @@
                                     $resultado = preg_replace("/[^a-zA-Z0-9]+/", "", $resultado);
                        
                         @endphp
-                        <input type="text" class="form-control" value="{{$resultado}}" readonly="">
+                         <input type="text" class="form-control" value="{{ strlen($damage) > 1 ? $damage : $resultado }}" readonly="">
                     </div>
                     <div class="col-4 form-group">
                         <label class="control-label">Comentario:</label>
