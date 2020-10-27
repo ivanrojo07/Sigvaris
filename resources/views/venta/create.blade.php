@@ -304,7 +304,7 @@
                                                 <label for=""> Folio</label>
                                                 <input type="number" class="form-control folio" name="folio[]" required="" >
                                             </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group" hidden="true">
                                                 <label for=""> Monto</label>
                                                 <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
                                             </div>
@@ -329,6 +329,13 @@
 
                                                 <input type="number" class="form-control" name="sigpesos_usar"
                                                     id="sigpesos_usar" value="0" min="0" step="0.01">
+                                            </div>
+                                             <div class="col-12 col-sm-6 col-md-4 form-group">
+
+                                                <label for="" class="text-uppercase text-muted">PAGO COMBINADO</label>
+
+                                                <input type="text" class="form-control" name="pago_combinado"
+                                                    id="pago_combinado" value="0"readonly="true">
                                             </div>
                                         </div>
                                     </div>
@@ -619,7 +626,7 @@
         }else{
             $('#total').val(0);
         }
-        console.log('TOTAL ACTUALIZADO',$('#total').val());
+        console.log('TOTAL ACTUALIZADO EN CIENTO POR CIENTO',$('#total').val());
 
     }
 
@@ -729,6 +736,22 @@
 
         
     if ($('#empleado_id').val()!="" && $('#paciente_id').val()) {
+            var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
+            var $total_venta = parseFloat($('#total').val());
+            var $sigpeso = parseInt($('#sigpesos_usar').val());
+
+            console.log($suma+$sigpeso);
+          if($('#tipoPago').val()==3){
+
+                if (parseInt($('#total').val()) == parseInt($('#pago_combinado').val())) {
+                     document.getElementById("form-cliente").submit(); 
+                }else{
+                     alert("Asegurate que la suma de pago combinado sea igual al total");
+                        return false;
+                }
+    
+            }
+
         if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
                 document.getElementById("form-cliente").submit();        
             } 
@@ -762,7 +785,7 @@
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
+        console.log('TOTAL ACTUALIZADO EN ON',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
         if (aux>0) {
             $('#total').val(aux.toFixed(2));
@@ -792,7 +815,7 @@
         console.log('iva', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
+        console.log('TOTAL ACTUALIZADO EN OFF',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
         if (aux.toFixed(2)!=$('#total').val()) {
             if (aux>0) {
@@ -939,8 +962,8 @@
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
         console.log('desCumple', desCumple);  
-        console.log('TOTAL ACTUALIZADO',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor));
-        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+        console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
+        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {
             $('#total').val(aux.toFixed(2));
         }else{
@@ -1000,14 +1023,20 @@
             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
             $('#iva').val(getIva);
             var iva=getIva;
-            var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+            var pago_combinado = sigpesos + parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val());
+                console.log('Pgo_combinado =',pago_combinado);
+                $('#pago_combinado').val(pago_combinado);
+
+
+            var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
             if (aux>0) {
                 $('#total').val(aux.toFixed(2));
+                 cambiarTotalVenta();
             }else{
                 $('#total').val(0);
             }
             
-            console.log('TOTAL ACTUALIZADO',$('#total').val());
+            console.log('TOTAL ACTUALIZADO EN LINEA 1016',$('#total').val());
          });
 
         $('#tipoPago').change(function(){  
@@ -1063,6 +1092,12 @@
                 var sigpesos=parseInt($('#sigpesos_usar').val());
                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
                 saldoAFavor = sigpesos;
+
+                var pago_combinado = sigpesos + $('#PagoEfectivo').val()+$('#PagoTarjeta').val();
+                console.log('Pgo_combinado =',pago_combinado);
+                $('#pago_combinado').val(pago_combinado);
+
+
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
                 console.log('Sipesos:',sigpesos);
                

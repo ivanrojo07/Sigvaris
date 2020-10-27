@@ -134,12 +134,34 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         //dd($request->PagoEfectivo+$request->PagoTarjeta==$request->total);
-        if (!($request->PagoEfectivo + $request->PagoTarjeta == round($request->total, 2))) {
+        if ($request->input('tipoPago') !== 3) {
+           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->sigpesos_usar == round($request->total, 2))) {
             return redirect()
                 ->back()
                 ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
                 ->withInput($request->input());
         }
+        }
+
+
+        $Paciente=Paciente::where("id",$request->paciente_id)->first();
+            
+        if ($request->sigpesos_usar<=$Paciente->saldo_a_favor) {
+
+             
+             $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
+
+             $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
+             $Paciente->update(['saldo_a_favor' => $actualizacion]); 
+             $Paciente->update(['saldo_a_favor' => $saldo_paciente]);         
+        }else{
+                
+           return redirect()
+                ->back()
+                ->withErrors(['Error saldo a favor insuficiente'])
+                ->withInput($request->input());
+        }
+        
         /*
         if (!is_null($request->digitos_targeta) && ($request->digitos_targeta<1000)) {
             return redirect()
@@ -240,25 +262,31 @@ class VentaController extends Controller
         $CRM->save();
         //Sigpesos 
 
-        if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
-            # code...
-             if ($request->input('sigpesos_usar')>0) {
-                foreach ($request->folio as $key => $folio) {
-                    # code...
-                    $Sigpesos = new Sigpesosventa([
-                        'venta_id' => $venta->id,
-                        'monto' => $request->monto[$key],
-                        'folio' => $folio,
-                        'folio_id' => $request->lista[$key]
-                    ]);
-                    $Sigpesos->save();
-                }
-            }
-        }
+        // if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
+        //     # code...
+        //      if ($request->input('sigpesos_usar')>0) {
+        //         foreach ($request->folio as $key => $folio) {
+        //             # code...
+        //             $Sigpesos = new Sigpesosventa([
+        //                 'venta_id' => $venta->id,
+        //                 'monto' => $request->monto[$key],
+        //                 'folio' => $folio,
+        //                 'folio_id' => $request->lista[$key]
+        //             ]);
+        //             $Sigpesos->save();
+        //         }
+        //     }
+        // }
+        //Actualizar saldo a favor 
+        //
+            // $Paciente=Paciente::where("id",$request->paciente_id)->first();
+            //  $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
 
+            //  $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
+            //  $Paciente->update(['saldo_a_favor' => $actualizacion]);  
         
-        $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        $Paciente->update(['saldo_a_favor' => $request->saldo_a_favor]);
+        
+       
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
     }
