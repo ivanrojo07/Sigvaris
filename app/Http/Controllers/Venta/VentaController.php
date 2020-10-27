@@ -152,8 +152,9 @@ class VentaController extends Controller
              $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
 
              $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
+            
              $Paciente->update(['saldo_a_favor' => $actualizacion]); 
-             $Paciente->update(['saldo_a_favor' => $saldo_paciente]);         
+             // $Paciente->update(['saldo_a_favor' => $saldo_paciente]);         
         }else{
                 
            return redirect()
@@ -285,7 +286,8 @@ class VentaController extends Controller
             //  $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
             //  $Paciente->update(['saldo_a_favor' => $actualizacion]);  
         
-        
+             $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
+                $Paciente->update(['saldo_a_favor' => $saldo_paciente]);  
        
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
