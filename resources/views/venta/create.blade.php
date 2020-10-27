@@ -745,9 +745,6 @@
 
                 if (parseInt($('#total').val()) == parseInt($('#pago_combinado').val())) {
                      document.getElementById("form-cliente").submit(); 
-                }else{
-                     alert("Asegurate que la suma de pago combinado sea igual al total");
-                        return false;
                 }
     
             }
