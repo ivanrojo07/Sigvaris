@@ -359,7 +359,7 @@
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Folio: </label>
-                                            <input type="number" name="precio" class="form-control" readonly=""
+                                            <input type="number" name="idVenta" id="idVenta" class="form-control" readonly=""
                                                 value="{{$folio}}">
                                         </div>
                                     </div>
@@ -1280,11 +1280,11 @@
                 success: function(res){
                     $('#promocion_id').html(res);
 
-                    $('#sigpesos_usar').prop("disabled", false);
-                    $('#agregarCupon').show();
-                    $('.folio').prop("disabled", false);
-                    $('.inputPesos').prop("disabled", false);
-                    $('.lista').prop("disabled", false);
+                    // $('#sigpesos_usar').prop("disabled", false);
+                    // $('#agregarCupon').show();
+                    // $('.folio').prop("disabled", false);
+                    // $('.inputPesos').prop("disabled", false);
+                    // $('.lista').prop("disabled", false);
                 }
             });
         });
@@ -1383,13 +1383,13 @@
                         }
 
                         if (res.aceptsp==0) {
-                            $('#sigpesos_usar').val(0);
-                            $('#sigpesos_usar').prop("disabled", true);
+                            // $('#sigpesos_usar').val(0);
+                            // $('#sigpesos_usar').prop("disabled", true);
 
-                            $('#agregarCupon').hide();
-                            $('.folio').prop("disabled", true);
-                            $('.inputPesos').prop("disabled", true);
-                            $('.lista').prop("disabled", true);
+                            // $('#agregarCupon').hide();
+                            // $('.folio').prop("disabled", true);
+                            // $('.inputPesos').prop("disabled", true);
+                            // $('.lista').prop("disabled", true);
                               
                             
                         }else if (res.aceptsp==1) {

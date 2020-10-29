@@ -142,8 +142,9 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         }
-
-
+      
+       
+          $auxiliar = (int)$request->sigpesos_usar;
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
             
         if ($request->sigpesos_usar<=$Paciente->saldo_a_favor) {
@@ -175,7 +176,14 @@ class VentaController extends Controller
             $request->cumpleDes=1;
         }*/
         // PREPARAR DATOS DE LA VENTA
+        // 
+        // 
+         // = intval($request->sigpesos_usar); 
+
         $venta = new Venta($request->all());
+         $venta->sigpesos =$auxiliar;
+
+
         $venta->oficina_id = session()->get('oficina');
 
         // dd($venta);
