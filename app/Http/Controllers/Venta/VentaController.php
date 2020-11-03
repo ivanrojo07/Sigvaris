@@ -134,7 +134,7 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         //dd($request->PagoEfectivo+$request->PagoTarjeta==$request->total);
-        if ($request->input('tipoPago') !== 3) {
+        if ($request->input('tipoPago') == 3) {
            if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->sigpesos_usar == round($request->total, 2))) {
             return redirect()
                 ->back()
