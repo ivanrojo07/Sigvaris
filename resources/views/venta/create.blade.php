@@ -745,17 +745,30 @@
 
                 if (parseInt($('#total').val()) == parseInt($('#pago_combinado').val())) {
                      document.getElementById("form-cliente").submit(); 
+                } else {
+                 alert("Valida que PAGO COMBINADO sea igual al TOTAL de pago");
+                 return false;
+                 }
+    
+            }
+            if($('#tipoPago').val()==4){
+
+                if (parseInt($('#total').val()) == parseInt($('#pago_combinado').val())) {
+                     document.getElementById("form-cliente").submit(); 
                 }
     
             }
-
-        if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
+            if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
+                    if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
                 document.getElementById("form-cliente").submit();        
             } 
             else {
                  alert("Valida los campos de forma de pago");
                  return false;
                  }
+            }
+
+        
                }
                  else{
                  alert("Valida el campo de empleado o paciente");
@@ -1167,7 +1180,7 @@
                 console.log(sigpesos);
                 $('#iva').val(getIva);
                 var iva=getIva;
-                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
                     $('#total').val(aux.toFixed(2));
                 }else{
