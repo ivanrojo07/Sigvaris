@@ -296,7 +296,7 @@ class VentaController extends Controller
             //  $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
             //  $Paciente->update(['saldo_a_favor' => $actualizacion]);  
         
-             $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
+             $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
                 $Paciente->update(['saldo_a_favor' => $saldo_paciente]);  
        
         // REDIRIGIR A LAS VENTAS REALIZADAS
@@ -468,10 +468,19 @@ class VentaController extends Controller
 
     public function ventaDamage(Request $request)
     {
+            
         $saldo_a_favor=$request->input('montonegativo');
         
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
+        
+        $Paciente=Paciente::where("id",$request->paciente_id)->first();
+
+       
+        
+        $saldo_paciente =$request->saldo_a_favor;
+            
+        $Paciente->update(['saldo_a_favor' => $saldo_paciente]); 
         $venta->oficina_id = session()->get('oficina');
 
         // GUARDAMOS EL FITTER DE LA VENTA
@@ -579,7 +588,7 @@ class VentaController extends Controller
         $HistorialCambioVenta->save();
         
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        $Paciente->update(['saldo_a_favor' => $saldo_a_favor]);
+        $Paciente->update(['saldo_a_favor' => $saldo_paciente]);
 
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');

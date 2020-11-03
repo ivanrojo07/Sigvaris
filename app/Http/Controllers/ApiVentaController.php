@@ -26,7 +26,7 @@ class ApiVentaController extends Controller
         $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
 
 
-        $diferencia = round ($totalVentaOriginal - round ($totalVentaBueva +($totalVentaBueva*.16)));
+        $diferencia = round (round ($totalVentaBueva +($totalVentaBueva*.16))-$totalVentaOriginal);
         
         return response()->json([
             'arrayViejosProductos' => $arrayPreciosProductos,

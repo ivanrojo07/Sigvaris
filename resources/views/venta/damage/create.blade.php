@@ -285,11 +285,13 @@
                                         </div>
                                         {{-- INPUT TOTAL --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
+                                            <input type="text" name="Nuevo_pago" id="Nuevo_Pago" value="{{$Nuevo_pago}}" hidden>
 
                                             <label for="" class="text-uppercase text-muted">Total: $ </label>
 
                                             <input type="number" required="" class="form-control" name="total"
                                                 id="total" value="0" min="1" step="0.01" value="{{$producto->precio_publico_iva-$saldo}}" readonly>
+
                                         </div>
                                         {{-- INPUT DESCUENTO --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
@@ -452,6 +454,7 @@
 <script>
     class FormValidator{
 
+
         static getPorcentajes(){
             return $('.inputPesos').map( function(){
                 return parseFloat(this.value)
@@ -567,7 +570,6 @@
     });
 </script>
 
-
 <script type="text/javascript">
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));
@@ -626,8 +628,10 @@
                 $('#tar4').hide();
                 $('#PagoSigpesos').hide();
                 $('#digitos_targeta').required;
+               ;
+                var new_pago = $('#Nuevo_pago').val() + $('#Total').val() ;
                 
-                
+                console.log('Pago :',new_pago);
                 $('#sigpesos_usar').val(0);
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
@@ -759,6 +763,8 @@
 
 
 <script type="text/javascript">
+
+
     $(document).ready(function(){
         
         var pacienteId = {{$paciente->id}};

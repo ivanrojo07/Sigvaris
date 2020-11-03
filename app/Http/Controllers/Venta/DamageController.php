@@ -101,7 +101,7 @@ class DamageController extends Controller
 
 
 
-
+            $Nuevo_pago= 0;
         $venta = Venta::find($request->id_venta);
         $producto = Producto::where("sku", $request->input("sku"))->where("oficina_id",session('oficina'))->first();
         $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->where("oficina_id",session('oficina'))->first();
@@ -111,9 +111,18 @@ class DamageController extends Controller
 
         if ($request->input("diferenciaPrecios")==0) {
             $saldo=$productoQueSeraEntregado->precio_publico_iva;
+           
         }else{
             $saldo=$request->input("diferenciaPrecios");
-            $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;            
+
+            // $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
+            $saldo= abs(round($saldo)); 
+            if ($saldo>0) {
+                 $Nuevo_pago=$saldo;
+                 
+             } 
+             
+                     
         }
 
         return view('venta.damage.create',['producto'=>$productoQueSeraEntregado,
@@ -126,7 +135,8 @@ class DamageController extends Controller
                                            'Folios' => Folio::get(),
                                            'TipoDamage'=>$TipoDamage,
                                            'DesDamage'=>$DesDamage,
-                                           'VentaA'=>$venta->id
+                                           'VentaA'=>$venta->id,
+                                           'Nuevo_pago' =>$Nuevo_pago
                                        ]);
     }
 
