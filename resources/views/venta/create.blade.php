@@ -973,6 +973,7 @@
         console.log('sigpesos', sigpesos);  
         console.log('desCumple', desCumple);  
         console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
+            // $('#total').val(0);
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {
             $('#total').val(aux.toFixed(2));
@@ -1701,6 +1702,7 @@
                     console.log('sigpesos peticion111',res.sigpesos);
                 }
                 console.log('sigpesos peticion198712',res.cumple);
+                $('#sigpesos_usar').val(0);
                 $('#descuentoCumple').val(parseInt(res.cumple));
                 if (res.cumple>0) {
                         $('#cumpleDes').val(1);
