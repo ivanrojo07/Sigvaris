@@ -134,19 +134,10 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         //dd($request->PagoEfectivo+$request->PagoTarjeta==$request->total);
-        if ($request->input('tipoPago') == 3) {
-           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->sigpesos_usar == round($request->total, 2))) {
-            return redirect()
-                ->back()
-                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
-                ->withInput($request->input());
-        }
-        }
-      
-       
-          $auxiliar = (int)$request->sigpesos_usar;
+        $auxiliar = (int)$request->sigpesos_usar;
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-            
+        if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+
         if ($request->sigpesos_usar<=$Paciente->saldo_a_favor) {
 
              
@@ -156,7 +147,7 @@ class VentaController extends Controller
             
              $Paciente->update(['saldo_a_favor' => $actualizacion]); 
              // $Paciente->update(['saldo_a_favor' => $saldo_paciente]);         
-        }else{
+             }else{
                 
            return redirect()
                 ->back()
@@ -164,6 +155,17 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         
+           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->sigpesos_usar == round($request->total, 2))) {
+            return redirect()
+                ->back()
+                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+                ->withInput($request->input());
+        }
+        }
+      
+       
+      
+      
         /*
         if (!is_null($request->digitos_targeta) && ($request->digitos_targeta<1000)) {
             return redirect()
