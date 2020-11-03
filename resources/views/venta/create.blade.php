@@ -1039,6 +1039,7 @@
         $('#tipoPago').change(function(){  
             console.log('Entra');
             if ($('#tipoPago').val()==2){
+                
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
                 
@@ -1063,11 +1064,12 @@
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
                 $('#iva').val(getIva);
                 var iva=getIva;
-                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
                     $('#total').val(aux.toFixed(2));
                 }else{
                     $('#total').val(0);
+                     $('#montonegativo').val(-aux.toFixed(2));
                 }
                 console.log('TOTAL ACTUALIZADO DESDE TARJETA',$('#total').val());
 
