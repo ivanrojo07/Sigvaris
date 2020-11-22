@@ -9,7 +9,7 @@ class Sigpesosventa extends Model
     //
 
     protected $table = 'sigpesosventa';
-    protected $fillable = ['id','venta_id', 'monto', 'folio' ,'folio_id'];
+    public $fillable = ['id','venta_id', 'monto', 'folio' ,'folio_id'];
     public $timestamps = true;
 
 

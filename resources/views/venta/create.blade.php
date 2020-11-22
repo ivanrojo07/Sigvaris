@@ -304,7 +304,7 @@
                                                 <label for=""> Folio</label>
                                                 <input type="number" class="form-control folio" name="folio[]" required="" >
                                             </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group" hidden="true">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group" >
                                                 <label for=""> Monto</label>
                                                 <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
                                             </div>

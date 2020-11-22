@@ -22,6 +22,10 @@
                         <label class="control-label" for="rango_inferior"><i class="fa fa-asterisk" aria-hidden="true"></i> Rango inferior:</label>
                         <input type="number" class="form-control" id="rango_inferior" name="rango_inferior" required>
                     </div>
+                    <div class="form-group col-6">
+                        <label class="control-label" for="rango_inferior"><i class="fa fa-asterisk" aria-hidden="true"></i> $Monto:</label>
+                        <input type="number" class="form-control" id="monto" name="monto" required>
+                    </div>
                 </div>
             </div>
             <div class="card-footer text-muted">

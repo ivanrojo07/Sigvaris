@@ -127,6 +127,9 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
+
+        
+        $venta = new Venta($request->all());
         if (!isset($request->producto_id) || is_null($request->producto_id)) {
             return redirect()
                 ->back()
@@ -136,6 +139,11 @@ class VentaController extends Controller
         //dd($request->PagoEfectivo+$request->PagoTarjeta==$request->total);
         $auxiliar = (int)$request->sigpesos_usar;
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
+
+      
+
+
+
         if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
 
         if ($request->sigpesos_usar<=$Paciente->saldo_a_favor) {
@@ -146,7 +154,23 @@ class VentaController extends Controller
              $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
             
              $Paciente->update(['saldo_a_favor' => $actualizacion]); 
-             // $Paciente->update(['saldo_a_favor' => $saldo_paciente]);         
+             // $Paciente->update(['saldo_a_favor' => $saldo_paciente]);  
+             // 
+             //        
+            
+            //  if ($request->input('sigpesos_usar')>0) {
+            //     foreach ($request->folio as $key => $folio) {
+            //         # code...
+            //         $Sigpesos = new Sigpesosventa([
+            //             'venta_id' => $venta->id,
+            //             'monto' => $request->monto[$key],
+            //             'folio' => $folio,
+            //             'folio_id' => $request->lista[$key]
+            //         ]);
+            //         $Sigpesos->save();
+            //     }
+            // }
+              
              }else{
                 
            return redirect()
@@ -182,8 +206,8 @@ class VentaController extends Controller
         // 
          // = intval($request->sigpesos_usar); 
 
-        $venta = new Venta($request->all());
-         $venta->sigpesos =$auxiliar;
+       
+         $venta->sigpesos = $auxiliar;
 
 
         $venta->oficina_id = session()->get('oficina');
@@ -271,23 +295,42 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
-        //Sigpesos 
+             if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+             //Sigpesos 
+             foreach ($request->folio as $key => $folio) {
+                    # code...
+                    $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => $request->monto[$key],
+                        'folio' => $folio,
+                        'folio_id' => $request->lista[$key]
+                    ]);
 
-        // if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
-        //     # code...
-        //      if ($request->input('sigpesos_usar')>0) {
-        //         foreach ($request->folio as $key => $folio) {
-        //             # code...
-        //             $Sigpesos = new Sigpesosventa([
-        //                 'venta_id' => $venta->id,
-        //                 'monto' => $request->monto[$key],
-        //                 'folio' => $folio,
-        //                 'folio_id' => $request->lista[$key]
-        //             ]);
-        //             $Sigpesos->save();
-        //         }
-        //     }
-        // }
+                $monto_folio = DB::table('folios')->find($request->lista[$key]);
+                $sigpesosventa = DB::table('sigpesosventa')->where('folio',$folio)->value('folio');
+                // dd($sigpesosventa);
+                if ($monto_folio->monto == $request->monto[$key] ) {
+                     
+
+                     if ($sigpesosventa == $folio) {
+                         return redirect()
+                            ->back()
+                            ->withErrors(['El cupon ya ha sido ocupado anteriormente'])
+                            ->withInput($request->input());
+                }
+                     else{
+                        $Sigpesos->save();
+                     }
+                }else{
+                    return redirect()
+                ->back()
+                ->withErrors(['El monto del cupon esta mal'])
+                ->withInput($request->input());
+                }
+                    
+                     }
+        }
+        
         //Actualizar saldo a favor 
         //
             // $Paciente=Paciente::where("id",$request->paciente_id)->first();

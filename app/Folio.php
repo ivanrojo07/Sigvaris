@@ -9,7 +9,7 @@ class Folio extends Model
     //
 
     protected $table = 'folios';
-    protected $fillable = ['id','rango_superior', 'rango_inferior', 'descripcion'];
+    public $fillable = ['id','rango_superior', 'rango_inferior', 'descripcion','monto'];
     public $timestamps = true;
 
     public function sigpesosventa(){
