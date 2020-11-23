@@ -623,7 +623,7 @@ class VentaController extends Controller
         $productosDamage->producto_id = $request->productoDevuelto;
         $productosDamage->tipo_damage = $request->TipoDamage;
         $productosDamage->user_id = Auth::user()->id;
-        $productosDamage->destinate_id =$request->folio_nuevo;
+        $productosDamage->destinate_id = $request->folio_nuevo;
         $productosDamage->origin_id = $request->VentaAnterior;
         $productosDamage->descripcion = $request->DesDamage;
         $productosDamage->save();
@@ -640,7 +640,8 @@ class VentaController extends Controller
 
     public function ventaCambio(Request $request)
     {
-        $saldo_a_favor=$request->input('montonegativo');
+        // $saldo_a_favor=$request->input('montonegativo');
+            $saldo_a_favor= $request->saldo_a_favor;
         
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
@@ -744,7 +745,8 @@ class VentaController extends Controller
         ]);
 
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        $Paciente->update(['saldo_a_favor' => $saldo_a_favor]);
+        
+        $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
 
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');

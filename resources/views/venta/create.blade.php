@@ -969,7 +969,7 @@
         console.log('desCumple', desCumple);  
         console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
             // $('#total').val(0);
-        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
+        var aux=(parseFloat(subtotal)+parseFloat(iva))-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {
             $('#total').val(aux.toFixed(2));
         }else{

@@ -228,8 +228,8 @@
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Fecha: </label>
-                                            <input type="date" name="fecha" class="form-control" readonly=""
-                                                value="{{date('Y-m-d')}}" required="">
+                                            <input type="text" name="fecha" class="form-control" readonly=""
+                                                value="{{date('Y-m-d H:i:s')}}" required="">
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Folio: </label>
@@ -253,7 +253,7 @@
                                             <label for="" class="text-uppercase text-muted">Saldo a favor: </label>
 
                                             <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
-                                                value="{{$saldo}}" min="0" step="0.01" readonly="">
+                                                value="{{$saldoA}}" min="0" step="0.01" readonly="">
                                         </div>
                                         {{-- INPUT SIGPESOS A USAR --}}
 
@@ -415,6 +415,7 @@
                     </div>
                     <hr>
                 </form>
+                     <input type="hidden" id="Diferencia" name="Diferencia" value="{{$Diferencia}} ">
                     {{-- BOTON GUARDAR --}}
                     <div class="row">
                         <div class="col-12">
@@ -449,6 +450,7 @@
 
 <script>
     class FormValidator{
+
 
         static getPorcentajes(){
             return $('.inputPesos').map( function(){
@@ -490,7 +492,7 @@
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
         $('#iva').val(getIva);
         var iva=getIva;
-        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-saldoAFavor;
+        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
         
         if (aux>0) {
             $('#total').val(aux.toFixed(2));
@@ -565,7 +567,6 @@
     });
 </script>
 
-
 <script type="text/javascript">
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));
@@ -599,7 +600,7 @@
             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
             $('#iva').val(getIva);
             var iva=getIva;
-            var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+            var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
            
             if (aux>0) {
                 $('#total').val(aux.toFixed(2));
@@ -616,7 +617,6 @@
             if ($('#tipoPago').val()==2){
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-                
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar5').show();
@@ -624,8 +624,10 @@
                 $('#tar4').hide();
                 $('#PagoSigpesos').hide();
                 $('#digitos_targeta').required;
+                var Segundo = parseFloat($('#Diferencia').val());
                 
                 
+                console.log('Pago :', $('#diferencia').val());
                 $('#sigpesos_usar').val(0);
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
@@ -637,9 +639,9 @@
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
                 $('#iva').val(getIva);
                 var iva=getIva;
-                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Segundo);
                 }else{
                     $('#total').val(0);
                     $('#montonegativo').val(-aux.toFixed(2));
@@ -662,9 +664,9 @@
                 $('#PagoSigpesos').show();
                 $('#digitos_targeta').required;
             }else if ($('#tipoPago').val()==1) {
+
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-
                $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#tar1').hide();
@@ -683,19 +685,20 @@
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
                 //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
                  var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                 var Segundo = parseFloat($('#Diferencia').val());
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
                 $('#iva').val(getIva);
                 var iva=getIva;
-                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Segundo);
                 }else{
                     $('#total').val(0);
                     $('#montonegativo').val(-aux.toFixed(2));
                     
                 }
-                console.log('TOTAL ACTUALIZADO',$('#total').val());
+                console.log('TOTAL ACTUALIZADO EN EFECTIVO',$('#total').val());
 
 
                 $('#PagoEfectivo').val($('#total').val());
@@ -736,7 +739,7 @@
                 var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
                 $('#iva').val(getIva);
                 var iva=getIva;
-                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 
                 if (aux>0) {
                     $('#total').val(aux.toFixed(2));
@@ -757,18 +760,28 @@
 
 
 <script type="text/javascript">
+
+
     $(document).ready(function(){
         
         var pacienteId = {{$paciente->id}};
 
         var nombrePaciente = "{{ $paciente->nombre }}";
         var apellidosPaciente = "{{ $paciente->paterno.' '.$paciente->materno }}";
-        var saldoAFavor=parseFloat("{{$paciente->saldo_a_favor+$saldo}}");
 
+         // var saldoAFavor=parseFloat("{{$paciente->saldo_a_favor+$saldo}}");
+            var Diferencia =  $('#diferencia').val();
+            console.log('Esta es la diferencia a pagar: ', $('#total').val());
         console.log('datosPAciente: ',nombrePaciente,apellidosPaciente);
         
         $('#inputNombrePaciente').val( nombrePaciente + " " + apellidosPaciente );
-        $('#saldoAFavor').val("{{$paciente->saldo_a_favor+$saldo}}");
+
+        if ({{$saldo}}<0) {
+            $('#saldoAFavor').val("{{$paciente->saldo_a_favor+abs($saldo)}}");
+        }else{
+            // $('#saldoAFavor').val("{{$paciente->saldo_a_favor+$saldo}}");
+        }
+        
         $('#paciente_id').val(pacienteId);
         console.log( 'Cliente seleccionado: ', pacienteId );
         $('#promocion_id option:eq(0)').prop('selected',true);
@@ -789,7 +802,7 @@
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
         
         var iva=getIva;
-        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
+        var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {
             $('#total').val(aux.toFixed(2));
         }else{
@@ -823,6 +836,27 @@
         });
         
     });
+
+   
+
+</script>
+
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+
+                var Diferencia =  $('#diferencia').val();
+
+
+
+
+
+
+
+          });
 
    
 

@@ -41,6 +41,8 @@ class CambioFisicoController extends Controller
     public function store(Request $request, Venta $venta)
     {
 
+        $Nuevo_pago = 0;
+        $auxiliar =0;
         $producto = Producto::where("sku", $request->input("skuProductoRegresado"))->where("oficina_id",session('oficina'))->first();
         $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->where("oficina_id",session('oficina'))->first();
 
@@ -49,9 +51,24 @@ class CambioFisicoController extends Controller
 
         if ($request->input("diferenciaPrecios")==0) {
             $saldo=$productoQueSeraEntregado->precio_publico_iva;
+            $saldo_paciente=$venta->paciente->saldo_a_favor;
+             $saldoA = $saldo_paciente;
+            $saldo = 0;
         }else{
             $saldo=$request->input("diferenciaPrecios");
-            $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;            
+                $saldo_paciente=$venta->paciente->saldo_a_favor;
+                 $saldoA = $saldo_paciente;
+            // $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
+    
+            if ($saldo>0) {
+                 $Nuevo_pago=$saldo; 
+                 $auxiliar = $Nuevo_pago;
+             } else{
+                 $saldoA = $saldo_paciente+$saldo;
+                 $auxiliar = 0;
+                  $saldo=$request->input("diferenciaPrecios");
+                     $saldo+=$saldo_paciente;
+             }            
         }
 
         return view('venta.cambios_fisicos.concluir',['producto'=>$productoQueSeraEntregado,
@@ -63,7 +80,9 @@ class CambioFisicoController extends Controller
                                            'empleadosFitter' => $empleadosFitter,
                                            'Folios' => Folio::get(),
                                            'ObserDevuelto'=>$ObserDevuelto,
-                                           'VentaA'=>$venta->id
+                                           'VentaA'=>$venta->id,
+                                           'Diferencia'=>$auxiliar,
+                                           'saldoA'=>$saldoA
                                        ]);
 
         //$storeCambioFisicoService = new StoreCambioFisicoService($request, $venta);
