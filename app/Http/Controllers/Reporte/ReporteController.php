@@ -674,6 +674,10 @@ class ReporteController extends Controller
         return view('reportes.productos');
     }
 
+    public function cortecaja(){
+         return view('reportes.cortecaja');
+    }
+
     /**
      * Obtiene las ventas que ha realizado un fitter en un rango de fechas si se envia un request,
      * en otro caso solo muestra la vista con los campos para hacer la busqueda.
