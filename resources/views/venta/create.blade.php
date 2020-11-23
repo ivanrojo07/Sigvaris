@@ -351,8 +351,7 @@
                                             <label for="" class="text-uppercase text-muted">Fecha: </label>
                                             @php
                                                $date =  new DateTime(); 
-                                                $date->modify('-5 hours');
-                                               
+     
                                             @endphp
                                             
                                             <input type="text" name="fecha" class="form-control" readonly=""value="{{$date->format('Y-m-d H:i:s')}}" required="">
