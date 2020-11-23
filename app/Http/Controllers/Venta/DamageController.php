@@ -101,7 +101,8 @@ class DamageController extends Controller
 
 
 
-            $Nuevo_pago= 0;
+            $Nuevo_pago = 0;
+            $auxiliar =0;
         $venta = Venta::find($request->id_venta);
         $producto = Producto::where("sku", $request->input("sku"))->where("oficina_id",session('oficina'))->first();
         $productoQueSeraEntregado = Producto::where('sku', $request->input("skuProductoEntregado"))->where("oficina_id",session('oficina'))->first();
@@ -110,17 +111,27 @@ class DamageController extends Controller
         $DesDamage =$request->descripcion;
 
         if ($request->input("diferenciaPrecios")==0) {
-            $saldo=$productoQueSeraEntregado->precio_publico_iva;
+            // $saldo=$productoQueSeraEntregado->precio_publico_iva;
+           
+               $saldo_paciente=$venta->paciente->saldo_a_favor;
+             $saldoA = $saldo_paciente;
+            $saldo = 0;
            
         }else{
-            $saldo=$request->input("diferenciaPrecios");
-
+                $saldo=$request->input("diferenciaPrecios");
+                $saldo_paciente=$venta->paciente->saldo_a_favor;
+                 $saldoA = $saldo_paciente;
             // $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
-            $saldo= abs(round($saldo)); 
+    
             if ($saldo>0) {
-                 $Nuevo_pago=$saldo;
-                 
-             } 
+                 $Nuevo_pago=$saldo; 
+                 $auxiliar = $Nuevo_pago;
+             } else{
+                 $saldoA = $saldo_paciente+$saldo;
+                 $auxiliar = 0;
+                  $saldo=$request->input("diferenciaPrecios");
+                     $saldo+=$saldo_paciente;
+             }
              
                      
         }
@@ -136,7 +147,9 @@ class DamageController extends Controller
                                            'TipoDamage'=>$TipoDamage,
                                            'DesDamage'=>$DesDamage,
                                            'VentaA'=>$venta->id,
-                                           'Nuevo_pago' =>$Nuevo_pago
+                                           'Nuevo_pago' =>$Nuevo_pago,
+                                           'Diferencia'=>$auxiliar,
+                                           'SaldoA'=>$saldoA
                                        ]);
     }
 
