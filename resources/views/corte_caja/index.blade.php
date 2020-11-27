@@ -15,7 +15,7 @@
                     <div class="row">
                           @php
                              $date =  new DateTime(); 
-                             $date->modify('-5 hours');                       
+                                                  
                           @endphp
                         <div class="col-12 col-lg-4">
                             <label for="" class="text-uppercase text-muted">Usuario</label>
