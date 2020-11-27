@@ -131,6 +131,8 @@ class DamageController extends Controller
                  $auxiliar = 0;
                   $saldo=$request->input("diferenciaPrecios");
                      $saldo+=$saldo_paciente;
+
+                     $saldoA = abs($saldoA);
              }
              
                      
