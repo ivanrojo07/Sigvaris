@@ -780,11 +780,11 @@
         
         $('#inputNombrePaciente').val( nombrePaciente + " " + apellidosPaciente );
 
-        if ({{$saldo}}<0) {
-            $('#saldoAFavor').val("{{$paciente->saldo_a_favor+abs($saldo)}}");
-        }else{
-            // $('#saldoAFavor').val("{{$paciente->saldo_a_favor+$saldo}}");
-        }
+        // if ({{$saldo}}<0) {
+        //     $('#saldoAFavor').val("{{$paciente->saldo_a_favor+abs($saldo)}}");
+        // }else{
+        //     // $('#saldoAFavor').val("{{$paciente->saldo_a_favor+$saldo}}");
+        // }
         
         $('#paciente_id').val(pacienteId);
         console.log( 'Cliente seleccionado: ', pacienteId );
