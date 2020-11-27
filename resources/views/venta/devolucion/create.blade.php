@@ -83,7 +83,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="{{route('ventas.devoluciones.store', ['venta'=>$venta->id])}}" method="POST">
+                                                <form action="{{route('ventas.devoluciones.store', ['venta'=>$venta->id])}}" method="POST" onsubmit="return checkAcceptation()">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="row">
@@ -106,7 +106,7 @@
                                                             <div class="col-12">
                                                                 <label for=""
                                                                     class="text-uppercase text-muted mt-2">Tipo de cambio</label>
-                                                                <select name="tipo_cambio" id="" class="form-control">
+                                                                <select name="tipo_cambio" id="tipo_cambio" class="form-control">
                                                                     <option value="1">Saldo a favor</option>
                                                                     <option value="2">Devolución de dinero</option>
                                                                 </select>
@@ -114,7 +114,7 @@
                                                             <div class="col-12">
                                                                 <label for=""
                                                                     class="text-uppercase text-muted mt-2">MONTO DEVUELTO</label>
-                                                                <input type="text" name="MONTO"
+                                                                <input type="text" id="MONTO" name="MONTO"
                                                                     class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}"
                                                                     readonly>
                                                             </div>
@@ -202,5 +202,39 @@
         } )
     }
 </script>
+ <script>
+                
+            function checkAcceptation() {
 
+                 var monto = $('#MONTO').val();
+                 // alert("se devolvera el monto al cliente: ",monto);
+
+                if ($('#tipo_cambio').val()==1) {
+                    alert("Estas por asignar saldo a favor");
+                    if (confirm("Presione aceptar para confirmar que se asignara saldo a favor al paciente ")){
+                                      return true;
+                                     }else{
+                                     return false;
+                                     }
+
+
+                    } else if($('#tipo_cambio').val()==2){
+                    alert("Estas por hacer una devolucion");
+                         if (confirm("Presione aceptar para confirmar que se devolvera el dinero al paciente ")){
+                                            return true;
+                                      }else{
+                                             return false;
+                                    }
+
+
+
+                }
+
+               
+             
+          
+        }
+               
+          </script> 
+          
 @endsection
