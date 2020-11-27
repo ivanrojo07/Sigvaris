@@ -11,6 +11,7 @@ use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
+use DB;
 
 class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
 {
@@ -47,7 +48,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                     $Venta->paciente->ventas()->count() == 1?  "1":"2",
                     $Venta->productos != null ? $Venta->productos()->pluck('cantidad')->sum():"",
                     $SkuRe,
-                    "",
+                     DB::table('productos_damage')->where('origin_id','=',$Venta->id)->exists() ? "SI":" NO",
                     "",
                     "",
                     $Venta->paciente->mail,
