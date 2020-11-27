@@ -68,7 +68,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     "0",
                     HistorialCambioVenta::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     "",
-                    DB::table('productos_damage')->where('origin_id','=',$Venta->id)->select('origin_id')->get()!= null ? "DAMAGE":" NO DAMAGE",
+                    DB::table('productos_damage')->where('origin_id','=',$Venta->id)->exists() ? "DAMAGE":" NO DAMAGE",
                      // DB::table('Productos_damage')->find($request->lista[$key]);
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
 
