@@ -20,7 +20,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
     public function collection()
     {
             $now = Carbon::now('America/Mexico_City');
-        $index=0;
+            $index=0;
+            // $DAMAGE = DB::table('Productos_damage')->where('origin_id','=',)->select('origin_id');
 
 
        // dd($now);
@@ -66,7 +67,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     "0",
                     HistorialCambioVenta::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     "",
-                    $Venta->producto_damage->origin_id==$Venta->id ? "DAMAGE":" NO DAMAGE",
+                    DB::table('Productos_damage')->where('origin_id','=',$Venta->id)->select('origin_id')->get()!= null ? "DAMAGE":" NO DAMAGE",
                      // DB::table('Productos_damage')->find($request->lista[$key]);
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
 
