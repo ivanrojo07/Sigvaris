@@ -674,8 +674,15 @@ class ReporteController extends Controller
         return view('reportes.productos');
     }
 
-    public function cortecaja(){
+    public function cortecaja(Request $request){
+
+
+        if ($request->fecha!=null) {
+            # code...
+            echo "La fecha es: ".$request->fecha;
+        }else{
          return view('reportes.cortecaja');
+        }
     }
 
     /**

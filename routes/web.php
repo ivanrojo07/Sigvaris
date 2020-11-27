@@ -220,7 +220,8 @@ Route::post('reportes/10','Reporte\ReporteController@diez')->name('reportes.10')
 
 Route::get('reportes/11','Reporte\ReporteController@once')->name('reportes.11');
 
-Route::get('reportes/cortecaja','Reporte\ReporteController@cortecaja')->name('reportes.cortecaja');
+Route::get('reportes/cortecaja','Reporte\ReporteController@cortecaja');
+Route::post('reportes/cortecaja','Reporte\ReporteController@cortecaja');
 
 
 Route::get('reportes/2','Reporte\ReporteController@dos')->name('reportes.2');

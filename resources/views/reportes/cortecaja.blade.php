@@ -9,14 +9,14 @@
                 </div>
                 {{-- Busqueda por fecha --}}
                 <div class="card-body">
-                    <form class="form-inline" method="POST" action="{{route('reportes.cortecaja')}}">
+                    <form class="form-inline" method="POST" action="{{url('reportes/cortecaja')}}">
                         @csrf
                         {{-- Input de fecha inicial --}}
                         <div class="form-group mr-3">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">FECHA DE CORTE DE CAJA:</div>
                             </div>
-                            <input type="date" class="form-control input-fecha" name="fecha_inicial" id="fechaInicial">
+                            <input type="date" class="form-control input-fecha" name="fecha" id="fecha">
                         </div>
                         
                         {{-- Boton submit para fechas --}}
