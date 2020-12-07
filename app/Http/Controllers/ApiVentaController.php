@@ -28,6 +28,16 @@ class ApiVentaController extends Controller
 
         $diferencia = round (round ($totalVentaBueva +($totalVentaBueva*.16))-$totalVentaOriginal);
         
+        if ($venta->cumpleDes) {
+            # code...
+            if ($diferencia <0) {
+                # code...
+                $diferencia =   $diferencia -300;
+            }else{
+
+              $diferencia =   $diferencia -300;
+            }
+        }
         return response()->json([
             'arrayViejosProductos' => $arrayPreciosProductos,
             'arrayNuevoProdutos' => $arrayPreciosProductosConNuevoProducto,

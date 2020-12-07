@@ -269,6 +269,7 @@ class DescuentoController extends Controller
         //promocion tipo A -> minimo de prendas 
         //promocion tipo B -> monto minimo
         //promocion tipo C -> Convenio
+        
         $response=array();
         switch ($promocion->tipo) {
             case 'A':
@@ -493,6 +494,7 @@ class DescuentoController extends Controller
         if(isset($paciente->ventas->last()->created_at))
         {
             $intervalo = new DateInterval('P6M');
+            
             $hoy=Carbon::now();
             $expira=$paciente->ventas->last()->created_at->add($intervalo);
             //dd($intervalo);

@@ -1370,6 +1370,7 @@
                 $('#descuento').val(0);
                 $('#sigpesos').val(0);
             }
+            console.log('id',id);
 
             // OBTENEMOS DATOS DE LA COMPRA
             var paciente_id=$('#paciente_id').val();
