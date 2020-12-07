@@ -237,6 +237,7 @@
                                                 <option value="2">Tarjeta</option>
                                                 <option value="3">Combinado</option>
                                                 <option value="4">Sigpesos</option>
+                                                <option value="5">Saldo a favor</option>
                                             </select>
                                         </div>
                                         {{-- INPUT tarjeta --}}
@@ -286,6 +287,17 @@
                                             </select>
                                         </div>
                                     </div>
+                                    {{--Saldo a favor--}}
+
+                                    <div  id="saldo_a_favoor" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for=""> SALDO A FAVOR A USAR</label>
+                                                <input type="number" class="form-control" name="saldo_a_usar" id="saldo_a_usar" required="" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
                                     {{--Sigpesos--}}
 
                                     <div  id="PagoSigpesos" style="display: none;">
@@ -339,6 +351,10 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                      
+
+
                                     <hr>
                                     <input type="hidden" name="paciente_id" id="paciente_id" required>
                                     <div class="row">
@@ -753,6 +769,12 @@
                 }
     
             }
+             if($('#tipoPago').val()==5){
+
+                if (parseInt($('#total').val()) == parseInt($('#saldo_a_usar').val())) {
+                     document.getElementById("form-cliente").submit(); 
+                } 
+            }
             if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
                     if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
                 document.getElementById("form-cliente").submit();        
@@ -1029,7 +1051,7 @@
             var getIva = (($('#subtotal').val())*0.16).toFixed(2);
             $('#iva').val(getIva);
             var iva=getIva;
-            var pago_combinado = sigpesos + parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val());
+            var pago_combinado = sigpesos +parseInt($('#saldo_a_usar').val())+ parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val());
                 console.log('Pgo_combinado =',pago_combinado);
                 $('#pago_combinado').val(pago_combinado);
 
@@ -1042,7 +1064,7 @@
                 $('#total').val(0);
             }
             
-            console.log('TOTAL ACTUALIZADO EN LINEA 1016',$('#total').val());
+            console.log('TOTAL ACTUALIZADO EN LINEA 1061',$('#total').val());
          });
 
         $('#tipoPago').change(function(){  
@@ -1051,7 +1073,7 @@
                 
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-                
+                $('#saldo_a_favoor').hide();
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar5').show();
@@ -1089,7 +1111,7 @@
             else if ($('#tipoPago').val()==3) {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-
+                $('#saldo_a_favoor').show();
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar4').show();
@@ -1101,7 +1123,7 @@
                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
                 saldoAFavor = sigpesos;
 
-                var pago_combinado = sigpesos + $('#PagoEfectivo').val()+$('#PagoTarjeta').val();
+                var pago_combinado = sigpesos + $('#PagoEfectivo').val()+$('#PagoTarjeta').val()+$('#saldo_a_usar').val();
                 console.log('Pgo_combinado =',pago_combinado);
                 $('#pago_combinado').val(pago_combinado);
 
@@ -1116,6 +1138,7 @@
 
                $('#banco').val(null);
                 $('#digitos_targeta').val(null);
+                $('#saldo_a_favoor').hide();
                 $('#tar1').hide();
                 $('#tar2').hide();
                 $('#tar4').show();
@@ -1155,6 +1178,7 @@
                 $('#PagoTarjeta').val(0);
 
                 $('#PagoSigpesos').show();
+                $('#saldo_a_favoor').hide();
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#tar1').hide();
@@ -1187,6 +1211,42 @@
               
 
 
+            }else if($('#tipoPago').val()==5){
+                $('#PagoEfectivo').val(0);
+                $('#PagoTarjeta').val(0);
+
+                $('#saldo_a_favoor').show();
+                $('#banco').val(null);
+                $('#digitos_targeta').val(null);
+                $('#tar1').hide();
+                $('#tar2').hide();
+                $('#tar4').hide();
+                $('#tar5').hide();
+                $('#tar10').hide();
+
+                var subtotal=parseFloat($('#subtotal').val());
+                var des=parseFloat($('#descuento').val());
+                var sigpesos=parseInt($('#sigpesos_usar').val());
+                var desCumple=parseFloat($('#descuentoCumple').val());
+                var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                var saldoAFavor = sigpesos;
+                //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
+                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+                var getIva = (($('#subtotal').val())*0.16).toFixed(2);
+                console.log(sigpesos);
+                $('#iva').val(getIva);
+                var iva=getIva;
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
+                if (aux>0) {
+                    $('#total').val(aux.toFixed(2));
+
+                }else{
+                    $('#total').val(0);
+                }
+                
+                console.log('TOTAL ACTUALIZADO EN saldo a favor',$('#total').val());
+               console.log('Saldo a favor:',saldoAFavor);
+               $('#saldo_a_usar').val($('#total').val());
             }
 
             else

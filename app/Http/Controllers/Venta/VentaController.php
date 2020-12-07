@@ -127,7 +127,7 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request);
         
         $venta = new Venta($request->all());
         if (!isset($request->producto_id) || is_null($request->producto_id)) {
@@ -144,32 +144,16 @@ class VentaController extends Controller
 
 
 
-        if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+        if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ||$request->input('tipoPago') == 5) {
 
-        if ($request->sigpesos_usar<=$Paciente->saldo_a_favor) {
+        if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
 
              
              $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
 
-             $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
+             $actualizacion =  $Paciente->saldo_a_favor -$request->saldo_a_usar; 
             
              $Paciente->update(['saldo_a_favor' => $actualizacion]); 
-             // $Paciente->update(['saldo_a_favor' => $saldo_paciente]);  
-             // 
-             //        
-            
-            //  if ($request->input('sigpesos_usar')>0) {
-            //     foreach ($request->folio as $key => $folio) {
-            //         # code...
-            //         $Sigpesos = new Sigpesosventa([
-            //             'venta_id' => $venta->id,
-            //             'monto' => $request->monto[$key],
-            //             'folio' => $folio,
-            //             'folio_id' => $request->lista[$key]
-            //         ]);
-            //         $Sigpesos->save();
-            //     }
-            // }
               
              }else{
                 
@@ -179,7 +163,7 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         
-           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->sigpesos_usar == round($request->total, 2))) {
+           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
             return redirect()
                 ->back()
                 ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
@@ -295,7 +279,9 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
-             if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+
+                if ($request->sigpesos_usar>0) {
+                      if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
              //Sigpesos 
              foreach ($request->folio as $key => $folio) {
                     # code...
@@ -330,6 +316,8 @@ class VentaController extends Controller
                     
                      }
         }
+                }
+           
         
         //Actualizar saldo a favor 
         //
