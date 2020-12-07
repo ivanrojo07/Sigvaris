@@ -32,7 +32,8 @@ class Venta extends Model
         'requiere_factura',
         'comentario',
         'oficina_id',
-        'cumpleDes'
+        'cumpleDes',
+        'PagoSaldo'
     ];
 
     /**

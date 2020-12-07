@@ -152,6 +152,8 @@ class VentaController extends Controller
              $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
 
              $actualizacion =  $Paciente->saldo_a_favor -$request->saldo_a_usar; 
+             
+             $venta->PagoSaldo=$request->saldo_a_usar;
             
              $Paciente->update(['saldo_a_favor' => $actualizacion]); 
               

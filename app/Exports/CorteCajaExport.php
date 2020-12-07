@@ -52,6 +52,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->total,
                     $Venta->PagoEfectivo,
                     $Venta->sigpesos,
+                    $Venta->PagoSaldo,
 
 
                     $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->PagoTarjeta:"" :"",
@@ -93,6 +94,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'TOTAL VENTA',
             'PAGO EFECTIVO',
             'PAGO SIGPESOS',
+            'PAGO SALDO A FAVOR',
 
             'PAGO TARJETA ',
             'DIGITOS 4 ULTIMOS ',
