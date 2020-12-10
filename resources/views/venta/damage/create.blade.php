@@ -122,7 +122,7 @@
                                             <select class="form-control" name="tipoPago" id="tipoPago">
                                                 <option value="0">Selecciona...</option>
                                                 <option value="1">Efectivo</option>
-                                                <option value="2">Tajeta</option>
+                                                <option value="2">Tarjeta</option>
                                                 <option value="3">Combinado</option>
                                                 <option value="4">Sigpesos</option>
                                                 <option value="5">Saldo a favor</option>
@@ -638,6 +638,15 @@
                         alert("Lo siento, no cuenta con el saldo necesario");
                         return false;  
                 }
+            }
+             if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
+                    if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
+                document.getElementById("form-cliente").submit();        
+            } 
+            else {
+                 alert("Valida los campos de forma de pago");
+                 return false;
+                 }
             }
             // if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
             //         if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {

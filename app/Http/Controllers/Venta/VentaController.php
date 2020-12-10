@@ -701,7 +701,9 @@ class VentaController extends Controller
                 ]
             );
         }
-
+         $Paciente=Paciente::where("id",$request->paciente_id)->first();
+        
+        $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
        
 
         if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
@@ -717,6 +719,35 @@ class VentaController extends Controller
                     $Sigpesos->save();
                 }
             }
+        }
+
+          if ($request->input('tipoPago') == 5) {
+
+        if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
+
+    
+             $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
+
+             $actualizacion =  $Paciente->saldo_a_favor - $request->saldo_a_usar; 
+             
+             $venta->PagoSaldo=$request->saldo_a_usar;
+            
+             $Paciente->update(['saldo_a_favor' => $actualizacion]);      
+             }else{
+                
+                return redirect()
+                ->back()
+                ->withErrors(['Error saldo a favor insuficiente'])
+                ->withInput($request->input());           
+        }
+        
+        //    if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
+        //     return redirect()
+        //         ->back()
+        //         ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+        //         ->withInput($request->input());
+
+        // }
         }
 
         $CRM = new Crm(
@@ -762,9 +793,7 @@ class VentaController extends Controller
             'stock' => $ProductoDevuelto->stock + 1
         ]);
 
-        $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        
-        $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
+       
 
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');
