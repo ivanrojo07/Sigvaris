@@ -112,7 +112,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Devolución en efectivo',
             'Cambio fisico',
             'Damage',
-            'FOLIO_DAMAGE'
+            'FOLIO_DAMAGE',
             'Descuento_cumpleaños',
             'Muestra',
             'Notas Observaciones'
