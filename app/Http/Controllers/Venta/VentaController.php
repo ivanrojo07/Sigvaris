@@ -514,21 +514,20 @@ class VentaController extends Controller
 
         if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
 
-             
+    
              $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
 
              $actualizacion =  $Paciente->saldo_a_favor - $request->saldo_a_usar; 
              
              $venta->PagoSaldo=$request->saldo_a_usar;
             
-             $Paciente->update(['saldo_a_favor' => $actualizacion]); 
-              
+             $Paciente->update(['saldo_a_favor' => $actualizacion]);      
              }else{
                 
-           return redirect()
-                ->back();
-
-                
+                return redirect()
+                ->back()
+                ->withErrors(['Error saldo a favor insuficiente'])
+                ->withInput($request->input());           
         }
         
         //    if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {

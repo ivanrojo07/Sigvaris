@@ -276,7 +276,7 @@
                                             <label for="" class="text-uppercase text-muted">Saldo a favor: </label>
 
                                             <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
-                                                value="{{$SaldoA}}" min="0" step="0.01" readonly="">
+                                                value="{{$SaldoA}}"  readonly="">
                                         </div>
                                         {{-- INPUT SIGPESOS A USAR --}}
 
@@ -602,9 +602,15 @@
         if ($('#empleado_id').val()!="") {
                  var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
             var $total_venta = parseFloat($('#total').val());
-            var $sigpeso = parseInt($('#sigpesos_usar').val());
 
-            console.log($suma+$sigpeso);
+            var $saldo_uso = parseFloat($('#saldo_a_usar').val());
+
+            var saldoAFavor=parseFloat($('#saldoAFavor').val());
+             // var saldoAFavor = $sigpeso;
+
+          
+            
+
           if($('#tipoPago').val()==3){
 
                 if (parseInt($('#total').val()) == parseInt($('#pago_combinado').val())) {
@@ -624,27 +630,32 @@
             }
              if($('#tipoPago').val()==5){
 
-                if (parseInt($('#total').val()) == parseInt($('#saldo_a_usar').val())) {
-                     document.getElementById("form-cliente").submit(); 
-                } 
+                if ( saldoAFavor >= parseInt($saldo_uso)) {
+                         console.log($saldo_uso," _____  SIGPESO_USAR");
+                         console.log(saldoAFavor," _____  SALDO A FAVOR");
+                      document.getElementById("form-cliente").submit();        
+                } else{
+                        alert("Lo siento, no cuenta con el saldo necesario");
+                        return false;  
+                }
             }
-            if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
-                    if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
-                document.getElementById("form-cliente").submit();        
-            } 
-            else {
-                 alert("Valida los campos de forma de pago");
-                 return false;
-                 }
-            }
+            // if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
+            //         if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
+            //     document.getElementById("form-cliente").submit();        
+            //          } 
+            //   else {
+            //      alert("Valida los campos de forma de pago");
+            //      return false;
+            //      }
+            // }
 
-
-            if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
-                document.getElementById("form-cliente").submit();
-            } else {
-                alert("Valida los campos de forma de pago");
-                return false;
-            }
+            // if (parseFloat($('#saldo_a_usar').val())>parseFloat($('#saldo_a_favor').val())) {
+            //     alert("Lo siento, no cuenta con el saldo necesario");
+            //     return false;
+               
+            // } else {
+            //      document.getElementById("form-cliente").submit();
+            // }
 
         }
 
@@ -718,7 +729,8 @@
                     
                 }
                 console.log('TOTAL ACTUALIZADO',$('#total').val());
-
+                 console.log(parseInt($('#saldo_a_usar').val())," _____  SIGPESO_USAR");
+                 console.log(parseInt($('#saldo_a_favor').val())," _____  SALDO A FAVOR");
 
                 $('#PagoTarjeta').val($('#total').val());
 
@@ -742,7 +754,8 @@
                 console.log('Pgo_combinado =',pago_combinado);
                 $('#pago_combinado').val(pago_combinado);
 
-
+                 console.log(parseInt($('#saldo_a_usar').val())," _____  SIGPESO_USAR");
+             console.log(parseInt($('#saldo_a_favor').val())," _____  SALDO A FAVOR");
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
                 console.log('Sipesos:',sigpesos);
             }else if ($('#tipoPago').val()==1) {
@@ -783,6 +796,8 @@
                 }
                 console.log('TOTAL ACTUALIZADO EN EFECTIVO',$('#total').val());
 
+                     console.log(parseInt($('#saldo_a_usar').val())," _____  SIGPESO_USAR");
+             console.log(parseInt($('#saldo_a_favor').val())," _____  SALDO A FAVOR");
 
                 $('#PagoEfectivo').val($('#total').val());
 
@@ -813,8 +828,8 @@
 
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
-                var sigpesos=parseInt($('#sigpesos_usar').val());
                 var desCumple=parseFloat($('#descuentoCumple').val());
+                var sigpesos=parseInt($('#sigpesos_usar').val());
                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
                 var saldoAFavor = sigpesos;
                 var Segundo = parseFloat($('#Diferencia').val());
@@ -834,6 +849,9 @@
                 
                 console.log('TOTAL ACTUALIZADO EN saldo a favor',$('#total').val());
                console.log('Saldo a favor:',saldoAFavor);
+
+                console.log(parseInt($('#saldo_a_usar').val())," _____  SIGPESO_USAR");
+             console.log(parseInt($('#saldo_a_favor').val())," _____  SALDO A FAVOR");
                $('#saldo_a_usar').val($('#total').val());
 
             }else{
