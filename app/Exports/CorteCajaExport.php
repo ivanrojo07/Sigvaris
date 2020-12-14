@@ -70,6 +70,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     HistorialCambioVenta::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     DB::table('productos_damage')->where('origin_id','=',$Venta->id)->exists() ? "SI":" NO",
                  DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->exists()?DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->value('origin_id') : "" ,
+                    HistorialCambioVenta::where('destinate_id','=',$Venta->id)->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('origin_id'):"No",
                     $Venta->cumpleDes ==1 ? "1":"0",
                     
                      // DB::table('Productos_damage')->find($request->lista[$key]);
@@ -112,7 +113,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Devolución en efectivo',
             'Cambio fisico',
             'Damage',
-            'FOLIO_DAMAGE',
+            'Folio Damage',
+            'Folio Cambio Fisico',
             'Descuento_cumpleaños',
             'Muestra',
             'Notas Observaciones'
