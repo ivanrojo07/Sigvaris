@@ -509,6 +509,11 @@
         var saldoAFavor=parseFloat($('#saldoAFavor').val());
         //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
         //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+        //
+        var pago_combinado = sigpesos +parseInt($('#saldo_a_usar').val())+ parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val());
+                console.log('Pgo_combinado =',pago_combinado);
+                $('#pago_combinado').val(pago_combinado);
+                cambiarTotalVenta();
         var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
         $('#iva').val(getIva);
         var iva=getIva;
@@ -685,6 +690,9 @@
             $('#iva').val(getIva);
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
+            var pago_combinado = sigpesos + parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val())+parseInt($('#saldo_a_usar').val());
+                console.log('Pgo_combinado =',pago_combinado);
+                $('#pago_combinado').val(pago_combinado);
            
             if (aux>0) {
                 $('#total').val(aux.toFixed(2));
@@ -694,6 +702,8 @@
                 
             }
             console.log('TOTAL ACTUALIZADO',$('#total').val());
+             var Segundo = parseFloat($('#Diferencia').val());
+                $('#total').val(Segundo);
          });
 
         $('#tipoPago').change(function(){  
@@ -754,14 +764,16 @@
                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
                 saldoAFavor = sigpesos;
 
-                var pago_combinado = sigpesos + $('#PagoEfectivo').val()+$('#PagoTarjeta').val()+$('#saldo_a_usar').val();
+               var pago_combinado = sigpesos + $('#PagoEfectivo').val()+$('#PagoTarjeta').val()+$('#saldo_a_usar').val();
                 console.log('Pgo_combinado =',pago_combinado);
                 $('#pago_combinado').val(pago_combinado);
+                 var Segundo = parseFloat($('#Diferencia').val());
 
                  console.log(parseInt($('#saldo_a_usar').val())," _____  SIGPESO_USAR");
              console.log(parseInt($('#saldo_a_favor').val())," _____  SALDO A FAVOR");
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
                 console.log('Sipesos:',sigpesos);
+                 $('#total').val(Segundo);
             }else if ($('#tipoPago').val()==1) {
 
                 $('#PagoEfectivo').val(0);

@@ -693,6 +693,10 @@
             var getIva = (($('#subtotal').val()-des-desCumple)*0.16).toFixed(2);
             $('#iva').val(getIva);
             var iva=getIva;
+            var pago_combinado = sigpesos +parseInt($('#saldo_a_usar').val())+ parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val());
+                console.log('Pgo_combinado =',pago_combinado);
+                $('#pago_combinado').val(pago_combinado);
+                cambiarTotalVenta();
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
              var pago_combinado = sigpesos + parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val())+parseInt($('#saldo_a_usar').val());
                 console.log('Pgo_combinado =',pago_combinado);

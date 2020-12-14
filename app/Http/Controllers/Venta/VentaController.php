@@ -532,7 +532,7 @@ class VentaController extends Controller
         }else{
 
          }
-         return redirect()->route('ventas.index');
+         // return redirect()->route('ventas.index');
         
         }
         
@@ -702,6 +702,10 @@ class VentaController extends Controller
         $venta = new Venta($request->all());
         $venta->oficina_id = session()->get('oficina');
 
+        $Paciente=Paciente::where("id",$request->paciente_id)->first();
+        
+        $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
+
         // GUARDAMOS EL FITTER DE LA VENTA
         if ($request->empleado_id) {
             $venta->empleado_id = $request->empleado_id;
@@ -710,6 +714,31 @@ class VentaController extends Controller
             // dd('Empleado fitter'.Auth::user()->empleado );
         }
 
+           if ($request->input('tipoPago') == 5 || $request->input('tipoPago') == 3) {
+
+        if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
+
+    
+             $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
+
+             $actualizacion =  $Paciente->saldo_a_favor - $request->saldo_a_usar; 
+             
+             $venta->PagoSaldo=$request->saldo_a_usar;
+            
+             $Paciente->update(['saldo_a_favor' => $actualizacion]);      
+             }else{
+                
+                return redirect()->route('ventas.index')->withErrors(['EL DAMAGE NO SE PUDO REALIZAR´PORQUE NO CUENTA CON SALDO SUFICIENTE']);          
+                 }
+
+             if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
+            return redirect()->route('ventas.index')->withErrors(['Error con importes de montos en efectivo o tarjeta']);
+        }else{
+
+         }
+         // return redirect()->route('ventas.index');
+        
+        }
         // dd('VENTA QUE SERÁ GUARDADA'.$venta);
 
         $productos = Producto::find($request->producto_id);
@@ -738,9 +767,7 @@ class VentaController extends Controller
                 ]
             );
         }
-         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-        
-        $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
+   
        
 
         if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
