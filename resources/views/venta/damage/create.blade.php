@@ -518,6 +518,10 @@
         $('#iva').val(getIva);
         var iva=getIva;
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
+        var pago_combinado = sigpesos +parseInt($('#saldo_a_usar').val())+ parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val());
+                console.log('Pgo_combinado =',pago_combinado);
+                $('#pago_combinado').val(pago_combinado);
+                cambiarTotalVenta();
         
         if (aux>0) {
             $('#total').val(aux.toFixed(2));
@@ -600,7 +604,7 @@
         console.log("empleado",$('#empleado_id').val());
 
         if ($('#empleado_id').val()!="") {
-                 var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
+            var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
             var $total_venta = parseFloat($('#total').val());
 
             var $saldo_uso = parseFloat($('#saldo_a_usar').val());
@@ -690,6 +694,10 @@
             $('#iva').val(getIva);
             var iva=getIva;
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
+             var pago_combinado = sigpesos + parseInt($('#PagoEfectivo').val())+parseInt($('#PagoTarjeta').val())+parseInt($('#saldo_a_usar').val());
+                console.log('Pgo_combinado =',pago_combinado);
+                $('#pago_combinado').val(pago_combinado);
+                  
            
             if (aux>0) {
                 $('#total').val(aux.toFixed(2));
@@ -699,6 +707,8 @@
                 
             }
             console.log('TOTAL ACTUALIZADO',$('#total').val());
+               var Segundo = parseFloat($('#Diferencia').val());
+                $('#total').val(Segundo);
          });
 
         $('#tipoPago').change(function(){  
@@ -762,10 +772,12 @@
                 var pago_combinado = sigpesos + $('#PagoEfectivo').val()+$('#PagoTarjeta').val()+$('#saldo_a_usar').val();
                 console.log('Pgo_combinado =',pago_combinado);
                 $('#pago_combinado').val(pago_combinado);
-
+                var Segundo = parseFloat($('#Diferencia').val());
                  console.log(parseInt($('#saldo_a_usar').val())," _____  SIGPESO_USAR");
              console.log(parseInt($('#saldo_a_favor').val())," _____  SALDO A FAVOR");
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
+                    $('#total').val(Segundo);
+
                 console.log('Sipesos:',sigpesos);
             }else if ($('#tipoPago').val()==1) {
 

@@ -502,7 +502,7 @@ class VentaController extends Controller
     public function ventaDamage(Request $request)
     {
             
-             // dd($request);
+              // dd($request);
         // $saldo_a_favor=$request->input('montonegativo');
         
         // PREPARAR DATOS DE LA VENTA
@@ -510,7 +510,7 @@ class VentaController extends Controller
         
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
 
-        if ($request->input('tipoPago') == 5) {
+        if ($request->input('tipoPago') == 5 || $request->input('tipoPago') == 3) {
 
         if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
 
@@ -524,20 +524,20 @@ class VentaController extends Controller
              $Paciente->update(['saldo_a_favor' => $actualizacion]);      
              }else{
                 
-                return redirect()
-                ->back()
-                ->withErrors(['Error saldo a favor insuficiente'])
-                ->withInput($request->input());           
+                return redirect()->route('ventas.index')->withErrors(['EL DAMAGE NO SE PUDO REALIZAR´PORQUE NO CUENTA CON SALDO SUFICIENTE']);          
+                 }
+
+             if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
+            return redirect()->route('ventas.index')->withErrors(['Error con importes de montos en efectivo o tarjeta']);
+        }else{
+
+         }
+         return redirect()->route('ventas.index');
+        
         }
         
-        //    if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
-        //     return redirect()
-        //         ->back()
-        //         ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
-        //         ->withInput($request->input());
 
-        // }
-        }
+        
         
         // $saldo_paciente =$request->saldo_a_favor;
             
@@ -606,6 +606,43 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
+           if ($request->sigpesos_usar>0) {
+                      if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+             //Sigpesos 
+             foreach ($request->folio as $key => $folio) {
+                    # code...
+                    $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => $request->monto[$key],
+                        'folio' => $folio,
+                        'folio_id' => $request->lista[$key]
+                    ]);
+
+                $monto_folio = DB::table('folios')->find($request->lista[$key]);
+                $sigpesosventa = DB::table('sigpesosventa')->where('folio',$folio)->value('folio');
+                // dd($sigpesosventa);
+                if ($monto_folio->monto == $request->monto[$key]->get() ) {
+                     
+
+                     if ($sigpesosventa == $folio) {
+                         return redirect()
+                            ->back()
+                            ->withErrors(['El cupon ya ha sido ocupado anteriormente'])
+                            ->withInput($request->input());
+                }
+                     else{
+                        $Sigpesos->save();
+                     }
+                }else{
+                    return redirect()
+                ->back()
+                ->withErrors(['El monto del cupon esta mal'])
+                ->withInput($request->input());
+                }
+                    
+                     }
+        }
+                }
        
 
         // if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
