@@ -114,6 +114,7 @@ class DevolucionController extends Controller
 
 
         $diferencia = $totalVentaOriginal - $totalVentaBueva;
+         $diferencia =  round($diferencia+ ($diferencia*0.16));
         
         return response()->json([
             'diferencia' => $diferencia
