@@ -7,7 +7,7 @@ use App\Factura;
 use App\HistorialCambioVenta;
 use Carbon\Carbon;
 use App\Descuento;
-use App\Devolución;
+use Illuminate\Database\Eloquent\Model\Devolución;
 use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
