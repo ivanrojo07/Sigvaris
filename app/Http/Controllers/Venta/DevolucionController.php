@@ -114,7 +114,21 @@ class DevolucionController extends Controller
 
 
         $diferencia = $totalVentaOriginal - $totalVentaBueva;
-         $diferencia =  round($diferencia+ ($diferencia*0.16));
+         $diferencia =  round($diferencia + ($diferencia*0.16));
+          if ($venta->cumpleDes) {
+            # code...
+            if ($diferencia <0) {
+                # code...
+                $diferencia =   $diferencia -300;
+            }else{
+
+              $diferencia =   $diferencia -300;
+            }
+        }
+        if ($venta->descuento_id !="") {
+            $promocion=Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
+            $diferencia=$diferencia-$promocion;
+        }
         
         return response()->json([
             'diferencia' => $diferencia
