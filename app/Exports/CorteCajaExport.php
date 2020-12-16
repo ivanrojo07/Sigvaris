@@ -7,6 +7,7 @@ use App\Factura;
 use App\HistorialCambioVenta;
 use Carbon\Carbon;
 use App\Descuento;
+use App\Devolución;
 use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -72,7 +73,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                  DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->exists()?DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->value('origin_id') : "" ,
                     HistorialCambioVenta::where('destinate_id','=',$Venta->id)->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
                     $Venta->cumpleDes ==1 ? "1":"0",
-                    
+
+                    Devolucion::where('venta_id','=',$Venta->id)->exists()?Devolucion::where('venta_id','=',$Venta->id)->value('monto'):"",
                      // DB::table('Productos_damage')->find($request->lista[$key]);
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
 
@@ -116,6 +118,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Folio Damage', 
             'Folio Cambio Fisico',
             'Descuento_cumpleaños',
+            'Devolucion',
             'Muestra',
             'Notas Observaciones'
 
