@@ -99,6 +99,8 @@ Route::get('get_promos/{descuento}','Venta\DescuentoController@getPromos');
 Route::post('calcular_descuento/{promocion}','Venta\DescuentoController@getDescuento');
 Route::get('obtener_sigpesos/{paciente}','Venta\DescuentoController@getSigpesos');
 
+Route::get('obtener_folios/{id}','Venta\DescuentoController@getFolios');
+
 Route::get('productos/inventario', 'Inventario\InventarioController@index')->name('productos.inventario');
 Route::get('productos/damage', 'Damage\DamageController@index')->name('productos.damage');
 Route::post('productos/damage', 'Damage\DamageController@store')->name('productos.damage.store');

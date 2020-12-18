@@ -312,17 +312,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                                <label for=""> Folio</label>
-                                                <input type="number" class="form-control folio" name="folio[]" required="" >
-                                            </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group" >
-                                                <label for=""> Monto</label>
-                                                <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
-                                            </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                                 <label for=""> Lista Folio</label>
-                                                <select   name="lista[]" class="form-control lista" required>
+                                                <select  id="lista" name="lista[]" class="form-control lista" required>
                                                     <option value="">Seleccionar</option>
                                                     @foreach ($Folios as $Folio1)
                                                     <option value="{{$Folio1->id}}">
@@ -331,6 +323,15 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for=""> Folio</label>
+                                                <input type="number" class="form-control folio" name="folio[]" required=""  id="folio" readonly="">
+                                            </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group" >
+                                                <label for=""> Monto</label>
+                                                <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" id="monto" readonly="">
+                                            </div>
+                                           
 
                                         </div>
                                         <div class="field_wrapper"></div>
@@ -1320,6 +1321,34 @@
 </script>
 
 <script type="text/javascript">
+
+  $(document).ready(function() {
+       $("#lista").change(function() {
+
+           var folio_id = $(this).val();
+           // alert($(this).val());
+           console.log('Folio que se envia::',folio_id);
+
+            $.ajax({
+            url:"{{ url('/obtener_folios') }}/"+folio_id,
+            type:'GET',
+            dataType:'json',
+            success: function(res34){   
+             
+              console.log(res34.folio);
+              $('#folio').val(res34.folio);
+              $('#monto').val(res34.monto);
+              console.log(res34.monto);
+            }
+
+        });
+
+       });
+});
+
+</script>
+
+<script type="text/javascript">
     $(document).ready(function(){
       
 
@@ -1720,6 +1749,7 @@
                 }                
             }
         });
+       
         const nombrePaciente = $(`.nombrePaciente[pacienteId=${pacienteId}]`).html();
         const apellidosPaciente = $(`.apellidosPaciente[pacienteId=${pacienteId}]`).html();
 
@@ -1866,6 +1896,10 @@
             }
 
         });
+
+      
+
+
         if((subtotal+iva-des-desCumple-saldoAFavor)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);

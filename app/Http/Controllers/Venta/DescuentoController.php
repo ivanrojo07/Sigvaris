@@ -8,12 +8,15 @@ use App\Paciente;
 use App\Producto;
 use App\PromocionEnProducto;
 use App\Venta;
+use App\Folio;
+use App\Sigpesosventa;
 use DateInterval;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
+use DB;
 
 class DescuentoController extends Controller
 {
@@ -469,6 +472,30 @@ class DescuentoController extends Controller
 
         return response()->json($response);
     }
+
+    public function getFolios(Request $request){
+
+        //Esta variable tendra el id y monto del tipo de sigpesos
+        $folio = Folio::find($request->id);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+$ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+        // dd($ultimo);
+            $response=array(
+                                'folio'=>$ultimo+1,
+                                'monto'=>$folio->monto,
+                                
+                            );
+        return response()->json($response);
+    }
+
+
+
 
     public function getSigpesos(Paciente $paciente)
     {
