@@ -27,7 +27,7 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
         $Devoluciones = DB::table('devoluciones')->where('created_at','>=',$now->format('Y-m-d'))->get();
         $Dev = $Devoluciones->sum('monto')*-1;
         $TotalVentas=$Ventas->count();
-        $VentasIVA= $Ventas->sum('total')-$Dev;
+        $VentasIVA= $Ventas->sum('total');
         $VentasSIVA=$Ventas->sum('subtotal');
         $auxNu=[];
         $auxRe=[];
