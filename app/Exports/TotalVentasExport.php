@@ -23,6 +23,8 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
         $Ventas=Venta::where('fecha', '>=', $now->format('Y-m-d'))
             ->where('oficina_id',2)
             ->get();
+        $Devoluciones = DB::table('devoluciones')->where('created_at','>=',$now->format('Y-m-d'))->get();
+        $Dev = $Devoluciones->sum('monto');
         $TotalVentas=$Ventas->count();
         $VentasIVA= $Ventas->sum('total');
         $VentasSIVA=$Ventas->sum('subtotal');
@@ -52,7 +54,8 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
                     $todo['auxNu']+$todo['auxRe'],
                     $todo['auxNu'],
                     $todo['auxRe'],
-                    $todo['NumDoc']
+                    $todo['NumDoc'],
+                    $todo['Dev']
 
                 ]]);
         /**return Venta::where('fecha', '>=', date('Y-m-d'))
@@ -77,7 +80,8 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
             'Numero total de pacientes',
             'Numero total de pacientes nuevos',
             'Numero total de pacientes recompra',
-            'Numero total de doctores recomendaron'
+            'Numero total de doctores recomendaron',
+            'Devoluciones'
 
 
         ];
