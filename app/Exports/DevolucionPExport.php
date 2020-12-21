@@ -29,16 +29,16 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
             ->flatten()
             ->map(
                 
-                // function ($Venta) {
-                //     $SkuRe="";
-                //     $contador = $Venta->productos()->pluck('cantidad');
-                //     $aux = 0;
-                //     foreach ($Venta->productos as $producto ) {
+                function ($Venta) {
+                    // $SkuRe="";
+                    // $contador = $Venta->productos()->pluck('cantidad');
+                    // $aux = 0;
+                    // foreach ($Venta->productos as $producto ) {
                        
-                //         $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
-                //         $aux++;
+                    //     $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
+                    //     $aux++;
                         
-                //     }
+                    }
 
                  $Devoluciones = DB::table('devoluciones')->where('created_at','>=',$now->format('Y-m-d'))->get();
 
