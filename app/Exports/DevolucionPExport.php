@@ -30,7 +30,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
         return Devolucion::where('created_at', '>=',$now->format('Y-m-d'))
             ->get()
             //->pluck('productos')
-            // ->flatten()
+             ->flatten()
             ->map(
                 
                 function ($Devolucion) {
@@ -39,7 +39,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
                   // dd($Devoluciones->id);
 
                 return collect([
-                    $Devolucion->id,
+                    $Devolucion->venta_id,
                     date('Y-m-d')                   
                                 
 
