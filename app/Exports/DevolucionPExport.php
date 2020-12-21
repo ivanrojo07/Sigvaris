@@ -33,7 +33,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
             // ->flatten()
             ->map(
                 
-                function ($Venta,$Devolucion) {
+                function ($Devolucion) {
 
                   // $Devoluciones = Devolucion::where('created_at','>=',$now->format('Y-m-d'))->get();
                   // dd($Devoluciones->id);
