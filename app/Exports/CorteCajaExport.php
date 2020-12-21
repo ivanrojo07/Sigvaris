@@ -35,7 +35,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             ->map(
                 
                 function ($Venta,$index) {
-                    $Sigp="";
+                $Sigp="";
                 //dd($Venta->productos()->pluck('cantidad')->sum());
                 $index++;
                   foreach ($Venta->SigpesosVenta as $Sigpesos ) {

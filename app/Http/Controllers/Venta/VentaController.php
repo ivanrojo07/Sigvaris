@@ -219,6 +219,8 @@ class VentaController extends Controller
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
 
+
+
         if ($request->facturar == "1") {
             $venta->update(['requiere_factura' => 1]);
                 DatoFiscal::updateOrCreate(
@@ -322,6 +324,25 @@ class VentaController extends Controller
                      }
         }
                 }
+
+                if ($request->descuento_id = 28) {
+            $folio = Folio::find(1);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 1000,
+                        'folio' => $ultimo,
+                        'folio_id' => $folio->id
+                    ]);
+                $Sigpesos->save();
+        }
            
         
         //Actualizar saldo a favor 
@@ -333,6 +354,10 @@ class VentaController extends Controller
             //  $Paciente->update(['saldo_a_favor' => $actualizacion]);  
             if ($Paciente->sigpesos_a_favor>0) {
                 $sigpesos_paciente = $Paciente->sigpesos_a_favor-$request->sigpesos_usar;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+            }else if($request->sigpesos>0){
+
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
             }
              
