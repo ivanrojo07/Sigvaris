@@ -38,7 +38,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
                     //     $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
                     //     $aux++;
                         
-                    }
+                    // }
 
                  
 
