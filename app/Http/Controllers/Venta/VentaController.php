@@ -338,7 +338,7 @@ class VentaController extends Controller
              $Sigpesos = new Sigpesosventa([
                         'venta_id' => $venta->id,
                         'monto' => 1000,
-                        'folio' => $ultimo,
+                        'folio' => $ultimo+1,
                         'folio_id' => $folio->id
                     ]);
                 $Sigpesos->save();
