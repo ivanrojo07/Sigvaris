@@ -22,7 +22,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
     public function collection()
     {
         $now = Carbon::now('America/Mexico_City');
-        $Devoluciones = Devolucion::where('created_at','>=',$now->format('Y-m-d'))->get();
+        $Devoluciones = Devolucion::where('created_at','>=',$now->format('Y-m-d'));
         dd($Devoluciones->venta_id);
         return Devolucion::where('created_at', '>=',$now->format('Y-m-d'))
             ->get()
