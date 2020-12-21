@@ -35,9 +35,15 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             ->map(
                 
                 function ($Venta,$index) {
-
+                    $Sigp="";
                 //dd($Venta->productos()->pluck('cantidad')->sum());
                 $index++;
+                  foreach ($Venta->SigpesosVenta as $Sigpesos ) {
+                       
+                        $Sigp.=$Sigpesos->folio." - ";
+                        
+                        
+                    }
                 //dd($Venta->requiere_factura);
                 return collect([
                     date('Y-m-d'),
@@ -74,7 +80,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     HistorialCambioVenta::where('destinate_id','=',$Venta->id)->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
                     $Venta->cumpleDes ==1 ? "1":"0",
                     
-                    DB::table('sigpesosventa')->where('venta_id','=',$Venta->id)->exists()?DB::table('sigpesosventa')->where('venta_id','=',$Venta->id)->value('folio'):"",
+                    // DB::table('sigpesosventa')->where('venta_id','=',$Venta->id)->exists()?DB::table('sigpesosventa')->where('venta_id','=',$Venta->id)->value('folio'):"",
+                    $Sigp,
 
                     DB::table('devoluciones')->where('venta_id','=',$Venta->id)->exists()?"-".DB::table('devoluciones')->where('venta_id','=',$Venta->id)->value('monto'):"",
                      // DB::table('Productos_damage')->find($request->lista[$key]);
