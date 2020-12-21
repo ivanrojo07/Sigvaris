@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Venta;
 use App\Factura;
 use App\Devolucion;
+use Illuminate\Database\Eloquent\Model\Devolución;
 use App\HistorialCambioVenta;
 use Carbon\Carbon;
 use App\Descuento;
@@ -29,19 +30,10 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
         return Devolucion::where('created_at', '>=',$now->format('Y-m-d'))
             ->get()
             //->pluck('productos')
-            ->flatten()
+            // ->flatten()
             ->map(
                 
                 function ($Venta,$Devolucion) {
-                    // $SkuRe="";
-                    // $contador = $Venta->productos()->pluck('cantidad');
-                    // $aux = 0;
-                    // foreach ($Venta->productos as $producto ) {
-                       
-                    //     $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
-                    //     $aux++;
-                        
-                    // }
 
                   // $Devoluciones = Devolucion::where('created_at','>=',$now->format('Y-m-d'))->get();
                   // dd($Devoluciones->id);
@@ -58,7 +50,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
     public function headings(): array
     {
         return [
-            'Nota de remisión',
+            'Folio',
             'Fecha de compra'
 
         ];
