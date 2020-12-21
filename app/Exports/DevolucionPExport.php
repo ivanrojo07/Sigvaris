@@ -32,7 +32,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
             ->flatten()
             ->map(
                 
-                function ($Venta,$Devoluciones) {
+                function ($Venta,$Devolucion) {
                     // $SkuRe="";
                     // $contador = $Venta->productos()->pluck('cantidad');
                     // $aux = 0;
