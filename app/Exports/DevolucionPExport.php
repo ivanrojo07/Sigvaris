@@ -43,11 +43,11 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
                         
                     // }
 
-                  $Devoluciones = Devolucion::where('created_at','>=',$now->format('Y-m-d'))->get();
-                  dd($Devoluciones->id);
+                  // $Devoluciones = Devolucion::where('created_at','>=',$now->format('Y-m-d'))->get();
+                  // dd($Devoluciones->id);
 
                 return collect([
-                    $Devoluciones->id,
+                    $Devolucion->id,
                     date('Y-m-d')                   
                                 
 
