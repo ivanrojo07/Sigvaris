@@ -44,7 +44,7 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
 
                 return collect([
                     $Devoluciones->id,
-                    date('Y-m-d'),                    
+                    date('Y-m-d')                   
                                 
 
                 ]);
