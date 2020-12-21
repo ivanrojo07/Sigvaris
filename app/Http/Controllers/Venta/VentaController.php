@@ -156,6 +156,9 @@ class VentaController extends Controller
              $venta->PagoSaldo=$request->saldo_a_usar;
             
              $Paciente->update(['saldo_a_favor' => $actualizacion]); 
+
+              // $saldo_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+              // $Paciente->update(['sigpesos_a_favor' => $saldo_paciente]);  
               
              }else{
                 
@@ -328,9 +331,13 @@ class VentaController extends Controller
 
             //  $actualizacion =  $Paciente->saldo_a_favor -$request->sigpesos_usar; 
             //  $Paciente->update(['saldo_a_favor' => $actualizacion]);  
-        
-             $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
-                $Paciente->update(['saldo_a_favor' => $saldo_paciente]);  
+            if ($Paciente->sigpesos_a_favor>0) {
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor-$request->sigpesos_usar;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+            }
+             
+             // $saldo_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos_usar;
+             //    $Paciente->update(['sigpesos_a_favor' => $saldo_paciente]);  
        
         // REDIRIGIR A LAS VENTAS REALIZADAS
         return redirect()->route('ventas.index');

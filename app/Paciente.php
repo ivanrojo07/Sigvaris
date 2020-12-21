@@ -24,7 +24,8 @@ class Paciente extends Model
         'doctor_id',
         'nivel_id',
         'oficina_id',
-        'saldo_a_favor'
+        'saldo_a_favor',
+        'sigpesos_a_favor'
     ];
 
     public function consultorios()

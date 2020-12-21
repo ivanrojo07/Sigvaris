@@ -393,6 +393,14 @@
                                             <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
                                                 value="0" min="0" step="0.01" readonly="">
                                         </div>
+                                           {{-- INPUT SALDO A FAVOR --}}
+                                        <div class="col-12 col-sm-6 col-md-4 mt-2">
+
+                                            <label for="" class="text-uppercase text-muted">Sigpesos a favor: </label>
+
+                                            <input type="number" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
+                                                value="0" min="0" step="0.01" readonly="">
+                                        </div>
                                         {{-- INPUT SIGPESOS A USAR --}}
 
                                         {{-- INPUT SUBTOTAL --}}
@@ -1074,7 +1082,9 @@
                 
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
+                $('#saldo_a_usar').val(0);
                 $('#saldo_a_favoor').hide();
+
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar5').show();
@@ -1112,6 +1122,7 @@
             else if ($('#tipoPago').val()==3) {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
+                $('#saldo_a_usar').val(0);
                 $('#saldo_a_favoor').show();
                 $('#tar1').show();
                 $('#tar2').show();
@@ -1136,7 +1147,7 @@
             else if ($('#tipoPago').val()==1) {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-
+                $('#saldo_a_usar').val(0);
                $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#saldo_a_favoor').hide();
@@ -1177,7 +1188,7 @@
             else if($('#tipoPago').val()==4){
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-
+                $('#saldo_a_usar').val(0);
                 $('#PagoSigpesos').show();
                 $('#saldo_a_favoor').hide();
                 $('#banco').val(null);
@@ -1215,7 +1226,7 @@
             }else if($('#tipoPago').val()==5){
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-
+                $('#saldo_a_usar').val(0);
                 $('#saldo_a_favoor').show();
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
@@ -1732,7 +1743,7 @@
                 $('#alcaldia_o_municipio').val(datos_fiscales.datosFiscales.alcaldia_o_municipio);
                 $('#uso_cfdi').val(datos_fiscales.datosFiscales.uso_cfdi);
                 }
-
+                $('#sigpesosAFavor').val(datos_fiscales.sigpesos_a_favor);
                 $('#saldoAFavor').val(datos_fiscales.saldo_a_favor);
                 console.table(datos_fiscales)
             }
