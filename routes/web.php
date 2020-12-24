@@ -100,6 +100,7 @@ Route::post('calcular_descuento/{promocion}','Venta\DescuentoController@getDescu
 Route::get('obtener_sigpesos/{paciente}','Venta\DescuentoController@getSigpesos');
 
 Route::get('obtener_folios/{id}','Venta\DescuentoController@getFolios');
+Route::get('folios/{paciente}/sigpesos', 'Venta\DescuentoController@foliospaciente');
 
 Route::get('productos/inventario', 'Inventario\InventarioController@index')->name('productos.inventario');
 Route::get('productos/damage', 'Damage\DamageController@index')->name('productos.damage');

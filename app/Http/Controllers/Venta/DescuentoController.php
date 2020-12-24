@@ -494,6 +494,21 @@ $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy(
         return response()->json($response);
     }
 
+public function foliospaciente (Paciente $paciente){
+    
+        $ultimo = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->get();
+
+
+
+        $response=array(
+                                'folio'=>$ultimo->folio,
+                                'monto'=>$ultimo->monto,
+                                
+                            );
+        return response()->json($response);
+
+    }
+
 
 
 
