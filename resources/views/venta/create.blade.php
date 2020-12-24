@@ -1336,7 +1336,27 @@
   $(document).ready(function() {
        $("#lista").change(function() {
 
-           var folio_id = $(this).val();
+            var pacienteId=$('#paciente_id').val();
+
+            
+
+            $.ajax({
+            url:"{{ url('/folios') }}/"+pacienteId+"/sigpesos",
+            type:'GET',
+            dataType:'json',
+            success: function(res34){   
+             
+              console.log(res34.folio);
+              $('#folio').val(res34.folio);
+              $('#monto').val(res34.monto);
+              console.log(res34.monto);
+            }
+
+        });
+
+
+            if ($('#folio').val()=="") {
+                    var folio_id = $(this).val();
            // alert($(this).val());
            console.log('Folio que se envia::',folio_id);
 
@@ -1352,9 +1372,34 @@
               console.log(res34.monto);
             }
 
-        });
+                 });
+            }
+
+        //    var folio_id = $(this).val();
+        //    // alert($(this).val());
+        //    console.log('Folio que se envia::',folio_id);
+
+        //     $.ajax({
+        //     url:"{{ url('/obtener_folios') }}/"+folio_id,
+        //     type:'GET',
+        //     dataType:'json',
+        //     success: function(res34){   
+             
+        //       console.log(res34.folio);
+        //       $('#folio').val(res34.folio);
+        //       $('#monto').val(res34.monto);
+        //       console.log(res34.monto);
+        //     }
+
+        // });
+
+
+           
 
        });
+
+
+
 });
 
 </script>
