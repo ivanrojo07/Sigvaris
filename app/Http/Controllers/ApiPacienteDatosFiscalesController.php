@@ -27,4 +27,20 @@ class ApiPacienteDatosFiscalesController extends Controller
         return response()->json("0");
         
     }
+
+
+    public function foliospaciente (Paciente $paciente){
+    
+        $ultimo = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->get();
+
+
+
+        $response=array(
+                                'folio'=>$ultimo->folio,
+                                'monto'=>$ultimo->monto,
+                                
+                            );
+        return response()->json($response);
+
+    }
 }

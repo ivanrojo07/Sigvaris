@@ -287,8 +287,8 @@ class VentaController extends Controller
         );
         $CRM->save();
 
-                if ($request->sigpesos_usar>0) {
-                      if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+             if ($request->sigpesos_usar>0) {
+                if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
              //Sigpesos 
              foreach ($request->folio as $key => $folio) {
                     # code...
@@ -324,11 +324,11 @@ class VentaController extends Controller
                 ->withInput($request->input());
                 }
                     
-                     }
-        }
+                        }
+                    }
                 }
 
-                if ($request->descuento_id = 28) {
+        if ($request->descuento_id = 28) {
             $folio = Folio::find(1);
         // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
         // 
@@ -362,6 +362,7 @@ class VentaController extends Controller
             if ($Paciente->sigpesos_a_favor>0) {
                 $sigpesos_paciente = $Paciente->sigpesos_a_favor-$request->sigpesos_usar;
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
             }else if($request->sigpesos>0){
 
                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
