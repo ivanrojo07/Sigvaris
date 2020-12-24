@@ -296,7 +296,10 @@ class VentaController extends Controller
                         'venta_id' => $venta->id,
                         'monto' => $request->monto[$key],
                         'folio' => $folio,
-                        'folio_id' => $request->lista[$key]
+                        'folio_id' => $request->lista[$key],
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'pago',
+                        'usado'=>1
                     ]);
 
                 $monto_folio = DB::table('folios')->find($request->lista[$key]);
@@ -339,7 +342,11 @@ class VentaController extends Controller
                         'venta_id' => $venta->id,
                         'monto' => 1000,
                         'folio' => $ultimo+1,
-                        'folio_id' => $folio->id
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'esencial',
+                        'usado'=>0
+
                     ]);
                 $Sigpesos->save();
         }
