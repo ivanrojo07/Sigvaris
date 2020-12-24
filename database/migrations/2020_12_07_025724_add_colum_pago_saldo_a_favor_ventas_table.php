@@ -29,6 +29,8 @@ class AddColumPagoSaldoAFavorVentasTable extends Migration
     {
         Schema::table('ventas', function (Blueprint $table) {
             //
+            //
+            $table->dropColumn('PagoSaldo');
         });
     }
 }
