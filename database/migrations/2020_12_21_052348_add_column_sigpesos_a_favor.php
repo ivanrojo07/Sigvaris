@@ -29,6 +29,7 @@ class AddColumnSigpesosAFavor extends Migration
     {
         Schema::table('pacientes', function (Blueprint $table) {
             //
+              $table->dropColumn('sigpesos_a_favor');
         });
     }
 }
