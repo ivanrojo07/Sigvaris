@@ -300,7 +300,7 @@ class VentaController extends Controller
                         // dd("Actualizado");
                        
                     }
-
+                    dd($new_fo);
                     if($new_fo == false ){
                         $Sigpesos = new Sigpesosventa([
                         'venta_id' => $venta->id,
@@ -311,7 +311,7 @@ class VentaController extends Controller
                         'tipo'=>'pago',
                         'usado'=>1
                          ]);
-                        dd($Sigpesos);
+                        
                         $Sigpesos->save();
                        
                         
