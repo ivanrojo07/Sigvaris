@@ -292,7 +292,7 @@ class VentaController extends Controller
              //Sigpesos 
              foreach ($request->folio as $key => $folio) {
                     # code...
-                    // dd($request->folio);
+                    dd($request->folio);
                     $new_fo = DB::table('sigpesosventa')->where('folio',$request->lista[$key])->exists();
                     $existe = DB::table('sigpesosventa')->where('folio',$folio)->exists();
                     if ($existe = true) {
