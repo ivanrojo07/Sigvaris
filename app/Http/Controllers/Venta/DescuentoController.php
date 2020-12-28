@@ -476,7 +476,7 @@ class DescuentoController extends Controller
     public function getFolios(Request $request){
 
         //Esta variable tendra el id y monto del tipo de sigpesos
-        $folio = Folio::find($request->id);
+$folio = Folio::find($request->id);
         // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
         // 
 $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
@@ -498,12 +498,14 @@ public function foliospaciente (Paciente $paciente){
     
          $ultimo = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('folio');
          $monto =DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('monto');
-
+          $folio_descrip =DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('folio_id');
+        $folio_id =DB::table('folios')->where('id','=',$folio_descrip)->orderBy('id','desc')->value('descripcion');
 
 
         $response=array(
                                 'folio'=>$ultimo,
-                                'monto'=>$monto
+                                'monto'=>$monto,
+                                'descripcion'=>$folio_id
                                 
                             );
         return response()->json($response);

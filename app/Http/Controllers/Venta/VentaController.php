@@ -292,7 +292,16 @@ class VentaController extends Controller
              //Sigpesos 
              foreach ($request->folio as $key => $folio) {
                     # code...
-                    $Sigpesos = new Sigpesosventa([
+                    // dd($request->folio);
+                    $new_fo = DB::table('sigpesosventa')->where('folio',$request->lista[$key])->exists();
+                    $existe = DB::table('sigpesosventa')->where('folio',$folio)->exists();
+                    if ($existe = true) {
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->where('usado','=',0)->increment('usado');
+                        // dd("Actualizado");
+                       
+                    }
+                    if($new_fo = false ){
+                        $Sigpesos = new Sigpesosventa([
                         'venta_id' => $venta->id,
                         'monto' => $request->monto[$key],
                         'folio' => $folio,
@@ -300,35 +309,19 @@ class VentaController extends Controller
                         'paciente_id'=>$request->paciente_id,
                         'tipo'=>'pago',
                         'usado'=>1
-                    ]);
-
-                $monto_folio = DB::table('folios')->find($request->lista[$key]);
-                $sigpesosventa = DB::table('sigpesosventa')->where('folio',$folio)->value('folio');
-                // dd($sigpesosventa);
-                if ($monto_folio->monto == $request->monto[$key] ) {
-                     
-
-                     if ($sigpesosventa == $folio) {
-                         return redirect()
-                            ->back()
-                            ->withErrors(['El cupon ya ha sido ocupado anteriormente'])
-                            ->withInput($request->input());
-                }
-                     else{
+                         ]);
                         $Sigpesos->save();
-                     }
-                }else{
-                    return redirect()
-                ->back()
-                ->withErrors(['El monto del cupon esta mal'])
-                ->withInput($request->input());
-                }
-                    
-                        }
                     }
+                    
+                        # code...
+                    
+                           
+                      }
+
+                    }    
                 }
 
-        if ($request->descuento_id = 28) {
+        if ($request->descuento_id == 28) {
             $folio = Folio::find(1);
         // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
         // 
@@ -349,6 +342,9 @@ class VentaController extends Controller
 
                     ]);
                 $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
         }
            
         
@@ -366,6 +362,7 @@ class VentaController extends Controller
             }else if($request->sigpesos>0){
 
                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                dd($sigpesos_paciente);
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
             }
              

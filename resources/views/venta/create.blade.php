@@ -1333,9 +1333,16 @@
 
 <script type="text/javascript">
 
+
+
+        function ultimoFolio(){
+
+        }
+
+
   $(document).ready(function() {
        $("#lista").change(function() {
-
+            var folio_id = $(this).val();
             var pacienteId=$('#paciente_id').val();
 
             
@@ -1349,15 +1356,36 @@
               console.log(res34.folio);
               $('#folio').val(res34.folio);
               $('#monto').val(res34.monto);
+              if (res34.descripcion != null) {alert(res34.descripcion)}
+              // alert(res34.descripcion)
               console.log(res34.monto);
+              console.log("Folio de paciente");
+                       if (res34.folio==null) {
+                        
+                         // alert($(this).val());
+                         console.log('Folio que se envia::',folio_id);
+
+                 $.ajax({
+            url:"{{ url('/obtener_folios') }}/"+folio_id,
+            type:'GET',
+            dataType:'json',
+            success: function(res34){   
+             
+              console.log(res34.folio);
+              $('#folio').val(res34.folio);
+              $('#monto').val(res34.monto);
+              console.log(res34.monto);
+               console.log("Folio si es null");
             }
 
-        });
+                 });
+            }
 
 
-            if ($('#folio').val()=="") {
-                    var folio_id = $(this).val();
-           // alert($(this).val());
+
+            },error: function(e){
+            
+           alert($(this).val());
            console.log('Folio que se envia::',folio_id);
 
             $.ajax({
@@ -1370,10 +1398,15 @@
               $('#folio').val(res34.folio);
               $('#monto').val(res34.monto);
               console.log(res34.monto);
+               console.log("Folio ultimo");
             }
 
                  });
             }
+
+        });
+
+
 
         //    var folio_id = $(this).val();
         //    // alert($(this).val());
