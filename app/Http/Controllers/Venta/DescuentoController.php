@@ -496,7 +496,7 @@ $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy(
 
 public function foliospaciente (Paciente $paciente){
     
-         $ultimo = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('folio');
+         $ultimo = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->where('usado','=',0)->orderBy('id','desc')->value('folio');
          $monto =DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('monto');
           $folio_descrip =DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('folio_id');
         $folio_id =DB::table('folios')->where('id','=',$folio_descrip)->orderBy('id','desc')->value('descripcion');
