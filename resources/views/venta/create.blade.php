@@ -670,17 +670,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for=""> Folio</label>
-                <input type="text" class="form-control folio" name="folio[]" required="" >
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                <label for=""> Monto</label>
-                <input type="text" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" >
-            </div>
-            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for=""> Lista Folio</label>
-                <select   name="lista[]" class="form-control lista" required>
+                <select  id="lista" name="lista[]" class="form-control lista" required>
                     <option value="">Seleccionar</option>
                     @foreach ($Folios as $Folio)
                     <option value="{{$Folio->id}}">
@@ -689,6 +681,15 @@
                     @endforeach
                 </select>
             </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for=""> Folio</label>
+                <input type="text" class="form-control folio" name="folio[]" required="" >
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                <label for=""> Monto</label>
+                <input type="text" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" >
+            </div>
+           
         </div>
         `;
   
@@ -1357,7 +1358,13 @@
               $('#folio').val(res34.folio);
               $('#monto').val(res34.monto);
               if (res34.descripcion != null && res34.folio != null ) {alert(res34.descripcion)}
-              // alert(res34.descripcion)
+              // var folios_old =  res34.pac;
+
+               for(var i=0;i<res34.pac.length;i++){
+
+                    alert("Folio de: "+res34.pac[i]["monto"]+" con folio"+res34.pac[i]["folio"]);
+                            }
+              console.log(res34.pac);
               console.log(res34.monto);
               console.log("Folio de paciente");
                        if (res34.folio==null) {
@@ -1385,7 +1392,7 @@
 
             },error: function(e){
             
-           alert($(this).val());
+           // alert($(this).val());
            console.log('Folio que se envia::',folio_id);
 
             $.ajax({

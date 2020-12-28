@@ -31,7 +31,7 @@ class CorteCajaPExport implements FromCollection, WithHeadings, WithTitle
 
                 //dd($Venta->productos()->pluck('cantidad')->sum());
                 $index++;
-                dd($Venta->requiere_factura);
+                // dd($Venta->requiere_factura);
                 return collect([
                     date('Y-m-d'),
                     Carbon::parse($Venta->fecha)->format('h:i:s'),

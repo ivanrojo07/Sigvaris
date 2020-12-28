@@ -298,6 +298,8 @@ class VentaController extends Controller
                     if ($existe = true) {
                         DB::table('sigpesosventa')->where('folio','=', $folio)->where('usado','=',0)->increment('usado');
                         // dd("Actualizado");
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->update(['venta_id' => $venta->id]);
+                        // DB::table('sigpesosventa')->where('folio','=', $folio)->update(['tipo' =>'pago']);
                        
                     }
                     // dd($new_fo);

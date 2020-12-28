@@ -496,7 +496,23 @@ $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy(
 
 public function foliospaciente (Paciente $paciente){
     
-         $ultimo = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->where('usado','=',0)->orderBy('id','desc')->value('folio');
+        $ultimo = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->where('usado','=',0)->orderBy('id','desc')->value('folio');
+        // $folios_pac = DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->where('usado','=',0)->get();
+        $folios_pac= Sigpesosventa::where('paciente_id','=',$paciente->id)->where('usado','=',0)->get();
+         // $arr_pa =[];
+         
+         // $folios_pac->map(function($sigpeso) {
+                
+         //        // return $user->email;
+         //    });
+         // foreach ($folios_pac as $key => $folios) {
+         //     $arr_pa = [
+         //      'folio' =>$folios->folio,
+         //      'monto'=>$folios->monto,
+         //      'tipo'=>$folios->tipo
+         //    ];
+         // }
+        
          $monto =DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('monto');
           $folio_descrip =DB::table('sigpesosventa')->where('paciente_id','=',$paciente->id)->orderBy('id','desc')->value('folio_id');
         $folio_id =DB::table('folios')->where('id','=',$folio_descrip)->orderBy('id','desc')->value('descripcion');
@@ -505,7 +521,8 @@ public function foliospaciente (Paciente $paciente){
         $response=array(
                                 'folio'=>$ultimo,
                                 'monto'=>$monto,
-                                'descripcion'=>$folio_id
+                                'descripcion'=>$folio_id,
+                                'pac'=>$folios_pac
                                 
                             );
         return response()->json($response);
