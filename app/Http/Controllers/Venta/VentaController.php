@@ -324,7 +324,7 @@ class VentaController extends Controller
 
                     }    
                 }
-
+                  
         if ($request->descuento_id == 28) {
             $folio = Folio::find(1);
         // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
@@ -349,6 +349,30 @@ class VentaController extends Controller
                  $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
                  // dd($sigpesos_paciente);
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+        }if ($request->descuento_id == 30) {
+              $folio = Folio::find(6);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 300,
+                        'folio' => $ultimo+1,
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'cupon producto negado',
+                        'usado'=>0
+
+                    ]);
+                $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
         }
            
         
@@ -366,7 +390,7 @@ class VentaController extends Controller
             }else if($request->sigpesos>0){
 
                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
-                dd($sigpesos_paciente);
+                // dd($sigpesos_paciente);
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
             }
              

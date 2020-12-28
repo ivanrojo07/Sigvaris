@@ -1356,7 +1356,7 @@
               console.log(res34.folio);
               $('#folio').val(res34.folio);
               $('#monto').val(res34.monto);
-              if (res34.descripcion != null) {alert(res34.descripcion)}
+              if (res34.descripcion != null && res34.folio != null ) {alert(res34.descripcion)}
               // alert(res34.descripcion)
               console.log(res34.monto);
               console.log("Folio de paciente");
