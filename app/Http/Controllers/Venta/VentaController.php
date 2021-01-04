@@ -604,8 +604,8 @@ class VentaController extends Controller
         }
         
 
-        
-        
+        $actualizacion = $request->saldo_a_favor; 
+        $Paciente->update(['saldo_a_favor' => $actualizacion]);   
         // $saldo_paciente =$request->saldo_a_favor;
             
         // $Paciente->update(['saldo_a_favor' => $saldo_paciente]); 
