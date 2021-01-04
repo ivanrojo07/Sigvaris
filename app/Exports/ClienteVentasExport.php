@@ -35,13 +35,13 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                     $contador = $Venta->productos()->pluck('cantidad');
                     $aux = 0;
                     $aux_2 = 0;
-            $descu = HistorialCambioVenta::where('venta_id',$Venta->id)->get();
-                    $produc = Producto::where('id',$descu->producto_devuelto_id)->get();
+            // $descu = HistorialCambioVenta::where('venta_id',$Venta->id)->get();
+                    // $produc = Producto::where('id',$descu->producto_devuelto_id)->get();
                     foreach ($Venta->productos as $producto ) {
 
-                       if ($producto->sku == $produc->sku) {
-                           $SkuPre.=$producto->precio_publico_iva-300;
-                       }
+                       // if ($producto->sku == $produc->sku) {
+                       //     $SkuPre.=$producto->precio_publico_iva-300;
+                       // }
                         $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
                         $SkuPre.=$producto->precio_publico_iva." - ".$contador[$aux]."| ";
                         $aux++;
