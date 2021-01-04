@@ -39,7 +39,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                     foreach ($Venta->productos as $producto ) {
 
                        if ($producto->sku == $produc->sku) {
-                           $SkuPre.=$producto->precio_publico_iva-300." - ".$contador[$aux]."| ";
+                           $SkuPre.=$producto->precio_publico_iva-300;
                        }
                         $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
                         $SkuPre.=$producto->precio_publico_iva." - ".$contador[$aux]."| ";
