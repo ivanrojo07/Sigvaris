@@ -27,12 +27,20 @@ class ClienteVentasPExport implements FromCollection, WithHeadings, WithTitle
             ->map(
                 
                 function ($Venta) {
-                    $SkuRe="";
+                     $SkuRe="";
+                    $SkuPre= "";
+                    $contador = $Venta->productos()->pluck('cantidad');
+                    $aux = 0;
+                    $descu = HistorialCambioVenta::where('venta_id',$Venta->id)->where('descuento_cu',1)->get();
+                    dd($descu);
                     foreach ($Venta->productos as $producto ) {
-                        $SkuRe.=$producto->sku." ";
+                       
+                        $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
+                        $SkuPre.=$producto->precio_publico_iva." - ".$contador[$aux]."| ";
+                        $aux++;
                     }
                 return collect([
-                    $Venta->id,
+                     $Venta->id,
                     date('Y-m-d'),                    
                     $Venta->paciente->nombre." ".$Venta->paciente->paterno." ".$Venta->paciente->materno,
                     $Venta->paciente->doctor != null ? $Venta->paciente->doctor->nombre : "",
@@ -41,6 +49,9 @@ class ClienteVentasPExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->paciente->ventas()->count() == 1?  "1":"2",
                     $Venta->productos != null ? $Venta->productos()->pluck('cantidad')->sum():"",
                     $SkuRe,
+                    $SkuPre,
+
+                     DB::table('productos_damage')->where('origin_id','=',$Venta->id)->exists() ? "SI":" NO",
                     "",
                     "",
                     $Venta->paciente->mail,
@@ -54,7 +65,7 @@ class ClienteVentasPExport implements FromCollection, WithHeadings, WithTitle
     public function headings(): array
     {
         return [
-            'Nota de remisión',
+           'Nota de remisión',
             'Fecha de compra',
             'Nombre del paciente',
             'Nombre del Doctor',
@@ -63,6 +74,8 @@ class ClienteVentasPExport implements FromCollection, WithHeadings, WithTitle
             'Numero de visita',
             'Cantidad ',
             'Sku Vendido',
+            'Precio Sku',
+            'damage',
             'Producto negado ',
             'Estilo negado',
             'mail',

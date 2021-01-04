@@ -569,7 +569,7 @@ class VentaController extends Controller
     public function ventaDamage(Request $request)
     {
             
-              // dd($request->VentaAnterior);
+              
         // $saldo_a_favor=$request->input('montonegativo');
         
         // PREPARAR DATOS DE LA VENTA
@@ -608,7 +608,7 @@ class VentaController extends Controller
         
         }
         
-
+// dd($venta_cu->descuento_cu);
         $actualizacion = $request->saldo_a_favor; 
         $Paciente->update(['saldo_a_favor' => $actualizacion]);   
         // $saldo_paciente =$request->saldo_a_favor;
@@ -755,6 +755,20 @@ class VentaController extends Controller
         $productosDamage->origin_id = $request->VentaAnterior;
         $productosDamage->descripcion = $request->DesDamage;
         $productosDamage->save();
+
+        $consulta = HistorialCambioVenta::where('venta_id',$request->VentaAnterior)->where('descuento_cu',1)->get();
+        // dd(count($consulta));
+
+        
+
+        // $venta_cu = Venta::where("id",$request->VentaAnterior)->first();
+         if ($venta_cu->descuento_cu == 1 ) {
+                        $HistorialCambioVenta->descuento_cu = 1;
+            }
+
+        if (count($consulta) >= 1) {
+            $HistorialCambioVenta->descuento_cu = 0;
+        }
 
         $HistorialCambioVenta->save();
         
@@ -918,15 +932,27 @@ class VentaController extends Controller
         );
         $CRM->save();
         
-        HistorialCambioVenta::create([
-            'tipo_cambio' => 'CAMBIO PRODUCTO',
+        // HistorialCambioVenta::create([
+        //     'tipo_cambio' => 'CAMBIO PRODUCTO',
+        //     'responsable_id' => Auth::user()->id,
+        //     'venta_id' => $request->VentaAnterior,
+        //     'destinate_id'=>$venta->id,
+        //     'producto_entregado_id' =>  $productos[0]->id,
+        //     'producto_devuelto_id' => $request->productoDevuelto,
+        //     'observaciones' => $request->observacionesDevuelto
+        // ]);
+
+        $HistorialCambioVenta = new HistorialCambioVenta(
+            array(
+                'tipo_cambio' => 'CAMBIO PRODUCTO',
             'responsable_id' => Auth::user()->id,
             'venta_id' => $request->VentaAnterior,
             'destinate_id'=>$venta->id,
             'producto_entregado_id' =>  $productos[0]->id,
             'producto_devuelto_id' => $request->productoDevuelto,
             'observaciones' => $request->observacionesDevuelto
-        ]);
+            )
+        );
 
         $ProductoDevuelto = Producto::where('id', $request->productoDevuelto)->first();
 
@@ -934,6 +960,15 @@ class VentaController extends Controller
             'stock' => $ProductoDevuelto->stock + 1
         ]);
 
+        $consulta = HistorialCambioVenta::where('venta_id',$request->VentaAnterior)->where('descuento_cu',1)->get();
+       if ($venta_cu->descuento_cu == 1 ) {
+                        $HistorialCambioVenta->descuento_cu = 1;
+            }
+         if (count($consulta) >= 1) {
+            $HistorialCambioVenta->descuento_cu = 0;
+        }
+
+            $HistorialCambioVenta->save();
        
 
         // REDIRIGIR A LAS VENTAS REALIZADAS
