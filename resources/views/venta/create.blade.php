@@ -737,12 +737,12 @@
              var combo = document.getElementById("descuento_id");
              var selected = combo.options[combo.selectedIndex].text;
              // alert(selected);
-            if (cantidad < 5  &&  selected == "Esencial") {
-                    alert("Descuento esencial solo esta dispobile en la compra de 5 prendas");
-                    $( "#descuento_id" ).focus();
-                    $( "#descuento_id" ).val(0);
+            // if (cantidad < 5  &&  selected == "Esencial") {
+            //         alert("Descuento esencial solo esta dispobile en la compra de 5 prendas");
+            //         $( "#descuento_id" ).focus();
+            //         $( "#descuento_id" ).val(0);
 
-            }
+            // }
             
             /* Para obtener el texto */
              // var combo = document.getElementById("descuento_id");
