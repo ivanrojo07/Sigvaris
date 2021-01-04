@@ -7,6 +7,7 @@ use App\Factura;
 use App\HistorialCambioVenta;
 use Carbon\Carbon;
 use App\Descuento;
+use App\Producto;
 use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
