@@ -33,7 +33,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                     $SkuPre= "";
                     $contador = $Venta->productos()->pluck('cantidad');
                     $aux = 0;
-                    $descu = HistorialCambioVenta::where('venta_id',$Venta->id)->where('descuento_cu',1)->get();
+            $descu = HistorialCambioVenta::where('venta_id',$Venta->id)->get();
                      dd($descu);
                     foreach ($Venta->productos as $producto ) {
                        
