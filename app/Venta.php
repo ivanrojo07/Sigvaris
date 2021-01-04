@@ -33,7 +33,8 @@ class Venta extends Model
         'comentario',
         'oficina_id',
         'cumpleDes',
-        'PagoSaldo'
+        'PagoSaldo',
+        'descuento_cu'
     ];
 
     /**

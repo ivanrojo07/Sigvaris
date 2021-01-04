@@ -569,13 +569,18 @@ class VentaController extends Controller
     public function ventaDamage(Request $request)
     {
             
-              // dd($request);
+              // dd($request->VentaAnterior);
         // $saldo_a_favor=$request->input('montonegativo');
         
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
         
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
+
+            $venta_cu = Venta::where("id",$request->VentaAnterior)->first();
+                  if ($venta_cu->descuento_cu == null && $venta_cu->cumpleDes ==1) {
+                        $venta_cu->update(['descuento_cu' => 1]);
+            }
 
         if ($request->input('tipoPago') == 5 || $request->input('tipoPago') == 3) {
 
@@ -735,6 +740,7 @@ class VentaController extends Controller
                 'responsable_id' => Auth::user()->id,
                 'venta_id' => $request->VentaAnterior,
                 'observaciones' => '',
+                'destinate_id'=>$venta->id,
                 'producto_devuelto_id' => $request->productoDevuelto,
                 'producto_entregado_id' => $productos[0]->id
             )
@@ -764,11 +770,15 @@ class VentaController extends Controller
     {
         // $saldo_a_favor=$request->input('montonegativo');
             $saldo_a_favor= $request->saldo_a_favor;
-        
+            
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
         $venta->oficina_id = session()->get('oficina');
-
+            $venta_cu = Venta::where("id",$request->VentaAnterior)->first();
+            if ($venta_cu->descuento_cu == null && $venta_cu->cumpleDes ==1) {
+                        $venta_cu->update(['descuento_cu' => 1]);
+            }
+                 
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
         
         $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
