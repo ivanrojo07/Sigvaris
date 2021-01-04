@@ -30,11 +30,13 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                 
                 function ($Venta) {
                     $SkuRe="";
+                    $SkuPre= "";
                     $contador = $Venta->productos()->pluck('cantidad');
                     $aux = 0;
                     foreach ($Venta->productos as $producto ) {
                        
                         $SkuRe.=$producto->sku." - ".$contador[$aux]."| ";
+                        $SkuPre.=$producto->precio_publico_iva." - ".$contador[$aux]."| ";
                         $aux++;
                         
                     }
@@ -48,6 +50,8 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
                     $Venta->paciente->ventas()->count() == 1?  "1":"2",
                     $Venta->productos != null ? $Venta->productos()->pluck('cantidad')->sum():"",
                     $SkuRe,
+                    $SkuPre,
+
                      DB::table('productos_damage')->where('origin_id','=',$Venta->id)->exists() ? "SI":" NO",
                     "",
                     "",
@@ -71,6 +75,7 @@ class ClienteVentasExport implements FromCollection, WithHeadings,WithTitle
             'Numero de visita',
             'Cantidad ',
             'Sku Vendido',
+            'Precio Sku',
             'damage',
             'Producto negado ',
             'Estilo negado',
