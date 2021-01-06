@@ -6,6 +6,7 @@ use App\Producto;
 use App\Venta;
 use App\Descuento;
 use App\Promocion;
+use App\HistorialCambioVenta;
 use Illuminate\Http\Request;
 
 class ApiVentaController extends Controller
@@ -14,28 +15,73 @@ class ApiVentaController extends Controller
     {
 
         $venta = Venta::find($request->ventaId);
+        // dd($venta);
         $productoQueSeraEntregado = Producto::where('sku', $request->skuProductoEntregado)->first();
         $precioProductoQueSeraDevuelto = $request->precioProductoDevuelto;
 
         $arrayPreciosProductos = $this->getArrayPreciosProductos($venta);
 
         $totalVentaOriginal = $venta->total;
-
+        $promo = Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
+        $promo_unidad = Promocion::where('descuento_id',$venta->descuento_id)->value('unidad_descuento');
 
         $arrayPreciosProductosConNuevoProducto = $this->getArrayPreciosProductosConNuevo($arrayPreciosProductos, $productoQueSeraEntregado, $precioProductoQueSeraDevuelto);
         $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
 
 
-        $diferencia = round (round ($totalVentaBueva +($totalVentaBueva*.16))-$totalVentaOriginal);
+        // $diferencia = round (round ($totalVentaBueva +($totalVentaBueva*.16))-$totalVentaOriginal);
+        // $diferencia = round (round ($totalVentaBueva)-$totalVentaOriginal);
+       $diferencia =  round (round ($precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16))-$productoQueSeraEntregado->precio_publico_iva);
+
+        if ($diferencia<1) {
+            $diferencia=$diferencia*-1;
+        }else{
+             $diferencia=$diferencia*-1;
+        }
+            $uno =0;
+            $dos =0;
+            $tres=0;
+            $cuatro=0;
+            $cinco=0;
+    if ($promo_unidad == 'Procentaje' ||$promo_unidad == 'Procentaje1' ||$promo_unidad == 'Procentaje2') {
+                # code...
+                $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16);
+
+                $dos = $productoQueSeraEntregado->precio_publico_iva;
+
+                $tres = (($uno-($uno*$promo/100))-($dos-($dos*$promo/100)));
+                $tres = round(abs($tres));
+                $cuatro = $uno-$uno*$promo/100;
+                    $cinco =$dos-$uno*$promo/100;
+                
+            }
+
+        if ($promo_unidad == 'Prendas') {
+            # code...
+            $promo = $tres ;
+        }
         
+
+
+
         if ($venta->cumpleDes) {
             # code...
+            $promo = 300;
+            $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16)-300;
+             $dos = $productoQueSeraEntregado->precio_publico_iva-300;
+             $cinco = $dos-$uno;
+         $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
+
+         if (count($consulta) >= 1) {
+             # code...
+             $promo =0;
+         }
             if ($diferencia <0) {
                 # code...
-                $diferencia =   $diferencia -300;
+                // $diferencia =   $diferencia +300;
             }else{
 
-              $diferencia =   $diferencia -300;
+              // $diferencia =   $diferencia -300;
             }
         }
         return response()->json([
@@ -43,7 +89,16 @@ class ApiVentaController extends Controller
             'arrayNuevoProdutos' => $arrayPreciosProductosConNuevoProducto,
             'totalVentaOriginal' => $totalVentaOriginal,
             'totalVentaNueva' => $totalVentaBueva,
-            'diferencia' => $diferencia
+            'diferencia' => $diferencia,
+            'precio_original'=>$precioProductoQueSeraDevuelto,
+            'precio_nueva' =>$productoQueSeraEntregado,
+            'venta' => $venta,
+            'promo' =>$promo,
+            'uno'=>$uno,
+            'dos'=>$dos,
+            'tres'=>$tres,
+            'cuatro'=>$cuatro,
+            'cinco'=>$cinco
         ]);
 
         return response()->json($request->input());

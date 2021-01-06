@@ -110,7 +110,7 @@ class DamageController extends Controller
         $TipoDamage =$request->tipo;
         $DesDamage =$request->descripcion;
 
-        if ($request->input("diferenciaPrecios")==0) {
+        if ($request->diferenciaPrecios==0) {
             // $saldo=$productoQueSeraEntregado->precio_publico_iva;
            
                $saldo_paciente=$venta->paciente->saldo_a_favor;
@@ -118,9 +118,15 @@ class DamageController extends Controller
             $saldo = 0;
            
         }else{
-                $saldo=$request->input("diferenciaPrecios");
+                $saldo=$request->diferenciaPrecios;
                 $saldo_paciente=$venta->paciente->saldo_a_favor;
-                 $saldoA = $saldo_paciente;
+                if ($saldo>0) {
+                    # code...
+                    $saldoA = $saldo_paciente;
+                }else{
+
+                 $saldoA = $saldo_paciente + $saldo;
+                }
             // $saldo=round($saldo)+$productoQueSeraEntregado->precio_publico_iva;
     
             if ($saldo>0) {
@@ -135,7 +141,7 @@ class DamageController extends Controller
              
                      
         }
-
+        // dd($auxiliar);
         return view('venta.damage.create',['producto'=>$productoQueSeraEntregado,
                                            'productoDebuelto'=>$producto,
                                            'ventaAnterior'=>$venta,

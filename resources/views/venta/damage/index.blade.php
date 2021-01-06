@@ -143,7 +143,40 @@
                                                                 <label for="" class="text-uppercase text-muted mt-2">DIFERENCIA</label>
                                                                 <input type="text" name="diferenciaPrecios" class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}" readonly>
                                                             </div>
-
+                                                              <div class="col-4 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">PRECIO ORIGINAL</label>
+                                                            <input id="precioOri" type="text" value="0" name="precioOri"
+                                                                class="form-control precioOri"readonly>
+                                                        </div>
+                                                        <div class="col-4 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">NEW $ CAMBIO</label>
+                                                            <input id="precioNew" type="text" value="0" name="precioNew"
+                                                                class="form-control precioNew"readonly>
+                                                        </div>
+                                                         <div class="col-4 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">DESCUENTO</label>
+                                                            <input id="prec_des" type="text" value="0" name="prec_des"
+                                                                class="form-control prec_des"readonly>
+                                                        </div>
+                                                       
+                                                         <div class="col-4 mt-2">
+                                                             <hr size="10" />
+                                                            
+                                                            <input id="preciouno" type="text" value="0" name="preciouno"
+                                                                class="form-control preciouno"readonly>
+                                                        </div>
+                                                         <div class="col-4 mt-2">
+                                                             <hr size="10" />
+                                                            
+                                                            <input id="preciodos" type="text" value="0" name="preciodos"
+                                                                class="form-control preciodos"readonly>
+                                                        </div>
+                                                         <div class="col-4 mt-2">
+                                                             <hr size="10" />
+                                                            
+                                                            <input id="preciotres" type="text" value="0" name="preciotres"
+                                                                class="form-control preciotres"readonly>
+                                                        </div>
                                                         <div class="col-12 mt-2">
                                                             <label for="" class="text-uppercase text-muted">TIPO DAMAGE</label>
                                                             <select name="tipo" id="tipo" class="form-control" required>
@@ -264,9 +297,23 @@
             success: function( response ){
                 console.log('RESPONSE')
                 console.log( response )
-                
-                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) )
-                $(`.inputPrecioDiferencia_id_pro[productoId=${idProducto}]`).val()
+                $(`.prec_des`).val( parseInt(response.promo) );
+                var original =  parseInt(response.precio_original) +(parseInt(response.precio_original)*.16);
+               $(`.precioOri`).val( parseInt(original) );
+               $(`.precioNew`).val( parseInt(response.precio_nueva.precio_publico_iva) );
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) );
+                $(`.inputPrecioDiferencia_id_pro[productoId=${idProducto}]`).val();
+                console.log('PRecio_original',response.precio_original);
+                console.log('PRecio_nueva',response.precio_nueva.precio_publico_iva);
+                console.log('venta',response.venta);
+                    console.log('promo',response.promo);
+                    console.log('Descuento_3',response.cinco);
+                    console.log('Descuento_2',response.dos);
+                    console.log('Descuento_1',response.uno);
+               $(`.preciouno`).val( response.uno);
+               $(`.preciodos`).val( response.dos );
+               $(`.preciotres`).val( response.cinco );
+               // alert(response.precio_nueva.precio_publico_iva);
                
 
             },
