@@ -23,6 +23,7 @@ class ApiVentaController extends Controller
 
         $totalVentaOriginal = $venta->total;
         $promo = Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
+        $aux = $promo;
         $promo_unidad = Promocion::where('descuento_id',$venta->descuento_id)->value('unidad_descuento');
 
         $arrayPreciosProductosConNuevoProducto = $this->getArrayPreciosProductosConNuevo($arrayPreciosProductos, $productoQueSeraEntregado, $precioProductoQueSeraDevuelto);
@@ -49,19 +50,24 @@ class ApiVentaController extends Controller
 
                 $dos = $productoQueSeraEntregado->precio_publico_iva;
 
-                $tres = (($uno-($uno*$promo/100))-($dos-($dos*$promo/100)));
+                $tres = (($dos-($dos*$promo/100))-($uno-($uno*$promo/100)));
                 $tres = round(abs($tres));
                 $cuatro = $uno-$uno*$promo/100;
-                    $cinco =$dos-$uno*$promo/100;
-                
+                    $cinco =$dos-$dos*$promo/100;
+                $diferencia= $tres;
+                $cinco = round($tres);
+                $promo = $aux/100;
             }
 
         if ($promo_unidad == 'Prendas') {
             # code...
             $promo = $tres ;
+            $promo = $promo/100;
         }
         
-
+        if ($uno>$dos) {
+           $diferencia = $diferencia*-1;
+        }
 
 
         if ($venta->cumpleDes) {
@@ -70,19 +76,30 @@ class ApiVentaController extends Controller
             $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16)-300;
              $dos = $productoQueSeraEntregado->precio_publico_iva-300;
              $cinco = $dos-$uno;
-         $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
+              $cinco = $cinco;
+              $diferencia=round($cinco);
+                 $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
 
          if (count($consulta) >= 1) {
              # code...
              $promo =0;
-         }
-            if ($diferencia <0) {
-                # code...
-                // $diferencia =   $diferencia +300;
-            }else{
+             $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16);
+             $dos = $productoQueSeraEntregado->precio_publico_iva;
+             $cinco = $dos-$uno;
+             $cinco = round($cinco);
 
-              // $diferencia =   $diferencia -300;
-            }
+             if ($promo_unidad == 'Procentaje' ||$promo_unidad == 'Procentaje1' ||$promo_unidad == 'Procentaje2') {
+
+                        $promo = $aux/100;
+                        $uno = $uno-($uno*$promo);
+                         $dos =$dos-($dos*$promo);
+                         $cinco = $dos -$uno;
+                         $diferencia= round($cinco);
+
+                }
+         }
+           
+            $cinco = round($cinco);
         }
         return response()->json([
             'arrayViejosProductos' => $arrayPreciosProductos,
@@ -94,10 +111,10 @@ class ApiVentaController extends Controller
             'precio_nueva' =>$productoQueSeraEntregado,
             'venta' => $venta,
             'promo' =>$promo,
-            'uno'=>$uno,
-            'dos'=>$dos,
+            'uno'=>round($uno),
+            'dos'=>round($dos),
             'tres'=>$tres,
-            'cuatro'=>$cuatro,
+            'cuatro'=>round($cuatro),
             'cinco'=>$cinco
         ]);
 

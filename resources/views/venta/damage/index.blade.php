@@ -297,7 +297,7 @@
             success: function( response ){
                 console.log('RESPONSE')
                 console.log( response )
-                $(`.prec_des`).val( parseInt(response.promo) );
+               
                 var original =  parseInt(response.precio_original) +(parseInt(response.precio_original)*.16);
                $(`.precioOri`).val( parseInt(original) );
                $(`.precioNew`).val( parseInt(response.precio_nueva.precio_publico_iva) );
@@ -307,12 +307,16 @@
                 console.log('PRecio_nueva',response.precio_nueva.precio_publico_iva);
                 console.log('venta',response.venta);
                     console.log('promo',response.promo);
-                    console.log('Descuento_3',response.cinco);
-                    console.log('Descuento_2',response.dos);
-                    console.log('Descuento_1',response.uno);
+                    console.log('cinco',response.cinco);
+                    console.log('dos',response.dos);
+                    console.log('uno',response.uno);
+                    console.log('Diferencia',response.diferencia);
+                    console.log('Cuatro',response.cuatro);
+                    console.log('Tres',response.tres);
                $(`.preciouno`).val( response.uno);
                $(`.preciodos`).val( response.dos );
                $(`.preciotres`).val( response.cinco );
+                $(`.prec_des`).val( response.promo);
                // alert(response.precio_nueva.precio_publico_iva);
                
 
