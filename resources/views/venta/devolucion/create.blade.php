@@ -118,6 +118,17 @@
                                                                     class="form-control inputPrecioDiferencia" productoId="{{$producto->id}}"
                                                                     readonly>
                                                             </div>
+                                                             <div class="col-4 mt-2">
+                                                            <label for="" class="text-uppercase text-muted">DESCUENTO</label>
+                                                            <input id="prec_des" type="text" value="0" name="prec_des"
+                                                                class="form-control prec_des"readonly>
+                                                        </div>
+                                                        <div class="col-4 mt-2">
+                                                             <hr size="10" />
+                                                            
+                                                            <input id="preciodos" type="text" value="0" name="preciodos"
+                                                                class="form-control preciodos"readonly>
+                                                        </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -192,8 +203,9 @@
             success: function( response ){
                 console.log('RESPONSE')
                 console.log( response )
-                
-                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) )
+                $(`.prec_des`).val( response.promo);
+                $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) );
+                 $(`.preciodos`).val( response.dos );
             },
             error: function( e ){
                 console.table(e)

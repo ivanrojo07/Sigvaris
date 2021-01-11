@@ -14,10 +14,11 @@ class RealizarDevolucionService
 {
 
     protected $producto;
-
+    protected $devolucion;
     public function __construct(Request $request, Venta $venta)
     {
         $this->setVenta($venta);
+        $this->devolucion = $request->MONTO;
         $this->setProducto($request);
         $this->anadirProductoAStock();
         $this->eliminarProductoDeLaVenta();
@@ -42,24 +43,42 @@ class RealizarDevolucionService
     {
         if ($venta->promocion_id) {
 
-            HistorialCambioVenta::create([
+              
+             $HistorialCambioVenta = new HistorialCambioVenta(
+                array(
                 'tipo_cambio' => 'DEVOLUCIÓN',
                 'responsable_id' => Auth::user()->id,
                 'venta_id' => $this->venta->id,
                 'producto_entregado_id' => null,
                 'producto_devuelto_id' => $this->producto->id,
-                'observaciones'=> "Monto devuelto: ".$this->calcularDiferencia($venta,$this->producto->precio_publico)
-            ]);
-        }else{
-            HistorialCambioVenta::create([
+                'observaciones'=> "Monto devuelto: ". $this->devolucion
+                                )
+                         );
+             }else{
+             $HistorialCambioVenta = new HistorialCambioVenta(
+                array(
                 'tipo_cambio' => 'DEVOLUCIÓN',
                 'responsable_id' => Auth::user()->id,
                 'venta_id' => $this->venta->id,
                 'producto_entregado_id' => null,
                 'producto_devuelto_id' => $this->producto->id,
-                'observaciones'=> "Monto devuelto: ".$this->producto->precio_publico
-            ]);
-        }
+                'observaciones'=> "Monto devuelto: ". $this->devolucion
+                                )
+                         );
+                 }
+
+              if ($venta->cumpleDes) {
+                    # code...
+                    $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
+                    if (count($consulta) >= 1) {
+                            $HistorialCambioVenta->descuento_cu = 0;
+               
+                             }else{
+                                $HistorialCambioVenta->descuento_cu = 1;
+                             }
+                }
+                 $HistorialCambioVenta->save();
+
     }
 
     public function anadirProductoAStock()
@@ -104,7 +123,7 @@ class RealizarDevolucionService
         $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
 
 
-        $diferencia = $totalVentaOriginal - $totalVentaBueva;
+        $diferencia = $precioProductoQueSeraDevuelto;
         
         return $diferencia;
     }

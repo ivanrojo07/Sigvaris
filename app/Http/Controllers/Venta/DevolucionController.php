@@ -8,8 +8,8 @@ use App\Services\Ventas\RealizarDevolucionService;
 use App\Producto;
 use App\Venta;
 use App\Descuento;
-use App\Promocion;
-
+use App\Promocion; 
+use App\HistorialCambioVenta;
 class DevolucionController extends Controller
 {
     /**
@@ -39,7 +39,8 @@ class DevolucionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Venta $venta)
-    {
+    {   
+        // dd($request->MONTO);
         $realizarDevolucionService = new RealizarDevolucionService($request, $venta);
         if ($request->input("tipo_cambio")==2) {
             $MONTO=$request->input("MONTO");
@@ -98,40 +99,81 @@ class DevolucionController extends Controller
     }
      public function calcularDiferencia(Request $request)
     {
-
+         // dd($request);
         $venta = Venta::find($request->ventaId);
         //$productoQueSeraEntregado = Producto::where('sku', $request->skuProductoEntregado)->first();
 
         $precioProductoQueSeraDevuelto = $request->precioProductoDevuelto;
 
         $arrayPreciosProductos = $this->getArrayPreciosProductos($venta);
+        $promo = Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
+        $aux = $promo;
+        $promo_unidad = Promocion::where('descuento_id',$venta->descuento_id)->value('unidad_descuento');
+        // $totalVentaOriginal = $this->calcularTotalVentaOriginal($venta, $arrayPreciosProductos);
+        // $promo = Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
+        // $aux = $promo;
 
-        $totalVentaOriginal = $this->calcularTotalVentaOriginal($venta, $arrayPreciosProductos);
+        // $arrayPreciosProductosConNuevoProducto = $this->getArrayPreciosProductosConNuevo($arrayPreciosProductos, $precioProductoQueSeraDevuelto);
+        // $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
+            $uno =0;
+            $dos =0;
+            $tres=0;
+            $cuatro=0;
+            $cinco=0;
+            $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16);
+            $cuatro = $uno;
 
-
-        $arrayPreciosProductosConNuevoProducto = $this->getArrayPreciosProductosConNuevo($arrayPreciosProductos, $precioProductoQueSeraDevuelto);
-        $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
-
-
-        $diferencia = $totalVentaOriginal - $totalVentaBueva;
-         $diferencia =  round($diferencia + ($diferencia*0.16));
-          if ($venta->cumpleDes) {
-            # code...
-            if ($diferencia <0) {
+            //precio completo
+        $diferencia = $precioProductoQueSeraDevuelto + ($precioProductoQueSeraDevuelto*0.16);
+        //redondeamos
+         $diferencia =  round($diferencia);
+        $promocion=Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
+        if ($venta->descuento_id !=null) {
+                
+            if ($promo_unidad == 'Procentaje' ||$promo_unidad == 'Procentaje1' ||$promo_unidad == 'Procentaje2') {
                 # code...
-                $diferencia =   $diferencia -300;
-            }else{
-
-              $diferencia =   $diferencia -300;
+                # precio original
+                $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16);
+                // precio con el descuento aplicado
+                $cuatro = $uno-$uno*$promo/100;
+                $dos=$uno*$promo/100;
+                $promocion = $promocion/100;
+                
             }
+
+            if ($promo_unidad == 'sigCompra') {
+                # code...
+                $promocion =0;
+            }
+           
         }
-        if ($venta->descuento_id !="") {
-            $promocion=Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
-            $diferencia=$diferencia-$promocion;
-        }
+        if ($venta->cumpleDes) {
+            # code...3.
+            $uno = $tres;
+
+                    $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
+            if (count($consulta) >= 1) {
+
+                    $diferencia=$cuatro;
+            }else{
+                $cuatro = $cuatro-300;
+                $diferencia=$cuatro;
+            }
+             $diferencia=round($cuatro);
+    }   
+     $diferencia=round($cuatro);
+
         
         return response()->json([
-            'diferencia' => $diferencia
+            'diferencia' => round($diferencia),
+            'cumple'=>$venta->cumpleDes,
+            'promo'=>$promocion,
+            'promo_2' =>$promo_unidad,
+            'uno'=>round($uno),
+            'dos'=>round($dos),
+            'tres'=>$tres,
+            'cuatro'=>round($cuatro),
+            'cinco'=>$precioProductoQueSeraDevuelto
         ]);
     }
 
