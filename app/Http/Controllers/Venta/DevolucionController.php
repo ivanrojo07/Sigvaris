@@ -141,10 +141,10 @@ class DevolucionController extends Controller
                 
             }
 
-            if ($promo_unidad == 'sigCompra') {
-                # code...
-                $promocion =0;
-            }
+            // if ($promo_unidad == 'sigCompra') {
+            //     # code...
+            //     $promocion =0;
+            // }
            
         }
         if ($venta->cumpleDes) {
