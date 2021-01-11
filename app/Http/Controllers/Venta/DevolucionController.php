@@ -156,6 +156,7 @@ class DevolucionController extends Controller
 
                     $diferencia=$cuatro;
             }else{
+                $promocion=300;
                 $cuatro = $cuatro-300;
                 $diferencia=$cuatro;
             }
