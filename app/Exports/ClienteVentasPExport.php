@@ -11,7 +11,7 @@ use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
-
+use DB;
 class ClienteVentasPExport implements FromCollection, WithHeadings, WithTitle
 {
     /**
