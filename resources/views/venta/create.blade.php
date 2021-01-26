@@ -336,20 +336,29 @@
                                         </div>
                                         <div class="field_wrapper"></div>
                                         <div class="row">
-                                            <div class="col-12 col-sm-6 col-md-4 form-group">
+                                            <div class="col-12 col-sm-4 col-md-4 form-group">
 
                                                 <label for="" class="text-uppercase text-muted">Total de sigpesos a usar: </label>
 
                                                 <input type="number" class="form-control" name="sigpesos_usar"
                                                     id="sigpesos_usar" value="0" min="0" step="0.01">
                                             </div>
-                                             <div class="col-12 col-sm-6 col-md-4 form-group">
+                                             <div class="col-12 col-sm-4 col-md-4 form-group">
 
                                                 <label for="" class="text-uppercase text-muted">PAGO COMBINADO</label>
+                                                
 
                                                 <input type="text" class="form-control" name="pago_combinado"
                                                     id="pago_combinado" value="0"readonly="true">
                                             </div>
+                                             <div  class="col-12 col-sm-4 col-md-4 form-group">
+                                            
+                                            <a class="btn btn-success rounded-0" onclick="javascript:sumar();">
+                                                <i class="fa fa-plus"></i>Sumar
+                                            </a>
+                                             </div>
+                                                 
+                                                     
                                         </div>
                                     </div>
 
@@ -724,6 +733,21 @@
     var cantidad = 0;
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));    
+    }
+    function sumar(){
+        
+        // var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
+        if ($('#PagoEfectivo').val() == '') {$('#PagoEfectivo').val(0)}
+            if ($('#PagoTarjeta').val() == '') {$('#PagoTarjeta').val(0)}
+                if ($('#saldo_a_usar').val() == '') {$('#saldo_a_usar').val(0)}
+                    if ($('#sigpesos_usar').val() == '') {$('#sigpesos_usar').val(0)}
+            var $pago_efectivo = parseFloat($('#PagoEfectivo').val());
+             var $pago_tarjeta = parseFloat($('#PagoTarjeta').val());
+             var $pago_saldo = parseFloat($('#saldo_a_usar').val());
+             var $pago_sigpesos = parseFloat($('#sigpesos_usar').val());
+             $('#pago_combinado').val(parseInt($pago_efectivo+$pago_tarjeta+$pago_saldo+$pago_sigpesos)); 
+            // var $total_venta = parseFloat($('#total').val());
+            // var $sigpeso = parseInt($('#sigpesos_usar').val());   
     }
      
     function ShowSelected(){
