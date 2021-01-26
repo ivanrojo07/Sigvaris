@@ -62,11 +62,15 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->PagoSaldo,
 
 
-                    $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->PagoTarjeta:"" :"",
-                    $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->digitos_targeta:"" :"",
+                    // $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->PagoTarjeta:"" :"",
+                    // $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->digitos_targeta:"" :"",
 
-                    $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->PagoTarjeta:"" :"",
-                    $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->digitos_targeta:"" :"",
+                    // $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->PagoTarjeta:"" :"",
+                    // $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->digitos_targeta:"" :"",
+                     strcmp($Venta->banco,"AMEX") === 0 ? $Venta->PagoTarjeta:"",
+                    strcmp($Venta->banco,"AMEX") === 0 ? $Venta->digitos_targeta :"",
+                     strcmp($Venta->banco,"AMEX") === 1 ? $Venta->PagoTarjeta:"",
+                    strcmp($Venta->banco,"AMEX") === 1 ? $Venta->digitos_targeta :"",
 
                     "",
                     $Venta->requiere_factura == 1 ? "SI":"NO",
@@ -86,8 +90,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     DB::table('devoluciones')->where('venta_id','=',$Venta->id)->exists()?"-".DB::table('devoluciones')->where('venta_id','=',$Venta->id)->value('monto'):"",
                      // DB::table('Productos_damage')->find($request->lista[$key]);
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
-                    strcmp($Venta->banco,"AMEX") === 0 ? $Venta->PagoTarjeta:"",
-                    strcmp($Venta->banco,"AMEX") === 0 ? $Venta->digitos_targeta :"",
+                   
 
                 ]);
             });
@@ -133,8 +136,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Devolucion',
             'Muestra',
             'Notas Observaciones',
-            'Prueba Amex',
-            'Dogitos Amex'
+
 
 
         ];
