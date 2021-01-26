@@ -86,6 +86,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     DB::table('devoluciones')->where('venta_id','=',$Venta->id)->exists()?"-".DB::table('devoluciones')->where('venta_id','=',$Venta->id)->value('monto'):"",
                      // DB::table('Productos_damage')->find($request->lista[$key]);
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
+                    strcmp($Venta->banco,"AMEX") === 0 ? $Venta->PagoTarjeta:"",
+                    strcmp($Venta->banco,"AMEX") === 0 ? $Venta->digitos_targeta :"",
 
                 ]);
             });
@@ -130,7 +132,9 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Folio Sigpesos',
             'Devolucion',
             'Muestra',
-            'Notas Observaciones'
+            'Notas Observaciones',
+            'Prueba Amex',
+            'Dogitos Amex'
 
 
         ];
