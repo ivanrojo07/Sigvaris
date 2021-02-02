@@ -56,6 +56,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->id,
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
                     $Venta->productos != null ? $Venta->productos()->pluck('cantidad')->sum():"",
+                    HistorialCambioVenta::where('destinate_id','=',$Venta->id)->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioOri')." - ".HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioNew'):"",
                     $Venta->total,
                     $Venta->PagoEfectivo,
                     $Venta->sigpesos,
@@ -91,8 +92,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                      // DB::table('Productos_damage')->find($request->lista[$key]);
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
                     "",
-                    $Venta->desc_inapam != null ? $Venta->desc_inapam : "0",
-                    HistorialCambioVenta::where('destinate_id','=',$Venta->id)->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioOri')." - ".HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioNew'):""
+                    $Venta->desc_inapam != null ? $Venta->desc_inapam : "0"
                    
 
                 ]);
@@ -112,6 +112,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'NOTA DE REMISION',
             'CIERRE VENTA',
             'PZAS POR PACIENTE',
+            'PrecioOriginal / PrecioNueva',
             'TOTAL VENTA',
             'PAGO EFECTIVO',
             'PAGO SIGPESOS',
@@ -139,8 +140,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Devolucion',
             'Descuento',
             'Notas Observaciones',
-            'INAPAM DESCUENTO',
-            'Precios',
+            'INAPAM DESCUENTO'
+            
 
 
 
