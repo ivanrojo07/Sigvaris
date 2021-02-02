@@ -90,6 +90,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     DB::table('devoluciones')->where('venta_id','=',$Venta->id)->exists()?"-".DB::table('devoluciones')->where('venta_id','=',$Venta->id)->value('monto'):"",
                      // DB::table('Productos_damage')->find($request->lista[$key]);
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
+                    "",
                     $Venta->desc_inapam != null ? $Venta->desc_inapam : "0"
                    
 
