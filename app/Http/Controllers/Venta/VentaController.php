@@ -140,7 +140,7 @@ class VentaController extends Controller
         $auxiliar = (int)$request->sigpesos_usar;
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
 
-      
+     
 
 
 
@@ -175,7 +175,11 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         }
-      
+         if ($request->INAPAM_ == 1) {
+          # code...
+          $venta->desc_inapam = $request->descuento;
+          // dd($venta->desc_inapam);
+            }
        
       
       

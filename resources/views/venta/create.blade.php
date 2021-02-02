@@ -30,6 +30,8 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                     <input type="hidden" name="cumpleDes" id="cumpleDes" value="0">
+                    <input type="hidden" name="INAPAM_" id="INAPAM_" value="0">
+                
                     <div class="row">
                         <div class="col-4 form-group">
                             <label class="control-label">Fitter:</label>
@@ -220,7 +222,7 @@
                                                 El INAPAM no esta cargado 
                                             </div>
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="INAPAM">
+                                                <input type="checkbox" class="form-check-input" name="INAPAM" id="INAPAM" value="0">
                                                 <label class="form-check-label" for="exampleCheck1">INAPAM</label>
                                             </div>
                                        </div>
@@ -902,6 +904,7 @@
                 success: function(inapam){
                     if (inapam=="1") {
                         var opcion = confirm("Se cargar la INAPAM despues ");
+                         $('#INAPAM_').val(1);
                         if (opcion == true) {
                             on();
                         } else {

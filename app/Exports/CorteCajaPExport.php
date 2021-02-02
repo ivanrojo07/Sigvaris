@@ -101,7 +101,7 @@ class CorteCajaPExport implements FromCollection, WithHeadings, WithTitle
 
             'Devolución en efectivo',
             'Cambio fisico',
-            'Muestra',
+            'Descuento',
             'Notas Observaciones'
 
 

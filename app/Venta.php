@@ -34,7 +34,8 @@ class Venta extends Model
         'oficina_id',
         'cumpleDes',
         'PagoSaldo',
-        'descuento_cu'
+        'descuento_cu',
+        'desc_inapam'
     ];
 
     /**
