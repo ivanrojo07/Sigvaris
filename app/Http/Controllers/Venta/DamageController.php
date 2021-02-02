@@ -139,7 +139,7 @@ class DamageController extends Controller
                   $saldo=$request->input("diferenciaPrecios");
                      $saldo+=$saldo_paciente;
              }
-             
+             $sigpesos_paciente=$venta->paciente->sigpesos_a_favor;
                      
         }
         // dd($auxiliar);
@@ -158,7 +158,8 @@ class DamageController extends Controller
                                            'Diferencia'=>$auxiliar,
                                            'SaldoA'=>$saldoA,
                                            'precioOri' =>$request->precioOri,
-                                           'precioNew'=>$request->precioNew
+                                           'precioNew'=>$request->precioNew,
+                                           'sigpesos_a_favor'=>$sigpesos_paciente
                                        ]);
     }
 

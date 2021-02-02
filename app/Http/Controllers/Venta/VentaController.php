@@ -380,7 +380,12 @@ class VentaController extends Controller
                  // dd($sigpesos_paciente);
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
         }
-           
+              if ($request->sigpesos != 0) {
+             $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
+            }
+       
         
         //Actualizar saldo a favor 
         //
@@ -682,43 +687,43 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
-           if ($request->sigpesos_usar>0) {
-                      if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
-             //Sigpesos 
-             foreach ($request->folio as $key => $folio) {
-                    # code...
-                    $Sigpesos = new Sigpesosventa([
-                        'venta_id' => $venta->id,
-                        'monto' => $request->monto[$key],
-                        'folio' => $folio,
-                        'folio_id' => $request->lista[$key]
-                    ]);
+        //    if ($request->sigpesos_usar>0) {
+        //               if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+        //      //Sigpesos 
+        //      foreach ($request->folio as $key => $folio) {
+        //             # code...
+        //             $Sigpesos = new Sigpesosventa([
+        //                 'venta_id' => $venta->id,
+        //                 'monto' => $request->monto[$key],
+        //                 'folio' => $folio,
+        //                 'folio_id' => $request->lista[$key]
+        //             ]);
 
-                $monto_folio = DB::table('folios')->find($request->lista[$key]);
-                $sigpesosventa = DB::table('sigpesosventa')->where('folio',$folio)->value('folio');
-                // dd($sigpesosventa);
-                if ($monto_folio->monto == $request->monto[$key]->get() ) {
+        //         $monto_folio = DB::table('folios')->find($request->lista[$key]);
+        //         $sigpesosventa = DB::table('sigpesosventa')->where('folio',$folio)->value('folio');
+        //         // dd($sigpesosventa);
+        //         if ($monto_folio->monto == $request->monto[$key]->get() ) {
                      
 
-                     if ($sigpesosventa == $folio) {
-                         return redirect()
-                            ->back()
-                            ->withErrors(['El cupon ya ha sido ocupado anteriormente'])
-                            ->withInput($request->input());
-                }
-                     else{
-                        $Sigpesos->save();
-                     }
-                }else{
-                    return redirect()
-                ->back()
-                ->withErrors(['El monto del cupon esta mal'])
-                ->withInput($request->input());
-                }
+        //              if ($sigpesosventa == $folio) {
+        //                  return redirect()
+        //                     ->back()
+        //                     ->withErrors(['El cupon ya ha sido ocupado anteriormente'])
+        //                     ->withInput($request->input());
+        //         }
+        //              else{
+        //                 $Sigpesos->save();
+        //              }
+        //         }else{
+        //             return redirect()
+        //         ->back()
+        //         ->withErrors(['El monto del cupon esta mal'])
+        //         ->withInput($request->input());
+        //         }
                     
-                     }
-        }
-                }
+        //              }
+        // }
+        //         }
        
 
         // if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {

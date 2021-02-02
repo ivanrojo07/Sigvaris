@@ -698,7 +698,7 @@
             </div>
             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                 <label for=""> Monto</label>
-                <input type="text" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" >
+                <input type="text" class="form-control inputPesos" name="monto[]">
             </div>
            
         </div>
