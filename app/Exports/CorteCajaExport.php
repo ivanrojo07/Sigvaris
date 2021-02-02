@@ -92,7 +92,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->promocion_id != null ? Descuento::where("id",$Venta->descuento_id)->value('nombre') : "",
                     "",
                     $Venta->desc_inapam != null ? $Venta->desc_inapam : "0",
-                    HistorialCambioVenta::where('destinate_id','=',$Venta->id)->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioOri')." - "HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioNew'):""
+                    HistorialCambioVenta::where('destinate_id','=',$Venta->id)->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioOri')." - ".HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('precioNew'):""
                    
 
                 ]);
