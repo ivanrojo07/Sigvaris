@@ -70,6 +70,7 @@ class CambioFisicoController extends Controller
                      $saldo+=$saldo_paciente;
              }            
         }
+         $sigpesos_paciente=$venta->paciente->sigpesos_a_favor;
 
         return view('venta.cambios_fisicos.concluir',['producto'=>$productoQueSeraEntregado,
                                            'productoDebuelto'=>$producto,
@@ -84,7 +85,8 @@ class CambioFisicoController extends Controller
                                            'Diferencia'=>$auxiliar,
                                            'saldoA'=>$saldoA,
                                            'precioOri' =>$request->precioOri,
-                                           'precioNew'=>$request->precioNew
+                                           'precioNew'=>$request->precioNew,
+                                           'sigpesos_a_favor'=>$sigpesos_paciente
                                        ]);
 
         //$storeCambioFisicoService = new StoreCambioFisicoService($request, $venta);

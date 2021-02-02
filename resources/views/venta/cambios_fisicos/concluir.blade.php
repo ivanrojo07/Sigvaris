@@ -201,17 +201,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                                <label for=""> Folio</label>
-                                                <input type="number" class="form-control folio" name="folio[]" required="" >
-                                            </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
-                                                <label for=""> Monto</label>
-                                                <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()">
-                                            </div>
-                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                                 <label for=""> Lista Folio</label>
-                                                <select   name="lista[]" class="form-control lista" required>
+                                                <select  id="lista" name="lista[]" class="form-control lista" required>
                                                     <option value="">Seleccionar</option>
                                                     @foreach ($Folios as $Folio1)
                                                     <option value="{{$Folio1->id}}">
@@ -220,8 +212,15 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-
-                                        </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for=""> Folio</label>
+                                                <input type="number" class="form-control folio" name="folio[]" required=""  id="folio" readonly="">
+                                            </div>
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group" >
+                                                <label for=""> Monto</label>
+                                                <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" id="monto" readonly="">
+                                            </div>
+                                           
                                         <div class="field_wrapper"></div>
                                         <div class="row">
                                             <div class="col-12 col-sm-6 col-md-4 form-group">
@@ -231,13 +230,21 @@
                                                 <input type="number" class="form-control" name="sigpesos_usar"
                                                     id="sigpesos_usar" value="0" min="0" step="0.01">
                                             </div>
-                                            <div class="col-12 col-sm-6 col-md-4 form-group">
+                                              <div class="col-12 col-sm-4 col-md-4 form-group">
 
                                                 <label for="" class="text-uppercase text-muted">PAGO COMBINADO</label>
+                                                
 
                                                 <input type="text" class="form-control" name="pago_combinado"
                                                     id="pago_combinado" value="0"readonly="true">
                                             </div>
+                                             <div  class="col-12 col-sm-4 col-md-4 form-group">
+                                            
+                                            <a class="btn btn-success rounded-0" onclick="javascript:sumar();">
+                                                <i class="fa fa-plus"></i>Sumar
+                                            </a>
+                                             </div>
+                                             
                                         </div>
                                     </div>
                                     <hr>
@@ -278,6 +285,14 @@
                                                 value="{{$saldoA}}" min="0" step="0.01" readonly="">
                                         </div>
                                         {{-- INPUT SIGPESOS A USAR --}}
+                                        {{-- INPUT SIGPESOS A FAVOR --}}
+                                        <div class="col-12 col-sm-6 col-md-4 mt-2">
+
+                                            <label for="" class="text-uppercase text-muted">Sigpesos a favor: </label>
+
+                                            <input type="number" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
+                                                value="{{$sigpesos_a_favor}}" min="0" step="0.01" readonly="">
+                                        </div>
 
                                         {{-- INPUT SUBTOTAL --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
@@ -500,6 +515,21 @@
         }
 
     }
+    function sumar(){
+        
+        // var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
+        if ($('#PagoEfectivo').val() == '') {$('#PagoEfectivo').val(0)}
+            if ($('#PagoTarjeta').val() == '') {$('#PagoTarjeta').val(0)}
+                if ($('#saldo_a_usar').val() == '') {$('#saldo_a_usar').val(0)}
+                    if ($('#sigpesos_usar').val() == '') {$('#sigpesos_usar').val(0)}
+            var $pago_efectivo = parseFloat($('#PagoEfectivo').val());
+             var $pago_tarjeta = parseFloat($('#PagoTarjeta').val());
+             var $pago_saldo = parseFloat($('#saldo_a_usar').val());
+             var $pago_sigpesos = parseFloat($('#sigpesos_usar').val());
+             $('#pago_combinado').val(parseInt($pago_efectivo+$pago_tarjeta+$pago_saldo+$pago_sigpesos)); 
+            // var $total_venta = parseFloat($('#total').val());
+            // var $sigpeso = parseInt($('#sigpesos_usar').val());   
+    }
 
     function cienporciento(){
         $('#sigpesos_usar').val(FormValidator.faltaPorcentaje());
@@ -677,6 +707,117 @@
         }
       
     }
+</script>
+<script type="text/javascript">
+
+
+
+        function ultimoFolio(){
+
+        }
+
+
+  $(document).ready(function() {
+       $("#lista").change(function() {
+            var folio_id = $(this).val();
+            var pacienteId=$('#paciente_id').val();
+
+            
+
+            $.ajax({
+            url:"{{ url('/folios') }}/"+pacienteId+"/sigpesos",
+            type:'GET',
+            dataType:'json',
+            success: function(res34){   
+             
+              console.log(res34.folio);
+              $('#folio').val(res34.folio);
+              $('#monto').val(res34.monto);
+              if (res34.descripcion != null && res34.folio != null ) {alert(res34.descripcion)}
+              // var folios_old =  res34.pac;
+
+               for(var i=0;i<res34.pac.length;i++){
+
+                    alert("Folio de: "+res34.pac[i]["monto"]+" con folio"+res34.pac[i]["folio"]);
+                            }
+              console.log(res34.pac);
+              console.log(res34.monto);
+              console.log("Folio de paciente");
+                       if (res34.folio==null) {
+                        
+                         // alert($(this).val());
+                         console.log('Folio que se envia::',folio_id);
+
+                 $.ajax({
+            url:"{{ url('/obtener_folios') }}/"+folio_id,
+            type:'GET',
+            dataType:'json',
+            success: function(res34){   
+             
+              console.log(res34.folio);
+              $('#folio').val(res34.folio);
+              $('#monto').val(res34.monto);
+              console.log(res34.monto);
+               console.log("Folio si es null");
+            }
+
+                 });
+            }
+
+
+
+            },error: function(e){
+            
+           // alert($(this).val());
+           console.log('Folio que se envia::',folio_id);
+
+            $.ajax({
+            url:"{{ url('/obtener_folios') }}/"+folio_id,
+            type:'GET',
+            dataType:'json',
+            success: function(res34){   
+             
+              console.log(res34.folio);
+              $('#folio').val(res34.folio);
+              $('#monto').val(res34.monto);
+              console.log(res34.monto);
+               console.log("Folio ultimo");
+            }
+
+                 });
+            }
+
+        });
+
+
+
+        //    var folio_id = $(this).val();
+        //    // alert($(this).val());
+        //    console.log('Folio que se envia::',folio_id);
+
+        //     $.ajax({
+        //     url:"{{ url('/obtener_folios') }}/"+folio_id,
+        //     type:'GET',
+        //     dataType:'json',
+        //     success: function(res34){   
+             
+        //       console.log(res34.folio);
+        //       $('#folio').val(res34.folio);
+        //       $('#monto').val(res34.monto);
+        //       console.log(res34.monto);
+        //     }
+
+        // });
+
+
+           
+
+       });
+
+
+
+});
+
 </script>
 <script>
     $(document).ready(function () {

@@ -139,9 +139,10 @@ class DamageController extends Controller
                   $saldo=$request->input("diferenciaPrecios");
                      $saldo+=$saldo_paciente;
              }
-             $sigpesos_paciente=$venta->paciente->sigpesos_a_favor;
+             
                      
         }
+        $sigpesos_paciente=$venta->paciente->sigpesos_a_favor;
         // dd($auxiliar);
         return view('venta.damage.create',['producto'=>$productoQueSeraEntregado,
                                            'productoDebuelto'=>$producto,
