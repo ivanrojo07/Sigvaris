@@ -188,8 +188,7 @@
                                     </div>
                                     <hr>
                                     {{--Sigpesos--}}
-
-                                    <div  id="PagoSigpesos" style="display: none;">
+                                       <div  id="PagoSigpesos" style="display: none;">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="d-flex bd-highlight">
@@ -221,6 +220,8 @@
                                                 <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" id="monto" readonly="">
                                             </div>
                                            
+
+                                        </div>
                                         <div class="field_wrapper"></div>
                                         <div class="row">
                                             <div class="col-12 col-sm-6 col-md-4 form-group">
@@ -230,10 +231,9 @@
                                                 <input type="number" class="form-control" name="sigpesos_usar"
                                                     id="sigpesos_usar" value="0" min="0" step="0.01">
                                             </div>
-                                              <div class="col-12 col-sm-4 col-md-4 form-group">
+                                            <div class="col-12 col-sm-6 col-md-4 form-group">
 
                                                 <label for="" class="text-uppercase text-muted">PAGO COMBINADO</label>
-                                                
 
                                                 <input type="text" class="form-control" name="pago_combinado"
                                                     id="pago_combinado" value="0"readonly="true">
@@ -244,7 +244,6 @@
                                                 <i class="fa fa-plus"></i>Sumar
                                             </a>
                                              </div>
-                                             
                                         </div>
                                     </div>
                                     <hr>
