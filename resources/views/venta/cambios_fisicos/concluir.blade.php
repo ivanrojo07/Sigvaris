@@ -32,6 +32,8 @@
                     <input type="hidden" name="productoDevuelto" id="productoDevuelto" value="{{$productoDebuelto->id}}">
                     <input type="hidden" name="ObserDevuelto" id="ObserDevuelto" value="{{$ObserDevuelto}}">
                     <input type="hidden" name="VentaAnterior" id="VentaAnterior" value="{{$VentaA}}">
+                    <input type="hidden" name="precioOri" id="precioOri" value="{{$precioOri}}">
+                      <input type="hidden" name="precioNew" id="precioNew" value="{{$precioNew}}">
 
                     <input type="hidden" class="form-control" name="montonegativo"
                                                 id="montonegativo" value="0" min="1" step="0.01" value="{{$saldo-$producto->precio_publico_iva}}

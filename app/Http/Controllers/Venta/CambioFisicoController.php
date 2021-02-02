@@ -82,7 +82,9 @@ class CambioFisicoController extends Controller
                                            'ObserDevuelto'=>$ObserDevuelto,
                                            'VentaA'=>$venta->id,
                                            'Diferencia'=>$auxiliar,
-                                           'saldoA'=>$saldoA
+                                           'saldoA'=>$saldoA,
+                                           'precioOri' =>$request->precioOri,
+                                           'precioNew'=>$request->precioNew
                                        ]);
 
         //$storeCambioFisicoService = new StoreCambioFisicoService($request, $venta);

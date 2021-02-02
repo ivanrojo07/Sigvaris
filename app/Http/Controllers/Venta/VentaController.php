@@ -746,7 +746,9 @@ class VentaController extends Controller
                 'observaciones' => '',
                 'destinate_id'=>$venta->id,
                 'producto_devuelto_id' => $request->productoDevuelto,
-                'producto_entregado_id' => $productos[0]->id
+                'producto_entregado_id' => $productos[0]->id,
+                'precioOri'=>$request->precioOri,
+                'precioNew' =>$request->precioNew
             )
         );
 
@@ -954,7 +956,9 @@ class VentaController extends Controller
             'destinate_id'=>$venta->id,
             'producto_entregado_id' =>  $productos[0]->id,
             'producto_devuelto_id' => $request->productoDevuelto,
-            'observaciones' => $request->observacionesDevuelto
+            'observaciones' => $request->observacionesDevuelto,
+            'precioOri'=>$request->precioOri,
+            'precioNew' =>$request->precioNew
             )
         );
 

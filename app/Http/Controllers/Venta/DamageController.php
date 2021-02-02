@@ -40,6 +40,7 @@ class DamageController extends Controller
     }
     public function Devolucion_Damage(Request $request)
     {
+            // dd($request);
         /*
         $venta = Venta::find($request->id_venta);
         $producto = Producto::where("sku", $request->input("sku"))->first();
@@ -155,7 +156,9 @@ class DamageController extends Controller
                                            'VentaA'=>$venta->id,
                                            'Nuevo_pago' =>$Nuevo_pago,
                                            'Diferencia'=>$auxiliar,
-                                           'SaldoA'=>$saldoA
+                                           'SaldoA'=>$saldoA,
+                                           'precioOri' =>$request->precioOri,
+                                           'precioNew'=>$request->precioNew
                                        ]);
     }
 
