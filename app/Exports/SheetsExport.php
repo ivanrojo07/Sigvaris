@@ -23,6 +23,7 @@ class SheetsExport implements  WithMultipleSheets
             'Ventas Totales' => new TotalVentasExport(),
             'Cientes ' => new ClienteVentasExport(),
             'Devoluciones ' => new DevolucionPExport(),
+            'Devoluciones Sigpesos ' => new DevolucionSExport(),
         ];
 
         return $sheets;
