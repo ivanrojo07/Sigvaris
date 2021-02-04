@@ -27,7 +27,7 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
 
         
 
-        return HistorialCambioVenta::where('created_at', '>=',$now->format('Y-m-d h:i:s'))->where('tipo_cambio','==','DEVOLUCION')
+        return HistorialCambioVenta::where('tipo_cambio','==','DEVOLUCION')
             ->get()
             //->pluck('productos')
              ->flatten()
