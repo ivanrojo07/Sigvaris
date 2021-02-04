@@ -16,7 +16,7 @@
                 <div class="col-4">
                     <h4>Punto de venta</h4>
                 </div>
-                <div class="col-4 text-center">
+                <div class="col-4 text-center">     
                     <a href="{{ route('ventas.index') }}" class="btn btn-primary">
                         <i class="fa fa-bars"></i><strong>Lista de ventas</strong>
                     </a>
