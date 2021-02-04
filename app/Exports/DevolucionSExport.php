@@ -23,7 +23,7 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
    
     public function collection()
     {
-        $now = Carbon::now('America/Mexico_City');
+        $now = Carbon::today('America/Mexico_City');
 
         
 
