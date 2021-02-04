@@ -6,6 +6,7 @@ use App\Exports\CorteCajaExport;
 use App\Exports\TotalVentasExport;
 use App\Exports\ClienteVentasExport;
 use App\Exports\DevolucionPExport;
+use App\Exports\DevolucionSExport;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
