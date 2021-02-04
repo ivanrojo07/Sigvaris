@@ -27,21 +27,21 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
 
         
 
-        return HistorialCambioVenta::where('tipo_cambio','==','DEVOLUCION')
+        return HistorialCambioVenta::where('tipo_cambio','DEVOLUCIÓN')
             ->get()
             //->pluck('productos')
              ->flatten()
             ->map(
                 
-                function ($Devolucion) {
+                function ($HistorialCambioVenta) {
 
                   // $Devoluciones = Devolucion::where('created_at','>=',$now->format('Y-m-d'))->get();
                   // dd($Devoluciones->id);
 
                 return collect([
-                    $Devolucion->venta_id,
+                    $HistorialCambioVenta->venta_id,
                     date('Y-m-d h:i:s'),
-                    $Devolucion->observaciones,                 
+                    $HistorialCambioVenta->observaciones,                 
                     
 
                 ]);
