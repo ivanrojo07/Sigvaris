@@ -47,6 +47,7 @@ class DevolucionController extends Controller
             return view('devolucion.create', compact('venta','MONTO'));
         }else{
             $venta->paciente->saldo_a_favor += $request->input("MONTO");
+            
             $venta->paciente->save();
             return redirect()->route('ventas.index');
         }
