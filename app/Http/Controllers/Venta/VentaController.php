@@ -687,61 +687,100 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
-        //    if ($request->sigpesos_usar>0) {
-        //               if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
-        //      //Sigpesos 
-        //      foreach ($request->folio as $key => $folio) {
-        //             # code...
-        //             $Sigpesos = new Sigpesosventa([
-        //                 'venta_id' => $venta->id,
-        //                 'monto' => $request->monto[$key],
-        //                 'folio' => $folio,
-        //                 'folio_id' => $request->lista[$key]
-        //             ]);
-
-        //         $monto_folio = DB::table('folios')->find($request->lista[$key]);
-        //         $sigpesosventa = DB::table('sigpesosventa')->where('folio',$folio)->value('folio');
-        //         // dd($sigpesosventa);
-        //         if ($monto_folio->monto == $request->monto[$key]->get() ) {
-                     
-
-        //              if ($sigpesosventa == $folio) {
-        //                  return redirect()
-        //                     ->back()
-        //                     ->withErrors(['El cupon ya ha sido ocupado anteriormente'])
-        //                     ->withInput($request->input());
-        //         }
-        //              else{
-        //                 $Sigpesos->save();
-        //              }
-        //         }else{
-        //             return redirect()
-        //         ->back()
-        //         ->withErrors(['El monto del cupon esta mal'])
-        //         ->withInput($request->input());
-        //         }
+        
+           if ($request->sigpesos_usar>0) {
+                if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+             //Sigpesos 
+             foreach ($request->folio as $key => $folio) {
+                    # code...
                     
-        //              }
-        // }
-        //         }
-       
+            $new_fo = DB::table('sigpesosventa')->where('folio',$folio)->exists();
+                    $existe = DB::table('sigpesosventa')->where('folio',$folio)->exists();
+                    if ($existe = true) {
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->where('usado','=',0)->increment('usado');
+                        // dd("Actualizado");
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->update(['venta_id' => $venta->id]);
+                        // DB::table('sigpesosventa')->where('folio','=', $folio)->update(['tipo' =>'pago']);
+                       
+                    }
+                    // dd($new_fo);
+                    if($new_fo == false ){
+                        $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => $request->monto[$key],
+                        'folio' => $folio,
+                        'folio_id' => $request->lista[$key],
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'pago',
+                        'usado'=>1
+                         ]);
+                        
+                        $Sigpesos->save();
+                       
+                        
+                    }
+                    
+                        # code...
+                    
+                           
+                      }
 
-        // if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
-        //     # code...
-        //     if ($request->input('sigpesos_usar')>0) {
-        //         foreach ($request->folio as $key => $folio) {
-        //             # code...
-        //             $Sigpesos = new Sigpesosventa([
-        //                 'venta_id' => $venta->id,
-        //                 'monto' => $request->monto[$key],
-        //                 'folio' => $folio,
-        //                 'folio_id' => $request->lista[$key]
-        //             ]);
-        //             $Sigpesos->save();
-        //         }
-        //     }
-        // }
+                    }    
+                }
+                  if ($request->descuento_id == 41) {
+            $folio = Folio::find(1);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 1000,
+                        'folio' => $ultimo+1,
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'esencial',
+                        'usado'=>0
 
+                    ]);
+                $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+        }if ($request->descuento_id == 30) {
+              $folio = Folio::find(6);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 300,
+                        'folio' => $ultimo+1,
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'cupon producto negado',
+                        'usado'=>0
+
+                    ]);
+                $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+        }
+              if ($request->sigpesos != 0) {
+             $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
+            }
 
         $HistorialCambioVenta = new HistorialCambioVenta(
             array(
@@ -942,7 +981,99 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
-        
+          if ($request->sigpesos_usar>0) {
+                if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+             //Sigpesos 
+             foreach ($request->folio as $key => $folio) {
+                    # code...
+                    
+            $new_fo = DB::table('sigpesosventa')->where('folio',$folio)->exists();
+                    $existe = DB::table('sigpesosventa')->where('folio',$folio)->exists();
+                    if ($existe = true) {
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->where('usado','=',0)->increment('usado');
+                        // dd("Actualizado");
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->update(['venta_id' => $venta->id]);
+                        // DB::table('sigpesosventa')->where('folio','=', $folio)->update(['tipo' =>'pago']);
+                       
+                    }
+                    // dd($new_fo);
+                    if($new_fo == false ){
+                        $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => $request->monto[$key],
+                        'folio' => $folio,
+                        'folio_id' => $request->lista[$key],
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'pago',
+                        'usado'=>1
+                         ]);
+                        
+                        $Sigpesos->save();
+                       
+                        
+                    }
+                    
+                        # code...
+                    
+                           
+                      }
+
+                    }    
+                }
+                  if ($request->descuento_id == 41) {
+            $folio = Folio::find(1);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 1000,
+                        'folio' => $ultimo+1,
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'esencial',
+                        'usado'=>0
+
+                    ]);
+                $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+        }if ($request->descuento_id == 30) {
+              $folio = Folio::find(6);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 300,
+                        'folio' => $ultimo+1,
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'cupon producto negado',
+                        'usado'=>0
+
+                    ]);
+                $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+        }
+              if ($request->sigpesos != 0) {
+             $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
+            }
         // HistorialCambioVenta::create([
         //     'tipo_cambio' => 'CAMBIO PRODUCTO',
         //     'responsable_id' => Auth::user()->id,
