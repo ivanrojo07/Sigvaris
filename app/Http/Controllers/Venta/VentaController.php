@@ -898,6 +898,9 @@ class VentaController extends Controller
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
 
+        $auxiliar = (int)$request->sigpesos_usar;
+         $venta->sigpesos = $auxiliar;
+
         if ($request->facturar == "1") {
             $venta->update(['requiere_factura' => 1]);
             DatoFiscal::updateOrCreate(
@@ -1084,8 +1087,7 @@ class VentaController extends Controller
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
 
             }
-             $auxiliar = (int)$request->sigpesos_usar;
-         $venta->sigpesos = $auxiliar;
+
         // HistorialCambioVenta::create([
         //     'tipo_cambio' => 'CAMBIO PRODUCTO',
         //     'responsable_id' => Auth::user()->id,
