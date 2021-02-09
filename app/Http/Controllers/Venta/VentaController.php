@@ -848,6 +848,8 @@ class VentaController extends Controller
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
         $venta->oficina_id = session()->get('oficina');
+         $auxiliar = (int)$request->sigpesos_usar;
+         $venta->sigpesos = $auxiliar;
             $venta_cu = Venta::where("id",$request->VentaAnterior)->first();
             if ($venta_cu->descuento_cu == null && $venta_cu->cumpleDes ==1) {
                         $venta_cu->update(['descuento_cu' => 1]);
