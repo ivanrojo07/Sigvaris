@@ -900,8 +900,8 @@ class VentaController extends Controller
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
 
-        $auxiliar = (int)$request->sigpesos_usar;
-         $venta->sigpesos = $auxiliar;
+        // $auxiliar = (int)$request->sigpesos_usar;
+        //  $venta->sigpesos = $auxiliar;
 
         if ($request->facturar == "1") {
             $venta->update(['requiere_factura' => 1]);
