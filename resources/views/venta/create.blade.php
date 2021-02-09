@@ -363,8 +363,33 @@
                                                      
                                         </div>
                                     </div>
+                                        <hr>
+                                        {{--Sigvaris card---}}
+                                        
+                                        <div class="row">
+                                             <label for="" class="text-uppercase text-muted">Sigvaris card</label>
+                                             <div class="col-4 form-group">
+                                               
+                                                <input type="text" class="form-control" name="SigvarisCard">
+                                                
 
-                                      
+                                            </div>
+                                            <div class="col-4 form-group">
+                                               
+                                                <select  id="SigvarisCard" name="SigvarisCard" class="form-control lista" required>
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="Blue">Blue</option>
+                                                    <option value="Gold">Gold</option>
+                                                    <option value="Black">Black</option>
+                                                    <option value="Platinum">Platinum</option>
+                                                  
+                                                </select> 
+                                            </div>
+
+                                        </div>
+                                           
+                                           
+                                            
 
 
                                     <hr>
@@ -404,7 +429,7 @@
                                             <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
                                                 value="0" min="0" step="0.01" readonly="">
                                         </div>
-                                           {{-- INPUT SALDO A FAVOR --}}
+                                           {{-- INPUT SIGPESOS A FAVOR --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
 
                                             <label for="" class="text-uppercase text-muted">Sigpesos a favor: </label>
