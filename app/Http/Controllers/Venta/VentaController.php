@@ -355,7 +355,7 @@ class VentaController extends Controller
                  $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
                  // dd($sigpesos_paciente);
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
-        }if ($request->descuento_id == 30) {
+        }if ($request->descuento_id == 41) {
               $folio = Folio::find(6);
         // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
         // 
