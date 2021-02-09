@@ -624,7 +624,8 @@ class VentaController extends Controller
             
         // $Paciente->update(['saldo_a_favor' => $saldo_paciente]); 
         $venta->oficina_id = session()->get('oficina');
-
+         $auxiliar = (int)$request->sigpesos_usar;
+         $venta->sigpesos = $auxiliar;
         // GUARDAMOS EL FITTER DE LA VENTA
         if ($request->empleado_id) {
             $venta->empleado_id = $request->empleado_id;
@@ -1083,6 +1084,8 @@ class VentaController extends Controller
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
 
             }
+             $auxiliar = (int)$request->sigpesos_usar;
+         $venta->sigpesos = $auxiliar;
         // HistorialCambioVenta::create([
         //     'tipo_cambio' => 'CAMBIO PRODUCTO',
         //     'responsable_id' => Auth::user()->id,
