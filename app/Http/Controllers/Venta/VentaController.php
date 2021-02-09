@@ -687,7 +687,7 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
-        
+
            if ($request->sigpesos_usar>0) {
                 if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
              //Sigpesos 
@@ -821,7 +821,16 @@ class VentaController extends Controller
         }
 
         $HistorialCambioVenta->save();
-        
+         if ($Paciente->sigpesos_a_favor>0) {
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor-$request->sigpesos_usar;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
+            }else if($request->sigpesos>0){
+
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+            }
         // $Paciente=Paciente::where("id",$request->paciente_id)->first();
         // $Paciente->update(['saldo_a_favor' => $saldo_paciente]);
 
@@ -1113,6 +1122,16 @@ class VentaController extends Controller
         }
 
             $HistorialCambioVenta->save();
+             if ($Paciente->sigpesos_a_favor>0) {
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor-$request->sigpesos_usar;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
+            }else if($request->sigpesos>0){
+
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+            }
        
 
         // REDIRIGIR A LAS VENTAS REALIZADAS
