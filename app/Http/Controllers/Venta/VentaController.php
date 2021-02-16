@@ -363,9 +363,9 @@ class VentaController extends Controller
 
                     ]);
                 $Sigpesos->save();
-                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
                  // dd($sigpesos_paciente);
-                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+                // $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
         }if ($request->descuento_id == 30) {
               $folio = Folio::find(6);
         // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
@@ -387,16 +387,16 @@ class VentaController extends Controller
 
                     ]);
                 $Sigpesos->save();
-                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
                  // dd($sigpesos_paciente);
-                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+                // $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
         }
               if ($request->sigpesos != 0) {
              $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
 
             }
-       
+            
         
         //Actualizar saldo a favor 
         //
