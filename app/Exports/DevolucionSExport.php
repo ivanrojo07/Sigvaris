@@ -59,6 +59,6 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
     }
     public function title(): string
     {
-        return 'Devoluciones sigpesos';
+        return 'Devoluciones saldoafavor';
     }
 }

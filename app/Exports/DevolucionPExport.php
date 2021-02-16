@@ -60,6 +60,6 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
     }
     public function title(): string
     {
-        return 'Devoluciones';
+        return 'Devoluciones deposito';
     }
 }
