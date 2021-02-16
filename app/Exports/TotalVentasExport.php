@@ -28,7 +28,7 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
         $Dev = $Devoluciones->sum('monto')*-1;
         $TotalVentas=$Ventas->count();
         $VentasIVA= $Ventas->sum('total')+$Dev;
-        $VentasSIVA=($VentasIVA*0.16);
+        $VentasSIVA=($VentasIVA-($VentasIVA*0.16));
         $auxNu=[];
         $auxRe=[];
         $NumDoc=[];
