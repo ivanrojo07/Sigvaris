@@ -40,7 +40,7 @@ class DevolucionController extends Controller
      */
     public function store(Request $request, Venta $venta)
     {   
-        dd($request);
+        // dd($request);
         $realizarDevolucionService = new RealizarDevolucionService($request, $venta);
         if ($request->input("tipo_cambio")==2) {
             $MONTO=$request->input("MONTO");
