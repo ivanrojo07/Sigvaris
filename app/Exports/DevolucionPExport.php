@@ -54,7 +54,8 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
             'Folio',
             'Fecha de compra',
             'Paciente',
-            'monto'
+            'Sigpesos',
+            'Monto'
 
         ];
     }
