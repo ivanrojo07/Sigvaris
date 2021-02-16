@@ -40,13 +40,14 @@ class DevolucionController extends Controller
      */
     public function store(Request $request, Venta $venta)
     {   
-        // dd($request->MONTO);
+        // dd($request->input("tipo_cambio"));
         $realizarDevolucionService = new RealizarDevolucionService($request, $venta);
         if ($request->input("tipo_cambio")==2) {
             $MONTO=$request->input("MONTO");
             return view('devolucion.create', compact('venta','MONTO'));
         }else{
             $venta->paciente->saldo_a_favor += $request->input("MONTO");
+            
             
             $venta->paciente->save();
             return redirect()->route('ventas.index');

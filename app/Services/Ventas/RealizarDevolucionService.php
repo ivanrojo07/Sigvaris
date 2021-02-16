@@ -19,6 +19,7 @@ class RealizarDevolucionService
     {
         $this->setVenta($venta);
         $this->devolucion = $request->MONTO;
+        $this->tipo = $request->input("tipo_cambio");
         $this->setProducto($request);
         $this->anadirProductoAStock();
         $this->eliminarProductoDeLaVenta();
@@ -40,10 +41,12 @@ class RealizarDevolucionService
     }
 
     public function anadirHistorialCambio(Venta $venta)
-    {
+    {   
+        // dd($this->tipo);
         if ($venta->promocion_id) {
-
-              
+            if ($this->tipo==1) {
+                
+            
              $HistorialCambioVenta = new HistorialCambioVenta(
                 array(
                 'tipo_cambio' => 'DEVOLUCIÓN',
@@ -51,9 +54,24 @@ class RealizarDevolucionService
                 'venta_id' => $this->venta->id,
                 'producto_entregado_id' => null,
                 'producto_devuelto_id' => $this->producto->id,
-                'observaciones'=> "Monto devuelto: ". $this->devolucion
+                'observaciones'=> "Monto devuelto: ". $this->devolucion,
+                'sigpesos' =>$this->tipo
                                 )
                          );
+                }else{
+                    $HistorialCambioVenta = new HistorialCambioVenta(
+                array(
+                'tipo_cambio' => 'DEVOLUCIÓN',
+                'responsable_id' => Auth::user()->id,
+                'venta_id' => $this->venta->id,
+                'producto_entregado_id' => null,
+                'producto_devuelto_id' => $this->producto->id,
+                'observaciones'=> "Monto devuelto: ". $this->devolucion,
+                'sigpesos' =>$this->tipo
+                                )
+                         );
+                }
+
              }else{
              $HistorialCambioVenta = new HistorialCambioVenta(
                 array(
@@ -62,7 +80,8 @@ class RealizarDevolucionService
                 'venta_id' => $this->venta->id,
                 'producto_entregado_id' => null,
                 'producto_devuelto_id' => $this->producto->id,
-                'observaciones'=> "Monto devuelto: ". $this->devolucion
+                'observaciones'=> "Monto devuelto: ". $this->devolucion,
+                'sigpesos' =>$this->tipo
                                 )
                          );
                  }
