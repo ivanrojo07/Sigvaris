@@ -370,7 +370,7 @@
                                              <label for="" class="text-uppercase text-muted">Sigvaris card</label>
                                              <div class="col-4 form-group">
                                                
-                                                <input type="text" class="form-control" name="SigvarisCard">
+                                                <input type="text" class="form-control" name="SigvarisCardFolio" id="SigvarisCardFolio">
                                                 
 
                                             </div>

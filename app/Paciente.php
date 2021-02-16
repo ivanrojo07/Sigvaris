@@ -109,6 +109,9 @@ class Paciente extends Model
 
         return $total_productos;
     }
+     public function sigvariscards(){
+            return $this->hasMany('App\sigvariscard');
+        }
 
     /**
      * Scope methos

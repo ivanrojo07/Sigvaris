@@ -11,6 +11,7 @@ use App\Promocion;
 use App\Doctor;
 use App\Empleado;
 use App\Crm;
+use App\sigvariscard;
 use App\DatoFiscal;
 use App\Folio;
 use App\Banco;
@@ -125,6 +126,7 @@ class VentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         // dd($request);
@@ -262,6 +264,14 @@ class VentaController extends Controller
           );
           $Factura->save();  
         }
+        $sigvariscard = new sigvariscard(
+            array(
+                'paciente_id'=> $request->paciente_id,
+                'folio'=>$request->SigvarisCardFolio,
+                'tipo'=>$request->SigvarisCard
+            )
+        );
+        $sigvariscard->save();
 
             
         $CRM = new Crm(
@@ -290,6 +300,7 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
+
 
              if ($request->sigpesos_usar>0) {
                 if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
