@@ -35,7 +35,11 @@ class Venta extends Model
         'cumpleDes',
         'PagoSaldo',
         'descuento_cu',
-        'desc_inapam'
+        'desc_inapam',
+        'num_transferencia',
+        'folio_transferencia',
+        'num_déposito',
+        'folio_deposito'
     ];
 
     /**

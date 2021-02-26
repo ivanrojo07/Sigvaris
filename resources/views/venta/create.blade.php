@@ -240,6 +240,7 @@
                                                 <option value="3">Combinado</option>
                                                 <option value="4">Sigpesos</option>
                                                 <option value="5">Saldo a favor</option>
+                                                <option value="6">Deposito Transferencia</option>
                                             </select>
                                         </div>
                                         {{-- INPUT tarjeta --}}
@@ -296,6 +297,32 @@
                                             <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
                                                 <label for=""> SALDO A FAVOR A USAR</label>
                                                 <input type="number" class="form-control" name="saldo_a_usar" id="saldo_a_usar" required="" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    {{--Deposito--}}
+
+                                    <div  id="deposito" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for="">Deposito</label>
+                                                <input type="number" class="form-control" name="deposito_total" id="deposito_total" required="" >
+                                                <label for="">Folio Deposito</label>
+                                                <input type="number" class="form-control" name="deposito_folio" id="deposito_folio" required="" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    {{--transferencia--}}
+
+                                    <div  id="transferencia" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 form-group">
+                                                <label for="">transferencia</label>
+                                                <input type="number" class="form-control" name="transferencia_total" id="transferencia_total" required="" >
+                                                <label for="">Folio transferencia</label>
+                                                <input type="number" class="form-control" name="transferencia_folio" id="transferencia_folio" required="" >
                                             </div>
                                         </div>
                                     </div>
@@ -768,11 +795,16 @@
             if ($('#PagoTarjeta').val() == '') {$('#PagoTarjeta').val(0)}
                 if ($('#saldo_a_usar').val() == '') {$('#saldo_a_usar').val(0)}
                     if ($('#sigpesos_usar').val() == '') {$('#sigpesos_usar').val(0)}
+                        if ($('#deposito_total').val() == '') {$('#deposito_total').val(0)}
+                            if ($('#transferencia_total').val() == '') {$('#transferencia_total').val(0)}
             var $pago_efectivo = parseFloat($('#PagoEfectivo').val());
              var $pago_tarjeta = parseFloat($('#PagoTarjeta').val());
              var $pago_saldo = parseFloat($('#saldo_a_usar').val());
              var $pago_sigpesos = parseFloat($('#sigpesos_usar').val());
-             $('#pago_combinado').val(parseInt($pago_efectivo+$pago_tarjeta+$pago_saldo+$pago_sigpesos)); 
+             var deposito = parseFloat($('#deposito_total').val());
+             var transferencia = parseFloat($('#transferencia_total').val());
+
+             $('#pago_combinado').val(parseInt($pago_efectivo+$pago_tarjeta+$pago_saldo+$pago_sigpesos+deposito+transferencia)); 
             // var $total_venta = parseFloat($('#total').val());
             // var $sigpeso = parseInt($('#sigpesos_usar').val());   
     }
@@ -835,7 +867,16 @@
                 if (parseInt($('#total').val()) == parseInt($('#saldo_a_usar').val())) {
                      document.getElementById("form-cliente").submit(); 
                 } 
+            }if($('#tipoPago').val()==6){
+
+                if (parseInt($('#total').val()) == parseInt($('#deposito_total').val())||parseInt($('#total').val()) == parseInt($('#transferencia_total').val())) {
+                     document.getElementById("form-cliente").submit(); 
+                } else {
+                 alert("Valida que el deposito sea igual al total");
+                 return false;
+                 }
             }
+
             if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
                     if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
                 document.getElementById("form-cliente").submit();        
@@ -1137,7 +1178,12 @@
                 $('#PagoTarjeta').val(0);
                 $('#saldo_a_usar').val(0);
                 $('#saldo_a_favoor').hide();
-
+                 $('#deposito').hide();
+                  $('#transferencia').hide();
+                  $('#deposito_total').val(0);
+                $('#transferencia_total').val(0);
+                $('#deposito_folio').val(null);
+                $('#transferencia_folio').val(null);
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar5').show();
@@ -1177,6 +1223,12 @@
                 $('#PagoTarjeta').val(0);
                 $('#saldo_a_usar').val(0);
                 $('#saldo_a_favoor').show();
+                $('#deposito').show();
+                $('#transferencia').show();
+                $('#deposito_total').val(0);
+                $('#transferencia_total').val(0);
+                // $('#deposito_folio').val("Ingrese Folio");
+                // $('#transferencia_folio').val("Ingrese Folio");
                 $('#tar1').show();
                 $('#tar2').show();
                 $('#tar4').show();
@@ -1201,15 +1253,21 @@
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
                 $('#saldo_a_usar').val(0);
-               $('#banco').val(null);
+                $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#saldo_a_favoor').hide();
+                $('#deposito_total').val(0);
+                $('#transferencia_total').val(0);
+                $('#deposito_folio').val(null);
+                $('#transferencia_folio').val(null);
                 $('#tar1').hide();
                 $('#tar2').hide();
                 $('#tar4').show();
                 $('#tar5').hide();
                 $('#tar10').hide();
                 $('#PagoSigpesos').hide();
+                 $('#deposito').hide();
+                  $('#transferencia').hide();
 
 
                 //$('#sigpesos_usar').val(0);
@@ -1244,6 +1302,12 @@
                 $('#saldo_a_usar').val(0);
                 $('#PagoSigpesos').show();
                 $('#saldo_a_favoor').hide();
+                $('#deposito_total').val(0);
+                $('#transferencia_total').val(0);
+                $('#deposito_folio').val(null);
+                $('#transferencia_folio').val(null);
+                $('#deposito').hide();
+                $('#transferencia').hide();
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#tar1').hide();
@@ -1280,6 +1344,10 @@
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
                 $('#saldo_a_usar').val(0);
+                $('#deposito_total').val(0);
+               $('#transferencia_total').val(0);
+                $('#deposito_folio').val(null);
+               $('#transferencia_folio').val(null);
                 $('#saldo_a_favoor').show();
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
@@ -1288,6 +1356,8 @@
                 $('#tar4').hide();
                 $('#tar5').hide();
                 $('#tar10').hide();
+                $('#deposito').hide();
+                $('#transferencia').hide();
 
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
@@ -1312,14 +1382,62 @@
                 console.log('TOTAL ACTUALIZADO EN saldo a favor',$('#total').val());
                console.log('Saldo a favor:',saldoAFavor);
                $('#saldo_a_usar').val($('#total').val());
-            }
+            }else if($('#tipoPago').val()==6){
+                $('#deposito_total').val(0);
+               $('#transferencia_total').val(0);
+                $('#PagoEfectivo').val(0);
+                $('#PagoTarjeta').val(0);
+                $('#saldo_a_usar').val(0);
+                $('#saldo_a_favoor').hide();
+                $('#banco').val(null);
+                $('#digitos_targeta').val(null);
+                $('#tar1').hide();
+                $('#tar2').hide();
+                $('#tar4').hide();
+                $('#tar5').hide();
+                $('#tar10').hide();
+                $('#deposito').show();
+                $('#transferencia').show();
+
+                var subtotal=parseFloat($('#subtotal').val());
+                var des=parseFloat($('#descuento').val());
+                var sigpesos=parseInt($('#sigpesos_usar').val());
+                var desCumple=parseFloat($('#descuentoCumple').val());
+                var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                var saldoAFavor = sigpesos;
+                //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
+                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+                var getIva = (($('#subtotal').val())*0.16).toFixed(2);
+                console.log(sigpesos);
+                $('#iva').val(getIva);
+                var iva=getIva;
+                var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
+                if (aux>0) {
+                    $('#total').val(aux.toFixed(2));
+
+                }else{
+                    $('#total').val(0);
+                }
+                
+                console.log('TOTAL ACTUALIZADO EN deposito',$('#total').val());
+               console.log('Saldo a favor:',saldoAFavor);
+               $('#deposito_total').val($('#total').val());
+               $('#transferencia_total').val($('#total').val());
+
+
+
+
+
+
+                }
 
             else
 
             {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
-
+                $('#deposito_total').val(0);
+                $('#transferencia_total').val(0);
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
                 $('#tar1').hide();

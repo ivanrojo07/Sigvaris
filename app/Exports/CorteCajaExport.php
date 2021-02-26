@@ -70,10 +70,14 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     // $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->digitos_targeta:"" :"",
                      strcmp($Venta->banco,"AMEX") === 1 ? $Venta->PagoTarjeta:"",
                     strcmp($Venta->banco,"AMEX") === 1 ? $Venta->digitos_targeta :"",
-                     strcmp($Venta->banco,"AMEX") === 0 ? $Venta->PagoTarjeta:"",
-                    strcmp($Venta->banco,"AMEX") === 0 ? $Venta->digitos_targeta :"",
-
-                    "",
+                    //  strcmp($Venta->banco,"AMEX") === 0 ? $Venta->PagoTarjeta:"",
+                    // strcmp($Venta->banco,"AMEX") === 0 ? $Venta->digitos_targeta :"",
+                    $Venta->num_transferencia,
+                    $Venta->folio_transferencia,
+                    $venta->num_déposito,
+                    $venta->folio_deposito,
+                    // "",
+                    // "",
                     $Venta->requiere_factura == 1 ? "SI":"NO",
                     //Factura::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
@@ -121,10 +125,11 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'PAGO TARJETA ',
             'DIGITOS 4 ULTIMOS ',
 
-            'PAGO TARJETA AMEX',
-            'DIGITOS 4 ULTIMOS ',
+            'PAGO TRANSFERENCIA',
+            'FOLIO TRANSFERENCIA',
 
-            'Pago depósito',
+            'PAGO DEPOSITO',
+            'FOLIO DEPOSITO',
             
             'FACTURA',
             'Generó',

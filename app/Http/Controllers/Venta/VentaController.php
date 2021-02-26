@@ -142,6 +142,21 @@ class VentaController extends Controller
         $auxiliar = (int)$request->sigpesos_usar;
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
 
+
+            if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 6 ) {
+            if ($request->deposito_folio == null && $request->transferencia_folio == null ) {
+                # code...
+                return redirect()
+                ->back()
+                ->withErrors(['Debes introducir algun folio en transferencia u deposito'])
+                ->withInput($request->input());
+            }else{
+                $venta->num_transferencia = $request->transferencia_total;
+                $venta->num_déposito = $request->deposito_total;
+                $venta->folio_transferencia = $request->transferencia_folio;
+                $venta->folio_deposito = $request->deposito_folio;
+            }
+        }
      
 
 
@@ -170,19 +185,21 @@ class VentaController extends Controller
                 ->withInput($request->input());
         }
         
-           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
+           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar + $request->transferencia_total + $request->deposito_total== round($request->total, 2))) {
             return redirect()
                 ->back()
                 ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
                 ->withInput($request->input());
         }
+
+
         }
          if ($request->INAPAM_ == 1) {
           # code...
           $venta->desc_inapam = $request->descuento;
           // dd($venta->desc_inapam);
             }
-       
+        
       
       
         /*
