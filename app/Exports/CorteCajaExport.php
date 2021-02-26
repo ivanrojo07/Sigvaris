@@ -61,14 +61,14 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->PagoEfectivo,
                     $Venta->sigpesos,
                     $Venta->PagoSaldo,
-
+                    $Venta->PagoTarjeta,
 
                     // $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->PagoTarjeta:"" :"",
                     // $Venta->banco!= null ? $Venta->banco =="AMEX"? $Venta->digitos_targeta:"" :"",
 
                     // $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->PagoTarjeta:"" :"",
                     // $Venta->banco!= null ? $Venta->banco !="AMEX"? $Venta->digitos_targeta:"" :"",
-                     strcmp($Venta->banco,"AMEX") === 1 ? $Venta->PagoTarjeta:"",
+                     // strcmp($Venta->banco,"AMEX") === 1 ? $Venta->PagoTarjeta:"",
                     strcmp($Venta->banco,"AMEX") === 1 ? $Venta->digitos_targeta :"",
                     //  strcmp($Venta->banco,"AMEX") === 0 ? $Venta->PagoTarjeta:"",
                     // strcmp($Venta->banco,"AMEX") === 0 ? $Venta->digitos_targeta :"",
