@@ -74,7 +74,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     // strcmp($Venta->banco,"AMEX") === 0 ? $Venta->digitos_targeta :"",
                     $Venta->num_transferencia,
                     $Venta->folio_transferencia,
-                    $venta->num_déposito,
+                    $venta->num_deposito,
                     $venta->folio_deposito,
                     // "",
                     // "",
