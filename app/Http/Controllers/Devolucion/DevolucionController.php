@@ -26,7 +26,9 @@ class DevolucionController extends Controller
     			'beneficiario' => $request->input("beneficiario"),
     			'referencia' => $request->input("referencia"),
     			'clave' => $request->input("clave"),
-    			'banco' => $request->input("banco")
+    			'banco' => $request->input("banco"),
+                'sigpesos_d'=> $request->input("sigpesos_d"),
+                'saldo_d'=>$request->input("saldo_d")
     		)
     	);
     	$Devolucion->save();

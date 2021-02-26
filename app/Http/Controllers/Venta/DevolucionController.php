@@ -40,11 +40,38 @@ class DevolucionController extends Controller
      */
     public function store(Request $request, Venta $venta)
     {   
-        // dd($request);
+        // dd($venta);
+
+        // if ($venta->tipoPago ==1 ||$venta->tipoPago ==2 || $venta->tipoPago ==6) {
+        //     # code...
+        // }
+        // if ($venta->tipoPago ==4 || $venta->tipoPago ==5 ) {
+        //     # code...
+        // }
+       
         $realizarDevolucionService = new RealizarDevolucionService($request, $venta);
-        if ($request->input("tipo_cambio")==2) {
-            $MONTO=$request->input("MONTO");
-            return view('devolucion.create', compact('venta','MONTO'));
+         $MONTO=$request->input("MONTO");
+             if ($request->input("tipo_cambio")==2) {
+                 if ($venta->tipoPago == 3) {
+                        $MONTO = $MONTO - $venta->PagoSaldo - $venta->sigpesos;
+
+                        $venta->paciente->saldo_a_favor += $venta->PagoSaldo;
+                        
+                        $venta->paciente->sigpesos_a_favor += $venta->sigpesos;
+                        
+                        $sigpesos_d = 0;
+                        $saldo_d = 0;
+
+                        $sigpesos_d =$venta->sigpesos;
+                        $saldo_d =$venta->PagoSaldo;
+                        $venta->paciente->save();
+                     }
+
+
+
+
+           
+            return view('devolucion.create', compact('venta','MONTO','sigpesos_d','saldo_d'));
         }else{
             $venta->paciente->saldo_a_favor += $request->input("MONTO");
             
@@ -165,7 +192,15 @@ class DevolucionController extends Controller
              $diferencia=round($cuatro);
     }   
      $diferencia=round($cuatro);
-
+        // if ($venta->tipoPago ==1 ||$venta->tipoPago ==2 || $venta->tipoPago ==6) {
+        //     # code...
+        // }
+        // if ($venta->tipoPago ==4 || $venta->tipoPago ==5 ) {
+        //     # code...
+        // }
+        // if ($venta->tipoPago == 3) {
+        //     # code...
+        // }
         
         return response()->json([
             'diferencia' => round($diferencia),
@@ -176,7 +211,8 @@ class DevolucionController extends Controller
             'dos'=>round($dos),
             'tres'=>$tres,
             'cuatro'=>round($cuatro),
-            'cinco'=>$precioProductoQueSeraDevuelto
+            'cinco'=>$precioProductoQueSeraDevuelto,
+            'tipoPago'=>$venta->tipoPago
         ]);
     }
 

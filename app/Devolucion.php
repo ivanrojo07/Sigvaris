@@ -18,7 +18,9 @@ class Devolucion extends Model
         'referencia',
         'clave',
         'banco',
-        'created_at'
+        'created_at',
+        'saldo_d',
+        'sigpesos_d'
     ];
 
     public function venta(){

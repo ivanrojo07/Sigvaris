@@ -41,7 +41,9 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
                 return collect([
                     $Devolucion->venta_id,
                     date('Y-m-d h:i:s'),
-                    $Devolucion->beneficiario,                 
+                    $Devolucion->beneficiario,
+                    $Devolucion->saldo_d,
+                    $Devolucion->sigpesos_d,                
                     $Devolucion->monto
 
                 ]);
@@ -54,7 +56,8 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
             'Folio',
             'Fecha de compra',
             'Paciente',
-            'Sigpesos',
+            'Saldo devuelto',
+            'Sigpeso devuelto',
             'Monto'
 
         ];

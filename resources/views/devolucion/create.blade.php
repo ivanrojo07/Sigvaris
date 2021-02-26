@@ -8,6 +8,10 @@
                 @csrf
                 <input type="hidden" name="venta_id" id="venta_id" value="{{$venta->id}}">
             <div class="row">
+                <input type="hidden" name="sigpesos_d" id="sigpesos_d" value="{{$sigpesos_d}}">
+            <div class="row">
+                <input type="hidden" name="saldo_d" id="saldo_d" value="{{$saldo_d}}">
+            <div class="row">
 
                 <div class="col-4 form-group">
                     <label for="" class="text-uppercase text-muted">Paciente: </label>

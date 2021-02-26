@@ -128,6 +128,7 @@
                                                             
                                                             <input id="preciodos" type="text" value="0" name="preciodos"
                                                                 class="form-control preciodos"readonly>
+                                                            <input type="hidden" name="tipoPago" id="tipoPago" value="">
                                                         </div>
                                                         </div>
                                                     </div>
@@ -206,6 +207,8 @@
                 $(`.prec_des`).val( response.promo);
                 $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) );
                  $(`.preciodos`).val( response.dos );
+                 $('#tipoPago').val( parseInt(response.tipoPago) );
+                 // console.log("tipo de pago",response.tipoPago);
             },
             error: function( e ){
                 console.table(e)
