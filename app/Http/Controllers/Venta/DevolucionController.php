@@ -66,7 +66,17 @@ class DevolucionController extends Controller
                         $saldo_d =$venta->PagoSaldo;
                         $venta->paciente->save();
                      }
-
+                //      if ($venta->cumpleDes) {
+                //     # code...
+                //     $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
+                //     if (count($consulta) >= 1) {
+                            
+               
+                //              }else{
+                //                 $venta->paciente->sigpesos_a_favor +=300;
+                //                 $venta->paciente->save();
+                //              }
+                // }
 
 
 
