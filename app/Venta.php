@@ -38,7 +38,7 @@ class Venta extends Model
         'desc_inapam',
         'num_transferencia',
         'folio_transferencia',
-        'num_déposito',
+        'num_deposito',
         'folio_deposito'
     ];
 

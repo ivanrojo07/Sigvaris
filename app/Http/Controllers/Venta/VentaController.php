@@ -152,7 +152,7 @@ class VentaController extends Controller
                 ->withInput($request->input());
             }else{
                 $venta->num_transferencia = $request->transferencia_total;
-                $venta->num_déposito = $request->deposito_total;
+                $venta->num_deposito = $request->deposito_total;
                 $venta->folio_transferencia = $request->transferencia_folio;
                 $venta->folio_deposito = $request->deposito_folio;
             }

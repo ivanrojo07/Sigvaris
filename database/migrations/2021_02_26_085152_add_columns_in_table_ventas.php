@@ -35,7 +35,7 @@ class AddColumnsInTableVentas extends Migration
             //
              $table->dropColumn('num_transferencia');
               $table->dropColumn('folio_transferencia');
-               $table->dropColumn('num_déposito');
+               $table->dropColumn('num_deposito');
               $table->dropColumn('folio_deposito');
         });
     }
