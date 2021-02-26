@@ -41,7 +41,8 @@ class DevolucionController extends Controller
     public function store(Request $request, Venta $venta)
     {   
         // dd($venta);
-
+         $sigpesos_d = 0;
+         $saldo_d = 0;
         // if ($venta->tipoPago ==1 ||$venta->tipoPago ==2 || $venta->tipoPago ==6) {
         //     # code...
         // }
@@ -59,8 +60,7 @@ class DevolucionController extends Controller
                         
                         $venta->paciente->sigpesos_a_favor += $venta->sigpesos;
                         
-                        $sigpesos_d = 0;
-                        $saldo_d = 0;
+                       
 
                         $sigpesos_d =$venta->sigpesos;
                         $saldo_d =$venta->PagoSaldo;
