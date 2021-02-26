@@ -144,12 +144,18 @@ class VentaController extends Controller
 
 
             if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 6 ) {
+
             if ($request->deposito_folio == null && $request->transferencia_folio == null ) {
                 # code...
-                return redirect()
-                ->back()
-                ->withErrors(['Debes introducir algun folio en transferencia u deposito'])
-                ->withInput($request->input());
+                if ($request->deposito_total != 0 || $request->transferencia_total != 0) {
+
+                    return redirect()
+                     ->back()
+                     ->withErrors(['Debes introducir algun folio en transferencia u deposito'])
+                     ->withInput($request->input());
+                    
+                }
+                
             }else{
                 $venta->num_transferencia = $request->transferencia_total;
                 $venta->num_deposito = $request->deposito_total;
