@@ -41,7 +41,7 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
 
                 return collect([
                     $HistorialCambioVenta->venta_id,
-                    Venta::where('id', '==', $HistorialCambioVenta->venta_id)->value('created_at'),
+                    Venta::where('id', $HistorialCambioVenta->venta_id)->value('created_at'),
                     $HistorialCambioVenta->updated_at,
                     $HistorialCambioVenta->descuento_cu == 1 ? "300":"0",
                     Sigpesosventa::where('venta_id',$HistorialCambioVenta->venta_id)->value('folio'),
