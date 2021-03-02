@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Venta;
+use App\Sigpesosventa;
 use App\Factura;
 use App\Devolucion;
 use Illuminate\Database\Eloquent\Model\Devolución;
@@ -27,7 +28,7 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
 
         
 
-     return HistorialCambioVenta::where('created_at', '>=',$now->format('Y-m-d'))->where('tipo_cambio','DEVOLUCION')->where('sigpesos',1)
+     return HistorialCambioVenta::where('created_at', '>=',$now->format('Y-m-d'))->orWhere('updated_at', '>=',$now->format('Y-m-d'))->where('tipo_cambio','DEVOLUCION')->where('sigpesos',1)
             ->get()
             //->pluck('productos')
              ->flatten()
@@ -40,7 +41,11 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
 
                 return collect([
                     $HistorialCambioVenta->venta_id,
-                    date('Y-m-d h:i:s'),
+                    Venta::where('id', '==', $HistorialCambioVenta->venta_id)->value('created_at'),
+                    $HistorialCambioVenta->updated_at,
+                    $HistorialCambioVenta->descuento_cu == 1 ? "300":"0",
+                    Sigpesosventa::where('venta_id',$HistorialCambioVenta->venta_id)->value('folio'),
+                    $HistorialCambioVenta->pagosig,
                     $HistorialCambioVenta->observaciones,                 
                     
 
@@ -53,7 +58,12 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
         return [
             'Folio',
             'Fecha de compra',
-            'monto'
+            'Fecha de devolucion',
+            'Cumpleaños',
+            'Folio',
+            'sigpesos',
+            'monto devolucion saldo a favor
+'
 
         ];
     }
