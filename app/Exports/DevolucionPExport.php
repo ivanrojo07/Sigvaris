@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Venta;
 use App\Factura;
 use App\Devolucion;
+use App\Sigpesosventa;
 use Illuminate\Database\Eloquent\Model\Devolución;
 use App\HistorialCambioVenta;
 use Carbon\Carbon;
@@ -40,7 +41,10 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
 
                 return collect([
                     $Devolucion->venta_id,
-                    date('Y-m-d h:i:s'),
+                    Venta::where('id', $Devolucion->venta_id)->value('created_at'),
+                    $Devolucion->updated_at,
+                    Venta::where('id', $Devolucion->venta_id)->value('cumpleDes')==1? "300":"0",
+                    Sigpesosventa::where('venta_id',$Devolucion->venta_id)->value('folio'),
                     $Devolucion->beneficiario,
                     $Devolucion->saldo_d,
                     $Devolucion->sigpesos_d,                
@@ -55,10 +59,13 @@ class DevolucionPExport implements FromCollection, WithHeadings,WithTitle
         return [
             'Folio',
             'Fecha de compra',
+            'Fecha de devolucion',
+            'Cumpleaños',
+            'Folio',
             'Paciente',
             'Saldo devuelto',
             'Sigpeso devuelto',
-            'Monto'
+            'Monto Deposito'
 
         ];
     }
