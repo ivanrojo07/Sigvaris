@@ -452,17 +452,29 @@
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
 
                                             <label for="" class="text-uppercase text-muted">Saldo a favor: </label>
-
+                                            @if (isset($paciente))
                                             <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
+                                            
+                                                value="{{$paciente->saldo_a_favor!= null ? 
+                                                $paciente->saldo_a_favor: 0}}" min="0" step="0.01" readonly="">
+                                            @else
+                                                <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
+                                            
                                                 value="0" min="0" step="0.01" readonly="">
+                                            @endif
                                         </div>
                                            {{-- INPUT SIGPESOS A FAVOR --}}
                                         <div class="col-12 col-sm-6 col-md-4 mt-2">
 
                                             <label for="" class="text-uppercase text-muted">Sigpesos a favor: </label>
-
+                                            @if (isset($paciente))
                                             <input type="number" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
-                                                value="0" min="0" step="0.01" readonly="">
+                                                value="{{$paciente->sigpesos_a_favor != null ? 
+                                                $paciente->sigpesos_a_favor : 0}} "  min="0" step="0.01"readonly="">
+                                            @else
+                                            <input type="number" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
+                                                value="0"  min="0" step="0.01" readonly="">
+                                            @endif
                                         </div>
                                         {{-- INPUT SIGPESOS A USAR --}}
 
