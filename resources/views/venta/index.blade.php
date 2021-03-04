@@ -14,6 +14,8 @@
                         <th>Folio</th>
                         <th>Cliente</th>
                         <th>Total</th>
+                        <th>Tienda</th>
+                        <th>Fitter</th>
                         <th>Descuento</th>
                         <th>Fecha</th>
                         <th>Operación</th>
@@ -28,6 +30,12 @@
                         <td>{{$venta->id}}</td>
                         <td>{{$venta->paciente->fullname}}</td>
                         <td>${{number_format($venta->total, 2)}}</td>
+                        @if($venta->oficina_id==2)
+                        <td>Perisur</td>
+                        @elseif($venta->oficina_id==1 ||$venta->oficina_id==3 )
+                        <td>Polanco</td>
+                        @endif
+                        <td>{{$venta->empleado->nombre." ".$venta->empleado->appaterno}}</td>
                         @if($venta->descuento)
                             <td>{{$venta->descuento->nombre}}</td>
                         @else
