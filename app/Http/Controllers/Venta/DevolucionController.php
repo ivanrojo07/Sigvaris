@@ -80,8 +80,8 @@ class DevolucionController extends Controller
                             
                             
 
-                            $saldo_d = $a;
-                            $sigpesos_d = $b;
+                            $saldo_d = $b;
+                            $sigpesos_d = $a;
                             //guardamos saldos de manera directa
                             $venta->paciente->save();
                         }
