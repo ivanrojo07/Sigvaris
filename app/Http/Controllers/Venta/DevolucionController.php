@@ -98,9 +98,18 @@ class DevolucionController extends Controller
            
             return view('devolucion.create', compact('venta','MONTO','sigpesos_d','saldo_d'));
         }else{
+            if (HistorialCambioVenta::where('venta_id',$venta->id)->count()>1) {
+                            //en caso de que si exista una devolucion, ya se habra devuelto el saldo y sigpesos a favor, entonces el monta pasa sin modificacion 
+                            
+                        }else{
+                                    $historial = HistorialCambioVenta::where("venta_id",$venta->id)->first();
+                                    $sigpesos_d = $venta->sigpesos;
+                                    $saldo_d = $venta->PagoSaldo;
+                                    $historial->update(['pagosig'=> $sigpesos_d] );
+                                    $historial->update(['pagosaldo'=> $saldo_d] );
+                        }
             $venta->paciente->saldo_a_favor += $request->input("MONTO");
-            
-            
+
             $venta->paciente->save();
             return redirect()->route('ventas.index');
         }
