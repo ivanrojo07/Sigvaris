@@ -55,7 +55,9 @@ class DevolucionController extends Controller
                             //en caso de que si exista una devolucion, ya se habra devuelto el saldo y sigpesos a favor, entonces el monta pasa sin modificacion 
                             
                         }else{
-
+                            //variables auxiliares para pasar el saldo y sigpesos
+                            $a = $venta->sigpesos ;     
+                            $b = $venta->PagoSaldo;
                             //Hago la resta
                             $MONTO = $MONTO - $venta->PagoSaldo - $venta->sigpesos;
                             //Sumo el saldo al del paciente
@@ -74,10 +76,9 @@ class DevolucionController extends Controller
                             //Actualizamos el mensaje de la devolucion 
                             $historial->update(['observaciones'=> $auxiliar] );
 
-
-                            //variables auxiliares para pasar el saldo y sigpesos
-                            $a = $venta->paciente->saldo_a_favor + $venta->PagoSaldo;     
-                            $b = $venta->paciente->sigpesos_a_favor + $venta->sigpesos;
+ 
+                            
+                            
 
                             $saldo_d = $a;
                             $sigpesos_d = $b;
