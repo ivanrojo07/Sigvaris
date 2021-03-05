@@ -468,9 +468,9 @@
 
                                             <label for="" class="text-uppercase text-muted">Sigpesos a favor: </label>
                                             @if (isset($paciente))
-                                            <input type="number" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
+                                            <input type="text" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
                                                 value="{{$paciente->sigpesos_a_favor != null ? 
-                                                $paciente->sigpesos_a_favor : 0}} "  min="0" step="0.01"readonly="">
+                                                intval($paciente->sigpesos_a_favor) : 0}} "  min="0" step="0.01"readonly="">
                                             @else
                                             <input type="number" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
                                                 value="0"  min="0" step="0.01" readonly="">
@@ -1081,6 +1081,13 @@
                     }   
                     
                     $('#descuentoCumple').val(parseInt(res.cumple));
+                    if (isNaN($('#descuentoCumple').val(res.cumple))) {
+
+                        desCumple=500
+
+                        } else{
+                            $('#descuentoCumple').val(parseInt(res.cumple));
+                        }
                     if (res.cumple>0) {
                         $('#cumpleDes').val(1);
                     }
@@ -1093,18 +1100,20 @@
         var des=parseFloat($('#descuento').val());
         var desCumple=parseFloat($('#descuentoCumple').val());
         var saldoAFavor=parseFloat($('#saldoAFavor').val());
-
+        // alert($('#descuentoCumple').val());
         getIva = (($('#subtotal').val())*0.16).toFixed(2);
         $('#iva').val(getIva);
         var iva=getIva;
         // console.log(des);
+        
         console.log('getIva', getIva);
         console.log('SUBTOTAL', subtotal);
         console.log('iva999', iva);
         console.log('des', des);
         console.log('sigpesos', sigpesos);  
-        console.log('desCumple', desCumple);  
-        console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
+        console.log('desCumple', desCumple); 
+
+        console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA 1109',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
             // $('#total').val(0);
         var aux=(parseFloat(subtotal)+parseFloat(iva))-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {

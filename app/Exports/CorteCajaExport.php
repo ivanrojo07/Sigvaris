@@ -7,6 +7,7 @@ use App\Factura;
 use App\HistorialCambioVenta;
 use Carbon\Carbon;
 use App\Descuento;
+use App\sigpesosventa;
 use Illuminate\Database\Eloquent\Model\Devolución;
 use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -88,7 +89,8 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                  DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->exists()?DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->value('origin_id') : "" ,
                     HistorialCambioVenta::where('destinate_id','=',$Venta->id)->where('tipo_cambio','CAMBIO PRODUCTO')->exists()? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
                     $Venta->cumpleDes ==1 ? "300":"0",
-                    
+
+                sigpesosventa::where('tipo','cumpleaños')->where('venta_id',$Venta->id)->exists()?sigpesosventa::where('tipo','cumpleaños')->where('venta_id',$Venta->id)->value('folio'): "",
                     // DB::table('sigpesosventa')->where('venta_id','=',$Venta->id)->exists()?DB::table('sigpesosventa')->where('venta_id','=',$Venta->id)->where('tipo','!=','esencial')->value('folio'):"",
                     $Sigp,
 
@@ -141,6 +143,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Folio Damage', 
             'Folio Cambio Fisico',
             'Descuento_cumpleaños',
+            'Folio Cumpleaños',
             'Folio Sigpesos',
             'Devolucion',
             'Descuento',

@@ -533,7 +533,8 @@ public function foliospaciente (Paciente $paciente){
 
 
     public function getSigpesos(Paciente $paciente)
-    {
+    {       
+        $sigpesosCumpleaños=0;
         //dd(isset($paciente->nacimiento));
         if (isset($paciente->nacimiento)) {
             if (\Carbon\Carbon::parse($paciente->nacimiento)->month==\Carbon\Carbon::now()->month) {

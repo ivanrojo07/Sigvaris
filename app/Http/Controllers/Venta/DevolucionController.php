@@ -43,40 +43,54 @@ class DevolucionController extends Controller
         // dd($venta);
          $sigpesos_d = 0;
          $saldo_d = 0;
-        // if ($venta->tipoPago ==1 ||$venta->tipoPago ==2 || $venta->tipoPago ==6) {
-        //     # code...
-        // }
-        // if ($venta->tipoPago ==4 || $venta->tipoPago ==5 ) {
-        //     # code...
-        // }
+ 
        
         $realizarDevolucionService = new RealizarDevolucionService($request, $venta);
          $MONTO=$request->input("MONTO");
              if ($request->input("tipo_cambio")==2) {
                  if ($venta->tipoPago == 3) {
-                        $MONTO = $MONTO - $venta->PagoSaldo - $venta->sigpesos;
 
-                        $venta->paciente->saldo_a_favor += $venta->PagoSaldo;
+                            //Pregunto si existe una devolucion con el id, si es que no existe entra en el else y resta el saldo y sigpesos que se usaron para pagar. De esta forma solo aplica a la primera devolucion.
+                        if (HistorialCambioVenta::where('venta_id',$venta->id)->count()>1) {
+                            //en caso de que si exista una devolucion, ya se habra devuelto el saldo y sigpesos a favor, entonces el monta pasa sin modificacion 
+                            
+                        }else{
+
+                            //Hago la resta
+                            $MONTO = $MONTO - $venta->PagoSaldo - $venta->sigpesos;
+                            //Sumo el saldo al del paciente
+                            $venta->paciente->saldo_a_favor += $venta->PagoSaldo;
+                            //agrego los sigpesos al paciente
+                            $venta->paciente->sigpesos_a_favor += $venta->sigpesos;
+                           //activar el cupon de sigpesos nuevamente 
+                            //
+                            //Se actualiza al status de cero para que este activo nuevamente
+                            $venta->SigpesosVenta()->update(['usado' => 0]);
+                            //Guardamos los saldos en variables que llevaremos a la otra vista para actualizar en el controlador.
+                            //
+                            $historial = HistorialCambioVenta::where("venta_id",$venta->id)->first();
+                            //Variable auxiliar que contiene el mensaje concatenado de la nueva cantidad 
+                            $auxiliar = "Monto devuelto: ".$MONTO;
+                            //Actualizamos el mensaje de la devolucion 
+                            $historial->update(['observaciones'=> $auxiliar] );
+
+
+                            //variables auxiliares para pasar el saldo y sigpesos
+                            $a = $venta->paciente->saldo_a_favor + $venta->PagoSaldo;     
+                            $b = $venta->paciente->sigpesos_a_favor + $venta->sigpesos;
+
+                            $saldo_d = $a;
+                            $sigpesos_d = $b;
+                            //guardamos saldos de manera directa
+                            $venta->paciente->save();
+                        }
                         
-                        $venta->paciente->sigpesos_a_favor += $venta->sigpesos;
-                        
+                            
                        
 
-                        $sigpesos_d =$venta->sigpesos;
-                        $saldo_d =$venta->PagoSaldo;
-                        $venta->paciente->save();
+                       
                      }
-                //      if ($venta->cumpleDes) {
-                //     # code...
-                //     $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
-                //     if (count($consulta) >= 1) {
-                            
-               
-                //              }else{
-                //                 $venta->paciente->sigpesos_a_favor +=300;
-                //                 $venta->paciente->save();
-                //              }
-                // }
+
 
 
 

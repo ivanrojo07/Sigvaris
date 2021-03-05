@@ -414,6 +414,33 @@ class VentaController extends Controller
                  // dd($sigpesos_paciente);
                 // $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
         }
+
+        if ($request->cumpleDes==1) {
+            //Obtenemos la informacion del folio de tipo cumpleaños sigpesos
+            $folio_id = Folio::where('descripcion','Cumpleaños')->value('id');
+            $rango_inferior = Folio::where('descripcion','Cumpleaños')->value('rango_inferior');
+            // dd($rango_inferior);
+            //hago una consulta en la table de sigpesos venta en donde me trae el ultimo folio que se añadio de este tipo de folio
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio_id)->orderBy('id','desc')->value('folio');
+                //si es igual a 0 entonces asigno el valor del rango inferior ya que sera el primero 
+             if ($ultimo == 0) {
+               $ultimo = $rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 300,
+                        'folio' => $ultimo+1,  
+                        'folio_id' => $folio_id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'cumpleaños',
+                        'usado'=>1
+
+                    ]);
+                $Sigpesos->save();
+        }
+
+
+
               if ($request->sigpesos != 0) {
              $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
                 $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
