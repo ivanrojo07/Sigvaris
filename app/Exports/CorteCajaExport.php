@@ -84,7 +84,6 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     //Factura::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
                     "",
-                    "0",
                     HistorialCambioVenta::where('venta_id',$Venta->id)->exists()? "Si":"No",
                     DB::table('productos_damage')->where('origin_id','=',$Venta->id)->exists() ? "SI":" NO",
                  DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->exists()?DB::table('productos_damage')->where('destinate_id','=',$Venta->id)->value('origin_id') : "" ,
@@ -140,7 +139,6 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Generó',
             'Envió',
 
-            'Devolución en efectivo',
             'Cambio fisico',
             'Damage',
             'Folio Damage', 
