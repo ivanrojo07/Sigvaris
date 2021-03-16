@@ -639,49 +639,113 @@ class VentaController extends Controller
 
     public function ventaDamage(Request $request)
     {
-            
+            // dd($request);
               
         // $saldo_a_favor=$request->input('montonegativo');
+        $saldo_a_favor= $request->saldo_a_favor;
+        
         
         // PREPARAR DATOS DE LA VENTA
         $venta = new Venta($request->all());
         
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
-
+        $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
             $venta_cu = Venta::where("id",$request->VentaAnterior)->first();
                   if ($venta_cu->descuento_cu == null && $venta_cu->cumpleDes ==1) {
                         $venta_cu->update(['descuento_cu' => 1]);
             }
 
-        if ($request->input('tipoPago') == 5 || $request->input('tipoPago') == 3) {
+            if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 6 ) {
+
+            if ($request->deposito_folio == null && $request->transferencia_folio == null ) {
+                # code...
+                if ($request->deposito_total != 0 || $request->transferencia_total != 0) {
+
+                    return redirect()
+                     ->back()
+                     ->withErrors(['Debes introducir algun folio en transferencia u deposito'])
+                     ->withInput($request->input());
+                    
+                }
+                
+            }else{
+                $venta->num_transferencia = $request->transferencia_total;
+                $venta->num_deposito = $request->deposito_total;
+                $venta->folio_transferencia = $request->transferencia_folio;
+                $venta->folio_deposito = $request->deposito_folio;
+            }
+        }
+
+        // if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ||$request->input('tipoPago') == 5) {
+
+        // if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
+
+    
+        //     $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
+
+        //      $actualizacion =  $Paciente->saldo_a_favor -$request->saldo_a_usar; 
+             
+        //      $venta->PagoSaldo=$request->saldo_a_usar;
+            
+        //      $Paciente->update(['saldo_a_favor' => $actualizacion]);    
+        //      }else{
+                
+        //         return redirect()->route('ventas.index')->withErrors(['EL DAMAGE NO SE PUDO REALIZAR´PORQUE NO CUENTA CON SALDO SUFICIENTE']);          
+        //          }
+
+        //       if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar + $request->transferencia_total + $request->deposito_total== round($request->total, 2))) {
+        //     return redirect()
+        //         ->back()
+        //         ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+        //         ->withInput($request->input());
+        // }else{
+
+        //  }
+        //  // return redirect()->route('ventas.index');
+        
+        // }
+          if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ||$request->input('tipoPago') == 5) {
 
         if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
 
-    
-             $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
+             
+             $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
 
-             $actualizacion =  $Paciente->saldo_a_favor - $request->saldo_a_usar; 
+             $actualizacion = $Paciente->saldo_a_favor - $request->saldo_a_usar; 
              
              $venta->PagoSaldo=$request->saldo_a_usar;
-            
-             $Paciente->update(['saldo_a_favor' => $actualizacion]);      
+                // dd($actualizacion, $request->saldo_a_favor,$Paciente->saldo_a_favor);
+             $Paciente->update(['saldo_a_favor' => $actualizacion]); 
+
+              // $saldo_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+              // $Paciente->update(['sigpesos_a_favor' => $saldo_paciente]);  
+              
              }else{
                 
-                return redirect()->route('ventas.index')->withErrors(['EL DAMAGE NO SE PUDO REALIZAR´PORQUE NO CUENTA CON SALDO SUFICIENTE']);          
-                 }
-
-             if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
-            return redirect()->route('ventas.index')->withErrors(['Error con importes de montos en efectivo o tarjeta']);
-        }else{
-
-         }
-         // return redirect()->route('ventas.index');
-        
+           return redirect()
+                ->back()
+                ->withErrors(['Error saldo a favor insuficiente'])
+                ->withInput($request->input());
         }
         
+           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar + $request->transferencia_total + $request->deposito_total== round($request->total, 2))) {
+            return redirect()
+                ->back()
+                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+                ->withInput($request->input());
+        }
+
+
+        }
+
+        
 // dd($venta_cu->descuento_cu);
-        $actualizacion = $request->saldo_a_favor; 
-        $Paciente->update(['saldo_a_favor' => $actualizacion]);   
+//      
+        // if ($request->saldo_a_favor>$Paciente->saldo_a_favor) {
+        //     $actualizacion = $request->saldo_a_favor; 
+        //     $Paciente->update(['saldo_a_favor' => $actualizacion]);  
+        // }
+         
         // $saldo_paciente =$request->saldo_a_favor;
             
         // $Paciente->update(['saldo_a_favor' => $saldo_paciente]); 
@@ -750,6 +814,15 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
+         $sigvariscard = new sigvariscard(
+            array(
+                'paciente_id'=> $request->paciente_id,
+                'folio'=>$request->SigvarisCardFolio,
+                'tipo'=>$request->SigvarisCard,
+                'venta_id'=>$venta->id
+            )
+        );
+        $sigvariscard->save();
 
            if ($request->sigpesos_usar>0) {
                 if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
@@ -916,7 +989,28 @@ class VentaController extends Controller
             if ($venta_cu->descuento_cu == null && $venta_cu->cumpleDes ==1) {
                         $venta_cu->update(['descuento_cu' => 1]);
             }
+             if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 6 ) {
+
+            if ($request->deposito_folio == null && $request->transferencia_folio == null ) {
+                # code...
+                if ($request->deposito_total != 0 || $request->transferencia_total != 0) {
+
+                    return redirect()
+                     ->back()
+                     ->withErrors(['Debes introducir algun folio en transferencia u deposito'])
+                     ->withInput($request->input());
+                    
+                }
+                
+            }else{
+                $venta->num_transferencia = $request->transferencia_total;
+                $venta->num_deposito = $request->deposito_total;
+                $venta->folio_transferencia = $request->transferencia_folio;
+                $venta->folio_deposito = $request->deposito_folio;
+            }
+        }
                  
+
         $Paciente=Paciente::where("id",$request->paciente_id)->first();
         
         $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
@@ -929,30 +1023,38 @@ class VentaController extends Controller
             // dd('Empleado fitter'.Auth::user()->empleado );
         }
 
-           if ($request->input('tipoPago') == 5 || $request->input('tipoPago') == 3) {
+             if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ||$request->input('tipoPago') == 5) {
 
         if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
 
-    
-             $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
+             
+             $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
 
-             $actualizacion =  $Paciente->saldo_a_favor - $request->saldo_a_usar; 
+             $actualizacion = $Paciente->saldo_a_favor - $request->saldo_a_usar; 
              
              $venta->PagoSaldo=$request->saldo_a_usar;
-            
-             $Paciente->update(['saldo_a_favor' => $actualizacion]);      
+                // dd($actualizacion, $request->saldo_a_favor,$Paciente->saldo_a_favor);
+             $Paciente->update(['saldo_a_favor' => $actualizacion]); 
+
+              // $saldo_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+              // $Paciente->update(['sigpesos_a_favor' => $saldo_paciente]);  
+              
              }else{
                 
-                return redirect()->route('ventas.index')->withErrors(['EL DAMAGE NO SE PUDO REALIZAR´PORQUE NO CUENTA CON SALDO SUFICIENTE']);          
-                 }
-
-             if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
-            return redirect()->route('ventas.index')->withErrors(['Error con importes de montos en efectivo o tarjeta']);
-        }else{
-
-         }
-         // return redirect()->route('ventas.index');
+           return redirect()
+                ->back()
+                ->withErrors(['Error saldo a favor insuficiente'])
+                ->withInput($request->input());
+        }
         
+           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar + $request->transferencia_total + $request->deposito_total== round($request->total, 2))) {
+            return redirect()
+                ->back()
+                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+                ->withInput($request->input());
+        }
+
+
         }
         // dd('VENTA QUE SERÁ GUARDADA'.$venta);
 
@@ -1058,6 +1160,15 @@ class VentaController extends Controller
             )
         );
         $CRM->save();
+        $sigvariscard = new sigvariscard(
+            array(
+                'paciente_id'=> $request->paciente_id,
+                'folio'=>$request->SigvarisCardFolio,
+                'tipo'=>$request->SigvarisCard,
+                'venta_id'=>$venta->id
+            )
+        );
+        $sigvariscard->save();
           if ($request->sigpesos_usar>0) {
                 if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
              //Sigpesos 

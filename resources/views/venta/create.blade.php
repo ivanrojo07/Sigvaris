@@ -1366,9 +1366,9 @@
                 $('#PagoTarjeta').val(0);
                 $('#saldo_a_usar').val(0);
                 $('#deposito_total').val(0);
-               $('#transferencia_total').val(0);
+                $('#transferencia_total').val(0);
                 $('#deposito_folio').val(null);
-               $('#transferencia_folio').val(null);
+                $('#transferencia_folio').val(null);
                 $('#saldo_a_favoor').show();
                 $('#banco').val(null);
                 $('#digitos_targeta').val(null);
@@ -1405,7 +1405,7 @@
                $('#saldo_a_usar').val($('#total').val());
             }else if($('#tipoPago').val()==6){
                 $('#deposito_total').val(0);
-               $('#transferencia_total').val(0);
+                $('#transferencia_total').val(0);
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
                 $('#saldo_a_usar').val(0);
@@ -1548,12 +1548,12 @@
               console.log(res34.folio);
               $('#folio').val(res34.folio);
               $('#monto').val(res34.monto);
-              if (res34.descripcion != null && res34.folio != null ) {alert(res34.descripcion)}
+              if (res34.descripcion != null && res34.folio != null ) {swal(res34.descripcion)}
               // var folios_old =  res34.pac;
 
                for(var i=0;i<res34.pac.length;i++){
 
-                    alert("Folio de: "+res34.pac[i]["monto"]+" con folio"+res34.pac[i]["folio"]);
+                    swal("Folio de: "+res34.pac[i]["monto"]+" con folio "+res34.pac[i]["folio"]);
                             }
               console.log(res34.pac);
               console.log(res34.monto);
