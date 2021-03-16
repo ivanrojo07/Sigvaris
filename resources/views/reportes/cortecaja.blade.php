@@ -24,6 +24,22 @@
                             <button type="submit" class="btn btn-success">GENERAR</button>
                         </div>
                     </form>
+                    <div class="col-12 col-lg-3 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <label class="text-uppercase text-muted">Exportar excel</label>
+                    <a href="{{route('corte-caja.export.polanco')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Polanco</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <label class="text-uppercase text-muted">Exportar excel</label>
+                    <a href="{{route('corte-caja.export.perisur')}}" class="form-control btn btn-success btn-block rounded-0">EXPORTAR Perisur</a>
+                </div>
+            </div>
+        </div>
                 </div>
                 <div class="card-body">
                     {{-- Tabla de las prendas --}}

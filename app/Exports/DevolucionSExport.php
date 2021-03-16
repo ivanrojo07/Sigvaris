@@ -62,8 +62,7 @@ class DevolucionSExport implements FromCollection, WithHeadings,WithTitle
             'Cumpleaños',
             'Folio',
             'sigpesos',
-            'monto devolucion saldo a favor
-'
+            'monto devolucion saldo a favor'
 
         ];
     }

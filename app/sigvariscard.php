@@ -13,7 +13,8 @@ class sigvariscard extends Model
         'id',
         'paciente_id',
         'folio',
-        'tipo'
+        'tipo',
+        'venta_id'
     ];
     public $timestamps = false;
 

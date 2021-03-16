@@ -291,7 +291,8 @@ class VentaController extends Controller
             array(
                 'paciente_id'=> $request->paciente_id,
                 'folio'=>$request->SigvarisCardFolio,
-                'tipo'=>$request->SigvarisCard
+                'tipo'=>$request->SigvarisCard,
+                'venta_id'=>$venta->id
             )
         );
         $sigvariscard->save();

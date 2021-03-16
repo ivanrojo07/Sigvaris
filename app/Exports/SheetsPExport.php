@@ -18,7 +18,7 @@ class SheetsPExport implements  WithMultipleSheets
     public function sheets(): array
     {
         $sheets = [
-            'Corte de Caja' => new CorteCajaPExport(),
+            'Corte de Caja ' => new CorteCajaPExport(),
             'Ventas Totales' => new TotalVentasPExport(),
             'Cientes ' => new ClienteVentasPExport()
         ];
