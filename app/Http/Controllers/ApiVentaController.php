@@ -38,7 +38,8 @@ class ApiVentaController extends Controller
             $diferencia=$diferencia*-1;
         }else{
              $diferencia=$diferencia*-1;
-        }
+        }   
+            $promo=0;
             $uno =0;
             $dos =0;
             $tres=0;
@@ -101,6 +102,18 @@ class ApiVentaController extends Controller
            
             $cinco = round($cinco);
         }
+         if (HistorialCambioVenta::where('venta_id',$venta->id)->count()>=1) {
+                            //en caso de que si exista una venta, ya se habra aplicado los descuentos y etc
+                            
+                        }else{
+                            if ($venta->desc_inapam != null) {
+                                 $diferencia = abs($diferencia)- intval($venta->desc_inapam);
+                                 $promo = intval($venta->desc_inapam);
+                            }
+                          
+                        }
+                        // $promo =$diferencia;
+
         return response()->json([
             'arrayViejosProductos' => $arrayPreciosProductos,
             'arrayNuevoProdutos' => $arrayPreciosProductosConNuevoProducto,

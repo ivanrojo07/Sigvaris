@@ -928,7 +928,8 @@ class VentaController extends Controller
                 'producto_devuelto_id' => $request->productoDevuelto,
                 'producto_entregado_id' => $productos[0]->id,
                 'precioOri'=>$request->precioOri,
-                'precioNew' =>$request->precioNew
+                'precioNew' =>$request->precioNew,
+                'pagosaldo'=>$request->saldo_a_usar
             )
         );
 
@@ -1283,7 +1284,8 @@ class VentaController extends Controller
             'producto_devuelto_id' => $request->productoDevuelto,
             'observaciones' => $request->observacionesDevuelto,
             'precioOri'=>$request->precioOri,
-            'precioNew' =>$request->precioNew
+            'precioNew' =>$request->precioNew,
+            'pagosaldo'=>$request->saldo_a_usar
             )
         );
 
