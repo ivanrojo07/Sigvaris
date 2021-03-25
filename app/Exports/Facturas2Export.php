@@ -88,7 +88,7 @@ class Facturas2Export implements FromCollection, WithHeadings
                     'regimen_fiscal' => $venta->paciente->datoFiscal->regimen_fiscal,
                     //'homoclave' => $venta->paciente->datoFiscal->homoclave,
                     'correo' => $venta->paciente->datoFiscal->correo,
-                    'rfc' => $RFC_,
+                    'rfc' => $venta->paciente->rfc,
                     'calle' => $venta->paciente->datoFiscal->calle,
                     'num_ext' => $venta->paciente->datoFiscal->num_ext,
                     'num_int' => $venta->paciente->datoFiscal->num_int,
