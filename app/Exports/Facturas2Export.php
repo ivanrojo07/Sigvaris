@@ -36,12 +36,11 @@ class Facturas2Export implements FromCollection, WithHeadings
     public function collection()
     {
 
-         // $limite = $this->fecha." 23:59:59";
-        // if (!is_null($this->fecha)) {
-           // $ventas = $ventas->where('created_at', ">=", $this->fecha)->where('created_at','<=',$limite);
+        $ventas = Venta::where('requiere_factura', 1);
          $limite = $this->fecha." 23:59:59";
-        $ventas = Venta::where('requiere_factura', 1)->where('created_at', ">=", $this->fecha)->where('created_at','<=',$limite);
-        // }
+        if (!is_null($this->fecha)) {
+           $ventas = $ventas->where('created_at', ">=", $this->fecha)->where('created_at','<=',$limite);
+        }
 
         if (!is_null($this->oficina_id)) {
             $ventas = $ventas->where('oficina_id', $this->oficina_id);
