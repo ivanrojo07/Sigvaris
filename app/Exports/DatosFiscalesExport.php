@@ -20,9 +20,9 @@ class DatosFiscalesExport implements FromCollection, WithHeadings
     {
         $ventas = Venta::where('requiere_factura',1);
         $limite = $this->fecha." 23:59:59";
-        if($this->fecha){
+        // if($this->fecha){
            $ventas = $ventas->where('created_at', ">=", $this->fecha)->where('created_at','<=',$limite);
-        }
+        // }
 
         if($this->oficina_id){
             $ventas = $ventas->where('oficina_id', $this->oficina_id);
