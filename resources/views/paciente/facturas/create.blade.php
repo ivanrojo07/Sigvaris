@@ -35,21 +35,21 @@
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
                                 <input type="text" name="fecha" id="fechaFactura" style="display:none">
-                                <button type="submit" class="btn btn-primary rounded-0">FACTURA MOSTRADOR</button>
+                                <button type="submit" class="btn btn-primary rounded-0" onclick="javascript:validar();">FACTURA MOSTRADOR</button>
                             </form>
                             <br><br><br>
                             <form action="{{route('facturas.download2')}}" method="POST" class="form-inline float-right">
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdFactura" style="display:none">
                                 <input type="text" name="fecha" id="fechaFactura" style="display:none">
-                                <button type="submit" class="btn btn-primary rounded-0">FACTURA  CLIENTES</button>
+                                <button type="submit" class="btn btn-primary rounded-0" onclick="javascript:validar();">FACTURA  CLIENTES</button>
                             </form>
                             <form action="{{route('corte-caja.export.datos-fiscales')}}" method="GET"
                                 class="form-inline">
                                 @csrf
                                 <input type="text" name="oficina_id" id="oficinaIdDatosFiscales" style="display:none">
-                                <input type="text" name="fecha" id="fechaDatosFiscales" style="display:none">
-                                <button type="submit" class="btn btn-primary rounded-0">DATOS FISCALES</button>
+                                <input type="text" name="fecha" id="fechaDatosFiscales" style="display:none" >
+                                <button type="submit" class="btn btn-primary rounded-0" onclick="javascript:validar();">DATOS FISCALES</button>
                             </form>
                         </div>
                     </div>
@@ -61,6 +61,24 @@
 
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
+
+
+    function validar(){
+        
+        if ($('#fecha').val() != "") {
+            swal("Se genero el archivo correctamente");
+              // if (confirm("Presione aceptar para confirmar que se asignara saldo a favor al paciente ")){
+              //                         return true;
+              //                        }else{
+              //                        return false;
+              //                        }    
+        } else{
+            swal("Asegurate de elegir una fecha y una sucursal");
+            return false;
+        }
+
+
+    }
 
     $(document).on('change', '#oficina', function(){
         $('#oficinaIdFactura').val( $(this).val() );
