@@ -82,6 +82,24 @@ class Facturas2Export implements FromCollection, WithHeadings
                     'iva' => 16,
                     'numero_almacen' => $venta->oficina->nombre == 'Polanco' ? 2 : 7,
                     'observaciones' => '',
+                    'paciente' => $venta->paciente->datoFiscal->paciente ? $venta->paciente->datoFiscal->paciente->fullname : '',
+                    'tipo_persona' => $venta->paciente->datoFiscal->tipo_persona,
+                    'nombre_o_razon_social' => $venta->paciente->datoFiscal->nombre_o_razon_social,
+                    'regimen_fiscal' => $venta->paciente->datoFiscal->regimen_fiscal,
+                    //'homoclave' => $venta->paciente->datoFiscal->homoclave,
+                    'correo' => $venta->paciente->datoFiscal->correo,
+                    'rfc' => $RFC_,
+                    'calle' => $venta->paciente->datoFiscal->calle,
+                    'num_ext' => $venta->paciente->datoFiscal->num_ext,
+                    'num_int' => $venta->paciente->datoFiscal->num_int,
+                    'colonia' => $venta->paciente->datoFiscal->colonia,
+                    'ciudad' => $venta->paciente->datoFiscal->ciudad,
+                    'alcaldia_o_municipio' => $venta->paciente->datoFiscal->alcaldia_o_municipio,
+                    'estado' => $venta->paciente->datoFiscal->estado,
+                    'codigo_postal' => $venta->paciente->datoFiscal->codigo_postal,
+                    'porcentaje_descuento' => '',
+                    'nombre_descuento' => '',
+                    'uso_cfdi' => $venta->paciente->datoFiscal->uso_cfdi
                 ];
             }),
         );
@@ -114,7 +132,26 @@ class Facturas2Export implements FromCollection, WithHeadings
             'IMPUESTO 3',
             'I.V.A.',
             'NÚM. DE ALMACÉN',
-            'OBSEREVACIONES DE PARTIDA'
+            'OBSEREVACIONES DE PARTIDA',
+            'PACIENTE',
+            'TIPO PERSONA',
+            'NOMBRE O RAZÓN SOCIAL',
+            'REGIMEN FISCAL',
+            //'HOMOCLAVE',
+            'CORREO',
+            'RFC',
+            'CALLE',
+            'NUM. EXT',
+            'NUM. INT',
+            'COLONIA',
+            'CIUDAD',
+            'ALCALDIA O MUNICIPIO',
+            'ESTADO',
+            'CODIGO POSTAL',
+            'PORCENTAJE DESCUENTO',
+            'NOMBRE DESCUENTO',
+            'USO CFDI'
+
         ];
     }
 
