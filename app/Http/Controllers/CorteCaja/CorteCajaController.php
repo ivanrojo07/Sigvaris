@@ -126,6 +126,9 @@ class CorteCajaController extends Controller
     }
     public function download(Request $request)
     {
+        // $fecha = $request->fecha;
+        // Se agrega el formato de horas ya que en la bd esta almacenada la fecha con horas
+        $request->fecha .= " 00:00:00";
         // dd($request->fecha);
         return Excel::download(new DatosFiscalesExport($request->fecha, $request->oficina_id), 'Datos_Fiscales.xlsx');
     }
