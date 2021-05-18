@@ -39,7 +39,19 @@
                     @endforeach
                 </select>
                 <button class="btn btn-primary">Buscar</button>
+            
+           
             </form>
+            @if ( isset($ventas) )
+
+
+            <form action="{{route('reportes.2.export')}}" method="POST">
+                     @csrf
+                      <input type="hidden"  name="fechaFinal" value="{{$fechaFinal}}">
+                       <input type="hidden"  name="fechaInicial" value="{{$fechaInicial}}">
+                <button class="btn btn-primary">EXPORTAR</button>
+            </form>
+            @endif
         </div>
         @if ( isset($ventas) )
         {{-- Lista de pacientes --}}

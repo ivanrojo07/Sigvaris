@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reporte;
 
 use App\Doctor;
 use App\Empleado;
+use App\Exports\ReporteDosExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
@@ -13,6 +14,7 @@ use App\Venta;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReporteController extends Controller
 {
@@ -105,7 +107,7 @@ class ReporteController extends Controller
 
             $ventas = $ventas->get();
 
-            return view('reportes.dos', compact('ventas', 'oficinas', 'empleadosFitter'));
+            return view('reportes.dos', compact('ventas', 'oficinas', 'empleadosFitter','fechaInicial','fechaFinal'));
         }
 
         return view('reportes.dos', compact('oficinas', 'empleadosFitter'));
@@ -883,4 +885,32 @@ class ReporteController extends Controller
         ];
         return $datosVentasMes;
     }
+
+
+    public function exportdos(Request $request){
+
+        $fechaInicial =$request->fechaInicial;
+        $fechaFinal =$request->fechaFinal;
+        $ventas = Venta::has('paciente')->has('productos')->where('fecha', '>=', $fechaInicial)
+                ->where('fecha', '<=', $fechaFinal)
+                ->withCount('productos');
+        $ventas = $ventas->get();
+        // dd($ventas->get(1));
+
+        return Excel::download(new ReporteDosExport($fechaInicial,$fechaFinal,$ventas), 'Prendas vendidas por paciente.xlsx');
+        // dd($ventas);
+        // $ventas = $request->ventas ; 
+        // foreach ($ventas as $key => $venta) {
+        //     dd($venta);
+        // }
+        
+
+        // return $request;
+    }
+
+
+
+
+
+
 }

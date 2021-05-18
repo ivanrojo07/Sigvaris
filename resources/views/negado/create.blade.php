@@ -116,7 +116,7 @@
                                     <input type="number" name="folio" class="form-control" step="1" id="folio" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label id="No_repetido" class="control-label">✱ SKU producto devuelto:</label>
+                                    <label id="No_repetido" class="control-label">✱ SKU PRODUCTO NEGADO:</label>
                                     <select class="form-control" name="producto_id" id="producto_id" required>
                                         <option value="">Buscar..</option>
                                     </select>
@@ -310,7 +310,8 @@
         
         const paciente_id = $(this).attr('pacienteid');
         const paciente_nombre = $(this).attr('nombre');
-        $('#paciente_id').append("<option value='"+paciente_id+"' >"+paciente_nombre+"</option>");
+        const paciente_apellidosPaciente = $(this).attr('apellidos');
+        $('#paciente_id').append("<option value='"+paciente_id+"' >"+paciente_nombre+" " +paciente_apellidosPaciente+"</option>");
         $('#paciente_id').val(paciente_id);
     /* Act on the event */
     });

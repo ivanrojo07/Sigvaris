@@ -46,12 +46,12 @@
 			<div class="row">
 				<div class="col-3 form-group">
 					<label class="control-label">Calle</label>
-					<input type="text" name="calle" class="form-control" required=""
+					<input type="text" name="calle" class="form-control" 
 						value="{{$paciente->datoFiscal ? $paciente->datoFiscal->calle : ''}}">
 				</div>
 				<div class="col-3 form-group">
 					<label class="control-label">Numero exterior</label>
-					<input type="text" name="num_ext" class="form-control" required=""
+					<input type="text" name="num_ext" class="form-control" 
 						value="{{$paciente->datoFiscal ? $paciente->datoFiscal->num_ext : ''}}">
 				</div>
 				<div class="col-3 form-group">
@@ -61,27 +61,27 @@
 				</div>
 				<div class="col-3 form-group">
 					<label class="control-label">Colonia</label>
-					<input type="text" name="colonia" class="form-control" required=""
+					<input type="text" name="colonia" class="form-control" 
 						value="{{$paciente->datoFiscal ? $paciente->datoFiscal->colonia : ''}}">
 				</div>
 				<div class="col-3 form-group">
 					<label class="control-label">Ciudad</label>
-					<input type="text" name="ciudad" class="form-control" required=""
+					<input type="text" name="ciudad" class="form-control" 
 						value="{{$paciente->datoFiscal ? $paciente->datoFiscal->ciudad : ''}}">
 				</div>
 				<div class="col-3 form-group">
 					<label class="control-label">Alcaldia o municipio</label>
-					<input type="text" name="alcaldia_o_municipio" class="form-control" required=""
+					<input type="text" name="alcaldia_o_municipio" class="form-control"
 						value="{{$paciente->datoFiscal ? $paciente->datoFiscal->alcaldia_o_municipio : ''}}">
 				</div>
 				<div class="col-3 form-group">
 					<label class="control-label">Estado</label>
-					<input type="text" name="estado" class="form-control" required=""
+					<input type="text" name="estado" class="form-control" 
 						value="{{$paciente->datoFiscal ? $paciente->datoFiscal->estado : ''}}">
 				</div>
 				<div class="col-3 form-group">
 					<label class="control-label">C.P.</label>
-					<input type="text" name="codigo_postal" class="form-control" required=""
+					<input type="text" name="codigo_postal" class="form-control"
 						value="{{$paciente->datoFiscal ? $paciente->datoFiscal->codigo_postal : ''}}">
 				</div>
 			</div>

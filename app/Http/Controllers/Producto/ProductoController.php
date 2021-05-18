@@ -141,16 +141,25 @@ class ProductoController extends Controller
     }
     public function getProductoExistsDesc(Request $request)
     {
+
         $Producto=Producto::where('oficina_id',session('oficina'));
+        // dd($Producto->where('sku',$request->input('sku'))
+        //             ->orWhere('upc',intval($request->input('sku')))
+        //             ->orWhere('swiss_id',intval($request->input('sku')))
+        //             ->exists());
+
+
         if ($Producto->where('sku',$request->input('sku'))
-                    ->orWhere('upc',$request->input('sku'))
-                    ->orWhere('swiss_id',$request->input('sku'))
+                    ->orWhere('upc',intval($request->input('sku')))
+                    ->orWhere('swiss_id',intval($request->input('sku')))
                     ->exists()) {
+
             $Producto=$Producto->where('sku',$request->input('sku'))
                     ->orWhere('upc',$request->input('sku'))
                     ->orWhere('swiss_id',$request->input('sku'))
                     ->get();
-            if (count($Producto)==1) {
+                    // dd($Producto);
+            if (count($Producto)==1 || count($Producto)>1) {
                 $ProductoActualizar=Producto::updateOrCreate(['id'=>$Producto[0]->id],[
                     'stock'=>$Producto[0]->stock+1
                 ]);
@@ -181,7 +190,11 @@ class ProductoController extends Controller
                 }
                 
                 return $Producto[0];
-            }else{
+            }
+
+
+
+            else{
                 return 0;
             }
 

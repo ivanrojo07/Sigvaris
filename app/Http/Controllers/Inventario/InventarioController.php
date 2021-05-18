@@ -97,12 +97,15 @@ class InventarioController extends Controller
         $historialModificaciones = HistorialSurtido::orderBy('created_at')->get();
         $fechaAux=Carbon::parse($fecha);
         $historialModificacionesInventario=[];
+
         foreach ($historialModificaciones as $historial) {
+            // dd(Carbon::parse($historial->created_at)->diffInDays($fechaAux));
             if (Carbon::parse($historial->created_at)->diffInDays($fechaAux)<1) {
                 array_push($historialModificacionesInventario,$historial);
             }
 
         }
+        // dd($historialModificacionesInventario);
         return view('producto.inventario.historialSurtidofecha', compact('historialModificacionesInventario','fecha'));
     }
 }

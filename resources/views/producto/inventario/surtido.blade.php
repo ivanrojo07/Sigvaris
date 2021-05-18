@@ -86,7 +86,7 @@
                                 res.precio_publico_iva
                             ]).draw();
                         }else{
-                            alert("Producto no encontrado.");
+                            swal("Producto no encontrado.");
                         }
                     }
 

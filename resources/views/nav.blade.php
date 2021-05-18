@@ -171,7 +171,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{route('reportes.1')}}"><span>Pacientes que no compraron</span><i class="fa fa-search float-right"></i></a>
-                            <a class="dropdown-item" href="{{route('reportes.2')}}"><span>Prendas compradas por paciente</span><i class="fa fa-search float-right"></i></a>
+                            <a class="dropdown-item" href="{{route('reportes.2')}}"><span>Prendas vendidas por paciente</span><i class="fa fa-search float-right"></i></a>
                             <a class="dropdown-item" href="{{route('reportes.3')}}"><span>Prendas vendidas por rango de fecha</span><i class="fa fa-search float-right"></i></a>
                             <a class="dropdown-item" href="{{route('reportes.4a')}}"><span>Prendas compradas</span><i class="fa fa-search float-right"></i></a>
                             <a class="dropdown-item" href="{{route('reportes.4b')}}"><span>Prendas por SKU</span><i class="fa fa-search float-right"></i></a>

@@ -9,6 +9,7 @@
     <tbody>
         @foreach ($historialModificacionesInventario as $modificacion)
             <tr>
+            
                 <td>{{\Carbon\Carbon::parse($modificacion["fecha"])->formatLocalized('%d de %B de %Y')}}</td>
                 <td>{{$modificacion["Total"]}}</td>
                 <td>
