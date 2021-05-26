@@ -289,8 +289,8 @@ class DescuentoController extends Controller
                         case 'Procentaje1':
                             $CostoProductoBarato=999999999;
                             foreach ($request->input("productos_id") as $producto_id) {
-                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico")){
-                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico");
+                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico_iva")){
+                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico_iva");
                                 }
                             }
                             $response=array(
