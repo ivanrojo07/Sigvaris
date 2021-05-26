@@ -109,7 +109,7 @@ class VentaController extends Controller
         $empleadosFitter = Empleado::fitters()->get();
         $Bancos = Banco::get();
         //dd($pacientes);
-        return view('venta.create', [
+        return view('venta.PEcreate', [
             'pacientes' => $pacientes,
             'paciente' => $paciente,
             'descuentos' => $descuentos,

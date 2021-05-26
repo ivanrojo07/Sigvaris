@@ -1052,9 +1052,11 @@
     function cambiarTotalVenta(){
         let precios_total = $('td.precio_total').toArray();
         let total = 0;
+         console.log("precios array",precios_total);
         precios_total.forEach(e => {
             total += parseFloat(e.innerText);
             console.log(total);
+
         });
         $('#promocion_id option:eq(0)').prop('selected',true);
         $('#descuento').val(0);
@@ -1081,6 +1083,7 @@
                     }   
                     
                     $('#descuentoCumple').val(parseInt(res.cumple));
+                       console.log('Consulta cumpleaños',res.cumple);
                     if (isNaN($('#descuentoCumple').val(res.cumple))) {
 
                         desCumple=500
@@ -1117,11 +1120,16 @@
             // $('#total').val(0);
         var aux=(parseFloat(subtotal)+parseFloat(iva))-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {
-            $('#total').val(aux.toFixed(2));
+            $('#total').val(parseInt(aux.toFixed(2)));
         }else{
             $('#total').val(0);
         }
         // $('#total').val('ola');
+        // iva=(($('#total').val())*0.16).toFixed(2);
+        // $('#iva').val(iva);
+        // aux = parseInt($('#total').val() ) -parseInt(iva);
+        // $('#subtotal').val(aux);
+        console.log('iba total de la venta ',iva);
     }
 
     function cambiarTotal2(a, p){
@@ -1637,8 +1645,8 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-      
-
+            
+        console.log('Hola');
         $('#descuento_id').change(function(){            
             var id=$('#descuento_id').val();
             $('#descuento').val(0);
@@ -1717,7 +1725,7 @@
                 total_productos+=parseInt($(this).val());
                 cantidad_id.push($(this).val());
             });
-
+            console.log('Cantidades que se envian',cantidad_id);
             // OBTENEMOS EL ID DE LOS PRODUCTOS DE LA POSIBLE COMPRA
             $('[name="producto_id[]"]').each(function(){
                 productos_id.push($(this).val());
@@ -1726,7 +1734,7 @@
                 url:"{{ url('/calcular_descuento') }}/"+id,
                 type:'POST',
                 data: {"_token": "{{CSRF_TOKEN()}}",
-                    "subtotal":$("#subtotal").val(),
+                    "subtotal":$("#total").val(),
                     "paciente_id":paciente_id,
                     "total_productos":total_productos,
                     "productos_id":productos_id,
@@ -1819,6 +1827,9 @@
             
             
         });
+
+
+
         $("#BuscarPaciente").on('keyup', function (e) {
           var keycode = e.keyCode || e.which;
             if (keycode == 13) {
@@ -1988,7 +1999,7 @@
         });*/
     });
 
-   @if(!isset($paciente))
+   
     $(document).on('click', '.botonSeleccionCliente', async function(){
         
                 
@@ -2109,13 +2120,69 @@
             console.log('total',$('#sigpesos_usar').val())
         }
     });
-   @endif
+   
     $(document).on('change', '#paciente_id', function(){
         const pacienteId = $(this).val();
         console.log('aqui');
     });
 
 </script>
+
+
+<script type="text/javascript">
+
+
+ $(document).ready(function(){
+        
+     
+        var pacienteId = {{$paciente->id}};
+
+        $.ajax({
+            url:`{{ url('/api/pacientes/${pacienteId}/datos_fiscales') }}`,
+            type: 'GET',
+            success: function(datos_fiscales){
+                console.log({
+                    pacienteId,
+                    datos_fiscales
+                });
+
+                if(datos_fiscales.datosFiscales != null){
+                $('#tipoPersona').val(datos_fiscales.datosFiscales.tipo_persona);
+                $('#nombreORazonSocial').val(datos_fiscales.datosFiscales.nombre_o_razon_social);
+                $('#regimeFiscal').val(datos_fiscales.datosFiscales.regimen_fiscal);
+                $('#correo').val(datos_fiscales.datosFiscales.correo);
+                $('#rfc').val(datos_fiscales.datosFiscales.rfc);
+                $('#homoclave').val(datos_fiscales.datosFiscales.homoclave);
+                $('#calle').val(datos_fiscales.datosFiscales.calle);
+                $('#num_ext').val(datos_fiscales.datosFiscales.num_ext);
+                $('#num_int').val(datos_fiscales.datosFiscales.num_int);
+                $('#codigo_postal').val(datos_fiscales.datosFiscales.codigo_postal);
+                $('#ciudad').val(datos_fiscales.datosFiscales.ciudad);
+                $('#homoclave').val(datos_fiscales.datosFiscales.homoclave);
+                $('#alcaldia_o_municipio').val(datos_fiscales.datosFiscales.alcaldia_o_municipio);
+                $('#uso_cfdi').val(datos_fiscales.datosFiscales.uso_cfdi);
+                }
+                $('#sigpesosAFavor').val(datos_fiscales.sigpesos_a_favor);
+                $('#saldoAFavor').val(datos_fiscales.saldo_a_favor);
+                console.table(datos_fiscales)
+            }
+        });
+
+    });
+  
+
+   
+
+</script>
+
+
+
+
+
+
+
+
+
 
 @if(isset($paciente))
 
@@ -2162,15 +2229,25 @@
             type:'GET',
             dataType:'json',
             success: function(res34){   
+                console.log('Consulta',res34);
                 if (!isNaN(res34.sigpesos)&&res34.sigpesos!="") {
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res34.sigpesos));
                     console.log('sigpesos peticion00',res34.sigpesos);
                 }else{             
-                    res34=0;       
+                    // res34=0;       
                     var sigpesos=$('#sigpesos_usar').val(0);
                     console.log('sigpesos peticion1199',0);
                 }
                 $('#descuentoCumple').val(parseInt(res34.cumple));
+                console.log('Consulta cumpleaños',res34);
+                    if (isNaN($('#descuentoCumple').val(res34.cumple))) {
+
+                        desCumple=500
+
+                        } else{
+                            $('#descuentoCumple').val(parseInt(res34.cumple));
+                        }
+
                 if (res34.cumple>0) {
                     $('#cumpleDes').val(1);
                 }
@@ -2208,6 +2285,9 @@
    
 
 </script>
+
+
+
 @else
 @endif
 @endsection

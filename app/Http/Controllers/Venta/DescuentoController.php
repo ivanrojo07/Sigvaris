@@ -261,7 +261,7 @@ class DescuentoController extends Controller
 
     public function getDescuento(Promocion $promocion,Request $request)
     {
-       // dd($request->input("productos_id"));
+       // dd($promocion,$request);
       //   $response = array(
       //     'status' => 'success',
       //     'subtotal' => $request->subtotal,
@@ -320,8 +320,8 @@ class DescuentoController extends Controller
                          case 'Pieza':
                             $CostoProductoBarato=999999999;
                             foreach ($request->input("productos_id") as $producto_id) {
-                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico")){
-                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico");
+                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico_iva")){
+                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico_iva");
                                 }
                             }
                             $response=array(
@@ -387,8 +387,8 @@ class DescuentoController extends Controller
                          case 'Pieza':
                             $CostoProductoBarato=999999999;
                             foreach ($request->input("productos_id") as $producto_id) {
-                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico")){
-                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico");
+                                if($CostoProductoBarato>Producto::where('id',$producto_id)->value("precio_publico_iva")){
+                                    $CostoProductoBarato=Producto::where('id',$producto_id)->value("precio_publico_iva");
                                 }
                             }
                             $response=array(
