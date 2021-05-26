@@ -69,7 +69,7 @@
                                         <tr>
                                             <th nowrap>Folio</th>
                                             <th nowrap>Cliente</th>
-                                            <th nowrap>Total (sin IVA)</th>
+                                            <th nowrap>Total</th>
                                             <th nowrap>Descuento</th>
                                             <th nowrap>Fecha</th>
                                             <th nowrap>Ver</th>
@@ -88,7 +88,7 @@
                                             <td nowrap>
                                                 {{$venta->paciente['nombre']." ".$venta->paciente['paterno']." ".$venta->paciente['materno']}}
                                             </td>
-                                            <td nowrap>${{$venta->subtotal}}</td>
+                                            <td nowrap>${{$venta->total}}</td>
                                             @if($venta->descuento)
                                             <td nowrap>{{$venta->descuento->nombre}}</td>
                                             @else
