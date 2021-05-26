@@ -76,8 +76,9 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
     {
         return [
             'Total de ventas',
-            'Ventas Con iva',
             'Ventas Sin iva',
+            'Ventas Con iva',
+            
             'Numero total de pacientes',
             'Numero total de pacientes nuevos',
             'Numero total de pacientes recompra',
