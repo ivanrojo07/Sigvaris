@@ -20,7 +20,9 @@ class SheetsPExport implements  WithMultipleSheets
         $sheets = [
             'Corte de Caja ' => new CorteCajaPExport(),
             'Ventas Totales' => new TotalVentasPExport(),
-            'Cientes ' => new ClienteVentasPExport()
+            'Cientes ' => new ClienteVentasPExport(),
+             'Devoluciones ' => new DevolucionPExport(),
+            'Devoluciones Sigpesos ' => new DevolucionSExport(),
         ];
 
         return $sheets;
