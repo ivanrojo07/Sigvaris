@@ -19,6 +19,7 @@ class TotalVentasPExport implements FromCollection, WithHeadings, WithTitle
      */
     public function collection()
     {
+        $now = Carbon::now('America/Mexico_City');
         $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
             ->where('oficina_id',1)
             ->get();
