@@ -401,6 +401,8 @@
                                                 
 
                                             </div>
+                                            
+
                                             <div class="col-4 form-group">
                                                
                                                 <select  id="SigvarisCard" name="SigvarisCard" class="form-control lista" required>
@@ -414,11 +416,23 @@
                                             </div>
 
                                         </div>
-                                           
-                                           
-                                            
+                                           <div class="row">      
+                                         <label for="" class="text-uppercase text-muted">GAREX FOLIO</label>
+                                             <div class="col-4 form-group">
+                                               
+                                                <input type="text" class="form-control" name="garex" id="garex">
+                                                
 
+                                            </div>
+                                            <label for="" class="text-uppercase text-muted">RETEX FOLIO</label>
+                                             <div class="col-4 form-group">
+                                               
+                                                <input type="text" class="form-control" name="retex" id="retex">
+                                                
 
+                                            </div>       
+
+                                             </div>
                                     <hr>
                                     <input type="hidden" name="paciente_id" id="paciente_id" required>
                                     <div class="row">
@@ -1727,6 +1741,7 @@
                 type:'POST',
                 data: {"_token": "{{CSRF_TOKEN()}}",
                     "subtotal":$("#subtotal").val(),
+                    "total":$("#total").val(),
                     "paciente_id":paciente_id,
                     "total_productos":total_productos,
                     "productos_id":productos_id,
@@ -1736,7 +1751,8 @@
                 success: function(res){
                     //alert(res.sigpesos);                  
                     if(res.status){
-                        if (res.status==1) {                       
+                        if (res.status==1) {     
+                            console.log('Datos del descuento:',res);                  
                             $('#descuento').val(res.total);
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());

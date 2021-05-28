@@ -107,7 +107,7 @@
                                                                 <label for="" class="text-uppercase text-muted mt-2">$
                                                                     PRODUCTO DEVUELTO</label>
                                                                 <input type="text" class="form-control inputPrecioProductoDevuelto"
-                                                                    value="{{ $producto->pivot->precio }}" productoId="{{$producto->id}}" readonly>
+                                                                    value="{{ $producto->precio_publico_iva }}" productoId="{{$producto->id}}" readonly>
                                                             </div>
                                                             <div class="col-12 col-md-6">
                                                                 <label for="" class="text-uppercase text-muted mt-2">$
@@ -223,7 +223,7 @@
             url: `/api/productos/sku/${skuProducto}`,
             success: function( response ){
                 console.table( response )
-                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( response.precio_publico )
+                $(`.inputPrecioProductoEntregado[productoId=${idProducto}]`).val( response.precio_publico_iva )
                 // const precioProductoDevuelto = $(`.inputPrecioProductoDevuelto[productoId=${idProducto}]`).val()
                 // $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat( precioProductoDevuelto ) - parseFloat(response.precio_publico) )
             },
@@ -255,7 +255,7 @@
                 console.log( response )
                 
                 $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) );
-                  var original =  parseInt(response.precio_original) +(parseInt(response.precio_original)*.16);
+                  var original =  parseInt(response.precio_original);
                $(`.precioOri`).val( parseInt(original) );
                $(`.precioNew`).val( parseInt(response.precio_nueva.precio_publico_iva) );
                console.log('PRecio_original',response.precio_original);

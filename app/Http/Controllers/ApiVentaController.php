@@ -15,9 +15,9 @@ class ApiVentaController extends Controller
     {
 
         $venta = Venta::find($request->ventaId);
-        // dd($venta);
+        // dd($request);
         $productoQueSeraEntregado = Producto::where('sku', $request->skuProductoEntregado)->first();
-        $precioProductoQueSeraDevuelto = $request->precioProductoDevuelto;
+        $precioProductoQueSeraDevuelto = intval($request->precioProductoDevuelto);
 
         $arrayPreciosProductos = $this->getArrayPreciosProductos($venta);
 
@@ -25,9 +25,10 @@ class ApiVentaController extends Controller
         $promo = Promocion::where('descuento_id',$venta->descuento_id)->value('descuento_de');
         $aux = $promo;
         $promo_unidad = Promocion::where('descuento_id',$venta->descuento_id)->value('unidad_descuento');
-
-        $arrayPreciosProductosConNuevoProducto = $this->getArrayPreciosProductosConNuevo($arrayPreciosProductos, $productoQueSeraEntregado, $precioProductoQueSeraDevuelto);
-        $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
+        $arrayPreciosProductosConNuevoProducto =0;
+        // $arrayPreciosProductosConNuevoProducto = $this->getArrayPreciosProductosConNuevo($arrayPreciosProductos, $productoQueSeraEntregado, $precioProductoQueSeraDevuelto);
+        $totalVentaBueva =0;
+        // $totalVentaBueva = $this->calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosConNuevoProducto);
 
 
         // $diferencia = round (round ($totalVentaBueva +($totalVentaBueva*.16))-$totalVentaOriginal);
@@ -47,7 +48,8 @@ class ApiVentaController extends Controller
             $cinco=0;
     if ($promo_unidad == 'Procentaje' ||$promo_unidad == 'Procentaje1' ||$promo_unidad == 'Procentaje2') {
                 # code...
-                $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16);
+                # $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16);
+                $uno = $precioProductoQueSeraDevuelto ;
 
                 $dos = $productoQueSeraEntregado->precio_publico_iva;
 
@@ -74,34 +76,38 @@ class ApiVentaController extends Controller
         if ($venta->cumpleDes) {
             # code...
             $promo = 300;
-            $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16)-300;
+            $uno = $precioProductoQueSeraDevuelto-300;
              $dos = $productoQueSeraEntregado->precio_publico_iva-300;
              $cinco = $dos-$uno;
               $cinco = $cinco;
               $diferencia=round($cinco);
                  $consulta = HistorialCambioVenta::where('venta_id',$venta->id)->where('descuento_cu',1)->get();
+                 // dd($uno,$dos,$tres,$cuatro,$cinco,$diferencia);
 
          if (count($consulta) >= 1) {
              # code...
              $promo =0;
-             $uno = $precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16);
+             $uno = $precioProductoQueSeraDevuelto ;
              $dos = $productoQueSeraEntregado->precio_publico_iva;
              $cinco = $dos-$uno;
              $cinco = round($cinco);
+             // dd($uno,$dos,$tres,$cuatro,$cinco,$diferencia);
 
              if ($promo_unidad == 'Procentaje' ||$promo_unidad == 'Procentaje1' ||$promo_unidad == 'Procentaje2') {
 
                         $promo = $aux/100;
-                        $uno = $uno-($uno*$promo);
-                         $dos =$dos-($dos*$promo);
+                        // $uno = $uno-($uno*$promo);
+                        //  $dos =$dos-($dos*$promo);
                          $cinco = $dos -$uno;
                          $diferencia= round($cinco);
+                         // dd($uno,$dos,$tres,$cuatro,$cinco,$diferencia, $promo);
 
                 }
          }
            
             $cinco = round($cinco);
         }
+        // dd($uno,$dos,$tres,$cuatro,$cinco,$diferencia);
          if (HistorialCambioVenta::where('venta_id',$venta->id)->count()>=1) {
                             //en caso de que si exista una venta, ya se habra aplicado los descuentos y etc
                             

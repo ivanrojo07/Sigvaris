@@ -115,7 +115,6 @@ class ProductoController extends Controller
         $Pro=Producto::where('oficina_id',session('oficina'));
         $Productos=$Pro->where('sku','like',$request->input('nombre').'%')
                     ->orwhere('upc','like',$request->input('nombre').'%')
-                    ->orwhere('swiss_id','like',$request->input('nombre').'%')
                     ->get();
         //dd($Productos);
         foreach ($Productos as $Producto) {
