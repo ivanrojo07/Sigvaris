@@ -13,8 +13,8 @@ class RealizarVentaProductosService
     {   
         // $auxCantidad = array_reverse($request->cantidad);
         // $auxProductoid = array_reverse($request->producto_id);
-        $request->cantidad = $auxCantidad;
-        $request->producto_id = $auxProductoid;
+        // $request->cantidad = $auxCantidad;
+        // $request->producto_id = $auxProductoid;
 
         // dd($productos,$venta,$request,$aux);
         // REALIZAMOS LA VENTA
