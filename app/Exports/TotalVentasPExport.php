@@ -54,7 +54,8 @@ class TotalVentasPExport implements FromCollection, WithHeadings, WithTitle
                     $todo['auxNu']+$todo['auxRe'],
                     $todo['auxNu'],
                     $todo['auxRe'],
-                    $todo['NumDoc']
+                    $todo['NumDoc'],
+                    $todo['Dev']
 
                 ]]);
         /**return Venta::where('fecha', '>=', date('Y-m-d'))
@@ -79,7 +80,8 @@ class TotalVentasPExport implements FromCollection, WithHeadings, WithTitle
             'Numero total de pacientes',
             'Numero total de pacientes nuevos',
             'Numero total de pacientes recurrentes',
-            'Numero total de doctores recomendaron'
+            'Numero total de doctores recomendaron',
+            'Devoluciones'
 
 
         ];
