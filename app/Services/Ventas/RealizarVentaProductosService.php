@@ -11,8 +11,8 @@ class RealizarVentaProductosService
 
     public function make($venta, $productos, $request)
     {   
-        $auxCantidad = array_reverse($request->cantidad);
-        $auxProductoid = array_reverse($request->producto_id);
+        // $auxCantidad = array_reverse($request->cantidad);
+        // $auxProductoid = array_reverse($request->producto_id);
         $request->cantidad = $auxCantidad;
         $request->producto_id = $auxProductoid;
 
