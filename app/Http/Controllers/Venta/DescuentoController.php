@@ -164,7 +164,8 @@ class DescuentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Descuento $descuento)
-    {
+    {   
+        dd($request);
         $descuento->update($request->all());
         if($request->tipoA)
         {

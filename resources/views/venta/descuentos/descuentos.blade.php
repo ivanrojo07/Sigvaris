@@ -49,13 +49,13 @@
                                         </strong>
                                     </a>
                                 </div>
-                                {{--  <!--<div class="col-2">
+                                 <div class="col-2">
                                     <a class="btn btn-warning" href="{{ route('descuentos.edit',['descuento'=>$descuento]) }}">
                                         <strong>
                                             <i class="far fa-edit"></i>
                                         </strong>
                                     </a>
-                                </div>-->--}}
+                                </div>
                                 <div class="col-2">
                                     <form role="form" method="POST" action="{{ route('descuentos.destroy',['descuento'=>$descuento]) }}">
                                         {{ csrf_field() }}
