@@ -11,7 +11,7 @@ use App\Promocion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
-
+use DB;
 class TotalVentasPExport implements FromCollection, WithHeadings, WithTitle
 {
     /**
@@ -22,9 +22,11 @@ class TotalVentasPExport implements FromCollection, WithHeadings, WithTitle
         $Ventas=Venta::where('fecha', '>=', date('Y-m-d'))
             ->where('oficina_id',1)
             ->get();
+            $Devoluciones = DB::table('devoluciones')->where('created_at','>=',$now->format('Y-m-d'))->get();
+         $Dev = $Devoluciones->sum('monto')*-1;
         $TotalVentas=$Ventas->count();
-        $VentasIVA= $Ventas->sum('total');
-        $VentasSIVA=$Ventas->sum('subtotal');
+        $VentasIVA= $Ventas->sum('total')+$Dev;
+        $VentasSIVA=($VentasIVA-($VentasIVA*0.16));;
         $auxNu=[];
         $auxRe=[];
         $NumDoc=[];
