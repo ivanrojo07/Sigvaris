@@ -163,82 +163,83 @@ class DescuentoController extends Controller
      * @param  \App\Descuento  $descuento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Descuento $descuento)
+    public function update(Descuento $descuento)
     {   
-        dd($request);
-        $descuento->update($request->all());
-        if($request->tipoA)
-        {
-            $promoA=new Promocion;
-            $promoA->tipo='A';
-            $promoA->compra_min=$request->compra_minA;
-            $promoA->unidad_compra='prendas';
-            $promoA->descuento_de=$request->descuento_deA;
-            $promoA->unidad_descuento='prendas';
-            $promoA->descuento_id=$descuento->id;
-            $promoA->save();
-        }
+        // dd($descuento);
+        // $descuento->update($request->all());
+        // if($request->tipoA)
+        // {
+        //     $promoA=new Promocion;
+        //     $promoA->tipo='A';
+        //     $promoA->compra_min=$request->compra_minA;
+        //     $promoA->unidad_compra='prendas';
+        //     $promoA->descuento_de=$request->descuento_deA;
+        //     $promoA->unidad_descuento='prendas';
+        //     $promoA->descuento_id=$descuento->id;
+        //     $promoA->save();
+        // }
 
-        if($request->tipoB)
-        {
-            $promoB=new Promocion;
-            $promoB->tipo='B';
-            $promoB->compra_min=$request->compra_minB;
-            $promoB->unidad_compra='$';
-            $promoB->descuento_de=$request->descuento_deB;
-            $promoB->unidad_descuento=$request->unidad_descuentoB;
-            $promoB->descuento_id=$descuento->id;
-            $promoB->save();
-        }
+        // if($request->tipoB)
+        // {
+        //     $promoB=new Promocion;
+        //     $promoB->tipo='B';
+        //     $promoB->compra_min=$request->compra_minB;
+        //     $promoB->unidad_compra='$';
+        //     $promoB->descuento_de=$request->descuento_deB;
+        //     $promoB->unidad_descuento=$request->unidad_descuentoB;
+        //     $promoB->descuento_id=$descuento->id;
+        //     $promoB->save();
+        // }
 
-        if($request->tipoC)
-        {
-            $promoC=new Promocion;
-            $promoC->tipo='C';
-            $promoC->compra_min=0;
-            $promoC->unidad_compra='$';
-            $promoC->descuento_de=$request->descuento_deC;
-            $promoC->unidad_descuento=$request->unidad_descuentoC;
-            $promoC->descuento_id=$descuento->id;
-            $promoC->save();
-        }
+        // if($request->tipoC)
+        // {
+        //     $promoC=new Promocion;
+        //     $promoC->tipo='C';
+        //     $promoC->compra_min=0;
+        //     $promoC->unidad_compra='$';
+        //     $promoC->descuento_de=$request->descuento_deC;
+        //     $promoC->unidad_descuento=$request->unidad_descuentoC;
+        //     $promoC->descuento_id=$descuento->id;
+        //     $promoC->save();
+        // }
 
-        if($request->tipoD)
-        {
-            $promoD=new Promocion;
-            $promoD->tipo='D';
-            $promoD->compra_min=$request->compra_minD;
-            $promoD->unidad_compra='prendas';
-            $promoD->descuento_de=$request->descuento_deD;
-            $promoD->unidad_descuento=$request->unidad_descuentoD;
-            $promoD->descuento_id=$descuento->id;
-            $promoD->save();
-        }
+        // if($request->tipoD)
+        // {
+        //     $promoD=new Promocion;
+        //     $promoD->tipo='D';
+        //     $promoD->compra_min=$request->compra_minD;
+        //     $promoD->unidad_compra='prendas';
+        //     $promoD->descuento_de=$request->descuento_deD;
+        //     $promoD->unidad_descuento=$request->unidad_descuentoD;
+        //     $promoD->descuento_id=$descuento->id;
+        //     $promoD->save();
+        // }
 
-        if($request->tipoE)
-        {
-            $promoE=new Promocion;
-            $promoE->tipo='D';
-            $promoE->compra_min=$request->compra_minE;
-            $promoE->unidad_compra='prendas';
-            $promoE->descuento_de=$request->descuento_deE;
-            $promoE->unidad_descuento='sigpesos';
-            $promoE->descuento_id=$descuento->id;
-            $promoE->save();
-        }
+        // if($request->tipoE)
+        // {
+        //     $promoE=new Promocion;
+        //     $promoE->tipo='D';
+        //     $promoE->compra_min=$request->compra_minE;
+        //     $promoE->unidad_compra='prendas';
+        //     $promoE->descuento_de=$request->descuento_deE;
+        //     $promoE->unidad_descuento='sigpesos';
+        //     $promoE->descuento_id=$descuento->id;
+        //     $promoE->save();
+        // }
 
-        if($request->tipoF)
-        {
-            $promoF=new Promocion;
-            $promoF->tipo='F';
-            $promoF->compra_min=0;
-            $promoF->unidad_compra='$';
-            $promoF->descuento_de=$request->descuento_deF;
-            $promoF->unidad_descuento=$request->unidad_descuentoF;
-            $promoF->descuento_id=$descuento->id;
-            $promoF->save();
-        }
-        return redirect('descuentos');
+        // if($request->tipoF)
+        // {
+        //     $promoF=new Promocion;
+        //     $promoF->tipo='F';
+        //     $promoF->compra_min=0;
+        //     $promoF->unidad_compra='$';
+        //     $promoF->descuento_de=$request->descuento_deF;
+        //     $promoF->unidad_descuento=$request->unidad_descuentoF;
+        //     $promoF->descuento_id=$descuento->id;
+        //     $promoF->save();
+        // }
+        // return redirect('descuentos');
+         return 'hola estamos trabajando en los cambios';
     }
 
     /**
