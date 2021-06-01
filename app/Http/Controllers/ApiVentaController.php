@@ -16,7 +16,13 @@ class ApiVentaController extends Controller
 
         $venta = Venta::find($request->ventaId);
         // dd($request);
-        $productoQueSeraEntregado = Producto::where('sku', $request->skuProductoEntregado)->first();
+        if (strlen($request->skuProductoEntregado)==12) {
+            # code...
+             $productoQueSeraEntregado = Producto::where('upc', $request->skuProductoEntregado)->first();
+        }else{
+            $productoQueSeraEntregado = Producto::where('sku', $request->skuProductoEntregado)->first();
+        }
+       
         $precioProductoQueSeraDevuelto = intval($request->precioProductoDevuelto);
 
         $arrayPreciosProductos = $this->getArrayPreciosProductos($venta);
@@ -33,8 +39,8 @@ class ApiVentaController extends Controller
 
         // $diferencia = round (round ($totalVentaBueva +($totalVentaBueva*.16))-$totalVentaOriginal);
         // $diferencia = round (round ($totalVentaBueva)-$totalVentaOriginal);
-       $diferencia =  round (round ($precioProductoQueSeraDevuelto +($precioProductoQueSeraDevuelto*.16))-$productoQueSeraEntregado->precio_publico_iva);
-
+       $diferencia =  round (round ($precioProductoQueSeraDevuelto )-$productoQueSeraEntregado->precio_publico_iva);
+// dd($diferencia);
         if ($diferencia<1) {
             $diferencia=$diferencia*-1;
         }else{

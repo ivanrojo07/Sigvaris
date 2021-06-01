@@ -9,7 +9,13 @@ use App\Producto;
 class ApiProductoController extends Controller
 {
     public function getProductoBySku($sku){
-        $producto = Producto::where('sku',$sku)->first();
+    	if (strlen($sku)==12) {
+    		# code...
+    	$producto = Producto::where('upc',$sku)->first();
+    	}else{
+    		$producto = Producto::where('sku',$sku)->first();
+    	}
+        
 
         return is_null($producto) ? 
             response()->json($producto, 404) :
