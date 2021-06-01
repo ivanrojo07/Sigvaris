@@ -11,20 +11,24 @@ class RealizarVentaProductosService
 
     public function make($venta, $productos, $request)
     {   
-        $auxCantidad = array_reverse($request->cantidad);
-        $auxProductoid = array_reverse($request->producto_id);
-        $request->cantidad = $auxCantidad;
-        $request->producto_id = $auxProductoid;
+        // $respaldo = $request->producto_id;
+        // // $auxCantidad = array_reverse($request->cantidad);
+        // // $segundo = array_flip($request->producto_id);
+        // // $auxProductoid = asort($respaldo);
+        // // $request->cantidad = $auxCantidad;
+        // // // $request->producto_id = $auxProductoid;
+        // $request->producto_id = asort($respaldo);
 
-        // dd($productos,$venta,$request,$aux);
+        // dd($productos,$request->cantidad,$request->producto_id);
         // REALIZAMOS LA VENTA
         $venta->save();
 
         // POR CADA PRODUCTO COMPRADO, ALMACENAMOS LA CANTIDAD COMPRADO, EL PRECIO Y DECREMENTAMOS EL STOCK
         foreach ($productos as $i => $producto) {
 
-
-            $venta->productos()->attach($producto->id, ['cantidad' => $request->cantidad[$i], 'precio' => $producto->precio_publico, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
+               $precio = Producto::where('id',$request->producto_id[$i])->value('precio_publico');
+               
+            $venta->productos()->attach($request->producto_id[$i] , ['cantidad' => $request->cantidad[$i], 'precio' => $precio, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]);
             $producto->decrement('stock', $request->cantidad[$i]);
         }
     }
