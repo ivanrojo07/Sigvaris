@@ -28,7 +28,7 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
         $Dev = $Devoluciones->sum('monto')*-1;
         $TotalVentas=$Ventas->count();
         $VentasIVA= $Ventas->sum('total')+$Dev;
-        $VentasSIVA=($VentasIVA-($VentasIVA*0.16));
+        $VentasSIVA=(($VentasIVA/1.16));
         $auxNu=[];
         $auxRe=[];
         $NumDoc=[];
@@ -76,8 +76,8 @@ class TotalVentasExport implements FromCollection, WithHeadings, WithTitle
     {
         return [
             'Total de ventas',
-            'Ventas Sin iva',
             'Ventas Con iva',
+            'Ventas Sin iva',
             
             'Numero total de pacientes',
             'Numero total de pacientes nuevos',
