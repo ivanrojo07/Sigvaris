@@ -31,10 +31,10 @@
                    
                 </div>
                     <br>
-                    <label>Tipo: </label>
+                    <!-- <label>Tipo: </label> -->
 
-                    <hr>    
-                    @if ($descuento->promociones->where('tipo','A')->first())
+                    <!-- <hr>   -->  
+                    <!-- @if ($descuento->promociones->where('tipo','A')->first())
                  <div class="row">
                     <div class="form-group col-12">
                         <input type="checkbox" name="tipoA" id="tipoA" checked="">
@@ -54,9 +54,9 @@
                         <label> Llevate: </label>
                         <input type="number" class="form-control" name="descuento_deA" id="descuento_deA">
                     </div>
-                </div>
-                    @endif
-                   <hr> 
+                </div> -->
+                    <!-- @endif -->
+                   <!-- <hr> 
                     @if ($descuento->promociones->where('tipo','B')->first())
                     <div class="form-group col-12">
                         <input type="checkbox" name="tipoB" id="tipoB" checked="">
@@ -68,8 +68,8 @@
                                 <option @if( $descuento->promociones->where('tipo','B')->first()->unidad_descuento == "$") selected @endif value="$">$</option>
                                 <option @if( $descuento->promociones->where('tipo','B')->first()->unidad_descuento == "%") selected @endif value="%">%</option> 
                         </select>
-                    </div>
-                    @else
+                    </div> -->
+                    <!-- @else
                     <div class="form-group col-12">
                         <input type="checkbox" name="tipoB" id="tipoB">
                         <label>Monto minimo de compra: </label>
@@ -82,9 +82,9 @@
                         </select>
                     </div>
                     @endif
-
-                        <hr>    
-                    @if ($descuento->promociones->where('tipo','C')->first())
+ -->
+                        <!-- <hr>     -->
+                   <!--  @if ($descuento->promociones->where('tipo','C')->first())
                     <div class="form-group col-12">
                         <input type="checkbox" name="tipoC" id="tipoC">
                         <label>Descuento por cumpleaños </label>
@@ -93,9 +93,9 @@
                                 <option @if( $descuento->promociones->where('tipo','B')->first()->unidad_descuento == "$") selected @endif value="$">$</option>
                                 <option @if( $descuento->promociones->where('tipo','B')->first()->unidad_descuento == "%") selected @endif value="%">%</option>
                         </select>
-                    </div>
-                    @else
-                    <div class="form-group col-12">
+                    </div> -->
+                    <!-- @else -->
+                   <!--  <div class="form-group col-12">
                         <input type="checkbox" name="tipoC" id="tipoC">
                         <label>Descuento por cumpleaños </label>
                         <input type="number" class="form-control" name="descuento_deC" id="descuento_deC" value="">
@@ -118,8 +118,8 @@
                                 <option value="%">%</option>
                         </select>
                     </div>
-                    @else
-                    <div class="form-group col-12">
+                    @else -->
+                 <!--    <div class="form-group col-12">
                         <input type="checkbox" name="tipoD" id="tipoD">
                         <label>Monto minimo de prendas: </label>
                         <input type="number" class="form-control" name="compra_minD" id="compra_minD">
@@ -139,7 +139,7 @@
                         <label> por: </label>
                         <input type="number" class="form-control" name="descuento_deE" id="descuento_deE">
                         <label>sigpesos</label>
-                    </div>
+                    </div> -->
                   
                     <!-- <div class="form-group col-12">
                         <input type="checkbox" name="tipoF" id="tipoF">
@@ -155,7 +155,7 @@
                     </div> -->
 
                     
-                </div>
+                <!-- </div> -->
                 <div class="col-3 pt-4">
                         <button type="submit" class="btn btn-success btn-lg btn-block">Actualizar </a>
                 </div>

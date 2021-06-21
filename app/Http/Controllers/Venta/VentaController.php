@@ -976,6 +976,356 @@ class VentaController extends Controller
     }
 
 
+
+
+
+     public function ventaRetex(Request $request)
+    {
+        // $saldo_a_favor=$request->input('montonegativo');
+            $saldo_a_favor= $request->saldo_a_favor;
+            
+        // PREPARAR DATOS DE LA VENTA
+        $venta = new Venta($request->all());
+        $venta->oficina_id = session()->get('oficina');
+         $auxiliar = (int)$request->sigpesos_usar;
+         $venta->sigpesos = $auxiliar;
+            $venta_cu = Venta::where("id",$request->VentaAnterior)->first();
+            if ($venta_cu->descuento_cu == null && $venta_cu->cumpleDes ==1) {
+                        $venta_cu->update(['descuento_cu' => 1]);
+            }
+             if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 6 ) {
+
+            if ($request->deposito_folio == null && $request->transferencia_folio == null ) {
+                # code...
+                if ($request->deposito_total != 0 || $request->transferencia_total != 0) {
+
+                    return redirect()
+                     ->back()
+                     ->withErrors(['Debes introducir algun folio en transferencia u deposito'])
+                     ->withInput($request->input());
+                    
+                }
+                
+            }else{
+                $venta->num_transferencia = $request->transferencia_total;
+                $venta->num_deposito = $request->deposito_total;
+                $venta->folio_transferencia = $request->transferencia_folio;
+                $venta->folio_deposito = $request->deposito_folio;
+            }
+        }
+                 
+
+        $Paciente=Paciente::where("id",$request->paciente_id)->first();
+        
+        $Paciente->update(['saldo_a_favor' => abs($saldo_a_favor)]);
+
+        // GUARDAMOS EL FITTER DE LA VENTA
+        if ($request->empleado_id) {
+            $venta->empleado_id = $request->empleado_id;
+        } else {
+            $venta->empleado_id = Auth::user()->empleado->id;
+            // dd('Empleado fitter'.Auth::user()->empleado );
+        }
+
+             if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ||$request->input('tipoPago') == 5) {
+
+        if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
+
+             
+             $saldo_paciente =$Paciente->saldo_a_favor+$request->sigpesos;
+
+             $actualizacion = $Paciente->saldo_a_favor - $request->saldo_a_usar; 
+             
+             $venta->PagoSaldo=$request->saldo_a_usar;
+                // dd($actualizacion, $request->saldo_a_favor,$Paciente->saldo_a_favor);
+             $Paciente->update(['saldo_a_favor' => $actualizacion]); 
+
+              // $saldo_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+              // $Paciente->update(['sigpesos_a_favor' => $saldo_paciente]);  
+              
+             }else{
+                
+           return redirect()
+                ->back()
+                ->withErrors(['Error saldo a favor insuficiente'])
+                ->withInput($request->input());
+        }
+        
+           if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar + $request->transferencia_total + $request->deposito_total== round($request->total, 2))) {
+            return redirect()
+                ->back()
+                ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+                ->withInput($request->input());
+        }
+
+
+        }
+        // dd('VENTA QUE SERÁ GUARDADA'.$venta);
+
+        $productos = Producto::find($request->producto_id);
+        //agrgar codigo para hacer crm 
+
+        // REALIZAR VENTA
+        $this->realizarVentaProductosService->make($venta, $productos, $request);
+
+        // $auxiliar = (int)$request->sigpesos_usar;
+        //  $venta->sigpesos = $auxiliar;
+
+        if ($request->facturar == "1") {
+            $venta->update(['requiere_factura' => 1]);
+            DatoFiscal::updateOrCreate(
+                ['paciente_id' => $request->paciente_id],
+                [
+                    'calle' => $request->calle,
+                    'tipo_persona' => $request->tipo_persona,
+                    'nombre_o_razon_social' => $request->nombre_o_razon_social,
+                    'regimen_fiscal' => $request->regimen_fiscal,
+                    'correo' => $request->correo,
+                    'rfc' => $request->rfc,
+                    'num_ext' => $request->num_ext,
+                    'num_int' => $request->num_int,
+                    'codigo_postal' => $request->codigo_postal,
+                    'ciudad' => $request->ciudad,
+                    'alcaldia_o_municipio' => $request->alcaldia_o_municipio,
+                    'uso_cfdi' => $request->uso_cfdi
+                ]
+            );
+        }
+   
+       
+
+        if ($request->input('tipoPago') == 4 || $request->input('tipoPago') == 3) {
+            if ($request->input('sigpesos_usar')>0) {
+                foreach ($request->folio as $key => $folio) {
+                    # code...
+                    $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => $request->monto[$key],
+                        'folio' => $folio,
+                        'folio_id' => $request->lista[$key]
+                    ]);
+                    $Sigpesos->save();
+                }
+            }
+        }
+
+          if ($request->input('tipoPago') == 5) {
+
+        if ($request->saldo_a_usar<=$Paciente->saldo_a_favor) {
+
+    
+             $saldo_paciente = $Paciente->saldo_a_favor+$request->sigpesos;
+
+             $actualizacion =  $Paciente->saldo_a_favor - $request->saldo_a_usar; 
+             
+             $venta->PagoSaldo=$request->saldo_a_usar;
+            
+             $Paciente->update(['saldo_a_favor' => $actualizacion]);      
+             }else{
+                
+                return redirect()
+                ->back()
+                ->withErrors(['Error saldo a favor insuficiente'])
+                ->withInput($request->input());           
+        }
+        
+        //    if (!($request->PagoEfectivo + $request->PagoTarjeta + $request->saldo_a_usar+ $request->sigpesos_usar == round($request->total, 2))) {
+        //     return redirect()
+        //         ->back()
+        //         ->withErrors(['Error con importes de montos en efectivo o tarjeta'])
+        //         ->withInput($request->input());
+
+        // }
+        }
+
+        $CRM = new Crm(
+            array(
+                'paciente_id' => $request->input('paciente_id'),
+                'estado_id'   => 1,
+                'hora'        => '00:00',
+                'forma_contacto' => 'Telefono',
+                'fecha_contacto' => Carbon::now()->addMonths(5),
+                'fecha_aviso' => Carbon::now()->addMonths(5),
+                'oficina_id' => session('oficina')
+
+            )
+        );
+        $CRM->save();
+        $CRM = new Crm(
+            array(
+                'paciente_id' => $request->input('paciente_id'),
+                'estado_id'   => 5,
+                'hora'        => '00:00',
+                'forma_contacto' => 'Telefono',
+                'fecha_contacto' => Carbon::now()->addDays(8),
+                'fecha_aviso' => Carbon::now()->addDays(8),
+                'oficina_id' => session('oficina')
+
+            )
+        );
+        $CRM->save();
+        $sigvariscard = new sigvariscard(
+            array(
+                'paciente_id'=> $request->paciente_id,
+                'folio'=>$request->SigvarisCardFolio,
+                'tipo'=>$request->SigvarisCard,
+                'venta_id'=>$venta->id
+            )
+        );
+        $sigvariscard->save();
+          if ($request->sigpesos_usar>0) {
+                if ($request->input('tipoPago') == 3 ||$request->input('tipoPago') == 4 ) {
+             //Sigpesos 
+             foreach ($request->folio as $key => $folio) {
+                    # code...
+                    
+            $new_fo = DB::table('sigpesosventa')->where('folio',$folio)->exists();
+                    $existe = DB::table('sigpesosventa')->where('folio',$folio)->exists();
+                    if ($existe = true) {
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->where('usado','=',0)->increment('usado');
+                        // dd("Actualizado");
+                        DB::table('sigpesosventa')->where('folio','=', $folio)->update(['venta_id' => $venta->id]);
+                        // DB::table('sigpesosventa')->where('folio','=', $folio)->update(['tipo' =>'pago']);
+                       
+                    }
+                    // dd($new_fo);
+                    if($new_fo == false ){
+                        $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => $request->monto[$key],
+                        'folio' => $folio,
+                        'folio_id' => $request->lista[$key],
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'pago',
+                        'usado'=>1
+                         ]);
+                        
+                        $Sigpesos->save();
+                       
+                        
+                    }
+                    
+                        # code...
+                    
+                           
+                      }
+
+                    }    
+                }
+                  if ($request->descuento_id == 41) {
+            $folio = Folio::find(1);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 1000,
+                        'folio' => $ultimo+1,
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'esencial',
+                        'usado'=>0
+
+                    ]);
+                $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+        }if ($request->descuento_id == 30) {
+              $folio = Folio::find(6);
+        // Contamos los registros en Sigpesosventa, y aqui sera el consecutivo que tendra el folio
+        // 
+            $ultimo = DB::table('sigpesosventa')->where('folio_id','=',$folio->id)->orderBy('id','desc')->value('folio');
+           $cuenta = Sigpesosventa::count();
+           // $prueba = Sigpesosventa ::where('folio_id','=',$folio->id)->orderBy('id','desc')->get();
+           if ($ultimo == 0) {
+               $ultimo = $folio->rango_inferior;
+           }
+             $Sigpesos = new Sigpesosventa([
+                        'venta_id' => $venta->id,
+                        'monto' => 300,
+                        'folio' => $ultimo+1,
+                        'folio_id' => $folio->id,
+                        'paciente_id'=>$request->paciente_id,
+                        'tipo'=>'cupon producto negado',
+                        'usado'=>0
+
+                    ]);
+                $Sigpesos->save();
+                 $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                 // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]);
+        }
+              if ($request->sigpesos != 0) {
+             $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
+            }
+
+        // HistorialCambioVenta::create([
+        //     'tipo_cambio' => 'CAMBIO PRODUCTO',
+        //     'responsable_id' => Auth::user()->id,
+        //     'venta_id' => $request->VentaAnterior,
+        //     'destinate_id'=>$venta->id,
+        //     'producto_entregado_id' =>  $productos[0]->id,
+        //     'producto_devuelto_id' => $request->productoDevuelto,
+        //     'observaciones' => $request->observacionesDevuelto
+        // ]);
+
+        $HistorialCambioVenta = new HistorialCambioVenta(
+            array(
+                'tipo_cambio' => 'RETEX DEL PRODUCTO',
+            'responsable_id' => Auth::user()->id,
+            'venta_id' => $request->VentaAnterior,
+            'destinate_id'=>$venta->id,
+            'producto_entregado_id' =>  $productos[0]->id,
+            'producto_devuelto_id' => $request->productoDevuelto,
+            'observaciones' => $request->observacionesDevuelto,
+            'precioOri'=>$request->precioOri,
+            'precioNew' =>$request->precioNew,
+            'pagosaldo'=>$request->saldo_a_usar
+            )
+        );
+
+        $ProductoDevuelto = Producto::where('id', $request->productoDevuelto)->first();
+
+        $ProductoDevuelto->update([
+            'stock' => $ProductoDevuelto->stock + 1
+        ]);
+
+       //  $consulta = HistorialCambioVenta::where('venta_id',$request->VentaAnterior)->where('descuento_cu',1)->get();
+       // if ($venta_cu->descuento_cu == 1 ) {
+       //                  $HistorialCambioVenta->descuento_cu = 1;
+       //      }
+       //   if (count($consulta) >= 1) {
+       //      $HistorialCambioVenta->descuento_cu = 0;
+       //  }
+
+            $HistorialCambioVenta->save();
+             if ($Paciente->sigpesos_a_favor>0) {
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor-$request->sigpesos_usar;
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+
+            }else if($request->sigpesos>0){
+
+                $sigpesos_paciente = $Paciente->sigpesos_a_favor+$request->sigpesos;
+                // dd($sigpesos_paciente);
+                $Paciente->update(['sigpesos_a_favor' => $sigpesos_paciente]); 
+            }
+       
+
+        // REDIRIGIR A LAS VENTAS REALIZADAS
+        return redirect()->route('ventas.index');
+
+
+    }
+
+
     public function ventaCambio(Request $request)
     {
         // $saldo_a_favor=$request->input('montonegativo');

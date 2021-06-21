@@ -87,10 +87,12 @@
                                                     </button>
                                                 </div>
                                                 <form
-                                                    action="{{route('Retex.store', ['venta' => $venta->id])}}"
+                                                    action="{{route('Retex.store', ['venta' => $venta])}}"
                                                     method="POST">
                                                     @csrf
+
                                                     <div class="modal-body">
+                                                        
                                                         <div class="row">
                                                             <div class="col-12">
                                                                 <label for="" class="text-uppercase text-muted mt-2">GAREX/RETEX FOLIO
@@ -99,6 +101,7 @@
                                                                     class="form-control inputSkuProductoDevuelto" value="{{$producto->sku}}" productoId="{{$producto->id}}"
                                                                     readonly>
                                                             </div>
+                                                            <input type="hidden" name="venta_id" id="venta_id" value="{{$venta->id}}">
                                                             <div class="col-12 col-md-6">
                                                                 <label for="" class="text-uppercase text-muted mt-2">SKU
                                                                     PRODUCTO ORIGINAL</label>
@@ -184,7 +187,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<!-- <script>
+<script>
 
     async function updatePrecioProductoEntregado( skuProducto, idProducto ){
         await $.ajax( {
@@ -212,7 +215,7 @@
         })
 
         await $.ajax( {
-            url: `/api/ventas/calcular-diferencia`,
+            url: `/api/ventas/calcular-diferencia-retex`,
             data: {
                 ventaId,
                 precioProductoDevuelto,
@@ -223,23 +226,23 @@
                 console.log( response )
                 
                 $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) );
-                  var original =  parseInt(response.precio_original);
-               $(`.precioOri`).val( parseInt(original) );
-               $(`.precioNew`).val( parseInt(response.precio_nueva.precio_publico_iva) );
-               console.log('PRecio_original',response.precio_original);
-                console.log('PRecio_nueva',response.precio_nueva.precio_publico_iva);
-                console.log('venta',response.venta);
-                    console.log('promo',response.promo);
-                    console.log('cinco',response.cinco);
-                    console.log('dos',response.dos);
-                    console.log('uno',response.uno);
+               //    var original =  parseInt(response.precio_original);
+               // $(`.precioOri`).val( parseInt(original) );
+               // $(`.precioNew`).val( parseInt(response.precio_nueva.precio_publico_iva) );
+               // console.log('PRecio_original',response.precio_original);
+               //  console.log('PRecio_nueva',response.precio_nueva.precio_publico_iva);
+               //  console.log('venta',response.venta);
+               //      console.log('promo',response.promo);
+               //      console.log('cinco',response.cinco);
+               //      console.log('dos',response.dos);
+               //      console.log('uno',response.uno);
                     console.log('Diferencia',response.diferencia);
-                    console.log('Cuatro',response.cuatro);
-                    console.log('Tres',response.tres);
-               $(`.preciouno`).val( response.uno);
-               $(`.preciodos`).val( response.dos );
-               $(`.preciotres`).val( response.cinco );
-                $(`.prec_des`).val( response.promo);
+               //      console.log('Cuatro',response.cuatro);
+               //      console.log('Tres',response.tres);
+               // $(`.preciouno`).val( response.uno);
+               // $(`.preciodos`).val( response.dos );
+               // $(`.preciotres`).val( response.cinco );
+               //  $(`.prec_des`).val( response.promo);
             },
             error: function( e ){
                 console.table(e)
@@ -266,7 +269,7 @@
 
     });
 
-</script> -->
+</script>
 
 
 

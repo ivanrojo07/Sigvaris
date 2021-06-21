@@ -25,7 +25,7 @@
         </div>
         <div class="card-body">
             <div class="card-body">
-                <form role="form" id="form-cliente" method="POST" action="{{route('ventaCambio.create')}}" name="form">
+                <form role="form" id="form-cliente" method="POST" action="{{route('ventaRetex.create')}}" name="form">
                     {{ csrf_field() }}
                     <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                     <input type="hidden" name="cumpleDes" id="cumpleDes" value="0">

@@ -24,3 +24,4 @@ Route::get('pacientes/{paciente}/datos_fiscales', 'ApiPacienteDatosFiscalesContr
 
 Route::get('pacientes/{paciente}/inapam', 'ApiPacienteDatosFiscalesController@getinapam');
 Route::get('ventas/calcular-diferencia', 'ApiVentaController@calcularDiferencia');
+Route::get('ventas/calcular-diferencia-retex', 'ApiVentaController@calcularDiferenciaRetex');

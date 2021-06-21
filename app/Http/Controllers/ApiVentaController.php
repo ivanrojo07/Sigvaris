@@ -146,6 +146,25 @@ class ApiVentaController extends Controller
         return response()->json($request->input());
     }
 
+
+    public function calcularDiferenciaRetex(Request $request){
+       
+        if (strlen($request->skuProductoEntregado)==12) {
+            # code...
+             $productoQueSeraEntregado = Producto::where('upc', $request->skuProductoEntregado)->first();
+        }else{
+            $productoQueSeraEntregado = Producto::where('sku', $request->skuProductoEntregado)->first();
+        }
+       
+        $precioProductoQueSeraDevuelto = intval($request->precioProductoDevuelto);
+
+        $diferencia = $productoQueSeraEntregado->precio_publico_iva-($productoQueSeraEntregado->precio_publico_iva*0.75);
+        return response()->json([
+            'diferencia' => $diferencia,
+          
+        ]);
+    }
+
     public function calcularTotalVentaNueva($venta, $totalVentaOriginal, $arrayPreciosProductosNuevos){
 
         $precioMenor = 0;
@@ -174,6 +193,7 @@ class ApiVentaController extends Controller
         // return $totalNuevaVentaSinHacerDescuento - $precioMenor;
 
     }
+
 
     public function getArrayPreciosProductosConNuevo($arrayPreciosProductos, $productoQueSeraEntregado, $precioProductoQueSeraDevuelto)
     {
