@@ -76,6 +76,7 @@
                                             <th nowrap>Damage</th>
                                             <th nowrap>Cambio físico</th>
                                             <th nowrap>Devolución</th>
+                                            <th nowrap>Garex/Retex</th>
                                         </tr>
                                     </thead>
                                     <tbody id="ventas">
@@ -125,6 +126,12 @@
                                                 <a href="{{route('ventas.devoluciones.create',['venta'=>$venta])}}"
                                                     class="btn btn-primary">
                                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                             <td nowrap class="text-center">
+                                                <a href="{{route('Retex.create',['venta'=>$venta])}}"
+                                                    class="btn btn-primary">
+                                                    <i class="fa fa-registered" aria-hidden="true"></i>
                                                 </a>
                                             </td>
                                         </tr>

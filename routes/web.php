@@ -176,9 +176,12 @@ Route::resource('puestos','Puesto\PuestoController', ['except'=>'show']);
 Route::resource('bancos','Banco\BancoController', ['except'=>'show']);
 Route::resource('bajas','Precargas\TipoBajaController')->middleware('precargas.role');
 
+
 Route::resource('roles','Role\RoleController');
 //Route::get('roles/{role}/destroy','Role\RoleController@destroy');
 Route::resource('usuarios','User\UserController');
+
+Route::resource('Retex','RetexControl');
 
 
 Auth::routes();

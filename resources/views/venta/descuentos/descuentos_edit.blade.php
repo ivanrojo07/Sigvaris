@@ -2,13 +2,19 @@
 @section('content')
 <div class="container">
     <div class="card">
-        
+        @if($errors->any())
+         <div class="alert alert-danger">
+        {{$errors->first()}}
+        </div>
+        @endif
         <form class="" action="{{route('descuentos.update',['descuento'=>$descuento])}}" method="post">
             <div class="card-header">
                 <h1>Editar Descuento</h1>
             </div>
+
             <div class="card-body">    
                 {{ csrf_field() }}
+                   {{ method_field('PUT') }}
                 <div class="row">
                     <div class="form-group col-3">
                         <label for="nombre">Nombre</label>
@@ -27,7 +33,7 @@
                     <br>
                     <label>Tipo: </label>
 
-                    
+                    <hr>    
                     @if ($descuento->promociones->where('tipo','A')->first())
                  <div class="row">
                     <div class="form-group col-12">
@@ -50,7 +56,7 @@
                     </div>
                 </div>
                     @endif
-                   
+                   <hr> 
                     @if ($descuento->promociones->where('tipo','B')->first())
                     <div class="form-group col-12">
                         <input type="checkbox" name="tipoB" id="tipoB" checked="">
@@ -77,7 +83,7 @@
                     </div>
                     @endif
 
-                 
+                        <hr>    
                     @if ($descuento->promociones->where('tipo','C')->first())
                     <div class="form-group col-12">
                         <input type="checkbox" name="tipoC" id="tipoC">
@@ -99,7 +105,7 @@
                         </select>
                     </div>
                     @endif
-                   
+                   <hr> 
                     @if ($descuento->promociones->where('tipo','D')->first())
                     <div class="form-group col-12">
                         <input type="checkbox" name="tipoD" id="tipoD">
