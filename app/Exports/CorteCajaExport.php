@@ -85,6 +85,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
                     $Venta->empleado != null ? $Venta->empleado->nombre : "",
                     "",
                      HistorialCambioVenta::where('venta_id',$Venta->id)->where('tipo_cambio','RETEX DEL PRODUCTO')? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
+                     "",
                     HistorialCambioVenta::where('venta_id',$Venta->id)->exists()? "Si":"No",
 
                     DB::table('productos_damage')->where('origin_id','=',$Venta->id)->exists() ? "SI":" NO",
@@ -141,6 +142,7 @@ class CorteCajaExport implements FromCollection, WithHeadings, WithTitle
             'Generó',
             'Envió',
             'Garex/Retex',
+            'Folio Garex/Retex',
             'Cambio fisico',
             'Damage',
             'Folio Damage', 
