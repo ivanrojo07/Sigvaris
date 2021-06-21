@@ -1220,6 +1220,7 @@
             var Diferencia =  $('#diferencia').val();
             console.log('Esta es la diferencia a pagar: ', $('#total').val());
         console.log('datosPAciente: ',nombrePaciente,apellidosPaciente);
+         console.log('PAciente_id: ',pacienteId);
         
         $('#inputNombrePaciente').val( nombrePaciente + " " + apellidosPaciente );
 

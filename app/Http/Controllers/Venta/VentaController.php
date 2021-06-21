@@ -1281,7 +1281,7 @@ class VentaController extends Controller
             array(
                 'tipo_cambio' => 'RETEX DEL PRODUCTO',
             'responsable_id' => Auth::user()->id,
-            'venta_id' => $request->VentaAnterior,
+            'venta_id' => $venta->id-1,
             'destinate_id'=>$venta->id,
             'producto_entregado_id' =>  $productos[0]->id,
             'producto_devuelto_id' => $request->productoDevuelto,

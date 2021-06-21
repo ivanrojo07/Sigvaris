@@ -47,8 +47,9 @@ class RetexControl extends Controller
     public function store(Request $request, Venta $venta)
     {
         //
+        
+        $venta = Venta::find($request->venta_id);
         // dd($venta,$request);
-        $venta = Venta::find($request->venta_id)->first();
         $Nuevo_pago = 0;
         $auxiliar =$request->diferenciaPrecios;
         $producto = Producto::where("sku", $request->input("skuProductoRegresado"))->where("oficina_id",session('oficina'))->first();

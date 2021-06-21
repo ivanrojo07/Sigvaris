@@ -92,10 +92,17 @@
                                                     @csrf
 
                                                     <div class="modal-body">
-                                                        
+                                                            
                                                         <div class="row">
-                                                            <div class="col-12">
-                                                                <label for="" class="text-uppercase text-muted mt-2">GAREX/RETEX FOLIO
+                                                            <div class="col-6">
+                                                                <label for="" class="text-uppercase text-muted mt-2">GAREX FOLIO
+                                                                    </label>
+                                                                <input type="text" name="skuProductoRegresado"
+                                                                    class="form-control inputSkuProductoDevuelto" value="{{$producto->sku}}" productoId="{{$producto->id}}"
+                                                                    readonly>
+                                                            </div>
+                                                             <div class="col-6">
+                                                                <label for="" class="text-uppercase text-muted mt-2">RETEX FOLIO
                                                                     </label>
                                                                 <input type="text" name="skuProductoRegresado"
                                                                     class="form-control inputSkuProductoDevuelto" value="{{$producto->sku}}" productoId="{{$producto->id}}"
