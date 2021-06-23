@@ -15,12 +15,12 @@ class CreateTableRetexVentas extends Migration
     {
         Schema::create('retex_ventas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('venta_id')->unsigned();
-            $table->string('SKU')->unsigned();
-            $table->decimal('total_a_pagar')->nullable();
+            $table->integer('venta_id');
+            $table->string('SKU');
+            $table->decimal('total_a_pagar');
             $table->string('folio');
             $table->date('fecha_fin');
-            $table->integer('status')->unsigned();
+            $table->integer('status');
             $table->timestamps();
         });
     }

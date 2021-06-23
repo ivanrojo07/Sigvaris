@@ -15,11 +15,11 @@ class CreateTableGarexVentas extends Migration
     {
         Schema::create('garex_ventas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('venta_id')->unsigned();
-            $table->string('SKU')->unsigned();
+            $table->integer('venta_id');
+            $table->string('SKU');
             $table->string('folio');
             $table->date('fecha_fin');
-            $table->integer('status')->unsigned();
+            $table->integer('status');
             $table->timestamps();
         });
     }
