@@ -64,7 +64,16 @@
                                 <td>{{$producto->pivot->cantidad}}</td>
 
                                 <td>{{$producto->precio_publico_iva * $producto->pivot->cantidad}}</td>
-                                 <td>####</td>
+                                
+                                
+                                 <td>@foreach($garex as $ga)
+                                    @if($ga->SKU == $producto->sku )
+                                    {{$ga->folio}}
+                                 @endif
+                                  @endforeach
+                             </td>
+                                
+                                
                                 <td>
 
                                     <!-- Button trigger modal -->
@@ -97,15 +106,22 @@
                                                             <div class="col-6">
                                                                 <label for="" class="text-uppercase text-muted mt-2">GAREX FOLIO
                                                                     </label>
-                                                                <input type="text" name="skuProductoRegresado"
-                                                                    class="form-control inputSkuProductoDevuelto" value="{{$producto->sku}}" productoId="{{$producto->id}}"
+                                                                <input type="text" name="garex_folio"
+                                                                    class="form-control garex_folio" value=""
                                                                     readonly>
                                                             </div>
                                                              <div class="col-6">
                                                                 <label for="" class="text-uppercase text-muted mt-2">RETEX FOLIO
                                                                     </label>
-                                                                <input type="text" name="skuProductoRegresado"
-                                                                    class="form-control inputSkuProductoDevuelto" value="{{$producto->sku}}" productoId="{{$producto->id}}"
+                                                                <input type="text" name="retex_folio"
+                                                                    class="form-control retex_folio" value="" 
+                                                                    readonly>
+                                                            </div>
+                                                             <div class="col-12">
+                                                                <label for="" class="text-uppercase text-muted mt-2">VALIDO HASTA:
+                                                                    </label>
+                                                                <input type="text" name="garex_fin"
+                                                                    class="form-control garex_fin" value="" 
                                                                     readonly>
                                                             </div>
                                                             <input type="hidden" name="venta_id" id="venta_id" value="{{$venta->id}}">
@@ -214,7 +230,8 @@
     async function updateDiferenciaDePrecios( idProducto, ventaId, precioProductoDevuelto, skuProductoEntregado ){
 
         console.log('======================')
-
+        // skuProductoRegresado
+        
         console.table({
             ventaId,
             skuProductoDevuelto,
@@ -226,7 +243,9 @@
             data: {
                 ventaId,
                 precioProductoDevuelto,
-                skuProductoEntregado
+                skuProductoEntregado,
+                skuProductoDevuelto
+               
             },
             success: function( response ){
                 console.log('RESPONSE')
@@ -234,7 +253,9 @@
                 
                 $(`.inputPrecioDiferencia[productoId=${idProducto}]`).val( parseFloat(response.diferencia).toFixed(2) );
                //    var original =  parseInt(response.precio_original);
-               // $(`.precioOri`).val( parseInt(original) );
+               $(`.garex_folio`).val( response.folio_garex);
+                $(`.retex_folio`).val( response.folio_retex);
+                $(`.garex_fin`).val( response.fecha_termino);
                // $(`.precioNew`).val( parseInt(response.precio_nueva.precio_publico_iva) );
                // console.log('PRecio_original',response.precio_original);
                //  console.log('PRecio_nueva',response.precio_nueva.precio_publico_iva);

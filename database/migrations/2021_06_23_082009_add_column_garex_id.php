@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRetexesTable extends Migration
+class AddColumnGarexId extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateRetexesTable extends Migration
      */
     public function up()
     {
-        Schema::create('retexes', function (Blueprint $table) {
-           $table->increments('id');
-             $table->integer('descuento')->nullable();
-               $table->timestamps();
+         Schema::table('garex_ventas', function (Blueprint $table) {
+            //
+            $table->integer('garex_id')->nullable();
         });
     }
 
@@ -27,6 +26,9 @@ class CreateRetexesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('retexes');
+        Schema::table('garex_ventas', function (Blueprint $table) {
+            //
+             $table->dropColumn('garex_id');
+        });
     }
 }

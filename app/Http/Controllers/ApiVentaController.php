@@ -8,6 +8,7 @@ use App\Descuento;
 use App\Promocion;
 use App\HistorialCambioVenta;
 use Illuminate\Http\Request;
+use DB;
 
 class ApiVentaController extends Controller
 {
@@ -149,6 +150,10 @@ class ApiVentaController extends Controller
 
     public function calcularDiferenciaRetex(Request $request){
        
+       
+       $folio_ga = DB::table('garex_ventas')->where('venta_id',$request->ventaId)->where('status',0)->where('SKU',$request->skuProductoDevuelto)->first();
+       $folio_re = str_replace('GA','RE',$folio_ga->folio);
+      
         if (strlen($request->skuProductoEntregado)==12) {
             # code...
              $productoQueSeraEntregado = Producto::where('upc', $request->skuProductoEntregado)->first();
@@ -161,6 +166,9 @@ class ApiVentaController extends Controller
         $diferencia = $productoQueSeraEntregado->precio_publico_iva-($productoQueSeraEntregado->precio_publico_iva*0.75);
         return response()->json([
             'diferencia' => $diferencia,
+            'folio_garex'=>$folio_ga->folio,
+             'folio_retex'=> $folio_re,
+            'fecha_termino'=>$folio_ga->fecha_fin
           
         ]);
     }

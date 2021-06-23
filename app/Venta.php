@@ -100,6 +100,15 @@ class Venta extends Model
         return $this->belongsTo('App\ProductoDamage', 'productos_damage');
     }
 
+    public function garex()
+    {
+        return $this->belongsToMany('App\Garex', 'garex_ventas','venta_id');
+    }
+     public function retex()
+    {
+        return $this->belongsToMany('App\Retex', 'retex_ventas','venta_id');
+    }
+
     /**
      * ==========
      * ATTRIBUTES

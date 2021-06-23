@@ -23,15 +23,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\Ventas\RealizarVentaProductosService;
+use App\Services\Ventas\RealizarGarexVentaService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class VentaController extends Controller
 {
 
-    public function __construct(RealizarVentaProductosService $realizarVentaProductos)
+    public function __construct(RealizarVentaProductosService $realizarVentaProductos,RealizarGarexVentaService $RealizarGarexVentaService)
     {
         $this->realizarVentaProductosService = $realizarVentaProductos;
+        $this->RealizarGarexVentaService = $RealizarGarexVentaService;
     }
 
     /**
@@ -247,7 +249,7 @@ class VentaController extends Controller
 
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
-
+        $this->RealizarGarexVentaService->make($venta, $request);
 
 
         if ($request->facturar == "1") {

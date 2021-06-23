@@ -8,7 +8,7 @@ use App\Producto;
 use Illuminate\Http\Request;
 use App\Services\Ventas\StoreCambioFisicoService;
 
-
+use DB;
 use App\Empleado;
 use App\Folio;
 
@@ -34,8 +34,12 @@ class RetexControl extends Controller
     public function create(Request $request)
     {
            $venta = Venta::find($request)->first();
+           $garex = DB::table('garex_ventas')->where('venta_id',$venta->id)->get();
+           $array = $garex->toArray();
+           // dd($array[0]->SKU,$garex);
+           $garex = json_encode($garex);
         $productos = $venta->productos;
-        return view('retex.create', ['venta' =>  $venta,'productos' => $productos]);
+        return view('retex.create', ['venta' =>  $venta,'productos' => $productos,'garex' => $array]);
     }
 
     /**
