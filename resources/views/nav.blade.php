@@ -74,6 +74,8 @@
                         <a class="dropdown-item" href="{{ url('/giros') }}">Giros<i class="fa fa-plus float-right"></i></a>
                         <a class="dropdown-item" href="{{ route('hospitals.index') }}">Hospitales<i class="fa fa-plus float-right"></i></a>
                         <a class="dropdown-item" href="{{route('foliosSigpesos.index')}}">Folios Sigpesos<i class="fa fa-plus float-right"></i></a>
+                        <a class="dropdown-item" href="{{url('/Retex')}}">Retex<i class="fa fa-plus float-right"></i></a>
+                        <a class="dropdown-item" href="{{url('/garex')}}">Garext<i class="fa fa-plus float-right"></i></a>
                     </div>
                 </li>    
             @endif

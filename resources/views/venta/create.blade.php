@@ -416,17 +416,35 @@
                                             </div>
 
                                         </div>
+                                        <hr>
                                     <div class="row">      
                                         <div class="p-2 flex-shrink-1 bd-highlight">
                                                         <a href="javascript:void(0);" id="agregarCupon" class="add_button_garex" title="Agregar cupon"><i class="fas fa-plus"></i></a>
                                         </div>
-                                         <label for="" class="text-uppercase text-muted">GAREX SKU</label>
-                                             <div class="col-4 form-group">
+                                         <label for="" class="text-uppercase text-muted">GAREXT01 </label>
+                                             <div class="col-2 form-group">
                                                
-                                                <input type="text" class="form-control" name="garex[] " id="garex">
-                                                
+                                            
+                                                <input type="text" class="myClass form-control" name="garex[] " id="garex[]">
+
+                                    
 
                                          </div>
+                                            <div class="col-2 form-group"> 
+                                             <label for="" class="text-uppercase text-muted"> SKU  LIGADO</label>
+                                              </div>     
+                                            <div class="col-3 form-group"> 
+                                            <input type="text" class="form-control" name="garex[] " id="garex">
+                                            </div>
+                                                <div class="col-2 form-group">                                    
+                                            <select  id="tipogarex" name="tipogarex[]" class="form-control lista" required onchange="garexporciento()">
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="100">100%</option>
+                                                    <option value="0">Gratis</option>
+                                                   
+                                                  
+                                                </select> 
+                                            </div>
                                                                                               
                                     </div>
                                     <div class="field_wrapper_garex"></div> 
@@ -713,7 +731,12 @@
 
     }
 
+
+    function garexporciento(){
+             alert($('input.myClass').val());
+    }
     function cienporciento(){
+        alert('ciento');
         $('#sigpesos_usar').val(FormValidator.faltaPorcentaje());
         var subtotal=parseFloat($('#subtotal').val());
         var des=parseFloat($('#descuento').val());
@@ -810,24 +833,38 @@
         var addButton = $('.add_button_garex'); //Add button selector
         var wrapper = $('.field_wrapper_garex'); //Input field wrapper
         var fieldHTML = `
-        <div class="row">
-            <div class="p-2 flex-shrink-1 bd-highlight">
-                <a href="javascript:void(0);" id="agregarCupon" class="remove_button_garex" title="Agregar cupon"><i class="fa fa-minus-circle"></i></a>
-                    </div>
-                     <label for="" class="text-uppercase text-muted">GAREX SKU</label>
-                 <div class="col-4 form-group">                                    
-            <input type="text" class="form-control" name="garex[] " id="garex">
-            </div>
-            </div>
-        `;
-  
-
-
-
-
-        // '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option></select><input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div></div>'; //New input field html 
-        var x = 1; //Initial field counter is 1
         
+            <div class="row">      
+                                        <div class="p-2 flex-shrink-1 bd-highlight">
+                                                        <a href="javascript:void(0);" id="agregarCupon" class="remove_button_garex" title="Agregar cupon"><i class="fa fa-minus-circle"></i></a>
+                                        </div>
+                                         <label for="" class="text-uppercase text-muted">GAREXT01/ SKU PRODUCTO LIGADO</label>
+                                             <div class="col-2 form-group">
+                                               
+                                            
+                                                <input type="text" class="form-control" name="garex[] " id="garex">
+
+                                    
+
+                                         </div>
+                                            <div class="col-2 form-group">                                    
+                                            <input type="text" class="form-control" name="garex[] " id="garex[]">
+                                            </div>
+                                                <div class="col-2 form-group">                                    
+                                            <select  id="tipogarex" name="tipogarex[] " class="form-control lista" required>
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="100">100%</option>
+                                                    <option value="0">Gratis</option>
+                                                   
+                                                  
+                                                </select> 
+                                            </div>
+                                                                                              
+                                    </div>
+        `;
+         // sumargarext();
+        var x = 1; //Initial field counter is 1
+        // alert('Hola');
         //Once add button is clicked
         $(addButton).click(function(){
             //Check maximum number of input fields
@@ -835,9 +872,21 @@
             if(x < maxField){ 
                 x++; //Increment field counter
                 $(wrapper).append(fieldHTML); //Add field html
+                 sumargarext();
+                 // alert('se agrego');
+                
             }
         });
-        
+        function sumargarext(){
+
+                console.log($("input[name='garex']").val());
+                $("input[name='garex[]']").each(function() {
+                  let arreglo =$(this).find("input[name='garex[]'").val();
+                  // folio = $(this).val();
+                  alert(arreglo);
+                         });
+
+        }
         //Once remove button is clicked
         $(wrapper).on('click', '.remove_button_garex', function(e){
             e.preventDefault();

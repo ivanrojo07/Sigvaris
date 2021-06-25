@@ -23,7 +23,9 @@ class RetexControl extends Controller
     public function index()
     {
         //
-        return 0;
+       $retex = Retex::get();
+       // dd($retex);
+        return view('retex.index', ['retex'=>$retex]);
     }
 
     /**
@@ -123,6 +125,7 @@ class RetexControl extends Controller
     public function edit(Retex $retex)
     {
         //
+        return "Hola";
     }
 
     /**

@@ -183,6 +183,7 @@ Route::resource('roles','Role\RoleController');
 Route::resource('usuarios','User\UserController');
 
 Route::resource('Retex','RetexControl');
+Route::resource('garex','garexController');
 
 
 Auth::routes();

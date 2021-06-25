@@ -9,7 +9,7 @@ class Retex extends Model
     //
     protected $table = 'retexes';
     protected $fillable = ['id','descuento'];
-    protected $timestamps = true;
+    public $timestamps = true;
 
 
 

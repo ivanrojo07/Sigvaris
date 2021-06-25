@@ -14,6 +14,6 @@ class Garex extends Model
 
 
     public function ventas(){
-        return $this->belongsToMany('App\Venta', 'garex_ventas')->withPivot('venta_id');
+        return $this->belongsToMany('App\Venta', 'garex_ventas','venta_id');
     }
 }
