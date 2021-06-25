@@ -83,6 +83,6 @@ class GarextPExport implements FromCollection, WithHeadings, WithTitle
     }
     public function title(): string
     {
-        return 'Total de ventas';
+        return 'Garext';
     }
 }
