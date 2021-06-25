@@ -5,7 +5,7 @@ namespace App\Exports;
 use App\Exports\CorteCajaPExport;
 use App\Exports\TotalVentasPExport;
 use App\Exports\ClienteVentasPExport;
-use App\Exports\garextPExport;
+use App\Exports\GarextPExport;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
@@ -24,7 +24,7 @@ class SheetsPExport implements  WithMultipleSheets
             'Cientes ' => new ClienteVentasPExport(),
              'Devoluciones ' => new DevolucionPExport(),
             'Devoluciones Sigpesos ' => new DevolucionSExport(),
-            'Garext ' => new garextPExport(),
+            'Garext ' => new GarextPExport(),
         ];
 
         return $sheets;
