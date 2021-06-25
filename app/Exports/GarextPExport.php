@@ -48,11 +48,14 @@ class GarextPExport implements FromCollection, WithHeadings, WithTitle
         
         return collect([[
                    DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->value('venta_id'):"",
-                    HistorialCambioVenta::where('venta_id',$Venta->id)->where('tipo_cambio','RETEX DEL PRODUCTO')? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
+
+                    Venta::where('id',$Venta->id)->value('total');
+
                      DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('folio')->where('venta_id','=',$Venta->id)->get():"",
 
                      DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('SKU')->where('venta_id','=',$Venta->id)->get():"",
-                  
+                    
+                    HistorialCambioVenta::where('venta_id',$Venta->id)->where('tipo_cambio','RETEX DEL PRODUCTO')? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
 
                 ]]);
         /**return Venta::where('fecha', '>=', date('Y-m-d'))
