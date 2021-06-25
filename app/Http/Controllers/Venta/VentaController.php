@@ -24,16 +24,18 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Services\Ventas\RealizarVentaProductosService;
 use App\Services\Ventas\RealizarGarexVentaService;
+use App\Services\Ventas\RealizarRetexVentaService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class VentaController extends Controller
 {
 
-    public function __construct(RealizarVentaProductosService $realizarVentaProductos,RealizarGarexVentaService $RealizarGarexVentaService)
+    public function __construct(RealizarVentaProductosService $realizarVentaProductos,RealizarGarexVentaService $RealizarGarexVentaService, RealizarRetexVentaService $RealizarRetexVentaService)
     {
         $this->realizarVentaProductosService = $realizarVentaProductos;
         $this->RealizarGarexVentaService = $RealizarGarexVentaService;
+        $this->RealizarRetexVentaService = $RealizarRetexVentaService;
     }
 
     /**
@@ -769,6 +771,7 @@ class VentaController extends Controller
 
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
+        $this->RealizarGarexVentaService->make($venta, $request);
 
         if ($request->facturar == "1") {
             $venta->update(['requiere_factura' => 1]);
@@ -982,7 +985,8 @@ class VentaController extends Controller
 
 
      public function ventaRetex(Request $request)
-    {
+    {   
+        // dd($request);
         // $saldo_a_favor=$request->input('montonegativo');
             $saldo_a_favor= $request->saldo_a_favor;
             
@@ -1069,7 +1073,9 @@ class VentaController extends Controller
 
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
-
+        $this->RealizarGarexVentaService->make($venta, $request);
+         $this->RealizarRetexVentaService->make($venta, $request);
+         // dd('hola');
         // $auxiliar = (int)$request->sigpesos_usar;
         //  $venta->sigpesos = $auxiliar;
 
@@ -1416,6 +1422,7 @@ class VentaController extends Controller
 
         // REALIZAR VENTA
         $this->realizarVentaProductosService->make($venta, $productos, $request);
+        $this->RealizarGarexVentaService->make($venta, $request);
 
         // $auxiliar = (int)$request->sigpesos_usar;
         //  $venta->sigpesos = $auxiliar;

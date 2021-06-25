@@ -425,7 +425,7 @@
                                              <div class="col-2 form-group">
                                                
                                             
-                                                <input type="text" class="myClass form-control" name="garex[] " id="garex[]">
+                                                <input type="text" class="myClass form-control" name="garexFolio[] " id="garex[]">
 
                                     
 
@@ -437,7 +437,7 @@
                                             <input type="text" class="form-control" name="garex[] " id="garex">
                                             </div>
                                                 <div class="col-2 form-group">                                    
-                                            <select  id="tipogarex" name="tipogarex[]" class="form-control lista" required onchange="garexporciento()">
+                                            <select  id="tipogarex" name="tipogarex[]" class="form-control lista" required >
                                                     <option value="">Seleccionar</option>
                                                     <option value="100">100%</option>
                                                     <option value="0">Gratis</option>
@@ -842,7 +842,7 @@
                                              <div class="col-2 form-group">
                                                
                                             
-                                                <input type="text" class="form-control" name="garex[] " id="garex">
+                                                <input type="text" class="form-control" name="garexFolio[] " id="garex">
 
                                     
 

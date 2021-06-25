@@ -63,7 +63,12 @@ class RetexControl extends Controller
 
         $empleadosFitter = Empleado::fitters()->get();
         $ObserDevuelto =$request->observaciones;
-
+        $retex_folio = $request->retex_folio;
+         $garex_folio = $request->garex_folio;
+          $garex_fin = $request->garex_fin;
+           $total_a_pagar = $request->total_a_pagar;
+            $skuProductoEntregado = $request->skuProductoEntregado;
+             $Diferencia_re = $request->skuProductoEntregado;
         // if ($request->input("diferenciaPrecios")==0) {
         //     $saldo=0;
         //     $saldo_paciente=$venta->paciente->saldo_a_favor;
@@ -101,7 +106,13 @@ class RetexControl extends Controller
                                            'saldoA'=>0,
                                            'precioOri' =>$request->precioOri,
                                            'precioNew'=>$request->precioNew,
-                                           'sigpesos_a_favor'=>$sigpesos_paciente
+                                           'sigpesos_a_favor'=>$sigpesos_paciente,
+                                            'retex_folio' => $request->retex_folio,
+                                            'garex_folio' => $request->garex_folio,
+                                            'garex_fin' => $request->garex_fin,
+                                            'total_a_pagar' => $request->total_a_pagar,
+                                            'skuProductoEntregado' => $request->skuProductoEntregado,
+                                            'Diferencia_re' => $request->skuProductoEntregado,
                                        ]);
     }
 

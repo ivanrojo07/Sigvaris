@@ -76,7 +76,7 @@
                                             <th nowrap>Damage</th>
                                             <th nowrap>Cambio físico</th>
                                             <th nowrap>Devolución</th>
-                                            <th nowrap>Garex/Retex</th>
+                                            <th nowrap>Garext/Retex</th>
                                         </tr>
                                     </thead>
                                     <tbody id="ventas">

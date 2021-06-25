@@ -26,7 +26,7 @@ class SheetsExport implements  WithMultipleSheets
             'Cientes ' => new ClienteVentasExport(),
             'Devoluciones ' => new DevolucionPExport(),
             'Devoluciones Sigpesos ' => new DevolucionSExport(),
-             'Garext ' => new GarextPExport(),
+            'Garext ' => new GarextPExport(),
         ];
 
         return $sheets;
