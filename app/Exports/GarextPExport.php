@@ -21,9 +21,7 @@ class GarextPExport implements FromCollection, WithHeadings, WithTitle
     public function collection()
     {
         $now = Carbon::now('America/Mexico_City');
-        $Ventas=Venta::where('fecha', '>=', $now->format('Y-m-d'))
-            ->where('oficina_id',2)
-            ->get();
+        $Ventas=Venta::where('fecha', '>=', $now->format('Y-m-d'))->get();
         $Devoluciones = DB::table('devoluciones')->where('created_at','>=',$now->format('Y-m-d'))->get();
         $Dev = $Devoluciones->sum('monto')*-1;
         $TotalVentas=$Ventas->count();
@@ -49,7 +47,7 @@ class GarextPExport implements FromCollection, WithHeadings, WithTitle
         $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc),'Dev'=>$Dev);
         
         return collect([[
-                    $todo['TotalVentas'],
+                   DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->get():"",
                     HistorialCambioVenta::where('venta_id',$Venta->id)->where('tipo_cambio','RETEX DEL PRODUCTO')? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
                      DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('folio')->where('venta_id','=',$Venta->id)->get():"",
 
