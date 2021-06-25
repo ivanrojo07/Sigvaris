@@ -5,6 +5,7 @@ namespace App\Exports;
 use App\Exports\CorteCajaPExport;
 use App\Exports\TotalVentasPExport;
 use App\Exports\ClienteVentasPExport;
+use App\Exports\garextPExport;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
