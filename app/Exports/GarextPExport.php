@@ -47,7 +47,7 @@ class GarextPExport implements FromCollection, WithHeadings, WithTitle
         $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc),'Dev'=>$Dev);
         
         return collect([[
-                   DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->get():"",
+                   DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->value('venta_id'):"",
                     HistorialCambioVenta::where('venta_id',$Venta->id)->where('tipo_cambio','RETEX DEL PRODUCTO')? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
                      DB::table('garex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('garex_ventas')->select('folio')->where('venta_id','=',$Venta->id)->get():"",
 
