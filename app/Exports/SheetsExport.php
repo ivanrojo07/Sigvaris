@@ -8,6 +8,7 @@ use App\Exports\ClienteVentasExport;
 use App\Exports\DevolucionPExport;
 use App\Exports\DevolucionSExport;
 use App\Exports\GarextPExport;
+use App\Exports\RetextPExport;
 
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
@@ -27,6 +28,7 @@ class SheetsExport implements  WithMultipleSheets
             'Devoluciones ' => new DevolucionPExport(),
             'Devoluciones Sigpesos ' => new DevolucionSExport(),
             'Garext ' => new GarextPExport(),
+            'Retext'=> new RetextPExport()
         ];
 
         return $sheets;
