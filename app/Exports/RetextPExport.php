@@ -49,7 +49,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
         $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc),'Dev'=>$Dev);
         
         return collect([[
-                   $retex->venta_id,
+                   DB::table('retex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('retex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->value('venta_id'):"",
 
                     Venta::where('id',$Venta->id)->value('total'),
 
