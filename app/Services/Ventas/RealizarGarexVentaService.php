@@ -27,7 +27,7 @@ class RealizarGarexVentaService
         $venta->save();
         $date = Carbon::now();
         $date->addMonth(3);
-        if (count($request->garex)>1) {
+        if (isset($request->garex)) {
              foreach ($request->garex as $i => $garex) {
 
                $SKU = Producto::where('SKU',$garex)->value('SKU');
