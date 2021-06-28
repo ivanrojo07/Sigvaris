@@ -35,7 +35,7 @@ class RealizarGarexVentaService
                // $professions = ;
                $folio = count(DB::table('garex_ventas')->get());
                $folio_id = $folio+1;
-               $folio = 'GA'.$folio;
+               $folio = 'GAREXT01-'.$folio;
                 if ($SKU == null) {
                     $SKU = '143CA13';
                 }

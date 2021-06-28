@@ -104,7 +104,7 @@
                                                             
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <label for="" class="text-uppercase text-muted mt-2">GAREX FOLIO
+                                                                <label for="" class="text-uppercase text-muted mt-2">GAREXT FOLIO
                                                                     </label>
                                                                 <input type="text" name="garex_folio"
                                                                     class="form-control garex_folio" value=""

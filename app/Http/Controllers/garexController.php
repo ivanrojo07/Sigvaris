@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Garex;
+use DB;
 class garexController extends Controller
 {
     /**
@@ -72,7 +73,28 @@ class garexController extends Controller
     {
         //
     }
+    public function getGarex(Request $request){
 
+        $ajaxGarex=array();
+        $garex=Garex::get();
+        $folios = count(DB::table('garex_ventas')->get());
+        foreach ($garex as $ga) {
+            array_push ($ajaxGarex,[ 
+                                        '<span garexId="'.$ga->id.'" class="garex_precio">'.$ga->id.'</span>',
+                                        '<span garexId="'.$ga->id.'" class="garex_precio" name="garex_precio">'.'$'.$ga->precio_publico_iva.' </span>',
+                                        '<button type="button" class="btn btn-success botonSeleccionGarex rounded-0" garexId="'.$ga->id.'" precio_publico_iva="'.$ga->precio_publico_iva.' "onclick="agregarGarex(\'#garex_precio\')" value=\''.json_encode($ga).'\'>
+                                            <i class="fas fa-plus"></i>
+                                        </button>',
+                                        '<span  garexId="'.$ga->id.'garex_precio" name="garex_precio" id="garex_precio" value=\''.json_encode($ga).'\'>'.'GAREXT01-'.$folios.'</span>',
+                                        '<span hidden garexId="'.$ga->id.'garex_precio" name="folios_garex" id="folios_garex" value=\''.json_encode($folios).'\'>'.$ga->id.'</span>',
+                                        // '<input type="text" class="btn btn-success boton_agregar" id="garex_a_agregar" value=\''.json_encode($ga).'\'  onclick="agregarGarex(\'#garex_a_agregar\')>',
+
+                                        ]);
+        }
+
+
+        return json_encode(['data'=> $ajaxGarex]);
+    }
     /**
      * Remove the specified resource from storage.
      *

@@ -152,7 +152,7 @@ class ApiVentaController extends Controller
        
        
        $folio_ga = DB::table('garex_ventas')->where('venta_id',$request->ventaId)->where('status',0)->where('SKU',$request->skuProductoDevuelto)->first();
-       $folio_re = str_replace('GA','RE',$folio_ga->folio);
+       $folio_re = str_replace('GAREXT01-','RETEXT01-',$folio_ga->folio);
       
         if (strlen($request->skuProductoEntregado)==12) {
             # code...

@@ -301,7 +301,72 @@
 
                                         </div>
                                             <hr>
-                                    <div class="row">      
+                                            {{--Garex de la compra --}}
+                    <div class="row">
+                        <div class="col-12">
+                             <div class="card-body rounded-0">
+                                 <div class="card-header rounded-0">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <h3>Garex</h3>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <label>Buscar:<input type="text" id="BuscarGarex" onkeypress="return event.keyCode!=13">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="table-responsive">
+                                        <table class="table" id="garexcarga">
+                                            <thead>
+                                                <tr>
+                                                    <th>Garex</th>
+                                                    <th>costo</th>
+                                                    <th>Agregar</th>
+                                                    <th>Ultimo Folio</th>
+                                                   
+                                                    
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                           </div>
+                     </div>
+                     {{-- DETALLES DEL GAREX --}}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card rounded-0">
+                                <div class="card-header">
+                                    <h3>Detalles Garex</h3>
+                                </div>
+                                {{-- TABLA DE Garex SELECCIONADOS --}}
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>costo</th>
+                                                        
+                                                         <th>Folio</th>
+                                                         <th>SKU</th>
+                                                        <th>Tipo</th>
+                                                        <th>Quitar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody_garex">
+                                                    {{-- <div id="tbody_garex"></div> --}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <!-- <div class="row">      
                                         <div class="p-2 flex-shrink-1 bd-highlight">
                                                         <a href="javascript:void(0);" id="agregarCupon" class="add_button_garex" title="Agregar cupon"><i class="fas fa-plus"></i></a>
                                         </div>
@@ -331,7 +396,7 @@
                                             </div>
                                                                                               
                                     </div>  
-                                      <div class="field_wrapper_garex"></div>      
+                                      <div class="field_wrapper_garex"></div>   -->    
                                             
 
                                     <hr>
@@ -879,7 +944,91 @@
     }
 </script>
 <script type="text/javascript">
+        function agregarGarex(p){
+         let garex = $('#garex_precio').val();
+         let garex2 = $('.1garex_precio').val();
+         
+        // alert("Se agrego un garex",garex,garex2);
+        $('#tbody_garex')
+                .append(`
+                <tr id="garex_agregado${garex.id}">
+                    <td class="precio_total">
+                        125
+                    </td>
+                   
+                    <td class="Folio">
+                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="GAREXT01-">
+                    </td>
+                    
+                    <td class="SKU">
+                        <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="">
+                    </td>
 
+                    <td class="tipo">
+                        <select  onchange="cambiarTotalVentaGarex(this, '#garex_agregado${garex.id}')" id="tipogarex" name="tipogarex[] " class="form-control lista" required>
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="100">100%</option>
+                                                    <option value="0">Gratis</option>
+                                                   
+                                                  
+                         </select> 
+                    </td>
+                    <td>
+                        <button onclick="quitarGarex('#garex_agregado${garex.id}')" type="button" class="btn btn-danger boton_quitar">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </td>
+                </tr>`);
+    }
+     function quitarGarex(p){
+        $(p).remove();
+        cambiarTotalVentaGarex();
+    }
+     function cambiarTotalVentaGarex(a,p){
+        let precios_total = $('td.precio_total').toArray();
+        let total = 0;
+        // alert(precios_total);
+        precios_total.forEach(e => {
+            total += parseFloat(e.innerText);
+            console.log(total);
+        });
+        // console.log($(a).val());
+                if ($(a).val() == 100) {
+                       nuevo_total = parseInt($('#total').val()) + 125;
+                       $('#total').val(nuevo_total);
+                       // alert(nuevo_total);
+
+                }
+                 if ($(a).val() == 0) {
+                        if ($('#total').val() == 0) {
+                            $('#total').val(0);
+                        }else{nuevo_total = parseInt($('#total').val()) - 125;
+                       $('#total').val(nuevo_total);}
+                       
+                       // alert(nuevo_total);
+
+                }
+                if ($('#tipoPago').val()==1) {
+                         $('#PagoEfectivo').val(nuevo_total);
+                }
+                else if ($('#tipoPago').val()==2) {
+                         $('#PagoTarjeta').val(nuevo_total); 
+                }
+                    else if ($('#tipoPago').val()==3) {
+
+                    }
+                        else if ($('#tipoPago').val()==4) {
+
+                        }
+                            else if ($('#tipoPago').val()==5) {
+                                     $('#saldo_a_usar').val(nuevo_total);
+                            }
+                                else if ($('#tipoPago').val()==6) {
+                                     $('#deposito_total').val(nuevo_total);
+                                        $('#transferencia_total').val(nuevo_total);
+
+                                }
+         }
 
 
         function ultimoFolio(){
@@ -1402,6 +1551,50 @@
     $(document).ready(function(){
 
                 var Diferencia =  $('#diferencia').val();
+                $("#BuscarGarex").on('keyup', function (e) {
+          var keycode = e.keyCode || e.which;
+            if (keycode == 13) {
+                $("#garexcarga").dataTable().fnDestroy();
+            //console.log($(this).val());
+            $('#garexcarga').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/getGarex",
+                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
+                           "nombre" : $(this).val()
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+
+            }
+        });
 
 
 
