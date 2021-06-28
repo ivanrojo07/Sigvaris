@@ -74,7 +74,7 @@ class GarextPExport implements FromCollection, WithHeadings, WithTitle
     public function headings(): array
     {
         return [
-            'Folio',
+            'Nota de remision',
             'Total que se pago:',
             'Folio Garext',
             'SKU'
