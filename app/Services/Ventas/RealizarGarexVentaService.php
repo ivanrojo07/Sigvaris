@@ -27,9 +27,8 @@ class RealizarGarexVentaService
         $venta->save();
         $date = Carbon::now();
         $date->addMonth(3);
-
-        // POR CADA PRODUCTO COMPRADO, ALMACENAMOS LA CANTIDAD COMPRADO, EL PRECIO Y DECREMENTAMOS EL STOCK
-        foreach ($request->garex as $i => $garex) {
+        if (count($request->garex)>1) {
+             foreach ($request->garex as $i => $garex) {
 
                $SKU = Producto::where('SKU',$garex)->value('SKU');
                // $professions = ;
@@ -43,6 +42,9 @@ class RealizarGarexVentaService
              
             // $producto->decrement('stock', $request->cantidad[$i]);
         }
+        }
+        // POR CADA PRODUCTO COMPRADO, ALMACENAMOS LA CANTIDAD COMPRADO, EL PRECIO Y DECREMENTAMOS EL STOCK
+       
         // dd($garex,$folio,$SKU,$date->toDateString(),$request->garex[0]);
     }
 }
