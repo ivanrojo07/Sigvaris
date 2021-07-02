@@ -268,7 +268,7 @@ class ReporteController extends Controller
 
         // dd( $arregloSumaPacientes );
 
-        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas', 'empleadosFitter'));
+        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas', 'empleadosFitter','fechaInicial','fechaFinal'));
     }
 
     public function cuatroa(Request $request)
