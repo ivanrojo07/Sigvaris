@@ -84,6 +84,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
                 $index++;
                 // dd($Venta->requiere_factura);
                 return collect([
+                    $index,
                     DB::table('retex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('retex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->value('venta_id'):"",
 
                     Venta::where('id',$Venta->id)->value('total'),
