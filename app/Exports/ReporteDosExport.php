@@ -50,7 +50,7 @@ class ReporteDosExport implements FromCollection,  WithHeadings
         );
     }
         
-    }
+    
 
     public function headings(): array
     {
