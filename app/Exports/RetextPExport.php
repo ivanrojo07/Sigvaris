@@ -36,7 +36,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
         foreach ($Ventas as $Venta) {
             if ( $Venta->paciente->ventas()->count()==1) {
                 array_push ($auxNu,$Venta->paciente->id);
-                array_push ($retex,$Venta->retex->_venta_id);
+                array_push ($retex,$Venta->retex->venta_id);
             }else{
                 array_push ($auxRe,$Venta->paciente->id);
             }
