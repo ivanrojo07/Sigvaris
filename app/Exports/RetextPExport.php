@@ -72,7 +72,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
     {
         $index=0;
         return Venta::where('fecha', '>=', date('Y-m-d'))
-            ->where('oficina_id',1)
+            ->where('oficina_id',2)
             ->get()
             //->pluck('productos')
             ->flatten()
