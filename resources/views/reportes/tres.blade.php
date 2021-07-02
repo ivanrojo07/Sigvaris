@@ -78,6 +78,7 @@
                                          @csrf
                                           <input type="hidden"  name="fechaFinal" value="{{$fechaFinal}}">
                                            <input type="hidden"  name="fechaInicial" value="{{$fechaInicial}}">
+                                            <input type="hidden"  name="arregloFechasConVentas" value="{{$arregloFechasConVentas}}">
                                     <button class="btn btn-primary">EXPORTAR</button>
                                 </form>
                                 @endif
