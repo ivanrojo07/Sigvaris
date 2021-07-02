@@ -80,11 +80,8 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
                 
                 function ($Venta,$index) {
 
-                //dd($Venta->productos()->pluck('cantidad')->sum());
-                $index++;
-                // dd($Venta->requiere_factura);
+
                 return collect([
-                    $index,
                     DB::table('retex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('retex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->value('venta_id'):"",
 
                     Venta::where('id',$Venta->id)->value('total'),
@@ -106,7 +103,8 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
             'Total que se pago:',
             'Folio Garext',
             'SKU',
-            'Retex'
+            'Retex',
+            'Garex Folio'
             
         ];
     }
