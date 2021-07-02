@@ -39,7 +39,7 @@ class ReporteDosExport implements FromCollection,  WithHeadings
        
         function ($Venta,$index) {
         return collect(
-        		return [
+        		 [
         		'fecha'=>$this->ventas->fecha,
         		'nombre'=>$this->ventas->paciente->nombre,
         		'paterno'=>$this->ventas->paciente->paterno,
