@@ -1279,11 +1279,19 @@
                             $('#total').val(0);
                         }
                         else if($('#total').val()>0){
+                            
+                            if($('#total').val()==120){
+                        nuevo_total = parseInt($('#total').val());
+                       $('#total').val(nuevo_total);
 
-                        nuevo_total = parseInt($('#total').val())-120;
+                       }else{ nuevo_total = parseInt($('#total').val())-120;
                         $('#total').val(nuevo_total);}
+                       
 
-                       else{
+
+                    }
+
+                       else if($('#total').val()==120){
                         nuevo_total = parseInt($('#total').val());
                        $('#total').val(nuevo_total);
 
