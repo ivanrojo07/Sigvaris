@@ -66,7 +66,7 @@ class ReporteDosExport implements FromCollection,  WithHeadings
                 ->withCount('productos');
         $ventas = $ventas->get();
 
-        return $ventas->->cantidad_productos;
+        return $ventas->cantidad_productos;
     }
 
     /**
