@@ -905,7 +905,7 @@
         });
         // console.log($(a).val());
                 if ($(a).val() == 100) {
-                       nuevo_total = parseInt($('#total').val()) + 125;
+                       nuevo_total = parseInt($('#total').val()) + 120;
                        $('#total').val(nuevo_total);
                        // alert(nuevo_total);
 
@@ -913,8 +913,16 @@
                  if ($(a).val() == 0) {
                         if ($('#total').val() == 0) {
                             $('#total').val(0);
-                        }else{nuevo_total = parseInt($('#total').val()) - 125;
-                       $('#total').val(nuevo_total);}
+                        } else if($('#total').val()>0){
+
+                        nuevo_total = parseInt($('#total').val())-120;
+                        $('#total').val(nuevo_total);}
+
+                       else{
+                        nuevo_total = parseInt($('#total').val());
+                       $('#total').val(nuevo_total);
+
+                       }
                        
                        // alert(nuevo_total);
 

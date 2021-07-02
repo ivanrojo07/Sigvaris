@@ -8,7 +8,7 @@ class Garex extends Model
 {
     //
     protected $table = 'garexes';
-    protected $fillable = ['id','precio_publico_iva'];
+    protected $fillable = ['id','precio_publico_iva','SKU'];
     public $timestamps = true;
 
 
