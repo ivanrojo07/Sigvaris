@@ -37,7 +37,7 @@ class ReporteDosExport implements FromCollection,  WithHeadings
         // $ventas = $this->ventas($this->fechaInicial,$this->fechaFinal);
         // 
        
-        
+        function ($Venta,$index) {
         return collect(
         		return [
         		'fecha'=>$this->ventas->fecha,
@@ -48,6 +48,7 @@ class ReporteDosExport implements FromCollection,  WithHeadings
         			 ]
         		
         );
+    });
         
     }
 
