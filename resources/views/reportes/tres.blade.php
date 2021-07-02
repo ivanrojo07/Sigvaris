@@ -66,7 +66,7 @@
                                     <button class="btn btn-primary">Buscar</button>
                                 </div>
                             </div>
-                                @if ( isset($ventas) )
+                                @if ( isset($arregloFechasConVentas) )
 
                                 <hr>
                                 <br>
