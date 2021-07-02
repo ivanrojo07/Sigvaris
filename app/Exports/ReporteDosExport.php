@@ -5,22 +5,21 @@ use App\Venta;
 use App\Oficina;
 use App\Paciente;
 use App\Producto;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+// use Maatwebsite\Excel\Concerns\FromCollection;
+// use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Contracts\View\View;
 
 class ReporteDosExport implements FromView
     {
-        public function __construct($fechaInicial,$fechaFinal,$ventas)
-    {
-        
+
+        public function __construct($fechaInicial,$fechaFinal,$ventas){ 
          $this->fechaInicial = $fechaInicial;
         $this->fechaFinal = $fechaFinal;
          $this->ventas = $ventas;
         
-    }
+            }
 	    public function view(): View
-    {
+            {
         $fechaInicial =$this->fechaInicial;
         $fechaFinal =$this->fechaFinal;
         $ventas = Venta::has('paciente')->has('productos')->where('fecha', '>=', $fechaInicial)
