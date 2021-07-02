@@ -5,7 +5,7 @@
         <div class="card">
             {{-- TITULO DEL REPORTE --}}
             <div class="card-header">
-                <h3>Reporte de prendas compradas</h3>
+                <h3>“% prendas compradas x paciente</h3>
             </div>
             {{-- BUSCADOR PACIENTES --}}
             <div class="card-body">

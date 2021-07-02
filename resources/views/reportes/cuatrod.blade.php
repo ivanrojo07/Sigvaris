@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h3>Prendas vendidas por año</h3>
+                <h3>“% prendas compradas x paciente</h3>
             </div>
             {{-- Buscador de pacientes --}}
             <div class="card-body">

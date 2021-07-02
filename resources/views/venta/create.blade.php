@@ -1184,7 +1184,7 @@
                     </td>
                    
                     <td class="Folio">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="GAREXT01-">
+                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="GAREXT0">
                     </td>
                     
                     <td class="SKU">
@@ -1279,7 +1279,7 @@
                             $('#total').val(0);
                         }
                         else if($('#total').val()>0){
-                            
+
                             if($('#total').val()==120){
                         nuevo_total = parseInt($('#total').val());
                        $('#total').val(nuevo_total);
