@@ -66,7 +66,11 @@
                                     <button class="btn btn-primary">Buscar</button>
                                 </div>
                             </div>
-                                @if ( isset($arregloFechasConVentas) )
+                                
+                        </div>
+                    </div>
+                </form>
+                @if ( isset($arregloFechasConVentas) )
 
                                 <hr>
                                 <br>
@@ -77,10 +81,6 @@
                                     <button class="btn btn-primary">EXPORTAR</button>
                                 </form>
                                 @endif
-                        </div>
-                    </div>
-                </form>
-            
             </div>
             @if ( isset($arregloFechasConVentas) )
             {{-- LISTA DE PACIENTES --}}
