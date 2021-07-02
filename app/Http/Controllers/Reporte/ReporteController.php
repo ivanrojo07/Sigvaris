@@ -127,8 +127,8 @@ class ReporteController extends Controller
         $arregloSumaPacientes = array();
         $totalPacientesConMasDeUnaPrenda = 0;
         $totalPacientesConUnaPrenda = 0;
-
-
+        $fechaInicial = 0;
+        $fechaFinal = 0;
         if ($request->input()) {
 
             if ($request->opcionBusqueda == 'dia') {
