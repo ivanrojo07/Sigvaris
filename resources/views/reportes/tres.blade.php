@@ -25,10 +25,10 @@
                                 <input type="radio" class="form-check-input" name="opcionBusqueda" required id="opcionMes" value="mes">
                                 <label for="opcionMes">Mes</label>
                             </div>
-                            <div class="form-check form-check-inline">
+                           <!--  <div class="form-check form-check-inline">
                                 <input type="radio" class="form-check-input" name="opcionBusqueda" required id="opcionTrimestre" value="trimestre">
                                 <label for="opcionTrimestre">Trimestre</label>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="col-12">
@@ -66,7 +66,17 @@
                                     <button class="btn btn-primary">Buscar</button>
                                 </div>
                             </div>
-                            
+                                @if ( isset($ventas) )
+
+                                <hr>
+                                <br>
+                                <form action="{{route('reportes.3.export')}}" method="POST">
+                                         @csrf
+                                          <input type="hidden"  name="fechaFinal" value="{{$fechaFinal}}">
+                                           <input type="hidden"  name="fechaInicial" value="{{$fechaInicial}}">
+                                    <button class="btn btn-primary">EXPORTAR</button>
+                                </form>
+                                @endif
                         </div>
                     </div>
                 </form>
@@ -79,8 +89,8 @@
                     <thead>
                         <tr class="info">
                             <th>Fecha</th>
-                            <th># Pacientes</th>
-                            <th># Prendas</th>
+                            <th> Pacientes 1 prenda</th>
+                            <th># Prendas > 1 prenda</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,13 +120,13 @@
                     </div>
                     <div class="col-3">
                         <label for="" class="text-uppercase text-muted">
-                            TOTAL PACIENTES 1ra vez
+                            PACIENTES 1 PRENDA
                         </label>
                         <input type="text" value="{{$totalPacientesConUnaPrenda}}" class="form-control" readonly>
                     </div>
                     <div class="col-3">
                         <label for="" class="text-uppercase text-muted">
-                            TOTAL PACIENTES recompra
+                            PACIENTES > 1 PRENDA
                         </label>
                         <input type="text" value="{{$totalPacientesConMasDeUnaPrenda}}" class="form-control" readonly>
                     </div>

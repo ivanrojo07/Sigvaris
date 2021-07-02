@@ -1,4 +1,4 @@
- <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
+ <table>
                 <thead>
                     <tr class="info">
                         <th>Fecha</th>
@@ -33,4 +33,4 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
+ </table>

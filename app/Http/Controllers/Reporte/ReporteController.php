@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reporte;
 use App\Doctor;
 use App\Empleado;
 use App\Exports\ReporteDosExport;
+use App\Exports\ReporteTresExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
@@ -895,17 +896,21 @@ class ReporteController extends Controller
                 ->where('fecha', '<=', $fechaFinal)
                 ->withCount('productos');
         $ventas = $ventas->get();
-        // dd($ventas->get(1));
+      
 
         return Excel::download(new ReporteDosExport($fechaInicial,$fechaFinal,$ventas), 'Prendas vendidas por paciente.xlsx');
-        // dd($ventas);
-        // $ventas = $request->ventas ; 
-        // foreach ($ventas as $key => $venta) {
-        //     dd($venta);
-        // }
+   
         
 
-        // return $request;
+    }
+     public function exportTres(Request $request){
+
+        dd($request);
+     
+
+        return Excel::download(new ReporteTresExport($request), 'Prendas vendidas por rango de fecha');
+
+       
     }
 
 
