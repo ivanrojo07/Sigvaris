@@ -104,7 +104,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
             'Total que se pago:',
             'Folio Garext',
             'SKU',
-            'Retex',
+            'Garex Nota de remision',
             'Garex Folio'
             
         ];
