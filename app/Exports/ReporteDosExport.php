@@ -48,7 +48,7 @@ class ReporteDosExport implements FromCollection,  WithHeadings
         			 ]
         		
         );
-    });
+    }
         
     }
 
