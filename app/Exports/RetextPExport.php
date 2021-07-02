@@ -60,7 +60,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
                      DB::table('retex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('retex_ventas')->select('SKU')->where('venta_id','=',$Venta->id)->get():"",
                     
                     HistorialCambioVenta::where('venta_id',$Venta->id)->where('tipo_cambio','RETEX DEL PRODUCTO')? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
-                     $todo['Retex'];
+                     $todo['Retex'],
 
                 ]]);
         /**return Venta::where('fecha', '>=', date('Y-m-d'))
