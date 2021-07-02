@@ -44,7 +44,8 @@
             </form>
             @if ( isset($ventas) )
 
-
+            <hr>
+            <br>
             <form action="{{route('reportes.2.export')}}" method="POST">
                      @csrf
                       <input type="hidden"  name="fechaFinal" value="{{$fechaFinal}}">
