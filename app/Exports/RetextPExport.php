@@ -32,9 +32,11 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
         $auxNu=[];
         $auxRe=[];
         $NumDoc=[];
+        $retex= [];
         foreach ($Ventas as $Venta) {
             if ( $Venta->paciente->ventas()->count()==1) {
                 array_push ($auxNu,$Venta->paciente->id);
+                array_push ($retex,$Venta->retex->_venta_id);
             }else{
                 array_push ($auxRe,$Venta->paciente->id);
             }
@@ -46,7 +48,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
         $auxNu=array_unique($auxNu);
         $auxRe=array_unique($auxRe);
         $NumDoc=array_unique($NumDoc);
-        $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc),'Dev'=>$Dev);
+        $todo = array('TotalVentas' => $TotalVentas , 'VentasIVA'=>$VentasIVA , 'VentasSIVA'=>$VentasSIVA,'auxNu'=>count($auxNu),'auxRe'=>count($auxRe),'NumDoc'=>count($NumDoc),'Dev'=>$Dev,'Retex'=>$retex);
         
         return collect([[
                    DB::table('retex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('retex_ventas')->select('venta_id')->where('venta_id','=',$Venta->id)->value('venta_id'):"",
@@ -58,6 +60,7 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
                      DB::table('retex_ventas')->where('venta_id','=',$Venta->id)->exists()?DB::table('retex_ventas')->select('SKU')->where('venta_id','=',$Venta->id)->get():"",
                     
                     HistorialCambioVenta::where('venta_id',$Venta->id)->where('tipo_cambio','RETEX DEL PRODUCTO')? HistorialCambioVenta::where('destinate_id','=',$Venta->id)->value('venta_id'):"",
+                     $todo['Retex'];
 
                 ]]);
         /**return Venta::where('fecha', '>=', date('Y-m-d'))
@@ -79,7 +82,8 @@ class RetextPExport implements FromCollection, WithHeadings, WithTitle
             'Nota de remision',
             'Total que se pago:',
             'Folio Garext',
-            'SKU'
+            'SKU',
+            'Retex'
             
         ];
     }
