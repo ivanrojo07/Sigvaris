@@ -130,6 +130,10 @@ class ReporteController extends Controller
         $totalPacientesConUnaPrenda = 0;
         $fechaInicial = $request->fechaInicial;
         $fechaFinal = $request->fechaFinal;
+        $mesIni  = 0;
+        $anioIni = 0 ;
+        $mesFin  = 0 ;
+        $anioFin = 0 ;
         if ($request->input()) {
 
             if ($request->opcionBusqueda == 'dia') {
@@ -152,6 +156,10 @@ class ReporteController extends Controller
                 $anioInicial = explode("-", $request->mesInicial)[0];
                 $mesFinal = explode("-", $request->mesFinal)[1];
                 $anioFinal = explode("-", $request->mesFinal)[0];
+                    $mesIni  =  $mesInicial;
+                    $anioIni = $anioInicial ;
+                    $mesFin  = $mesFinal ;
+                    $anioFin = $anioFinal;
 
                 $arregloFechasConVentas = Venta::whereYear('fecha', '>=', $anioInicial)
                     ->whereYear('fecha', '<=', $anioFinal)
@@ -269,7 +277,7 @@ class ReporteController extends Controller
 
         // dd( $arregloSumaPacientes );
 
-        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas', 'empleadosFitter','fechaInicial','fechaFinal'));
+        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas', 'empleadosFitter','fechaInicial','fechaFinal',  'mesIni ','anioIni', 'mesFin','anioFin'));
     }
 
     public function cuatroa(Request $request)

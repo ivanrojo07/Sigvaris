@@ -78,6 +78,10 @@
                                          @csrf
                                           <input type="hidden"  name="fechaFinal" value="{{$fechaFinal}}">
                                            <input type="hidden"  name="fechaInicial" value="{{$fechaInicial}}">
+                                            <input type="hidden"  name="fechaFinal" value="{{$anioFin}}">
+                                           <input type="hidden"  name="fechaInicial" value="{{$mesIni}}">
+                                            <input type="hidden"  name="fechaFinal" value="{{$mesFin}}">
+                                           <input type="hidden"  name="fechaInicial" value="{{$anioIni}}">
                                          
                                     <button class="btn btn-primary">EXPORTAR</button>
                                 </form>
