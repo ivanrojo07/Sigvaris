@@ -130,10 +130,11 @@ class ReporteController extends Controller
         $totalPacientesConUnaPrenda = 0;
         $fechaInicial = $request->fechaInicial;
         $fechaFinal = $request->fechaFinal;
-        $mesIni  = 0;
-        $anioIni = 0 ;
-        $mesFin  = 0 ;
-        $anioFin = 0 ;
+        $mesIni  = explode("-", $request->mesInicial)[1];;
+        $anioIni = explode("-", $request->mesInicial)[0]; ;
+        $mesFin  = explode("-", $request->mesFinal)[1] ;
+        $anioFin = explode("-", $request->mesFinal)[0];
+
         if ($request->input()) {
 
             if ($request->opcionBusqueda == 'dia') {
