@@ -11,17 +11,10 @@
                                 
                                 <tr>
                                     <td>{{$arregloFechasConVentas[$i]}}</td>
-                                    
-                                    
+                                     <td>{{$arregloTotalPacientesConUnProducto[$i]}}</td>
+                                     <td>{{$arregloTotalPacientesConMasDeUnProducto[$i]}}</td>
                                 </tr>
-                                <tr>
-                                    <td>{{$arregloTotalPacientesConUnProducto[$i]}}</td>
-                                </tr>
-                                <tr>
-                                    
-                                    <td>{{$arregloTotalPacientesConMasDeUnProducto[$i]}}</td>
-                                   
-                                </tr>
+
                             @endfor
                        
                     </tbody>    
