@@ -79,10 +79,11 @@
                                           <input type="hidden"  name="fechaFinal" value="{{$fechaFinal}}">
                                            <input type="hidden"  name="fechaInicial" value="{{$fechaInicial}}">
                                             <input type="hidden"  name="anioFin" value="{{$anioFin }}">
-                                           <input type="hidden"  name="mesIni" value="{{$mesIni }}">
-                                            <input type="hidden"  name="mesFin" value="{{$mesFin  }}">
+                                           <input type="hidden"  name="mesIni" value="{{$mesIni}}">
+                                            <input type="hidden"  name="mesFin" value="{{$mesFin}}">
                                            <input type="hidden"  name="anioIni" value="{{$anioIni}}">
-                                         
+                                          <input type="hidden"  name="fitter" value="{{$fitter}}">
+                                           <input type="hidden"  name="oficina" value="{{$oficina}}">
                                     <button class="btn btn-primary">EXPORTAR</button>
                                 </form>
                                 @endif

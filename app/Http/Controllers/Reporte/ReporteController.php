@@ -134,6 +134,8 @@ class ReporteController extends Controller
         $anioIni = null ;
         $mesFin  = null ;
         $anioFin = null ;
+        $fitter = null;
+        $oficina= null;
 
         if ($request->input()) {
 
@@ -181,10 +183,12 @@ class ReporteController extends Controller
             }
 
             if ($request->empleadoFitterId) {
+                $filter = $request->empleadoFitterId;
                 $arregloFechasConVentas = $arregloFechasConVentas->where('empleado_id', $request->empleadoFitterId);
             }
 
             if ($request->oficina_id) {
+                $odicina = $request->oficina_id;
                 $arregloFechasConVentas = $arregloFechasConVentas
                     ->where('oficina_id', $request->oficina_id);
             }
@@ -278,7 +282,7 @@ class ReporteController extends Controller
 
         // dd( $arregloSumaPacientes );
 
-        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas','empleadosFitter','fechaInicial','fechaFinal','mesIni','anioIni', 'mesFin','anioFin'));
+        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas','empleadosFitter','fechaInicial','fechaFinal','mesIni','anioIni', 'mesFin','anioFin','fitter','oficina'));
     }
 
     public function cuatroa(Request $request)
@@ -927,6 +931,8 @@ class ReporteController extends Controller
         $arregloSumaPacientes = array();
         $totalPacientesConMasDeUnaPrenda = 0;
         $totalPacientesConUnaPrenda = 0;
+        $fitter = null;
+        $oficina= null;
 
 
 
@@ -968,14 +974,16 @@ class ReporteController extends Controller
                     ->whereMonth('fecha', '>=', $mesInicial)
                     ->whereMonth('fecha', '<=', $mesFinal);
             }
+            //Hasta aqui bien en caunto a datos
+            //FitterId,odicina
 
-            if ($request->empleadoFitterId) {
-                $arregloFechasConVentas = $arregloFechasConVentas->where('empleado_id', $request->empleadoFitterId);
+            if ($request->fitter) {
+                $arregloFechasConVentas = $arregloFechasConVentas->where('empleado_id', $request->fitter);
             }
 
-            if ($request->oficina_id) {
+            if ($request->oficina) {
                 $arregloFechasConVentas = $arregloFechasConVentas
-                    ->where('oficina_id', $request->oficina_id);
+                    ->where('oficina_id', $request->oficina);
             }
 
             $arregloFechasConVentas = $arregloFechasConVentas->orderBy('fecha')
