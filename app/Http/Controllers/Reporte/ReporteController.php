@@ -1024,7 +1024,7 @@ class ReporteController extends Controller
 
                 // dd($totalProductosCompras,$pacientesConCompra,$rangoFechas);
 
-        return Excel::download(new ReporteCuatroAExport($request->arreglo), 'Pacientes por año y mes.xlsx');
+        return Excel::download(new ReporteCuatroAExport($request->arreglo), '% prendas compradas x paciente.xlsx');
 
        
     }
