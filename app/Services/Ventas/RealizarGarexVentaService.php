@@ -30,7 +30,7 @@ class RealizarGarexVentaService
         if (isset($request->garex)) {
              foreach ($request->garex as $i => $garex) {
                 if (strlen($garex)==12) {
-                    $SKU = Producto::where('upc', $request->skuProductoEntregado)>value('SKU');
+                    $SKU = Producto::where('upc',$garex)->value('SKU');
                 }else{
                      $SKU = Producto::where('SKU',$garex)->value('SKU');
                 }   
