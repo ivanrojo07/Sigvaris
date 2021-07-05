@@ -116,7 +116,7 @@ class ReporteController extends Controller
 
     public function tres(Request $request)
     {
-        dd($request);
+        // dd($request);
         $oficinas = Oficina::get();
         $empleadosFitter = Empleado::fitters()->get();
 
@@ -128,8 +128,8 @@ class ReporteController extends Controller
         $arregloSumaPacientes = array();
         $totalPacientesConMasDeUnaPrenda = 0;
         $totalPacientesConUnaPrenda = 0;
-        $fechaInicial = 0;
-        $fechaFinal = 0;
+        $fechaInicial = $request->fechaInicial;
+        $fechaFinal = $request->fechaFinal;
         if ($request->input()) {
 
             if ($request->opcionBusqueda == 'dia') {
