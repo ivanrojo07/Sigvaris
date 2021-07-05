@@ -916,7 +916,7 @@ class ReporteController extends Controller
      public function exportTres(Request $request){
 
         // dd($request);
-        /$oficinas = Oficina::get();
+        $oficinas = Oficina::get();
         $empleadosFitter = Empleado::fitters()->get();
 
         $ventas = null;
