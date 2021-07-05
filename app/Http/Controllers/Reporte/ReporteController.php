@@ -931,8 +931,8 @@ class ReporteController extends Controller
         $arregloSumaPacientes = array();
         $totalPacientesConMasDeUnaPrenda = 0;
         $totalPacientesConUnaPrenda = 0;
-        $fitter = null;
-        $oficina= null;
+        // $fitter = null;
+        // $oficina= null;
 
 
 
