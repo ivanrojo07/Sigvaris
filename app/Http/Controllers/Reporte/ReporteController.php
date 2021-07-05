@@ -116,6 +116,7 @@ class ReporteController extends Controller
 
     public function tres(Request $request)
     {
+        dd($request);
         $oficinas = Oficina::get();
         $empleadosFitter = Empleado::fitters()->get();
 
