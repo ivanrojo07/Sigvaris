@@ -983,7 +983,7 @@ class ReporteController extends Controller
 
             if ($request->oficina) {
                 $arregloFechasConVentas = $arregloFechasConVentas
-                    ->where('oficina_id', $request->oficina);
+                    ->where('oficina_id', $request->oficina->id);
             }
 
             $arregloFechasConVentas = $arregloFechasConVentas->orderBy('fecha')
