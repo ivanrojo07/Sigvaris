@@ -23,7 +23,7 @@ class ReporteTresExport implements FromView
             }
 	    public function view(): View
             {
-                dd($this->request);
+                dd($this->request,"export");
             $ventas = $this->request  ;
         return view('exports.reporteTres', [
             'ventas' =>$ventas
