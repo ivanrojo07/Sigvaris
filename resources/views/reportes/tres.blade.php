@@ -84,7 +84,7 @@
                                            <input type="hidden"  name="anioIni" value="{{$anioIni}}">
                                           <input type="hidden"  name="fitter" value="{{$fitter}}">
                                            <input type="hidden"  name="oficina" value="{{$oficina}}">
-                                            <input type="hidden"  name="arreglo" value="{{$arreglo}}">
+                                            <input type="hidden"  name="arreglo" value="{{array($arreglo)}}">
                                     <button class="btn btn-primary" id="">EXPORTAR</button>
                                 </form>
                                 @endif
