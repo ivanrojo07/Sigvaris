@@ -130,8 +130,8 @@ class ReporteController extends Controller
         $totalPacientesConUnaPrenda = 0;
         $fechaInicial = $request->fechaInicial;
         $fechaFinal = $request->fechaFinal;
-        $mesIni  = explode("-", $request->mesInicial)[1];;
-        $anioIni = explode("-", $request->mesInicial)[0]; ;
+        $mesIni  = explode("-", $request->mesInicial)[1];
+        $anioIni = explode("-", $request->mesInicial)[0];
         $mesFin  = explode("-", $request->mesFinal)[1] ;
         $anioFin = explode("-", $request->mesFinal)[0];
 
