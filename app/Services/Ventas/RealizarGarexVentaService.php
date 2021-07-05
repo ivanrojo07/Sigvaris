@@ -29,8 +29,13 @@ class RealizarGarexVentaService
         $date->addMonth(3);
         if (isset($request->garex)) {
              foreach ($request->garex as $i => $garex) {
+                if (strlen($garex)==12) {
+                    $SKU = Producto::where('upc', $request->skuProductoEntregado)>value('SKU');
+                }else{
+                     $SKU = Producto::where('SKU',$garex)->value('SKU');
+                }   
 
-               $SKU = Producto::where('SKU',$garex)->value('SKU');
+              
                // $professions = ;
                $folio = count(DB::table('garex_ventas')->get());
                $folio_id = $folio+1;

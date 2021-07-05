@@ -244,6 +244,7 @@ Route::post('reportes/metas','Reporte\ReporteController@reporteVentasfitter')->n
 //reportes excel
 Route::post('reportes/export/2','Reporte\ReporteController@exportdos')->name('reportes.2.export');
 Route::post('reportes/export/3','Reporte\ReporteController@exportTres')->name('reportes.3.export');
+Route::post('reportes/export/4a','Reporte\ReporteController@exportCuatroA')->name('reportes.4a.export');
 
 //Productos con daño
 Route::get('ventas/{id}/damage','Venta\DamageController@index');

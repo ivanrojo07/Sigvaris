@@ -6,6 +6,7 @@ use App\Doctor;
 use App\Empleado;
 use App\Exports\ReporteDosExport;
 use App\Exports\ReporteTresExport;
+use App\Exports\ReporteCuatroAExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
@@ -305,6 +306,11 @@ class ReporteController extends Controller
         $rangoFechas = array();
         $empleadosFitter = Empleado::fitters()->get();
         $oficinas = Oficina::get();
+        $arreglo= [] ;
+        $fechaIni=$request->fechaInicial;
+        $fechaFin=$request->fechaFinal;
+        $oficina = $request->oficina_id;
+        $fitter=$request->empleadoFitterId;
 
         if ($request->input()) {
 
@@ -360,8 +366,13 @@ class ReporteController extends Controller
                 ->pluck('cantidad')
                 ->sum();
         }
+        array_push($arreglo, json_encode($pacientesConCompra));
+        array_push($arreglo, $totalProductosCompras);
+        // array_push($arreglo, $rangoFechas);
+        // array_push($arreglo, $empleadosFitter);
+        // array_push($arreglo, $oficinas);
 
-        return view('reportes.cuatroa', compact('pacientesConCompra','totalProductosCompras', 'rangoFechas', 'empleadosFitter', 'oficinas'));
+        return view('reportes.cuatroa', compact('pacientesConCompra','totalProductosCompras', 'rangoFechas', 'empleadosFitter', 'oficinas','arreglo','fechaIni','fechaFin','fitter','oficina'));
     }
 
     public function cuatrob(Request $request)
@@ -935,6 +946,81 @@ class ReporteController extends Controller
 
        
     }
+
+    public function exportCuatroA(Request $request){
+
+            // dd($request);
+                  // dd($request->input());
+
+                $pacientesConCompra = array();
+                $totalProductosCompras = 0;
+                $rangoFechas = array();
+                $empleadosFitter = Empleado::fitters()->get();
+                $oficinas = Oficina::get();
+                $arreglo= [] ;
+                $fechaIni=$request->fechaIni;
+                $fechaFin=$request->fechaFin;
+                $oficina = $request->oficina_id;
+                $fitter  = $request->empleadoFitterId;
+        // dd($request->input());
+
+            // OBTENEMOS EL PERIODO DE TIEMPO DE BUSQUEDA
+            $rangoFechas = array(
+                "inicio" => $request->fechaIni,
+                "fin" => $request->fechaFin
+            );
+
+            // OBTENEMOS LOS PACIENTES CON COMPRAS
+            $pacientesConCompra = Paciente::has('ventas')->whereHas('ventas', function (Builder $query) use ($request) {
+                $query->where('fecha', '>=', $request->fechaIni)
+                    ->where('fecha', '<=', $request->fechaFin);
+            });
+            // dd($pacientesConCompra);
+            if (json_decode($request->oficina)->id) {
+                $pacientesConCompra = $pacientesConCompra->whereHas('ventas', function (Builder $query) use ($request) {
+                    $query->where('oficina_id', json_decode($request->oficina)->id);
+                });
+            }
+
+            // if ($request->fitter) {
+            //     $pacientesConCompra = $pacientesConCompra->whereHas('ventas', function (Builder $query) use ($request) {
+            //         $query->where('empleado_id', $request->fitter);
+            //     });
+            // }
+
+            $pacientesConCompra = $pacientesConCompra->with(['ventas' => function ($query) use ($request) {
+                $query->where('fecha', '>=', $request->fechaIni)
+                    ->where('fecha', '<=', $request->fechaFin);
+            }])
+                ->get()
+                ->filter( function($paciente){
+                    return $paciente->ventas
+                    ->pluck('productos')->flatten()
+                    ->pluck('pivot')->flatten()
+                    ->pluck('cantidad')->flatten()
+                    ->sum() >= 1;
+                } )
+                ->unique();
+
+            // return $pacientesConCompra;
+
+            $totalProductosCompras = $pacientesConCompra
+                ->pluck('ventas')
+                ->flatten()
+                ->pluck('productos')
+                ->flatten()
+                ->pluck('pivot')
+                ->flatten()
+                ->pluck('cantidad')
+                ->sum();
+
+                // dd($totalProductosCompras,$pacientesConCompra,$rangoFechas);
+
+        return Excel::download(new ReporteCuatroAExport($request->arreglo), 'Pacientes por año y mes.xlsx');
+
+       
+    }
+
 
 
 

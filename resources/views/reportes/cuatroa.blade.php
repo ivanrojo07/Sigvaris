@@ -51,6 +51,22 @@
                     </div>
                     
                 </form>
+                @if ( isset($pacientesConCompra) )
+
+                                <hr>
+                                <br>
+                                <form action="{{route('reportes.4a.export')}}" method="POST">
+                                         @csrf
+                                            <input type="hidden" class="form-control" name="fechaIni" id="fechaIni"  value="{{$fechaIni}} ">
+                                            <input type="hidden" class="form-control" name="fechaFin" id="fechaFin"  value="{{$fechaFin}} ">
+                                             <input type="hidden" class="form-control" name="fitter" id="fitter"  value="{{$fitter}} ">
+                                              <input type="hidden" class="form-control" name="oficina" id="oficina" value="{{$oficina}} "> 
+                                              <input type="hidden"  name="arreglo" value="{{json_encode($pacientesConCompra)}}"> 
+                                             <input type="hidden"  name="totalProductosCompras1" value="{{$totalProductosCompras}}"> 
+                                    <button class="btn btn-primary" id="">EXPORTAR</button>
+                                </form>
+                @endif
+
             </div>
             @if ( isset($pacientesConCompra) )
             {{-- TABLA PACIENTES --}}
