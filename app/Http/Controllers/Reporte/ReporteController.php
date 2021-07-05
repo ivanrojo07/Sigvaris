@@ -136,6 +136,7 @@ class ReporteController extends Controller
         $anioFin = null ;
         $fitter = null;
         $oficina= null;
+        $arreglo=[];
 
         if ($request->input()) {
 
@@ -278,11 +279,19 @@ class ReporteController extends Controller
 
             $arregloSumaPacientes[] = array_sum($arregloTotalPacientesConUnProducto);
             $arregloSumaPacientes[] = array_sum($arregloTotalPacientesConMasDeUnProducto);
+
+                $arreglo =array_push($arreglo, $arregloSumaPacientes);
+                $arreglo =array_push($arreglo, $arregloTotalPacientesConUnProducto);
+                $arreglo =array_push($arreglo, $arregloFechasConVentas);
+                $arreglo =array_push($arreglo, $arregloTotalPacientesConMasDeUnProducto);
+                $arreglo =array_push($arreglo, $totalPacientesConMasDeUnaPrenda);
+                $arreglo =array_push($arreglo, $arregloSumaPacientes);
+                $arreglo =array_push($arreglo, $totalPacientesConUnaPrenda);
         }
 
         // dd( $arregloSumaPacientes );
 
-        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas','empleadosFitter','fechaInicial','fechaFinal','mesIni','anioIni', 'mesFin','anioFin','fitter','oficina'));
+        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas','empleadosFitter','fechaInicial','fechaFinal','mesIni','anioIni', 'mesFin','anioFin','fitter','oficina','arreglo'));
     }
 
     public function cuatroa(Request $request)

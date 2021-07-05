@@ -63,7 +63,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-4 mt-3">
-                                    <button class="btn btn-primary">Buscar</button>
+                                    <button class="btn btn-primary" id="exportarExcel">Buscar</button>
                                 </div>
                             </div>
                                 
@@ -84,7 +84,8 @@
                                            <input type="hidden"  name="anioIni" value="{{$anioIni}}">
                                           <input type="hidden"  name="fitter" value="{{$fitter}}">
                                            <input type="hidden"  name="oficina" value="{{$oficina}}">
-                                    <button class="btn btn-primary">EXPORTAR</button>
+                                            <input type="hidden"  name="arreglo" value="{{$arreglo}}">
+                                    <button class="btn btn-primary" id="">EXPORTAR</button>
                                 </form>
                                 @endif
             </div>
@@ -262,6 +263,23 @@ function downloadPDF2() {
 
 </script>
 
+<script src="bower_components\jquery\dist\jquery.min.js"></script>
+<script src="bower_components\jquery-table2excel\dist\jquery.table2excel.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+
+
+<script>
+    $("exportarExcel").click(function(){
+    $("#listaEmpleados").table2excel({
+    // exclude CSS class
+    exclude:".noExl",
+    name:"Worksheet Name",
+    filename:"SomeFile",//do not include extension
+    fileext:".xls" // file extension
+     });
+});
+
+</script>   
 <script>
 
 function mostrarInputsBusquedaDia(){
