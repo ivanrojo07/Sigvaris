@@ -130,10 +130,10 @@ class ReporteController extends Controller
         $totalPacientesConUnaPrenda = 0;
         $fechaInicial = $request->fechaInicial;
         $fechaFinal = $request->fechaFinal;
-        $mesIni  = 0;
-        $anioIni = 0 ;
-        $mesFin  = 0 ;
-        $anioFin = 0 ;
+        $mesIni  = null;
+        $anioIni = null ;
+        $mesFin  = null ;
+        $anioFin = null ;
 
         if ($request->input()) {
 
@@ -278,7 +278,7 @@ class ReporteController extends Controller
 
         // dd( $arregloSumaPacientes );
 
-        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas','empleadosFitter','fechaInicial','fechaFinal','mesIni'=>$mesIni,'anioIni'=>$anioIni, 'mesFin'=>$mesFin,'anioFin'=>$anioFin));
+        return view('reportes.tres', compact('arregloFechasConVentas', 'arregloTotalPacientesConUnProducto', 'arregloTotalPacientesConMasDeUnProducto', 'arregloSumaPacientes', 'totalPacientesConMasDeUnaPrenda', 'totalPacientesConUnaPrenda', 'oficinas','empleadosFitter','fechaInicial','fechaFinal','mesIni','anioIni', 'mesFin','anioFin'));
     }
 
     public function cuatroa(Request $request)
