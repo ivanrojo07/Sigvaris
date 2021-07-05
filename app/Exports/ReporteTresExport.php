@@ -31,6 +31,7 @@ class ReporteTresExport implements FromView
                 $arregloTotalPacientesConMasDeUnProducto=[];
                 $contador=0;
                 $auxiliar= $this->request;
+                dd($auxiliar);
                 foreach ($auxiliar  as &$arreglo) {
                     if ($contador==0) {
                        $arregloFechasConVentas = $arreglo;
