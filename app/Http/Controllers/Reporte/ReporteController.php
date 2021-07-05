@@ -918,7 +918,7 @@ class ReporteController extends Controller
         // dd($request);
      
 
-        return Excel::download(new ReporteTresExport($request), 'Prendas vendidas por rango de fecha');
+        return Excel::download(new ReporteTresExport($request), 'Prendas vendidas por rango de fecha.xlsx');
 
        
     }
