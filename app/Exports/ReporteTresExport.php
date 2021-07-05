@@ -23,7 +23,26 @@ class ReporteTresExport implements FromView
             }
 	    public function view(): View
             {
-                dd($this->request,"export");
+                //1arregloFechasConVentas
+                //2arregloTotalPacientesConUnProducto
+                //3arregloTotalPacientesConMasDeUnProducto
+                $arregloFechasConVentas=[];
+                $arregloTotalPacientesConUnProducto=[];
+                $arregloTotalPacientesConMasDeUnProducto=[];
+                $contador=0;
+
+                foreach ($this->request  as &$arreglo) {
+                    if ($contador==0) {
+                       $arregloFechasConVentas = $arreglo;
+                    }else if($contador==1){
+                        $arregloTotalPacientesConUnProducto = $arreglo;
+                    }else if($contador==2){
+                        $arregloTotalPacientesConMasDeUnProducto = $arreglo;
+                    }
+                    // $arregloFechasConVentas = $arreglo;
+                }
+
+                dd($arregloFechasConVentas,"fehca",$arregloTotalPacientesConUnProducto,'Paciente',$arregloTotalPacientesConMasDeUnProducto,'Mas de uno');
             $ventas = $this->request  ;
         return view('exports.reporteTres', [
             'ventas' =>$ventas
