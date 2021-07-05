@@ -280,11 +280,11 @@ class ReporteController extends Controller
             $arregloSumaPacientes[] = array_sum($arregloTotalPacientesConUnProducto);
             $arregloSumaPacientes[] = array_sum($arregloTotalPacientesConMasDeUnProducto);
                 // dd($arregloFechasConVentas,$arregloTotalPacientesConUnProducto,$arregloTotalPacientesConMasDeUnProducto);
-                
-                $arreglo =array_push($arreglo, $arregloFechasConVentas);
-                $arreglo =array_push($arreglo, array($arregloFechasConVentas));
-                $arreglo =array_push($arreglo, array($arregloTotalPacientesConUnProducto));
-                $arreglo =array_push($arreglo, array($arregloTotalPacientesConMasDeUnProducto));
+
+                array_push($arreglo, $arregloFechasConVentas);
+                array_push($arreglo, array($arregloFechasConVentas));
+                array_push($arreglo, array($arregloTotalPacientesConUnProducto));
+                array_push($arreglo, array($arregloTotalPacientesConMasDeUnProducto));
                 // $arreglo =array_push($arreglo, array($totalPacientesConMasDeUnaPrenda));
                 // $arreglo =array_push($arreglo, array($arregloSumaPacientes));
                 // $arreglo =array_push($arreglo, array($totalPacientesConUnaPrenda));
