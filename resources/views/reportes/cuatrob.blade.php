@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>“% prendas compradas x paciente</h3>
+            <h3>Prendas por SKU</h3>
         </div>
         {{-- Buscador de pacientes --}}
         <div class="card-body">
@@ -22,56 +22,20 @@
                 </div>
                 <button class="btn btn-primary">Buscar</button>
             </form>
+          <!--   <div class="form-group mr-4"> -->
+            <hr>
+            <form action="{{route('reportes.4b.export')}}"   method="POST" class="form-inline">
+                 @csrf
+                 <input type="hidden" name="Ventas" value="{{ $Ventas }}">
+                  <input type="hidden" name="VentasPrendas" value="{{$totalPrendasVendidas}}">
+                <button class="btn btn-primary">Exportar</button>
+            </form>
+          <!--    </div> -->
         </div>
-        @if ( isset($skusConVentas) )
-        {{-- TABLA --}}
-        <div class="card-body">
-            <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
-                <thead>
-                    <tr class="info">
-                        <th>SKU</th>
-                        <th>NUM. PACIENTES</th>
-                        <th>NUM. PRENDAS</th>
-                        <th>% DE VENTA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($skusConVentas as $key => $sku)
-                    <tr>
-                        <td>{{$key}}</td>
-                        <td>
-                            {{
-                                    $sku->pluck('ventas')
-                                        ->flatten()
-                                        ->pluck('paciente_id')
-                                        ->flatten()
-                                        ->unique()
-                                        ->count()    
-                                }}
-                        </td>
-                        <td>{{
-                                $sku->pluck('ventas')
-                                    ->flatten()
-                                    ->pluck('pivot')
-                                    ->flatten()
-                                    ->pluck('cantidad')
-                                    ->sum()
-                                }}
-                        </td>
-                        <td>
-                            {{
-                                    round($sku->pluck('ventas')
-                                    ->flatten()
-                                    ->pluck('pivot')
-                                    ->flatten()
-                                    ->pluck('cantidad')
-                                    ->sum()/$totalPrendasVendidas*100,2)    
-                                }}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+
+            @if(sizeof($skusConVentas) >0)
+            @include('reportes.tableCuatrob',[$skusConVentas,$totalPrendasVendidas])
+            @endif
             <div class="row">
                 <div class="col-4">
                     <label for="" class="text-uppercase text-muted">TOTAL PACIENTES</label>
@@ -96,7 +60,7 @@
                 </div>
             </div>
         </div> --}}
-        @endif
+        
         {{-- <div class="card-body">
             <canvas id="canvas" height="280" width="600"></canvas>
         </div> --}}

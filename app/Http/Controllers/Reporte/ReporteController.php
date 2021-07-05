@@ -7,6 +7,7 @@ use App\Empleado;
 use App\Exports\ReporteDosExport;
 use App\Exports\ReporteTresExport;
 use App\Exports\ReporteCuatroAExport;
+use App\Exports\ReporteCuatroBExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
@@ -380,7 +381,8 @@ class ReporteController extends Controller
 
         $skusConVentas = array();
         $totalPrendasVendidas = 0;
-
+        $VentasPrendas = null;
+        $Ventas = null;
         if ($request->input()) {
 
             // SKUS CON VENTAS EN EL INTERVALO SOLICITADO
@@ -405,8 +407,14 @@ class ReporteController extends Controller
 
             // return $skusConVentas->flatten()->pluck('ventas')->flatten()->pluck('pivot');
         }
+        $VentasPrendas=$totalPrendasVendidas;
+        $Ventas = $skusConVentas;
+        if (count($Ventas)==0) {
+            $Ventas=null;
+        }
+        // dd($Ventas);
 
-        return view('reportes.cuatrob', compact('skusConVentas', 'totalPrendasVendidas'));
+        return view('reportes.cuatrob', compact('skusConVentas', 'totalPrendasVendidas','Ventas','VentasPrendas'));
     }
 
     public function cuatroc(Request $request)
@@ -1017,6 +1025,14 @@ class ReporteController extends Controller
                 // dd($totalProductosCompras,$pacientesConCompra,$rangoFechas);
 
         return Excel::download(new ReporteCuatroAExport($request->arreglo), 'Pacientes por año y mes.xlsx');
+
+       
+    }
+    public function exportCuatroB(Request $request){
+
+        // dd($request->arreglo);
+     
+        return Excel::download(new ReporteCuatroBExport($request->Ventas,$request->VentasPrendas), 'Prendas por SKU.xlsx');
 
        
     }
