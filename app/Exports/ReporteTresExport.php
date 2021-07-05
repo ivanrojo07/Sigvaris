@@ -49,10 +49,13 @@ class ReporteTresExport implements FromView
                     // $arregloFechasConVentas = $arreglo;
                 }
 
-                dd($arregloFechasConVentas,"fehca",$arregloTotalPacientesConUnProducto,'Paciente',$arregloTotalPacientesConMasDeUnProducto,'Mas de uno');
+                // dd($arregloFechasConVentas,"fehca",$arregloTotalPacientesConUnProducto,'Paciente',$arregloTotalPacientesConMasDeUnProducto,'Mas de uno');
             $ventas = $this->request  ;
         return view('exports.reporteTres', [
-            'ventas' =>$ventas
+            // 'ventas' =>$ventas
+            'arregloFechasConVentas'=>$arregloFechasConVentas,
+            'arregloTotalPacientesConUnProducto'=>$arregloTotalPacientesConUnProducto,
+            'arregloTotalPacientesConMasDeUnProducto'=>$arregloTotalPacientesConMasDeUnProducto,
         ]);
     }
 }
