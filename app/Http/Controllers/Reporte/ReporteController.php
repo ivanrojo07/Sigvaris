@@ -977,14 +977,14 @@ class ReporteController extends Controller
             //Hasta aqui bien en caunto a datos
             //FitterId,odicina
 
-            if ($request->fitter) {
-                $arregloFechasConVentas = $arregloFechasConVentas->where('empleado_id', $request->fitter);
-            }
+            // if ($request->fitter) {
+            //     $arregloFechasConVentas = $arregloFechasConVentas->where('empleado_id', $request->fitter);
+            // }
 
-            if ($request->oficina) {
-                $arregloFechasConVentas = $arregloFechasConVentas
-                    ->where('oficina_id', $request->oficina->id);
-            }
+            // if ($request->oficina) {
+            //     $arregloFechasConVentas = $arregloFechasConVentas
+            //         ->where('oficina_id', $request->oficina->id);
+            // }
 
             $arregloFechasConVentas = $arregloFechasConVentas->orderBy('fecha')
                 ->pluck('fecha')
