@@ -929,7 +929,7 @@ class ReporteController extends Controller
     }
      public function exportTres(Request $request){
 
-        dd($request);
+        dd($request->arreglo[0],$request->arreglo[1],$request->arreglo[2] );
      
         return Excel::download(new ReporteTresExport($arregloSumaPacientes), 'Prendas vendidas por rango de fecha.xlsx');
 
