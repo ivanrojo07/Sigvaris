@@ -930,35 +930,35 @@ class ReporteController extends Controller
 
 
 
-            if ($this->request->opcionBusqueda == 'dia') {
+            if ($request->opcionBusqueda == 'dia') {
                 // OBTENEMOS EL DÍA DE INICIO Y DÍA DE FIN
-                $fechaInicial = $this->request->input('fechaInicial');
-                $fechaFinal = $this->request->input('fechaFinal');
+                $fechaInicial = $request->input('fechaInicial');
+                $fechaFinal = $request->input('fechaFinal');
 
                 // OBTENEMOS ARREGLO DE LAS FECHAS CON VENTAS
                 $arregloFechasConVentas = Venta::where('fecha', '>=', $fechaInicial)
                     ->where('fecha', '<=', $fechaFinal);
-            } else if ($this->request->opcionBusqueda == "semana") {
+            } else if ($request->opcionBusqueda == "semana") {
 
-                $fechaInicial = Carbon::parse($this->request->fechaInicial)->startOfWeek()->toDateString();
-                $fechaFinal = Carbon::parse($this->request->fechaFinal)->endOfWeek()->toDateString();
+                $fechaInicial = Carbon::parse($request->fechaInicial)->startOfWeek()->toDateString();
+                $fechaFinal = Carbon::parse($request->fechaFinal)->endOfWeek()->toDateString();
 
                 $arregloFechasConVentas = Venta::where('fecha', '>=', $fechaInicial)
                     ->where('fecha', '<=', $fechaFinal);
-            } else if ($this->request->opcionBusqueda == 'mes') {
-                $mesInicial = explode("-", $this->request->mesInicial)[1];
-                $anioInicial = explode("-", $this->request->mesInicial)[0];
-                $mesFinal = explode("-", $this->request->mesFinal)[1];
-                $anioFinal = explode("-", $this->request->mesFinal)[0];
+            } else if ($request->opcionBusqueda == 'mes') {
+                $mesInicial = explode("-", $request->mesInicial)[1];
+                $anioInicial = explode("-", $request->mesInicial)[0];
+                $mesFinal = explode("-", $request->mesFinal)[1];
+                $anioFinal = explode("-", $request->mesFinal)[0];
 
                 $arregloFechasConVentas = Venta::whereYear('fecha', '>=', $anioInicial)
                     ->whereYear('fecha', '<=', $anioFinal)
                     ->whereMonth('fecha', '>=', $mesInicial)
                     ->whereMonth('fecha', '<=', $mesFinal);
-            } else if ($this->request->opcionBusqueda == 'trimestre') {
+            } else if ($request->opcionBusqueda == 'trimestre') {
 
-                $mesInicial = explode("-", $this->request->mesInicial)[1];
-                $anioInicial = explode("-", $this->request->mesInicial)[0];
+                $mesInicial = explode("-", $request->mesInicial)[1];
+                $anioInicial = explode("-", $request->mesInicial)[0];
                 $fechaFinal = Carbon::parse($anioInicial . "-" . $mesInicial . "-01")->addMonths(3)->format('Y-m-d');
                 $mesFinal = explode("-", $fechaFinal)[1];
                 $anioFinal = explode("-", $fechaFinal)[0];
@@ -969,13 +969,13 @@ class ReporteController extends Controller
                     ->whereMonth('fecha', '<=', $mesFinal);
             }
 
-            if ($this->request->empleadoFitterId) {
-                $arregloFechasConVentas = $arregloFechasConVentas->where('empleado_id', $this->request->empleadoFitterId);
+            if ($request->empleadoFitterId) {
+                $arregloFechasConVentas = $arregloFechasConVentas->where('empleado_id', $request->empleadoFitterId);
             }
 
-            if ($this->request->oficina_id) {
+            if ($request->oficina_id) {
                 $arregloFechasConVentas = $arregloFechasConVentas
-                    ->where('oficina_id', $this->request->oficina_id);
+                    ->where('oficina_id', $request->oficina_id);
             }
 
             $arregloFechasConVentas = $arregloFechasConVentas->orderBy('fecha')
