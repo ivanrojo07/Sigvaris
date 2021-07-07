@@ -974,9 +974,11 @@ class ReporteController extends Controller
     }
         public function exportCuatroD(Request $request){
 
-        dd($request);
+        // dd($request);
+        $meses = json_decode($request->meses_);
+        // dd($meses);
      
-        return Excel::download(new ReporteCuatroDExport($request->Ventas,$request->VentasPrendas), 'Total prendas vendidas x año.xlsx');
+        return Excel::download(new ReporteCuatroDExport($request->anio_ini,$request->anio_fin,$meses,$request), 'Total prendas vendidas por año.xlsx');
 
        
     }

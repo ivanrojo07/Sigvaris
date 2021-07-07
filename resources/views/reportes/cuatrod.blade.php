@@ -30,13 +30,15 @@
                 </form>
                  <form action="{{route('reportes.4d.export')}}"   method="POST" class="form-inline">
                  @csrf
-                 <input type="hidden" name="anio_ini" value="{{ old('anioInicial')  }}">
-                  <input type="hidden" name="anio_fin" value="{{old('anioFinal')}}">
-                  <input type="hidden" name="$meses_" value="{{old('$meses')}}">
+                 <input type="hidden" name="anio_ini" value="{{ $anioInicial  }}">
+                  <input type="hidden" name="anio_fin" value="{{$anioFinal}}">
+                  <input type="hidden" name="meses_" value="{{ json_encode($meses)}}">
                 <button class="btn btn-primary">Exportar</button>
-            </form
+                 </form
             </div>
-            @include('reportes.tableCuatrod',[$anioInicial,$meses])
+               <div class="card-body">
+            @include('reportes.tableCuatrod',[$anioInicial,$meses,$anioFinal])
+             </div>
            <!--  @if ( isset($anioInicial) )
                 {{-- TABLA DE PACIENTES --}}
                 <div class="card-body">
@@ -70,6 +72,14 @@
                     <button class="btn btn-success" id="download-pdf">Descargar PDF</button>
                 </div>
             @endif -->
+                {{-- GRAFICA DE TABLA --}}
+                <div class="card-body">
+                    <canvas id="canvas" height="280" width="600"></canvas>
+                </div>
+                {{-- BOTÓN DE DESCARGA PDF --}}
+                <div class="card-body">
+                    <button class="btn btn-success" id="download-pdf">Descargar PDF</button>
+                </div>
         </div>
     </div>
 
