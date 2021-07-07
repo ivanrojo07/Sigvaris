@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 
-class ReporteCuatroAExport implements FromView
+class ReporteCuatroDExport implements FromView
     {
 
         public function __construct($request,$total){ 

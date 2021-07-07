@@ -8,6 +8,7 @@ use App\Exports\ReporteDosExport;
 use App\Exports\ReporteTresExport;
 use App\Exports\ReporteCuatroAExport;
 use App\Exports\ReporteCuatroBExport;
+use App\Exports\ReporteCuatroDExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
@@ -957,74 +958,9 @@ class ReporteController extends Controller
 
     public function exportCuatroA(Request $request){
 
-            // dd($request);
-                  // dd($request->input());
+          
 
-                $pacientesConCompra = array();
-                $totalProductosCompras = 0;
-                $rangoFechas = array();
-                $empleadosFitter = Empleado::fitters()->get();
-                $oficinas = Oficina::get();
-                $arreglo= [] ;
-                $fechaIni=$request->fechaIni;
-                $fechaFin=$request->fechaFin;
-                $oficina = $request->oficina_id;
-                $fitter  = $request->empleadoFitterId;
-        // dd($request->input());
-
-            // OBTENEMOS EL PERIODO DE TIEMPO DE BUSQUEDA
-            $rangoFechas = array(
-                "inicio" => $request->fechaIni,
-                "fin" => $request->fechaFin
-            );
-
-            // OBTENEMOS LOS PACIENTES CON COMPRAS
-            $pacientesConCompra = Paciente::has('ventas')->whereHas('ventas', function (Builder $query) use ($request) {
-                $query->where('fecha', '>=', $request->fechaIni)
-                    ->where('fecha', '<=', $request->fechaFin);
-            });
-            // dd($pacientesConCompra);
-            if (json_decode($request->oficina)->id) {
-                $pacientesConCompra = $pacientesConCompra->whereHas('ventas', function (Builder $query) use ($request) {
-                    $query->where('oficina_id', json_decode($request->oficina)->id);
-                });
-            }
-
-            // if ($request->fitter) {
-            //     $pacientesConCompra = $pacientesConCompra->whereHas('ventas', function (Builder $query) use ($request) {
-            //         $query->where('empleado_id', $request->fitter);
-            //     });
-            // }
-
-            $pacientesConCompra = $pacientesConCompra->with(['ventas' => function ($query) use ($request) {
-                $query->where('fecha', '>=', $request->fechaIni)
-                    ->where('fecha', '<=', $request->fechaFin);
-            }])
-                ->get()
-                ->filter( function($paciente){
-                    return $paciente->ventas
-                    ->pluck('productos')->flatten()
-                    ->pluck('pivot')->flatten()
-                    ->pluck('cantidad')->flatten()
-                    ->sum() >= 1;
-                } )
-                ->unique();
-
-            // return $pacientesConCompra;
-
-            $totalProductosCompras = $pacientesConCompra
-                ->pluck('ventas')
-                ->flatten()
-                ->pluck('productos')
-                ->flatten()
-                ->pluck('pivot')
-                ->flatten()
-                ->pluck('cantidad')
-                ->sum();
-
-                // dd($totalProductosCompras,$pacientesConCompra,$rangoFechas);
-
-        return Excel::download(new ReporteCuatroAExport($request->arreglo), '% prendas compradas x paciente.xlsx');
+        return Excel::download(new ReporteCuatroAExport($request->arreglo,$request->totalProductosCompras1), '% prendas compradas x paciente.xlsx');
 
        
     }
@@ -1036,6 +972,15 @@ class ReporteController extends Controller
 
        
     }
+        public function exportCuatroD(Request $request){
+
+        dd($request);
+     
+        return Excel::download(new ReporteCuatroDExport($request->Ventas,$request->VentasPrendas), 'Total prendas vendidas x año.xlsx');
+
+       
+    }
+
 
 
 

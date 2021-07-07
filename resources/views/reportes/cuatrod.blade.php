@@ -28,8 +28,16 @@
                     </div>
                     <button class="btn btn-primary">Buscar</button>
                 </form>
+                 <form action="{{route('reportes.4d.export')}}"   method="POST" class="form-inline">
+                 @csrf
+                 <input type="hidden" name="anio_ini" value="{{ old('anioInicial')  }}">
+                  <input type="hidden" name="anio_fin" value="{{old('anioFinal')}}">
+                  <input type="hidden" name="$meses_" value="{{old('$meses')}}">
+                <button class="btn btn-primary">Exportar</button>
+            </form
             </div>
-            @if ( isset($anioInicial) )
+            @include('reportes.tableCuatrod',[$anioInicial,$meses])
+           <!--  @if ( isset($anioInicial) )
                 {{-- TABLA DE PACIENTES --}}
                 <div class="card-body">
                     <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
@@ -61,7 +69,7 @@
                 <div class="card-body">
                     <button class="btn btn-success" id="download-pdf">Descargar PDF</button>
                 </div>
-            @endif
+            @endif -->
         </div>
     </div>
 

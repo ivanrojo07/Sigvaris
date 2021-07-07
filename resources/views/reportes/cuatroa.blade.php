@@ -68,7 +68,8 @@
                 @endif
 
             </div>
-            @if ( isset($pacientesConCompra) )
+            @include('reportes.tableCuatroa',[$pacientesConCompra,$totalProductosCompras])
+          <!--   @if ( isset($pacientesConCompra) )
             {{-- TABLA PACIENTES --}}
             <div class="card-body">
                 <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
@@ -114,7 +115,7 @@
                 </div>
             </div>
 
-            @endif
+            @endif -->
         </div>
     </div>
 
