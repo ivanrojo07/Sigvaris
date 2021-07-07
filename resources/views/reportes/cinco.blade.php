@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>Pacientes por año y mes</h3>
+            <h3>Pacientes nuevos  y recompra</h3>
         </div>
         {{-- Buscador de pacientes --}}
         <div class="card-body">
@@ -41,11 +41,21 @@
                 </div>
                 <button class="btn btn-primary">Buscar</button>
             </form>
+             <form action="{{route('reportes.5.export')}}"   method="POST" class="form-inline">
+                 @csrf
+                 <input type="hidden" name="pacientes_" value="{{ $pacientes }}">
+                  <input type="hidden" name="anios_" value="{{json_encode($anios)}}">
+                  <input type="hidden" name="meses_" value="{{ json_encode($meses)}}">
+                  <input type="hidden" name="numPacientesPorAnio" value="{{ json_encode($numPacientesPorAnio)}}">
+                  <input type="hidden" name="opcion" value="{{ $opcion}}">
+                <button class="btn btn-primary">Exportar</button>
+                 </form>
         </div>
         {{-- @if ( isset($pacientes_sin_compra) ) --}}
         {{-- TABLA DE PACIENTES --}}
         <div class="card-body">
-            <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="tabla">
+              @include('reportes.tableCinco',[$pacientes,$anios,$meses,$opcion,$numPacientesPorAnio,])
+           <!--  <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="tabla">
                 <thead>
                     <tr class="info">
                         <th>mes</th>
@@ -94,7 +104,7 @@
 
 
                 </tbody>
-            </table>
+            </table> -->
         </div>
         {{-- @endif --}}
         {{-- GRAFICA DE PACIENTES --}}

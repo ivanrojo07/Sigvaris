@@ -9,6 +9,8 @@ use App\Exports\ReporteTresExport;
 use App\Exports\ReporteCuatroAExport;
 use App\Exports\ReporteCuatroBExport;
 use App\Exports\ReporteCuatroDExport;
+use App\Exports\ReporteCincoExport;
+use App\Exports\ReporteDiezExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
@@ -583,7 +585,8 @@ class ReporteController extends Controller
     }
 
     public function diez(Request $request)
-    {
+    {   
+        // dd($request);
 
         $mesesSolicitados = [];
 
@@ -980,8 +983,31 @@ class ReporteController extends Controller
      
         return Excel::download(new ReporteCuatroDExport($request->anio_ini,$request->anio_fin,$meses,$request), 'Total prendas vendidas por año.xlsx');
 
+      
+    }
+
+        public function exportCinco(Request $request){
+
+        // dd($request->pacientes_);
+        // $meses = json_decode($request->meses_);
+        // dd($meses);
+     
+        return Excel::download(new ReporteCincoExport($request->pacientes_,$request->anios_,$request->meses_,$request->numPacientesPorAnio,$request->opcion), 'Pacientes nuevos y recompra.xlsx');
+
        
     }
+
+     public function exportDiez(Request $request){
+
+        dd($request);
+        // $meses = json_decode($request->meses_);
+        // dd($meses);
+     
+        return Excel::download(new ReporteDiezExport($request->mesesString,$request->doctores,$request->mesesSolicitados), 'Pacientes por medico.xlsx');
+
+       
+    }
+
 
 
 

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h3>“% prendas compradas x paciente</h3>
+                <h3>“Total prendas vendidas por año</h3>
             </div>
             {{-- Buscador de pacientes --}}
             <div class="card-body">
@@ -34,7 +34,7 @@
                   <input type="hidden" name="anio_fin" value="{{$anioFinal}}">
                   <input type="hidden" name="meses_" value="{{ json_encode($meses)}}">
                 <button class="btn btn-primary">Exportar</button>
-                 </form
+                 </form>
             </div>
                <div class="card-body">
             @include('reportes.tableCuatrod',[$anioInicial,$meses,$anioFinal])

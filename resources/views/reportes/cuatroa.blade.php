@@ -70,7 +70,7 @@
             </div>
             @include('reportes.tableCuatroa',[$pacientesConCompra,$totalProductosCompras])
           <!--   @if ( isset($pacientesConCompra) )
-            {{-- TABLA PACIENTES --}}
+           {{-- TABLA PACIENTES --}}
             <div class="card-body">
                 <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
                     <thead>
@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            @endif -->
+            @endif --> 
         </div>
     </div>
 
