@@ -26,12 +26,13 @@ class ReporteDiezExport implements FromView
         // $this->total=$total;
             }
 	    public function view(): View
-            {
-                    dd($this->doctores);
+            {   
+                  $doctores = Doctor::get();
+                    // dd($this->doctores);
         return view('reportes.tableDiez', [
             
             'mesesString'=> $this->mesesString,
-            'doctores'=>$this->doctores,
+            'doctores'=>$doctores,
              'mesesSolicitados'=>json_decode($this->mesesSolicitados),
 
         ]);

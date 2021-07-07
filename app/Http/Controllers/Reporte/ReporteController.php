@@ -999,7 +999,7 @@ class ReporteController extends Controller
 
      public function exportDiez(Request $request){
 
-        dd($request);
+        // dd($request);
         // $meses = json_decode($request->meses_);
         // dd($meses);
      
