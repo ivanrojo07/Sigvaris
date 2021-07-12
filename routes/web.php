@@ -249,6 +249,7 @@ Route::post('reportes/export/4b','Reporte\ReporteController@exportCuatroB')->nam
 Route::post('reportes/export/4d','Reporte\ReporteController@exportCuatroD')->name('reportes.4d.export');
 Route::post('reportes/export/5','Reporte\ReporteController@exportCinco')->name('reportes.5.export');
 Route::post('reportes/export/10','Reporte\ReporteController@exportDiez')->name('reportes.10.export');
+Route::post('reportes/export/fitter','Reporte\ReporteController@exportFitter')->name('reportes.11.export');
 
 //Productos con daño
 Route::get('ventas/{id}/damage','Venta\DamageController@index');

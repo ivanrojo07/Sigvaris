@@ -104,6 +104,7 @@ var aniosSolicitados = {!! json_encode($aniosSolicitados) !!};
 var productosPorAnio = {!! json_encode($productosPorAnio) !!};
 var aniosYProductosPorMes = {!! json_encode($aniosYProductosPorMes) !!};
 console.log(aniosSolicitados);
+console.log(aniosYProductosPorMes[0].length);
 console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
 
 for (const i in aniosSolicitados) {
@@ -116,7 +117,7 @@ for (const i in aniosSolicitados) {
         const objeto = {
             label: aniosSolicitados[i],
             fill: false,
-            lineTension: 0.1,
+            lineTension: 0.3,
             backgroundColor: color,
             borderColor: color, // The main line color
             borderCapStyle: 'square',
@@ -133,7 +134,7 @@ for (const i in aniosSolicitados) {
             pointRadius: 4,
             pointHitRadius: 10,
             // notice the gap in the data and the spanGaps: true
-            data: Object.values(aniosYProductosPorMes[i])[0],
+            data: aniosYProductosPorMes[i][0],
             spanGaps: true,
         };
 
@@ -178,7 +179,7 @@ var options = {
 
 // Chart declaration:
 var myBarChart = new Chart(ctx, {
-  type: 'line',
+  type: 'bar',
   data: data,
   options: options
 });

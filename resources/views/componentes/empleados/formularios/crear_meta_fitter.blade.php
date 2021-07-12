@@ -30,6 +30,25 @@
                             <input type="number" min="0" step="0.01" name="numero_recompras" class="form-control" required value="0">
                         </div>
                     </div>
+                    <hr>
+                    <div class="row">
+                    <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="montoVentas" class="text-mutted text-uppercase">Porcentaje</label>
+                        <input type="number" step="0.01" class="form-control" name="Porcentaje">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numPacientesRecompra" class="text-mutted text-uppercase">objetivo de ventas</label>
+                        <input type="number" class="form-control" name="objetivo_ve">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numRecompras" class="text-mutted text-uppercase">objetivo promedio</label>
+                        <input type="number" class="form-control" name="objetivo_pro">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Piezas por paciente mensual</label>
+                        <input type="number" class="form-control" name="Piezas">
+                    </div>
+                </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success rounded-0">Guardar</button>

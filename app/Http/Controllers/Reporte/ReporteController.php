@@ -11,6 +11,7 @@ use App\Exports\ReporteCuatroBExport;
 use App\Exports\ReporteCuatroDExport;
 use App\Exports\ReporteCincoExport;
 use App\Exports\ReporteDiezExport;
+use App\Exports\ReporteFitterExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
@@ -473,7 +474,7 @@ class ReporteController extends Controller
 
     public function cuatrod(Request $request)
     {
-
+        ini_set('max_execution_time', 600);
         $anioInicial = null;
         $anioFinal = null;
         $aniosSolicitados = null;
@@ -527,10 +528,12 @@ class ReporteController extends Controller
 
     public function cinco(Request $request)
     {
-
+         ini_set('max_execution_time', 600);
         $pacientes = null;
         $anios = [];
         $aniosPacientes = [];
+          $numPacientesPrimeraVez = [];
+            $numPacientesRecompra = [];
         $meses = [];
         $opcion = null;
         $numPacientesPorAnio = null;
@@ -546,9 +549,11 @@ class ReporteController extends Controller
 
                 if ($opcion == 'primeraVez') {
                     $numPacientesPorAnio[] = count(Paciente::whereYear('created_at', $i)->doesnthave('ventas')->get());
+                    $numPacientesRecompra[]=  count(Paciente::whereYear('created_at', $i)->has('ventas')->get());
                 }
 
                 if ($opcion == 'recompra') {
+                       $numPacientesPrimeraVez[]= count(Paciente::whereYear('created_at', $i)->doesnthave('ventas')->get());;
                     $numPacientesPorAnio[] = count(Paciente::whereYear('created_at', $i)->has('ventas')->get());
                 }
             }
@@ -557,7 +562,7 @@ class ReporteController extends Controller
             $meses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         }
 
-        return view('reportes.cinco', compact('pacientes', 'anios', 'meses', 'opcion', 'numPacientesPorAnio'));
+        return view('reportes.cinco', compact('pacientes', 'anios', 'meses', 'opcion', 'numPacientesPorAnio','numPacientesPrimeraVez','numPacientesRecompra'));
     }
 
     public function nueve(Request $request)
@@ -586,9 +591,15 @@ class ReporteController extends Controller
 
     public function diez(Request $request)
     {   
-        // dd($request);
+        $año_ini = 2020;
+        $año_fin = 2020;
+        // dd($request,substr($request->fechaInicial, 0,4),$request->fechaFinal);
+        $año_ini = substr($request->fechaInicial, 0,4);
+          $año_fin = substr($request->fechaFinal, 0,4);
+           ini_set('max_execution_time', 600);
 
         $mesesSolicitados = [];
+        $añosSolicitados =[];
 
         $mesesString = array(
             "01" => "Enero",
@@ -610,7 +621,8 @@ class ReporteController extends Controller
 
             $mesInicio = explode("-", $request->fechaInicial)[1];
             $mesFinal = explode("-", $request->fechaFinal)[1];
-
+            array_push($añosSolicitados, $año_ini);
+            array_push($añosSolicitados, $año_fin);
             for ($i = $mesInicio; $i <= $mesFinal; $i++) {
 
                 $numMes = (int) $i;
@@ -628,7 +640,7 @@ class ReporteController extends Controller
             $doctores = Doctor::get();
         }
 
-        return view('reportes.diez', compact('doctores', 'mesesSolicitados', 'mesesString'));
+        return view('reportes.diez', compact('doctores', 'mesesSolicitados', 'mesesString','año_ini','año_fin','añosSolicitados'));
     }
 
     public function once()
@@ -749,14 +761,21 @@ class ReporteController extends Controller
 
         $empleadosFitter = Empleado::fitters()->get();
         $fitter = null;
+        $fecha_ini= null;
+        $fecha_fin= null;
         // Se usa datosVentasMes para guardar los datos de ventas
         // de un fitter en un rango de fechas de un mes.
         $datosVentasMes = [];
 
         if ($request->input()) {
             // OBTENEMOS EL RANGO DE FECHAS SOLICITADOS
+
             $fechaInicial = Carbon::createFromFormat('Y-m-d', $request->input('fechaInicial') . '-01');
             $fechaFinal   = Carbon::createFromFormat('Y-m-d', $request->input('fechaFinal') . '-01');
+            $fecha_ini=$fechaInicial;
+            $fecha_fin= $fechaFinal;
+            // dd( $request->input('fechaInicial'),$request->input('fechaFinal'));
+
             $difAnio = $fechaFinal->year - $fechaInicial->year;
             $difMes  = $fechaFinal->month - $fechaInicial->month;
             $fechaInOneMes = $difAnio === 0 && $difMes === 0 ? true : false;
@@ -773,7 +792,7 @@ class ReporteController extends Controller
             }
         }
 
-        return view('reportes.metasfitter', compact('oficinas', 'empleadosFitter', 'datosVentasMes', 'fitter'));
+        return view('reportes.metasfitter', compact('oficinas', 'empleadosFitter', 'datosVentasMes', 'fitter','fecha_ini','fecha_fin'));
     }
 
     /**
@@ -802,25 +821,31 @@ class ReporteController extends Controller
         $metaFitter  = $fitter->fitterMetas()
             ->whereBetween('fecha_inicio', [$fechaInicial->toDateString(), $fechaFinal->toDateString()])
             ->get()->last();
-
+            // dd();
+            // $monto = collect($metaFitter->monto_venta);
         foreach ($ventasfitter as $venta) {
             $datosVentasMes["montoVenta"][] = [
-                "meta"       => $metaFitter->monto_venta,
+                "meta"       => 1,
                 "valor"      => $venta->total,
-                "porcentaje" => (($venta->total * 100) / $metaFitter->monto_venta)
+                // "porcentaje" => (($venta->total * 100) / $metaFitter->monto_venta)
+                "porcentaje" => (($venta->total * 100) /100)
             ];
-
+                // dd($venta->productos,$venta->productos->count());
             // OBTENEMOS SI EN UNA VENTA SE COMPRA MAS DE UNA PRENDA
-            if ($venta->productos->count() > 1 || $venta->productos[0]->pivot->cantidad > 1) {
+            // if ($venta->productos->count() > 1 || $venta->productos[0]->pivot->cantidad > 1) {
+                    if ($venta->productos->count() > 1) {
                 $datosVentasMes["pacientes"][] = [
-                    "meta"  => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
+                    // "meta"  => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
+                    "meta"  => $metaFitter ? 1 : 1,
                     "valor" => 1,
                     // TODO: ver si ese valor de 1 esta bien
-                    "porcentaje" => ((100) / $metaFitter->num_pacientes_recompra)
+                    // "porcentaje" => ((100) / $metaFitter->num_pacientes_recompra)
+                     "porcentaje" => ((100) /100)
                 ];
             } else {
                 $datosVentasMes["pacientes"][] = [
-                    "meta" => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
+                    // "meta" => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
+                    "meta" => $metaFitter ? 1 : 1,
                     "valor" => "-",
                     "porcentaje" => "-"
                 ];
@@ -829,13 +854,16 @@ class ReporteController extends Controller
             // OBTENEMOS SI EN UNA VENTA EL PACIENTE HACE RECOMPRA
             if ($venta->paciente->ventas->count() > 1) {
                 $datosVentasMes["recompras"][] = [
-                    "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                    // "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                      "meta" => $metaFitter ? 1 : 1,
                     "valor" => 1,
-                    "porcentaje" => ((100) / $metaFitter->numero_recompras)
+                    // "porcentaje" => ((100) / $metaFitter->numero_recompras)
+                     "porcentaje" => ((100) / 100)
                 ];
             } else {
                 $datosVentasMes["recompras"][] = [
-                    "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                    // "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                     "meta" => $metaFitter ? 1 : 1,
                     "valor" => "-",
                     "porcentaje" => "-"
                 ];
@@ -936,7 +964,7 @@ class ReporteController extends Controller
 
 
     public function exportdos(Request $request){
-
+        ini_set('max_execution_time', 600);
         $fechaInicial =$request->fechaInicial;
         $fechaFinal =$request->fechaFinal;
         $ventas = Venta::has('paciente')->has('productos')->where('fecha', '>=', $fechaInicial)
@@ -953,7 +981,7 @@ class ReporteController extends Controller
      public function exportTres(Request $request){
 
         // dd($request->arreglo);
-     
+        ini_set('max_execution_time', 600);
         return Excel::download(new ReporteTresExport($request->arreglo), 'Prendas vendidas por rango de fecha.xlsx');
 
        
@@ -962,7 +990,7 @@ class ReporteController extends Controller
     public function exportCuatroA(Request $request){
 
           
-
+        ini_set('max_execution_time', 600);
         return Excel::download(new ReporteCuatroAExport($request->arreglo,$request->totalProductosCompras1), '% prendas compradas x paciente.xlsx');
 
        
@@ -970,7 +998,7 @@ class ReporteController extends Controller
     public function exportCuatroB(Request $request){
 
         // dd($request->arreglo);
-     
+        ini_set('max_execution_time', 600);
         return Excel::download(new ReporteCuatroBExport($request->Ventas,$request->VentasPrendas), 'Prendas por SKU.xlsx');
 
        
@@ -978,6 +1006,7 @@ class ReporteController extends Controller
         public function exportCuatroD(Request $request){
 
         // dd($request);
+        ini_set('max_execution_time', 600);
         $meses = json_decode($request->meses_);
         // dd($meses);
      
@@ -1000,10 +1029,65 @@ class ReporteController extends Controller
      public function exportDiez(Request $request){
 
         // dd($request);
-        // $meses = json_decode($request->meses_);
+        // $meses = json_decode($request->meses_);0
+        // 
         // dd($meses);
+        ini_set('max_execution_time', 600);
      
         return Excel::download(new ReporteDiezExport($request->mesesString,$request->doctores,$request->mesesSolicitados), 'Pacientes por medico.xlsx');
+
+       
+    }
+    public function exportFitter(Request $request){
+
+          $oficinas = Oficina::get();
+
+        $empleadosFitter = Empleado::fitters()->get();
+        $fitter = null;
+        // $fecha_ini= null;
+        // $fecha_fin= null;
+        // Se usa datosVentasMes para guardar los datos de ventas
+        // de un fitter en un rango de fechas de un mes.
+        $datosVentasMes = [];
+            
+        // if ($request->input()) {
+        //     // OBTENEMOS EL RANGO DE FECHAS SOLICITADOS
+
+            $fechaInicial = $request->fecha_ini;
+            $fechaFinal   = $request->fecha_fin;
+            // substr($fechaInicial, 0,7);
+        //     // $fecha_ini=$fechaInicial;
+        //     // $fecha_fin= $fechaFinal;
+
+        //     // $difAnio = $fechaFinal->year - $fechaInicial->year;
+        //     // $difMes  = $fechaFinal->month - $fechaInicial->month;
+        //     // $fechaInOneMes = $difAnio === 0 && $difMes === 0 ? true : false;
+        //     
+                 $uno = substr($fechaInicial, 0,7);
+                 $dos =  substr($fechaFinal, 0,7);
+
+                 // dd($uno,$dos,$request);
+            // $fitter = Empleado::findOrFail();
+          $fechaInicial = Carbon::createFromFormat('Y-m-d', $uno.'-01');
+            $fechaFinal   = Carbon::createFromFormat('Y-m-d',$dos.'-01');
+            $fitteer = json_decode($request->fitter_);
+               $fitter = Empleado::findOrFail($fitteer->id);
+             // dd($request,$datosVentasMes,$fitter);
+        //     if ($request->pleadoFitterId && $fechaInOneMes) {
+        //         $datosVentasMes = $this->getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request);
+        //     } else if ($request->empleadoFitterId && !$fechaInOneMes) {
+        //         // Rango de fechas en mas de un mes se genera por meses la informacion
+                // $datosVentasMes = $this->getDatosVentaFitterMeses($fechaInicial, $fechaFinal, $fitter, $request);
+        //         dd($request,$datosVentasMes);
+        //     } else {
+        //         $pacientes_sin_compra = Paciente::noCompradores();
+        //         dd($request,$datosVentasMes);
+        //     }
+        // }
+                // dd($datosVentasMes);
+        // ini_set('max_execution_time', 600);
+     
+        return Excel::download(new ReporteFitterExport($request->ventasMes,$datosVentasMes), 'Ventas de fitter.xlsx');
 
        
     }

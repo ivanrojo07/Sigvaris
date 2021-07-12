@@ -1,10 +1,18 @@
  <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="tabla">
                 <thead>
                     <tr class="info">
-                        <th>mes</th>
+                        <th rowspan="2" >mes</th>
                         @foreach ($anios as $anio)
-                        <th>{{$anio}}</th>
-                        @endforeach
+                        <th colspan="2">{{$anio}}</th>
+
+                        @endforeach     
+                    </tr>
+                    <tr>
+                        @foreach ($anios as $anio)
+                        <th>1ra vez</th>
+                         <th>recompra</th>
+
+                        @endforeach 
                     </tr>
 
                 </thead>
@@ -14,9 +22,9 @@
                     <tr>
                         <td>{{$mes}}</td>
                         @foreach($anios as $key => $anio)
-                        {{--  --}}
-                        @if ($opcion == "primeraVez")
-                        <td>
+                        
+                      
+                        <td rowspan="1">
                             {{
                                 App\Paciente::whereYear('created_at',$anio)
                                 ->whereMonth('created_at',$mes)
@@ -27,8 +35,8 @@
                                 } )->count()
                             }}
                         </td>
-                        @else
-                        <td>{{
+                      
+                        <td rowspan="1">  {{
                                 App\Paciente::whereYear('created_at',$anio)
                                 ->whereMonth('created_at',$mes)
                                 ->has('ventas')
@@ -38,7 +46,8 @@
                                 } )->count()
                             }}
                         </td>
-                        @endif
+                      
+                      
 
                         @endforeach
                     </tr>

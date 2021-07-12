@@ -145,7 +145,7 @@ var Years = <?php echo json_encode($anios) ?>;
 var Labels = new Array("l1", "l2", "l3");
 // var Prices = new Array("100", "200", "300");
 var Prices = <?php echo json_encode($numPacientesPorAnio) ?>;
-
+console.log('pa por año', Prices)
 $(document).ready(function(){
     // $.get(url, function(response){
     // response.forEach(function(data){
@@ -158,7 +158,7 @@ $(document).ready(function(){
     var ctx = document.getElementById("canvas").getContext('2d');
     ctx.fillStyle = "#FFFFFF";
         var myChart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels:Years,
                 datasets: [{

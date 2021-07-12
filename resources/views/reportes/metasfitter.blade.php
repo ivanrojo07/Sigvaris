@@ -47,6 +47,14 @@
                     <button class="btn btn-primary my-4">Buscar</button>
                 </div>
             </form>
+             <form action="{{route('reportes.11.export')}}"   method="POST" class="form-inline">
+                 @csrf
+                 <input type="hidden" name="fecha_ini" value="{{ $fecha_ini  }}">
+                  <input type="hidden" name="fecha_fin" value="{{$fecha_fin}}">
+                  <input type="hidden" name="fitter_" value="{{ $fitter}}">
+                  <input type="hidden" name="ventasMes" value="{{ json_encode($datosVentasMes)}}">
+                <button class="btn btn-primary">Exportar</button>
+                 </form>
         </div>
         @if ( isset($fitter) )
         <div class="input-group col-md-5 my-4">
@@ -68,21 +76,24 @@
                     </tr>
                     <tr class="info text-center">
                         <th></th>
-                        <th>Cuota</th>
+                        <th>Objetivo</th>
                         <th>Real</th>
                         <th>%</th>
-                        <th>Cuota</th>
+                        <th>Objetivo</th>
                         <th>Real</th>
                         <th>%</th>
-                        <th>Cuota</th>
+                        <th>Objetivo</th>
                         <th>Real</th>
                         <th>%</th>
+                        <th>Piezas promedio por paciente</th>
+                         <th>Piezas promedio mensual</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if(isset($datosVentasMes["montoVenta"]))
                     @foreach($datosVentasMes["montoVenta"] as $key => $row)
                     <tr class="text-center">
+                    <!--     {{dd($datosVentasMes["montoVenta"])}} -->
                         <td>{{ $key + 1 }}</td>
                         <td>${{ number_format($row["meta"], 2) }}</td>
                         <td>${{ number_format($row["valor"], 2) }}</td>
@@ -137,6 +148,8 @@
                         @else
                         <td>{{ $datosVentasMes[$i][0]["recompras"]["porcentaje"] }}</td>
                         @endif
+                        <td>0</td>
+                         <td>0</td>
                         </tr>
                         @endfor
                         <tr class="text-center">
@@ -150,6 +163,8 @@
                             <td>{{ $datosVentasMes["totales"]["recompras"][0] }}</td>
                             <td>{{ $datosVentasMes["totales"]["recompras"][1] }}</td>
                             <td>{{ number_format($datosVentasMes["totales"]["recompras"][2]) }}%</td>
+                             <td>0</td>
+                              <td>0</td>
                         </tr>
                         @endif
                 </tbody>

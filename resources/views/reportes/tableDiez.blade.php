@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped table-bordered table-responsive" style="margin-bottom: 0;" id="listaEmpleados">
+<table class="table">
                     <thead>
                         <tr class="info">
                             <th rowspan="2">Doctor</th>
@@ -32,8 +32,8 @@
                                                 ->withCount("ventas")
                                                 // SOLO PACIENTES CON VENTAS EN EL RANGO DE TIEMPO
                                                 ->whereHas('ventas', function(\Illuminate\Database\Eloquent\Builder $query) use($mes){
-                                                    $query->where('fecha','>=','2019-'.$mes.'-01')
-                                                        ->where('fecha', '<=', '2019-'.$mes.'-31');
+                                                    $query->where('fecha','>=',$año_ini.'-'.$mes.'-01')
+                                                        ->where('fecha', '<=', $año_fin.'-'.$mes.'-31');
                                                 })
                                                 // SOLO PACIENTES CON MENOS DE UNA VENTA
                                                 ->having('ventas_count', '<=', 1)
@@ -47,8 +47,8 @@
                                                 ->withCount("ventas")
                                                 // SOLO PACIENTES CON VENTAS EN EL RANGO DE TIEMPO
                                                 ->whereHas('ventas', function(\Illuminate\Database\Eloquent\Builder $query) use($mes){
-                                                    $query->where('fecha','>=','2019-'.$mes.'-01')
-                                                        ->where('fecha', '<=', '2019-'.$mes.'-31');
+                                                    $query->where('fecha','>=',$año_ini.'-'.$mes.'-01')
+                                                        ->where('fecha', '<=', $año_fin.'-'.$mes.'-31');
                                                 })
                                                 // SOLO PACIENTES CON MENOS DE UNA VENTA
                                                 ->having('ventas_count', '>', 1)
@@ -63,8 +63,8 @@
                                             ->withCount("ventas")
                                             // SOLO PACIENTES CON VENTAS EN EL RANGO DE TIEMPO
                                             ->whereHas('ventas', function(\Illuminate\Database\Eloquent\Builder $query) use($mesesSolicitados){
-                                                $query->where('fecha','>=','2019-'.$mesesSolicitados[0].'-01')
-                                                    ->where('fecha', '<=', '2019-'.end($mesesSolicitados).'-31');
+                                                $query->where('fecha','>=',$año_ini.'-'.$mesesSolicitados[0].'-01')
+                                                    ->where('fecha', '<=', $año_fin.'-'.end($mesesSolicitados).'-31');
                                             })
                                             // SOLO PACIENTES CON MENOS DE UNA VENTA
                                             ->having('ventas_count', '<=', 1)
@@ -78,8 +78,8 @@
                                             ->withCount("ventas")
                                             // SOLO PACIENTES CON VENTAS EN EL RANGO DE TIEMPO
                                             ->whereHas('ventas', function(\Illuminate\Database\Eloquent\Builder $query) use($mesesSolicitados){
-                                                $query->where('fecha','>=','2019-'.$mesesSolicitados[0].'-01')
-                                                    ->where('fecha', '<=', '2019-'.end($mesesSolicitados).'-31');
+                                                $query->where('fecha','>=',$año_ini.'-'.$mesesSolicitados[0].'-01')
+                                                    ->where('fecha', '<=', $año_fin.'-'.end($mesesSolicitados).'-31');
                                             })
                                             // SOLO PACIENTES CON MENOS DE UNA VENTA
                                             ->having('ventas_count', '>', 1)
