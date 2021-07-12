@@ -28,7 +28,7 @@ class ReporteController extends Controller
 
     public function uno(Request $request)
     {
-
+          ini_set('max_execution_time', 600);
         // dd($request->input());
 
         $pacientes_sin_compra = null;
@@ -83,7 +83,7 @@ class ReporteController extends Controller
 
     public function dos(Request $request)
     {
-
+          ini_set('max_execution_time', 600);
         $oficinas = Oficina::get();
 
         $empleadosFitter = Empleado::fitters()->get();
@@ -123,6 +123,7 @@ class ReporteController extends Controller
     public function tres(Request $request)
     {
         // dd($request);
+          ini_set('max_execution_time', 600);
         $oficinas = Oficina::get();
         $empleadosFitter = Empleado::fitters()->get();
 
@@ -305,7 +306,7 @@ class ReporteController extends Controller
     {
 
         // dd($request->input());
-
+          ini_set('max_execution_time', 600);
         $pacientesConCompra = array();
         $totalProductosCompras = 0;
         $rangoFechas = array();
@@ -382,7 +383,7 @@ class ReporteController extends Controller
 
     public function cuatrob(Request $request)
     {
-
+          ini_set('max_execution_time', 600);
         $skusConVentas = array();
         $totalPrendasVendidas = 0;
         $VentasPrendas = null;
@@ -423,7 +424,7 @@ class ReporteController extends Controller
 
     public function cuatroc(Request $request)
     {
-
+          ini_set('max_execution_time', 600);
         $meses = null;
         $anios = null;
         $skus = null;
