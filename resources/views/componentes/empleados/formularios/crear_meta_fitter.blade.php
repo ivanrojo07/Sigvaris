@@ -48,6 +48,10 @@
                         <label for="numRecompras" class="text-mutted text-uppercase">Piezas por paciente mensual</label>
                         <input type="number" class="form-control" name="Piezas">
                     </div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Piezas promedio por paciente</label>
+                        <input type="number" class="form-control" name="Piezas_pac">
+                    </div>
                 </div>
                 </div>
                 <div class="modal-footer">
