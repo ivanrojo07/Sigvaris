@@ -44,8 +44,8 @@
                   <input type="hidden" name="aux" value="{{$aux}}">
                   <input type="hidden" name="doctores" value="{{($doctores)}}">
                   <input type="hidden" name="mesesSolicitados" value="{{ json_encode($mesesSolicitados)}}">
-                   <input type="hidden" name="mesesSolicitados" value="{{   $año_ini }}">
-                    <input type="hidden" name="mesesSolicitados" value="{{  $año_fin }}">
+                   <input type="hidden" name="año_ini" value="{{   $año_ini }}">
+                    <input type="hidden" name="año_fin" value="{{  $año_fin }}">
                 <button class="btn btn-primary">Exportar</button>
                  </form>
         </div>
@@ -56,9 +56,7 @@
                     <thead>
                         <tr class="info">
                             <th rowspan="2">Doctor</th>
-                           <!--  @foreach($añosSolicitados as $año )
-                             <th colspan="1">{{$año}}</th>
-                            @endforeach -->
+
                             @foreach ($mesesSolicitados as $mes)
                                 <th colspan="2">{{$mesesString[$mes]}}</th>
                             @endforeach

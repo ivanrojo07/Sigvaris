@@ -520,11 +520,46 @@ class ReporteController extends Controller
 
                 array_push($aniosYProductosPorMes, array($i => $productosPorMes));
             }
+            $suma_año=[];
+        $ProductosAño=[];
+
+        foreach ($aniosYProductosPorMes as $key => $años) {
+
+            foreach ($años as $key => $meses_) {
+              
+              // dd($meses);
+               $suma_productos=[];
+                foreach ($meses_ as $key => $total) {
+                    //El total de los productos que se vendieron n°
+                    $Sum=0;
+                    if (count($total) != 0) {
+
+                        // dd($total,count($total));
+                        foreach ($total as $key => $suma) {
+                             $Sum+=$suma;
+                            //aqui hago la suma de la cantidad por producto y la guardo en el arreglo
+                        }
+                        array_push($suma_productos , $Sum);
+                    }else{
+                        //Aqui agrego que tiene 0 productos ese mes
+                        array_push($suma_productos, 0);
+                    }
+
+
+                }
+
+                 array_push($suma_año, array($suma_productos));
+              
+            }
+           
+              // array_push($ProductosAño, $suma_año);
+         
+        }
         }
 
         // dd($aniosYProductosPorMes);
 
-        return view('reportes.cuatrod', compact('anioInicial', 'anioFinal', 'meses', 'aniosSolicitados', 'productosPorAnio', 'aniosYProductosPorMes'));
+        return view('reportes.cuatrod', compact('anioInicial', 'anioFinal', 'meses', 'aniosSolicitados', 'productosPorAnio', 'aniosYProductosPorMes','suma_año'));
     }
 
     public function cinco(Request $request)
@@ -597,7 +632,8 @@ class ReporteController extends Controller
         // dd($request,substr($request->fechaInicial, 0,4),$request->fechaFinal);
         $año_ini = substr($request->fechaInicial, 0,4);
           $año_fin = substr($request->fechaFinal, 0,4);
-           ini_set('max_execution_time', 600);
+          
+           ini_set('max_execution_time', 900);
 
         $mesesSolicitados = [];
         $añosSolicitados =[];
@@ -758,7 +794,9 @@ class ReporteController extends Controller
      */
     public function reporteVentasfitter(Request $request)
     {
+        // dd($request->empleadoFitterId==0);
         $oficinas = Oficina::get();
+          ini_set('max_execution_time', 600);
 
         $empleadosFitter = Empleado::fitters()->get();
         $fitter = null;
@@ -767,6 +805,23 @@ class ReporteController extends Controller
         // Se usa datosVentasMes para guardar los datos de ventas
         // de un fitter en un rango de fechas de un mes.
         $datosVentasMes = [];
+        // dd($empleadosFitter);
+          // if ($request->empleadoFitterId==0) {
+          //   $fechaInicial = Carbon::createFromFormat('Y-m-d','2016-01-01');
+          //      $fechaFinal = Carbon::now();
+          //       // $fechaFinal   = Carbon::createFromFormat('Y-m-d', $ahora );
+          //      // dd($fechaInicial->format('Y-m'),$ahora->format('Y-m') );
+          //       foreach ($empleadosFitter as $key => $value) {
+          //           $fitter = Empleado::findOrFail($value->id);
+          //           if ($fitter->id != 4) {
+          //               array_push($datosVentasMes, $this->getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request));
+          //           }
+                    
+                     
+                   
+          //       }
+          //        dd($datosVentasMes);
+          //   }
 
         if ($request->input()) {
             // OBTENEMOS EL RANGO DE FECHAS SOLICITADOS
@@ -776,12 +831,39 @@ class ReporteController extends Controller
             $fecha_ini=$fechaInicial;
             $fecha_fin= $fechaFinal;
             // dd( $request->input('fechaInicial'),$request->input('fechaFinal'));
+            
+        // dd($request->empleadoFitterId==0);
+      
+         
+
+        $datosVentasMesFitters = [];
+        // dd($empleadosFitter);
+          if ($request->empleadoFitterId==0) {
+             ini_set('max_execution_time', 600);
+            // $fechaInicial = Carbon::createFromFormat('Y-m-d','2016-01-01');
+            //    $fechaFinal = Carbon::now();
+                // $fechaFinal   = Carbon::createFromFormat('Y-m-d', $ahora );
+               // dd($fechaInicial->format('Y-m'),$ahora->format('Y-m') );
+                foreach ($empleadosFitter as $key => $value) {
+                    $fitter = Empleado::findOrFail($value->id);
+                    // if ($fitter->id != 4) {
+                        array_push($datosVentasMesFitters, $this->getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request));
+                    // }
+                    
+                     
+                   
+                }
+                // array_push($datosVentasMesFitters, $datosVentasMes);
+                 // dd($datosVentasMes);
+                 return view('reportes.metasfitter', compact('datosVentasMesFitters','oficinas', 'empleadosFitter', 'datosVentasMes', 'fitter','fecha_ini','fecha_fin'));
+            }
 
             $difAnio = $fechaFinal->year - $fechaInicial->year;
             $difMes  = $fechaFinal->month - $fechaInicial->month;
             $fechaInOneMes = $difAnio === 0 && $difMes === 0 ? true : false;
             $fitter = Empleado::findOrFail($request->empleadoFitterId);
             $fitter = Empleado::findOrFail($request->empleadoFitterId);
+          
 
             if ($request->pleadoFitterId && $fechaInOneMes) {
                 $datosVentasMes = $this->getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request);
@@ -825,50 +907,64 @@ class ReporteController extends Controller
             // dd();
             // $monto = collect($metaFitter->monto_venta);
         foreach ($ventasfitter as $venta) {
+            // dd($venta);
             $datosVentasMes["montoVenta"][] = [
-                "meta"       => 1,
+                "meta"       => $metaFitter->monto_venta,
                 "valor"      => $venta->total,
-                // "porcentaje" => (($venta->total * 100) / $metaFitter->monto_venta)
-                "porcentaje" => (($venta->total * 100) /100)
+                "porcentaje" => (($venta->total * 100) / $metaFitter->monto_venta)
+                // "porcentaje" => (($venta->total * 100) /100)
             ];
+            // if (!isset(  $venta->productos   )   ) {
+            //     # code...
+            //     # 
+            //     dd($venta->productos,$venta,$datosVentasMes);
+            // }
                 // dd($venta->productos,$venta->productos->count());
             // OBTENEMOS SI EN UNA VENTA SE COMPRA MAS DE UNA PRENDA
-            // if ($venta->productos->count() > 1 || $venta->productos[0]->pivot->cantidad > 1) {
-                    if ($venta->productos->count() > 1) {
-                $datosVentasMes["pacientes"][] = [
-                    // "meta"  => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
-                    "meta"  => $metaFitter ? 1 : 1,
-                    "valor" => 1,
-                    // TODO: ver si ese valor de 1 esta bien
-                    // "porcentaje" => ((100) / $metaFitter->num_pacientes_recompra)
-                     "porcentaje" => ((100) /100)
-                ];
-            } else {
-                $datosVentasMes["pacientes"][] = [
-                    // "meta" => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
-                    "meta" => $metaFitter ? 1 : 1,
-                    "valor" => "-",
-                    "porcentaje" => "-"
-                ];
-            }
+            if ($venta->productos != null) 
+            {        if ($venta->productos->count() > 1 && $venta->productos != null) {
+                            $datosVentasMes["pacientes"][] = [
+                                "meta"  => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
+                                // "meta"  => $metaFitter ? 1 : 1,
+                                "valor" => 1,
+                                // TODO: ver si ese valor de 1 esta bien
+                                "porcentaje" => ((100) / $metaFitter->num_pacientes_recompra)
+                                 // "porcentaje" => ((100) /100)
+                            ];
+                        } else {
+                            $datosVentasMes["pacientes"][] = [
+                                "meta" => $metaFitter ? $metaFitter->num_pacientes_recompra : 0,
+                                // "meta" => $metaFitter ? 1 : 1,
+                                "valor" => "-",
+                                "porcentaje" => "-"
+                            ];
+                        }}
+            // if (!isset(  $venta->paciente->ventas   )   ) {
+            //     # code...
+            //     # 
+            //     dd($venta->paciente,$venta,$datosVentasMes);
+            // }
+            if($venta->paciente != null)
+             {  if ($venta->paciente->ventas->count() > 1 && $venta->paciente != null) {
+                          $datosVentasMes["recompras"][] = [
+                              "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                                // "meta" => $metaFitter ? 1 : 1,
+                              "valor" => 1,
+                              "porcentaje" => ((100) / $metaFitter->numero_recompras)
+                               // "porcentaje" => ((100) / 100)
+                          ];
+                      } else {
+                          $datosVentasMes["recompras"][] = [
+                              "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
+                               // "meta" => $metaFitter ? 1 : 1,
+                              "valor" => "-",
+                              "porcentaje" => "-"
+                          ];
+                      }
+                  }
 
-            // OBTENEMOS SI EN UNA VENTA EL PACIENTE HACE RECOMPRA
-            if ($venta->paciente->ventas->count() > 1) {
-                $datosVentasMes["recompras"][] = [
-                    // "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
-                      "meta" => $metaFitter ? 1 : 1,
-                    "valor" => 1,
-                    // "porcentaje" => ((100) / $metaFitter->numero_recompras)
-                     "porcentaje" => ((100) / 100)
-                ];
-            } else {
-                $datosVentasMes["recompras"][] = [
-                    // "meta" => $metaFitter ? $metaFitter->numero_recompras : 0,
-                     "meta" => $metaFitter ? 1 : 1,
-                    "valor" => "-",
-                    "porcentaje" => "-"
-                ];
-            }
+
+
         }
 
         $sumValor = 0;

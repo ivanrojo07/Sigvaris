@@ -104,20 +104,32 @@ var aniosSolicitados = {!! json_encode($aniosSolicitados) !!};
 var productosPorAnio = {!! json_encode($productosPorAnio) !!};
 var aniosYProductosPorMes = {!! json_encode($aniosYProductosPorMes) !!};
 console.log(aniosSolicitados);
-console.log(aniosYProductosPorMes[0].length);
-console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
 
+var aux = {!!json_encode($suma_año)!!} ;
+
+
+
+console.log('auxiliar total',aux[1] );
+console.log('completo',aniosYProductosPorMes);
+console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
+var arreglo=[] ; 
+totales = [];
+
+console.log('arreglo',arreglo);
 for (const i in aniosSolicitados) {
+
     if (aniosSolicitados.hasOwnProperty(i)) {
         
         const anio = aniosSolicitados[i];
-
+       
         const color = getRandomColor();    
-        
+
+           
+
         const objeto = {
             label: aniosSolicitados[i],
             fill: false,
-            lineTension: 0.3,
+            lineTension: 0.5,
             backgroundColor: color,
             borderColor: color, // The main line color
             borderCapStyle: 'square',
@@ -134,13 +146,14 @@ for (const i in aniosSolicitados) {
             pointRadius: 4,
             pointHitRadius: 10,
             // notice the gap in the data and the spanGaps: true
-            data: aniosYProductosPorMes[i][0],
+            data: aux[i][0] ,
             spanGaps: true,
         };
 
         datasets.push(objeto);
         
     }
+
 }
 
 function getRandomColor() {
@@ -166,7 +179,8 @@ var options = {
   scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero:true
+                    beginAtZero:true,
+
                 },
                 scaleLabel: {
                      display: true,
@@ -179,7 +193,7 @@ var options = {
 
 // Chart declaration:
 var myBarChart = new Chart(ctx, {
-  type: 'bar',
+  type: 'line',
   data: data,
   options: options
 });
