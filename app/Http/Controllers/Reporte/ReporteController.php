@@ -481,6 +481,7 @@ class ReporteController extends Controller
         $aniosSolicitados = null;
         $productosPorAnio = null;
         $aniosYProductosPorMes = array();
+         $suma_año=[];
         $meses = array(
             '01' => 'Enero',
             '02' => 'Febrero',
@@ -520,7 +521,7 @@ class ReporteController extends Controller
 
                 array_push($aniosYProductosPorMes, array($i => $productosPorMes));
             }
-            $suma_año=[];
+           
         $ProductosAño=[];
 
         foreach ($aniosYProductosPorMes as $key => $años) {
