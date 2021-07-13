@@ -630,9 +630,8 @@ class ReporteController extends Controller
         $año_ini = 2020;
         $año_fin = 2020;
         // dd($request,substr($request->fechaInicial, 0,4),$request->fechaFinal);
-        $año_ini = substr($request->fechaInicial, 0,4);
-          $año_fin = substr($request->fechaFinal, 0,4);
-          
+     
+
            ini_set('max_execution_time', 900);
 
         $mesesSolicitados = [];
@@ -655,7 +654,8 @@ class ReporteController extends Controller
         $doctores = collect();
 
         if ($request->input()) {
-
+            $año_ini = substr($request->fechaInicial, 0,4);
+          $año_fin = substr($request->fechaFinal, 0,4);
             $mesInicio = explode("-", $request->fechaInicial)[1];
             $mesFinal = explode("-", $request->fechaFinal)[1];
             array_push($añosSolicitados, $año_ini);
