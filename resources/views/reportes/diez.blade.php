@@ -80,8 +80,8 @@
                         </tr>
                         <tr>
                             @foreach ($mesesSolicitados as $mes)
-                                <th>1° vez</th>
-                                <th>Recompra</th>
+                                <th>New</th>
+                                <th>Rec</th>
                             @endforeach
                             <th>1° vez</th>
                             <th>Recompra</th>
