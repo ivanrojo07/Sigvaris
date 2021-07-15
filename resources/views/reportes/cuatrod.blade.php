@@ -26,6 +26,16 @@
                         </div>
                         <input type="number" min="2000" max="2100" class="form-control" id="anioFinal" name="anioFinal" required value="{{old('anioFinal')}}">
                     </div>
+                     <div class="input-group mr-3">
+                            {{-- INPUT OFICINA --}}
+                            <label for="oficina"></label>
+                            <select name="oficina_id" id="selectOficina" class="form-control">
+                                <option value="">Todas</option>
+                                @foreach ($oficinas as $oficina)
+                                    <option value="{{$oficina->id}}">{{$oficina->nombre}}</option>
+                                @endforeach
+                            </select>
+                    </div>
                     <button class="btn btn-primary">Buscar</button>
                 </form>
                  <form action="{{route('reportes.4d.export')}}"   method="POST" class="form-inline">

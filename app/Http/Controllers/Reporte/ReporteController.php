@@ -382,18 +382,30 @@ class ReporteController extends Controller
     }
 
     public function cuatrob(Request $request)
-    {
+    {   
+
+             $oficinas = Oficina::get();
           ini_set('max_execution_time', 600);
         $skusConVentas = array();
         $totalPrendasVendidas = 0;
         $VentasPrendas = null;
         $Ventas = null;
         if ($request->input()) {
-
+            // dd($request->oficina_id);
             // SKUS CON VENTAS EN EL INTERVALO SOLICITADO
-            $skusConVentas = Producto::with(['ventas' => function ($query) use ($request) {
-                return $query->where('fecha', '>=', $request->fechaInicial)
-                    ->where('fecha', '<=', $request->fechaFinal);
+               if ($request->oficina_id == null) {
+               $skusConVentas = Producto::with(['ventas' => function ($query) use ($request) {
+                return $query->where('fecha', '>=', $request->fechaInicial)->where('fecha', '<=', $request->fechaFinal);
+            }, 'ventas.paciente'])
+                ->whereHas('ventas', function (Builder $query) use ($request) {
+                    return $query->where('fecha', '>=', $request->fechaInicial)->where('fecha', '<=', $request->fechaFinal);
+                })
+                ->get()
+                ->groupBy('sku');
+            }else{
+
+                $skusConVentas = Producto::with(['ventas' => function ($query) use ($request) {
+                return $query->where('fecha', '>=', $request->fechaInicial)->where('oficina_id',$request->oficina_id)->where('fecha', '<=', $request->fechaFinal);
             }, 'ventas.paciente'])
                 ->whereHas('ventas', function (Builder $query) use ($request) {
                     return $query->where('fecha', '>=', $request->fechaInicial)
@@ -401,6 +413,8 @@ class ReporteController extends Controller
                 })
                 ->get()
                 ->groupBy('sku');
+            }
+            
 
             $totalPrendasVendidas = $skusConVentas->flatten()
                 ->pluck('ventas')
@@ -419,7 +433,7 @@ class ReporteController extends Controller
         }
         // dd($Ventas);
 
-        return view('reportes.cuatrob', compact('skusConVentas', 'totalPrendasVendidas','Ventas','VentasPrendas'));
+        return view('reportes.cuatrob', compact('skusConVentas', 'totalPrendasVendidas','Ventas','VentasPrendas','oficinas'));
     }
 
     public function cuatroc(Request $request)
@@ -476,6 +490,7 @@ class ReporteController extends Controller
     public function cuatrod(Request $request)
     {
         ini_set('max_execution_time', 600);
+        $oficinas = Oficina::get();
         $anioInicial = null;
         $anioFinal = null;
         $aniosSolicitados = null;
@@ -509,9 +524,17 @@ class ReporteController extends Controller
                 $productosPorMes = [];
 
                 foreach ($meses as $key => $mes) {
-                    $productosPorMes[] = Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->map(function ($venta) {
+                    if ($request->oficina_id == null) {
+                         $productosPorMes[] = Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->map(function ($venta) {
                         return $venta->cantidad_productos;
-                    });
+                        });
+                     }else{
+                        $productosPorMes[] = Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->where('oficina_id',$request->oficina_id)->get()->map(function ($venta) {
+                        return $venta->cantidad_productos;
+                        });
+                     }
+                   
+                    
                     // $productosPorMes[] = count(Venta::whereYear('fecha', $i)->whereMonth('fecha', $key)->get()->pluck('productos')->flatten()->pluck('pivot')->flatten()->pluck('cantidad')->flatten());
                 }
 
@@ -560,13 +583,14 @@ class ReporteController extends Controller
 
         // dd($aniosYProductosPorMes);
 
-        return view('reportes.cuatrod', compact('anioInicial', 'anioFinal', 'meses', 'aniosSolicitados', 'productosPorAnio', 'aniosYProductosPorMes','suma_año'));
+        return view('reportes.cuatrod', compact('anioInicial', 'anioFinal', 'meses', 'aniosSolicitados', 'productosPorAnio', 'aniosYProductosPorMes','suma_año','oficinas'));
     }
 
     public function cinco(Request $request)
     {
          ini_set('max_execution_time', 600);
         $pacientes = null;
+         $oficinas = Oficina::get();
         $anios = [];
         $aniosPacientes = [];
           $numPacientesPrimeraVez = [];
@@ -599,7 +623,7 @@ class ReporteController extends Controller
             $meses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
         }
 
-        return view('reportes.cinco', compact('pacientes', 'anios', 'meses', 'opcion', 'numPacientesPorAnio','numPacientesPrimeraVez','numPacientesRecompra'));
+        return view('reportes.cinco', compact('pacientes', 'anios', 'meses', 'opcion', 'numPacientesPorAnio','numPacientesPrimeraVez','numPacientesRecompra','oficinas'));
     }
 
     public function nueve(Request $request)
@@ -631,7 +655,7 @@ class ReporteController extends Controller
         $año_ini = 2020;
         $año_fin = 2020;
         // dd($request,substr($request->fechaInicial, 0,4),$request->fechaFinal);
-     
+         $oficinas = Oficina::get();
 
            ini_set('max_execution_time', 900);
 
@@ -678,7 +702,7 @@ class ReporteController extends Controller
             $doctores = Doctor::get();
         }
 
-        return view('reportes.diez', compact('doctores', 'mesesSolicitados', 'mesesString','año_ini','año_fin','añosSolicitados'));
+        return view('reportes.diez', compact('doctores', 'mesesSolicitados', 'mesesString','año_ini','año_fin','añosSolicitados','oficinas'));
     }
 
     public function once()

@@ -45,4 +45,9 @@ class Doctor extends Model
             return $this->nombre . ' ' . $this->apellidomaterno . ' ' . $this->apellidopaterno;
         }
 
+      //   public function scopeOFicinaPacientes($query)
+      //   {
+      //   return $query->doesntHave('ventas');
+      // }
+
 }

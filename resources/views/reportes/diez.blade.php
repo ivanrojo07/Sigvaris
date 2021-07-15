@@ -11,7 +11,7 @@
             <form action="{{route('reportes.10')}}" method="POST" class="form-inline">
                 @csrf
                 <div class="row">
-                    <div class="col-5">
+                    <div class="input-group mr-2">
                         {{-- Año inicial --}}
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -20,7 +20,7 @@
                             <input type="date" class="form-control" id="fechaInicial" name="fechaInicial" required>
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="input-group mr-3">
                         {{-- Año final --}}
                         <div class="input-group">
                             {{-- <label for="anioFinal">A: </label> --}}
@@ -30,12 +30,26 @@
                             <input type="date" class="form-control" id="fechaFinal" name="fechaFinal" required>
                         </div>
                     </div>
-                    <div class="col-2">
+                     <div  class="input-group mr-3">
+                            {{-- INPUT OFICINA --}}
+                            <label for="oficina"></label>
+                            <select name="oficina_id" id="selectOficina" class="form-control">
+                                <option value="">Todas</option>
+                                @foreach ($oficinas as $oficina)
+                                    <option value="{{$oficina->id}}">{{$oficina->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    <div class="input-group mr-3">
                         <button class="btn btn-primary">Buscar</button>
                     </div>
                 </div>
             </form>
-             <form action="{{route('reportes.10.export')}}"   method="POST" class="form-inline">
+            
+                 
+                    
+                    <hr>
+                         <form action="{{route('reportes.10.export')}}"   method="POST" class="form-inline" class="input-group mr-3">
                  @csrf
                  <input type="hidden" name="mesesString" value="{{json_encode($mesesString)}}">
                  <?php 
@@ -46,8 +60,9 @@
                   <input type="hidden" name="mesesSolicitados" value="{{ json_encode($mesesSolicitados)}}">
                    <input type="hidden" name="año_ini" value="{{$año_ini }}">
                     <input type="hidden" name="año_fin" value="{{$año_fin }}">
-                <button class="btn btn-primary">Exportar</button>
+                    <button class="btn btn-primary">Exportar</button>
                  </form>
+                 
         </div>
         @if ( count($doctores) )
             {{-- TABLA DOCTORES --}}

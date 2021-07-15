@@ -29,6 +29,16 @@
                     <input type="number" class="form-control" id="anioFinal" name="anioFinal" required min="2010"
                         max="2100">
                 </div>
+                 <div class="ml-3 input-group-prepend">
+                            {{-- INPUT OFICINA --}}
+                            <label for="oficina"></label>
+                            <select name="oficina_id" id="selectOficina" class="form-control">
+                                <option value="">Todas</option>
+                                @foreach ($oficinas as $oficina)
+                                    <option value="{{$oficina->id}}">{{$oficina->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                 {{-- Selección de tipo --}}
                 <div class="btn-group btn-group-toggle mr-3" data-toggle="buttons">
                     <label class="btn btn-success active">

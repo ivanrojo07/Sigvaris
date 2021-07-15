@@ -21,6 +21,16 @@
                     <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" required>
                 </div>
                 <button class="btn btn-primary">Buscar</button>
+                 <div class="col-12 col-sm-6 col-md-4 mt-2">
+                            {{-- INPUT OFICINA --}}
+                            <label for="oficina"></label>
+                            <select name="oficina_id" id="selectOficina" class="form-control">
+                                <option value="">Todas</option>
+                                @foreach ($oficinas as $oficina)
+                                    <option value="{{$oficina->id}}">{{$oficina->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
             </form>
           <!--   <div class="form-group mr-4"> -->
             <hr>
