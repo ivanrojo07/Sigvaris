@@ -213,22 +213,22 @@ var myBarChart = new Chart(ctx, {
 });
 
 //add event listener to 2nd button
-document.getElementById('download-pdf').addEventListener("click", downloadPDF2);
+// document.getElementById('download-pdf').addEventListener("click", downloadPDF2);
 
 //download pdf form hidden canvas
-function downloadPDF2() {
-	var newCanvas = document.querySelector('#canvas');
+// function downloadPDF2() {
+// 	var newCanvas = document.querySelector('#canvas');
 
-  //create image from dummy canvas
-	var newCanvasImg = newCanvas.toDataURL("image/png", 1.0);
+//   //create image from dummy canvas
+// 	var newCanvasImg = newCanvas.toDataURL("image/png", 1.0);
   
-  	//creates PDF from img
-	var doc = new jsPDF('landscape');
-	doc.setFontSize(20);
-	doc.text(10, 10, "Prendas vendidas por año");
-	doc.addImage(newCanvasImg, 'PNG', 10, 10, 280, 150 );
-	doc.save('prendas-vendidas-por-anio.pdf');
- }
+//   	//creates PDF from img
+// 	var doc = new jsPDF('landscape');
+// 	doc.setFontSize(20);
+// 	doc.text(10, 10, "Prendas vendidas por año");
+// 	doc.addImage(newCanvasImg, 'PNG', 10, 10, 280, 150 );
+// 	doc.save('prendas-vendidas-por-anio.pdf');
+//  }
 
 </script>
 
@@ -354,16 +354,19 @@ function downloadPDF2() {
 
   //create image from dummy canvas
     var newCanvasImg = newCanvas.toDataURL("image/png", 1.0);
-    var newCanvasImg2 = newCanvas2.toDataURL("image/png", 1.0);
+    var newCanvasImg2 = newCanvas2.toDataURL("image2/png", 2.0);
   
     //creates PDF from img
     var doc = new jsPDF('landscape');
-    doc.setFontSize(20);
+    doc.setFontSize(15);
     doc.text(10, 10, "Prendas vendidas por año");
-    doc.addImage(newCanvasImg, 'PNG', 10, 10, 280, 150 );
-    doc.addImage(newCanvasImg2, 'PNG', 10, 10, 280, 150 );
+    doc.addImage(newCanvasImg, 'JPEG', 30, 30, 220, 170,'uno','SLOW' );
+    doc.addPage();
+    doc.text(10, 10, "Prendas vendidas por año");
+    doc.addImage(newCanvasImg2, 'JPEG', 30, 30, 220, 170,'dos','SLOW' );
     doc.save('prendas-vendidas-por-anio.pdf');
  }
 
 </script>
+
 @endsection

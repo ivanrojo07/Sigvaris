@@ -933,6 +933,7 @@ class ReporteController extends Controller
             // $monto = collect($metaFitter->monto_venta);
         foreach ($ventasfitter as $venta) {
             // dd($venta);
+            // 
             $datosVentasMes["montoVenta"][] = [
                 "meta"       => $metaFitter->monto_venta,
                 "valor"      => $venta->total,

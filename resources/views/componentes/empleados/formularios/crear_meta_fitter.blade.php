@@ -33,24 +33,40 @@
                     <hr>
                     <div class="row">
                     <div class="col-12 col-sm-6 col-md-4 mt-2">
-                        <label for="montoVentas" class="text-mutted text-uppercase">Porcentaje</label>
-                        <input type="number" step="0.01" class="form-control" name="Porcentaje">
+                        <label for="montoVentas" class="text-mutted text-uppercase">Ventas por Mes</label>
+                        <input type="number" step="0.01" class="form-control" name="ventasMes">
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mt-2">
-                        <label for="numPacientesRecompra" class="text-mutted text-uppercase">objetivo de ventas</label>
-                        <input type="number" class="form-control" name="objetivo_ve">
+                        <label for="numPacientesRecompra" class="text-mutted text-uppercase">Calcetin</label>
+                        <input type="number" class="form-control" name="Calcetin">
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mt-2">
-                        <label for="numRecompras" class="text-mutted text-uppercase">objetivo promedio</label>
-                        <input type="number" class="form-control" name="objetivo_pro">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Leggings</label>
+                        <input type="number" class="form-control" name="Leggings">
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mt-2">
-                        <label for="numRecompras" class="text-mutted text-uppercase">Piezas por paciente mensual</label>
-                        <input type="number" class="form-control" name="Piezas">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Panti</label>
+                        <input type="number" class="form-control" name="Panti">
                     </div>
                     <div class="col-12 col-sm-6 col-md-4 mt-2">
-                        <label for="numRecompras" class="text-mutted text-uppercase">Piezas promedio por paciente</label>
-                        <input type="number" class="form-control" name="Piezas_pac">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Media</label>
+                        <input type="number" class="form-control" name="Media">
+                    </div>
+                     <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Muslo</label>
+                        <input type="number" class="form-control" name="Muslo">
+                    </div>
+                     <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Tobimedias</label>
+                        <input type="number" class="form-control" name="Tobi">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Prendas de mayor valor</label>
+                        <input type="number" class="form-control" name="mayorValor">
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 mt-2">
+                        <label for="numRecompras" class="text-mutted text-uppercase">Prendas de menor valor</label>
+                        <input type="number" class="form-control" name="menorValor">
                     </div>
                 </div>
                 </div>

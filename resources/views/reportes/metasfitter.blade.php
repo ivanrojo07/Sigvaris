@@ -1,9 +1,12 @@
 @extends('principal')
 @section('content')
+<script src="https://unpkg.com/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+<script src="https://unpkg.com/file-saverjs@latest/FileSaver.min.js"></script>
+<script src="https://unpkg.com/tableexport@latest/dist/js/tableexport.min.js"></script>
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>Ventas de fitter </h3>
+            <h3>Ventas por fitter </h3>
         </div>
         {{-- Buscador de pacientes --}}
         <div class="card-body">
@@ -47,14 +50,17 @@
                     <button class="btn btn-primary my-4">Buscar</button>
                 </div>
             </form>
-             <form action="{{route('reportes.11.export')}}"   method="POST" class="form-inline">
+            <!--  <form action="{{route('reportes.11.export')}}"   method="POST" class="form-inline">
                  @csrf
                  <input type="hidden" name="fecha_ini" value="{{ $fecha_ini  }}">
                   <input type="hidden" name="fecha_fin" value="{{$fecha_fin}}">
                   <input type="hidden" name="fitter_" value="{{ $fitter}}">
                   <input type="hidden" name="ventasMes" value="{{ json_encode($datosVentasMes)}}">
                 <button class="btn btn-primary">Exportar</button>
-                 </form>
+                 </form> -->
+                       <button id="btnExportar" class="btn btn-success">
+                <i class="fas fa-file-excel"></i> Exportar datos a Excel
+    </button>
         </div>
         @if ( isset($fitter) )
         <div class="input-group col-md-5 my-4">
@@ -63,30 +69,56 @@
             </div>
             <input type="text" class="form-control"
                 @if(isset($fitter))value="{{ $fitter->nombre ." ".$fitter->appaterno ." ".$fitter->apmaterno}}" @else
-                value="--" @endif readonly="">
+                value="--" @endif readonly="" id="FitterName" name="FitterName">
         </div>
-        <div class="card-body">
-            <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
+        <div class="card-body" style="overflow-x: auto;">
+            <table class="table table-hover table-striped table-bordered table-responsive" style="overflow-x: auto;" id="listaEmpleados">
                 <thead>
                     <tr class="info text-center">
                         <th>Mes</th>
                         <th colspan="3">Monto de venta</th>
                         <th colspan="3">Pacientes > 1 prenda</th>
                         <th colspan="3">Recompras</th>
+                        <th colspan="3">Ventas Mes</th>
+                        <th colspan="3">Calcetin</th>
+                        <th colspan="3">Panti</th>
+                        <th colspan="3">Media al muslo</th>
+                        <th colspan="3">Tobi</th>
+                        <th colspan="3">Prendas de mayor valor</th>
+                        <th colspan="3">Prendas de menor valor</th>
                     </tr>
                     <tr class="info text-center">
                         <th></th>
-                        <th>Objetivo</th>
+                        <th>Obj</th>
                         <th>Real</th>
                         <th>%</th>
-                        <th>Objetivo</th>
+                        <th>Obj</th>
                         <th>Real</th>
                         <th>%</th>
-                        <th>Objetivo</th>
+                        <th>Obj</th>
                         <th>Real</th>
                         <th>%</th>
-                        <th>Piezas promedio por paciente</th>
-                         <th>Piezas promedio mensual</th>
+                        <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
+                         <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
+                         <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
+                         <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
+                         <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
+                         <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
+                         <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,14 +133,14 @@
                         <td>{{ $datosVentasMes["pacientes"][$key]["meta"] }}</td>
                         <td>{{ $datosVentasMes["pacientes"][$key]["valor"] }}</td>
                         @if($datosVentasMes["pacientes"][$key]["porcentaje"] != "-")
-                        <td>{{ $datosVentasMes["pacientes"][$key]["porcentaje"] }}%</td>
+                        <td>{{ number_format($datosVentasMes["pacientes"][$key]["porcentaje"],2) }}%</td>
                         @else
                         <td>{{ $datosVentasMes["pacientes"][$key]["porcentaje"] }}</td>
                         @endif
                         <td>{{ $datosVentasMes["recompras"][$key]["meta"] }}</td>
                         <td>{{ $datosVentasMes["recompras"][$key]["valor"] }}</td>
                         @if($datosVentasMes["recompras"][$key]["porcentaje"] != "-")
-                        <td>{{ $datosVentasMes["recompras"][$key]["porcentaje"] }}%</td>
+                        <td>{{ number_format($datosVentasMes["recompras"][$key]["porcentaje"],2) }}%</td>
                         @else
                         <td>{{ $datosVentasMes["recompras"][$key]["porcentaje"] }}</td>
                         @endif
@@ -150,6 +182,26 @@
                         @endif
                         <td>0</td>
                          <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                          <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                          <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                         
                         </tr>
                         @endfor
                         <tr class="text-center">
@@ -163,22 +215,67 @@
                             <td>{{ $datosVentasMes["totales"]["recompras"][0] }}</td>
                             <td>{{ $datosVentasMes["totales"]["recompras"][1] }}</td>
                             <td>{{ number_format($datosVentasMes["totales"]["recompras"][2]) }}%</td>
-                             <td>0</td>
-                              <td>0</td>
+                               <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                 <td>0</td>
+                                  <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
+                          <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
                         </tr>
                         @endif
                 </tbody>
             </table>
         </div>
+
         @endif
+
     </div>
+   
 </div>
+
 
 <script src="{{ URL::asset('js/handleFitters.js') }}"></script>
 <script>
     $(document).on('change', '#selectOficina', function(){
         const OFICINA_ID = $(this).val();
         actualizarOpcionesFitters(OFICINA_ID);
+    });
+</script>
+
+<!-- script para exportar a excel -->
+<script>
+    const $btnExportar = document.querySelector("#btnExportar"),
+        $tabla = document.querySelector("#listaEmpleados");
+        var FitterName = $('#FitterName').val();
+        var nameFile = "Ventas fitter_"+FitterName ;
+         console.log('FitterName',nameFile);
+
+    $btnExportar.addEventListener("click", function() {
+        let tableExport = new TableExport($tabla, {
+            exportButtons: false, // No queremos botones
+            filename: nameFile, //Nombre del archivo de Excel
+            sheetname: "Reporte de prueba", //Título de la hoja
+        });
+        
+        let datos = tableExport.getExportData();
+        console.log('datos',datos);
+        
+        let preferenciasDocumento = datos.listaEmpleados.xlsx;
+        tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
     });
 </script>
 

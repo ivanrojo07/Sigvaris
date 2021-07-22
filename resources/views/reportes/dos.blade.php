@@ -50,7 +50,9 @@
                      @csrf
                       <input type="hidden"  name="fechaFinal" value="{{$fechaFinal}}">
                        <input type="hidden"  name="fechaInicial" value="{{$fechaInicial}}">
-                <button class="btn btn-primary">EXPORTAR</button>
+                <button class="btn btn-success">
+                  <i class="fas fa-file-excel"></i> Exportar datos a Excel
+                  </button>
             </form>
             @endif
         </div>
