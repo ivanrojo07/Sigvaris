@@ -77,7 +77,7 @@
                     <tr class="info text-center">
                         <th>Mes</th>
                         <th colspan="3">Monto de venta</th>
-                        <th colspan="3">Pacientes > 1 prenda</th>
+                        <th colspan="3">Pares x paciente</th>
                         <th colspan="3">Recompras</th>
                         <th colspan="3">Ventas Obsoletos</th>
                         <th colspan="3">Calcetin</th>
