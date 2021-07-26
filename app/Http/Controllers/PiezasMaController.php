@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\FitterMeta;
+use App\piezasMa;
+use App\Producto;
 use Illuminate\Http\Request;
 
-class MetaController extends Controller
+class PiezasMaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,9 @@ class MetaController extends Controller
      */
     public function index()
     {
-        //
+         $pz = piezasMa::get();
+       // dd($retex);
+        return view('PiezasMayorValor.index', ['pz'=>$pz]);
     }
 
     /**
@@ -25,6 +27,7 @@ class MetaController extends Controller
     public function create()
     {
         //
+         return view('PiezasMayorValor.create');
     }
 
     /**
@@ -35,25 +38,35 @@ class MetaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        FitterMeta::create([
-            "monto_venta" => $request->monto_venta,
-            "num_pacientes_recompra" => $request->num_pacientes_recompra,
-            "numero_recompras" => $request->numero_recompras,
-            "fecha_inicio" => $request->fecha_inicio."-01",
-            "empleado_id" => $request->empleado_id,
-            'ventas_obsoletos'=>$request->ventasMes,
-            'calcetin'=>$request->Calcetin,
-            'leggings'=>$request->Leggings,
-            'muslo'=>$request->Muslo,
-            'media'=>$request->Media,
-            'panti'=>$request->Panti,
-            'tobimedias'=>$request->Tobi,
-            'pz_mayor'=>$request->mayorValor,
-            'pz_menor'=>$request->menorValor,
+        //
+        if (strlen($request->nombre) == 12) {
+            $aux  = Producto::where('upc',$request->nombre)->get()->last();
+           $piezas = piezasMa::where('SKU', $aux->sku)->get();
+            // dd($aux);
+            if (count($piezas) == 0 ) {
+           $pzNew = new piezasMa;
+           $pzNew->producto_id = $aux->id;
+           $pzNew->SKU = $aux->sku;
+           $pzNew->save();
 
-        ]);
-        return redirect()->back();
+            }
+            // dd(count($piezas));
+        }else{
+            $aux  = Producto::where('sku',$request->nombre)->get()->last();
+         // dd($request->nombre);
+             $piezas= piezasMa::where('SKU', $aux->sku)->get();
+               if (count($piezas) == 0 ) {
+           $pzNew = new piezasMa;
+           $pzNew->producto_id = $aux->id;
+           $pzNew->SKU = $aux->sku;
+           $pzNew->save();
+
+         }
+             // dd($piezas);
+        }
+
+        return redirect('piezasMa');
+
     }
 
     /**
@@ -87,14 +100,7 @@ class MetaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        FitterMeta::find($id)->update([
-            "monto_venta" => $request->monto_venta,
-            "num_pacientes_recompra" => $request->num_pacientes_recompra,
-            "numero_recompras" => $request->numero_recompras,
-            "fecha_inicio" => date_format(date_create($request->fecha_inicio), 'Y-m-01'),
-        ]);
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -103,8 +109,12 @@ class MetaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(piezasMa $piezasMa)
     {
         //
+        // dd($piezasMa);
+        piezasMa::where('id',$piezasMa->id)->delete();
+        // $piezasMa->delete();
+        return  redirect('piezasMa');
     }
 }

@@ -184,6 +184,8 @@ Route::resource('usuarios','User\UserController');
 
 Route::resource('Retex','RetexControl');
 Route::resource('garex','garexController');
+Route::resource('piezasMa','PiezasMaController');
+Route::resource('piezasMe','PiezasMeController');
 Route::post('getGarex','garexController@getGarex');
 
 

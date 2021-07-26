@@ -28,6 +28,10 @@
                                     <label for="numero_recompras">Número de recompras</label>
                                     <input type="number" min="0" step="0.01" name="numero_recompras" class="form-control" required value="{{$meta->numero_recompras}}">
                                 </div>
+                                <div class="col-12 col-md-4 mt-2">
+                                    <label for="numero_recompras">Ventas Obsoletos</label>
+                                    <input type="number" min="0" step="0.01" name="numero_recompras" class="form-control" required value="{{$meta->ventas_obsoletas}}">
+                                </div>
                         </div>
                     </div>
                     <div class="modal-footer">

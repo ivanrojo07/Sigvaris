@@ -42,7 +42,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button class="fas fa-file-excel">Buscar</button>
+                <button class="btn btn-primary">Buscar</button>
             </form>
         </div>
         @if ( isset($pacientes_sin_compra) )

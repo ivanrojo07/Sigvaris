@@ -39,7 +39,8 @@ class Venta extends Model
         'num_transferencia',
         'folio_transferencia',
         'num_deposito',
-        'folio_deposito'
+        'folio_deposito',
+        'obsoletos'
     ];
 
     /**

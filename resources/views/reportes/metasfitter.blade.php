@@ -79,9 +79,10 @@
                         <th colspan="3">Monto de venta</th>
                         <th colspan="3">Pacientes > 1 prenda</th>
                         <th colspan="3">Recompras</th>
-                        <th colspan="3">Ventas Mes</th>
+                        <th colspan="3">Ventas Obsoletos</th>
                         <th colspan="3">Calcetin</th>
                         <th colspan="3">Panti</th>
+                         <th colspan="3">Leggings</th>
                         <th colspan="3">Media al muslo</th>
                         <th colspan="3">Tobi</th>
                         <th colspan="3">Prendas de mayor valor</th>
@@ -117,6 +118,9 @@
                          <th>Real</th>
                          <th>%</th>
                          <th>Obj</th>
+                         <th>Real</th>
+                         <th>%</th>
+                          <th>Obj</th>
                          <th>Real</th>
                          <th>%</th>
                     </tr>
@@ -201,6 +205,9 @@
                           <td>0</td>
                          <td>0</td>
                          <td>0</td>
+                          <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
                          
                         </tr>
                         @endfor
@@ -230,6 +237,9 @@
                                  <td>0</td>
                                  <td>0</td>
                                   <td>0</td>
+                                   <td>0</td>
+                         <td>0</td>
+                         <td>0</td>
                          <td>0</td>
                          <td>0</td>
                           <td>0</td>

@@ -90,6 +90,12 @@
                 <div class="card-body">
                     <canvas id="canvas2" height="280" width="600"></canvas>
                 </div>
+
+
+                 {{-- GRAFICA DE TABLA --}}
+                <div class="card-body">
+                    <canvas id="canvas3" height="280" width="600"></canvas>
+                </div>
                 {{-- BOTÓN DE DESCARGA PDF --}}
                 <div class="card-body">
                     <button class="btn btn-success" id="download-pdf">Descargar PDF</button>
@@ -254,7 +260,7 @@ console.log(aniosSolicitados);
 var aux = {!!json_encode($suma_año)!!} ;
 
 
-
+console.log('auxiliar total completo',aux );
 console.log('auxiliar total',aux[1] );
 console.log('completo',aniosYProductosPorMes);
 console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
@@ -267,9 +273,13 @@ for (const i in aniosSolicitados) {
     if (aniosSolicitados.hasOwnProperty(i)) {
         
         const anio = aniosSolicitados[i];
-       
-        const color = getRandomColor();    
-
+        auxiliar_2 = 0;
+        const color = getRandomColor();  
+        for (var e = 0; e < aux[i][0].length; e++) {
+              auxiliar_2 += aux[i][0][e];
+              // console.log('auxiliar_2',auxiliar_2);
+          }  
+         totales.push(auxiliar_2);
            
 
         const objeto = {
@@ -301,7 +311,7 @@ for (const i in aniosSolicitados) {
     }
 
 }
-
+console.log('totales de años',totales);
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -344,6 +354,270 @@ var myBarChart = new Chart(ctx, {
   options: options
 });
 
+// //add event listener to 2nd button
+// document.getElementById('download-pdf').addEventListener("click", downloadPDF2);
+
+// //download pdf form hidden canvas
+// function downloadPDF2() {
+//     var newCanvas = document.querySelector('#canvas');
+//     var newCanvas2 = document.querySelector('#canvas2');
+
+//   //create image from dummy canvas
+//     var newCanvasImg = newCanvas.toDataURL("image/png", 1.0);
+//     var newCanvasImg2 = newCanvas2.toDataURL("image2/png", 2.0);
+  
+//     //creates PDF from img
+//     var doc = new jsPDF('landscape');
+//     doc.setFontSize(15);
+//     doc.text(10, 10, "Prendas vendidas por año");
+//     doc.addImage(newCanvasImg, 'JPEG', 30, 30, 220, 170,'uno','SLOW' );
+//     doc.addPage();
+//     doc.text(10, 10, "Prendas vendidas por año");
+//     doc.addImage(newCanvasImg2, 'JPEG', 30, 30, 220, 170,'dos','SLOW' );
+//     doc.save('prendas-vendidas-por-anio.pdf');
+//  }
+
+</script>
+
+
+<script>
+
+var canvas3 = document.getElementById("canvas3");
+var ctx = canvas3.getContext('2d');
+ctx.fillStyle = "#FFFFFF";
+
+
+
+var aniosSolicitados = {!! json_encode($aniosSolicitados) !!};
+var productosPorAnio = {!! json_encode($productosPorAnio) !!};
+var aniosYProductosPorMes = {!! json_encode($aniosYProductosPorMes) !!};
+
+console.log(aniosSolicitados);
+
+var aux = {!!json_encode($suma_año)!!} ;
+
+
+console.log('auxiliar total completo',aux );
+console.log('auxiliar total',aux[1] );
+console.log('completo',aniosYProductosPorMes);
+console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
+var arreglo=[] ; 
+totales = [];
+colores=[];
+arreglo.push(aniosSolicitados);
+ // const color = getRandomColor();  
+for (const i in aniosSolicitados) {
+    colores.push(getRandomColor());
+    auxiliar_2 =0;
+    for (var e = 0; e < aux[i][0].length; e++) {
+              auxiliar_2 += aux[i][0][e];
+              // console.log('auxiliar_2',auxiliar_2);
+          }  
+         totales.push(auxiliar_2);
+
+
+
+}
+// Global Options:
+Chart.defaults.global.defaultFontColor = 'black';
+Chart.defaults.global.defaultFontSize = 16;
+
+var data = {
+  labels: aniosSolicitados,
+  datasets: [{
+      label: "Numero por año",
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: colores,
+      borderColor: colores, // The main line color
+      borderCapStyle: 'square',
+      borderDash: [], // try [5, 15] for instance
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: "black",
+      pointBackgroundColor: "white",
+      pointBorderWidth: 1,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: "red",
+      pointHoverBorderColor: "brown",
+      pointHoverBorderWidth: 2,
+      pointRadius: 4,
+      pointHitRadius: 10,
+      // notice the gap in the data and the spanGaps: true
+      data: totales,
+      spanGaps: true,
+    }
+  ]
+};
+
+// Notice the scaleLabel at the same level as Ticks
+var options = {
+  scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                },
+                scaleLabel: {
+                     display: true,
+                     labelString: 'ventas vs años',
+                     fontSize: 20 
+                  }
+            }]            
+        }  
+};
+
+// Chart declaration:
+var myBarChart = new Chart(ctx, {
+  type: 'polarArea',
+  data: data,
+  options: options
+});
+
+//add event listener to 2nd button
+//add event listener to 2nd button
+document.getElementById('download-pdf').addEventListener("click", downloadPDF2);
+
+//download pdf form hidden canvas
+function downloadPDF2() {
+    var newCanvas = document.querySelector('#canvas');
+    var newCanvas2 = document.querySelector('#canvas2');
+    var newCanvas3 = document.querySelector('#canvas3');
+
+  //create image from dummy canvas
+    var newCanvasImg = newCanvas.toDataURL("image/png", 1.0);
+    var newCanvasImg2 = newCanvas2.toDataURL("image2/png", 2.0);
+    var newCanvasImg3 = newCanvas3.toDataURL("image3/png", 3.0);
+  
+    //creates PDF from img
+    var doc = new jsPDF('landscape');
+    doc.setFontSize(15);
+    doc.text(10, 10, "Prendas vendidas por año");
+    doc.addImage(newCanvasImg, 'JPEG', 30, 30, 220, 170,'uno','SLOW' );
+    doc.addPage();
+    doc.text(10, 10, "Prendas vendidas por año");
+    doc.addImage(newCanvasImg2, 'JPEG', 30, 30, 220, 170,'dos','SLOW' );
+     doc.addPage();
+    doc.text(10, 10, "Prendas vendidas por año");
+    doc.addImage(newCanvasImg3, 'JPEG', 30, 30, 220, 120,'tres','SLOW' );
+    doc.save('prendas-vendidas-por-anio.pdf');
+ }
+
+</script>
+
+
+
+<!-- 
+<script>
+
+var canvas3 = document.getElementById("canvas3");
+var ctx2 = canvas3.getContext('2d');
+ctx.fillStyle = "#FFFFFF";
+
+var datasets = new Array();
+
+var aniosSolicitados = {!! json_encode($aniosSolicitados) !!};
+var productosPorAnio = {!! json_encode($productosPorAnio) !!};
+var aniosYProductosPorMes = {!! json_encode($aniosYProductosPorMes) !!};
+
+console.log(aniosSolicitados);
+
+var aux = {!!json_encode($suma_año)!!} ;
+
+
+console.log('auxiliar total completo',aux );
+console.log('auxiliar total',aux[1] );
+console.log('completo',aniosYProductosPorMes);
+console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
+var arreglo=[] ; 
+totales = [];
+arreglo.push(aniosSolicitados);
+console.log('arreglo',arreglo);
+for (const i in aniosSolicitados) {
+
+    if (aniosSolicitados.hasOwnProperty(i)) {
+        
+        const anio = aniosSolicitados[i];
+        auxiliar_2 = 0;
+        const color = getRandomColor();  
+        for (var e = 0; e < aux[i][0].length; e++) {
+              auxiliar_2 += aux[i][0][e];
+              // console.log('auxiliar_2',auxiliar_2);
+          }  
+         totales.push(auxiliar_2);
+           console.log('total con valor:',totales[i]);
+
+        const objeto = {
+            label: aniosSolicitados[i],
+            fill: false,
+            lineTension: 0.5,
+            backgroundColor: color,
+            borderColor: color, // The main line color
+            borderCapStyle: 'square',
+            borderDash: [], // try [5, 15] for instance
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "black",
+            pointBackgroundColor: "white",
+            pointBorderWidth: 1,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: color,
+            pointHoverBorderColor: "brown",
+            pointHoverBorderWidth: 2,
+            pointRadius: 4,
+            pointHitRadius: 10,
+            // notice the gap in the data and the spanGaps: true
+            data: totales[i],
+            spanGaps: true,
+        };
+
+        datasets.push(objeto);
+        
+    }
+
+}
+console.log('totales de años',totales);
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Global Options:
+Chart.defaults.global.defaultFontColor = 'black';
+Chart.defaults.global.defaultFontSize = 16;
+
+var data = {
+  labels: ['2017','2018'],
+  datasets: datasets
+};
+
+// Notice the scaleLabel at the same level as Ticks
+var options = {
+  scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+
+                },
+                scaleLabel: {
+                     display: true,
+                     labelString: 'Ventas vs Mes',
+                     fontSize: 20 
+                  }
+            }]            
+        }  
+};
+
+// Chart declaration:
+var myBarChart = new Chart(ctx2, {
+  type: 'line',
+  data: data,
+  options: options
+});
+
 //add event listener to 2nd button
 document.getElementById('download-pdf').addEventListener("click", downloadPDF2);
 
@@ -367,6 +641,6 @@ function downloadPDF2() {
     doc.save('prendas-vendidas-por-anio.pdf');
  }
 
-</script>
+</script> -->
 
 @endsection

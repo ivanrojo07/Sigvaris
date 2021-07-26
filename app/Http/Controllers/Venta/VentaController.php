@@ -211,7 +211,7 @@ class VentaController extends Controller
             }
         
       
-      
+         
         /*
         if (!is_null($request->digitos_targeta) && ($request->digitos_targeta<1000)) {
             return redirect()

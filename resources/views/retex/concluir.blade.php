@@ -132,6 +132,15 @@
                                                  <option value="6">Deposito Transferencia</option>
                                             </select>
                                         </div>
+                                           <div class="col-12 col-sm-6 col-md-4 form-group">
+                                            <label for="Obsoletos"
+                                                class="text-uppercase text-muted">Obsoletos</label>
+                                            <select class="form-control" name="Obsoletos" id="Obsoletos">
+                                                <option value="">Selecciona...</option>
+                                                 <option value="0">NO</option>
+                                                  <option value="1">SI</option>
+                                            </select>
+                                        </div>
                                         {{-- INPUT tarjeta --}}
 
                                         <div id="tar1" class="col-12 col-sm-6 col-md-4 form-group"

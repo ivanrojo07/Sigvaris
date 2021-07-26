@@ -13,6 +13,15 @@ class FitterMeta extends Model
         "numero_recompras",
         "fecha_inicio",
         "empleado_id",
+        'ventas_obsoletos',
+        'calcetin',
+        'leggings',
+        'muslo',
+        'media',
+        'panti',
+        'tobimedias',
+        'pz_mayor',
+        'pz_menor',
     ];
 
     public function empleado(){

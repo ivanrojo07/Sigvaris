@@ -76,6 +76,8 @@
                         <a class="dropdown-item" href="{{route('foliosSigpesos.index')}}">Folios Sigpesos<i class="fa fa-plus float-right"></i></a>
                         <a class="dropdown-item" href="{{url('/Retex')}}">Retex<i class="fa fa-plus float-right"></i></a>
                         <a class="dropdown-item" href="{{url('/garex')}}">Garext<i class="fa fa-plus float-right"></i></a>
+                          <a class="dropdown-item" href="{{url('/piezasMa')}}">Piezas myor val<i class="fa fa-plus float-right"></i></a>
+                        <a class="dropdown-item" href="{{url('/piezasMe')}}">Piezas mnor val<i class="fa fa-plus float-right"></i></a>
                     </div>
                 </li>    
             @endif

@@ -21,6 +21,16 @@ class RealizarVentaProductosService
 
         // dd($productos,$request->cantidad,$request->producto_id);
         // REALIZAMOS LA VENTA
+        if ($request->Obsoletos ==null) {
+            $venta->obsoletos=0;
+        }elseif ($request->Obsoletos == 1) {
+             $venta->obsoletos = $request->Obsoletos;
+        }else{
+            $venta->obsoletos = $request->Obsoletos;
+        }
+
+        
+        
         $venta->save();
 
         // POR CADA PRODUCTO COMPRADO, ALMACENAMOS LA CANTIDAD COMPRADO, EL PRECIO Y DECREMENTAMOS EL STOCK

@@ -246,6 +246,33 @@
 							<td>
 								número de recompras
 							</td>
+							<td>
+								ventas obsoletos
+							</td>
+							<td>
+								calcetin
+							</td>
+							<td>
+								leggings
+							</td>
+							<td>
+								muslo
+							</td>
+							<td>
+								media
+							</td>
+							<td>
+								panti
+							</td>
+							<td>
+								tobimedias
+							</td>
+							<td>
+								pz_mayor
+							</td>
+							<td>
+								pz_menor
+							</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -263,6 +290,33 @@
 								</td>
 								<td>
 									{{$meta->numero_recompras}}
+								</td>
+								<td>
+									{{$meta->ventas_obsoletos}}
+								</td>
+								<td>
+									{{$meta->calcetin}}
+								</td>
+								<td>
+									{{$meta->leggings}}
+								</td>
+								<td>
+									{{$meta->muslo}}
+								</td>
+								<td>
+									{{$meta->media}}
+								</td>
+								<td>
+									{{$meta->panti}}
+								</td>
+								<td>
+									{{$meta->tobimedias}}
+								</td>
+								<td>
+									{{$meta->pz_mayor}}
+								</td>
+								<td>
+									{{$meta->pz_menor}}
 								</td>
 							</tr>
 						@endforeach

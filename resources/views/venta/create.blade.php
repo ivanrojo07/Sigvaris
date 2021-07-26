@@ -212,7 +212,15 @@
                                                 <option value="">Selecciona...</option>
                                             </select>
                                         </div>
-                                        
+                                         <div class="col-12 col-sm-6 col-md-4 form-group">
+                                            <label for="Obsoletos"
+                                                class="text-uppercase text-muted">Obsoletos</label>
+                                            <select class="form-control" name="Obsoletos" id="Obsoletos">
+                                                <option value="">Selecciona...</option>
+                                                 <option value="0">NO</option>
+                                                  <option value="1">SI</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
@@ -223,6 +231,7 @@
                                                 <input type="checkbox" class="form-check-input" name="INAPAM" id="INAPAM" value="0">
                                                 <label class="form-check-label" for="exampleCheck1">INAPAM</label>
                                             </div>
+
                                        </div>
                                     </div>
                                     
@@ -241,6 +250,11 @@
                                                 <option value="6">Deposito Transferencia</option>
                                             </select>
                                         </div>
+                                         <!-- <div class="col-12 col-sm-6 col-md-4"> -->
+                                         <!--  <div class="form-check"> -->
+                                              <!--   <input type="checkbox" class="form-check-input" name="obsoletos" id="obsoletos" value="0">
+                                                <label class="form-check-label" for="exampleCheck2">obsoletos</label> -->
+                                       <!--   </div> -->
                                         {{-- INPUT tarjeta --}}
 
                                         <div id="tar1" class="col-12 col-sm-6 col-md-4 form-group"
@@ -481,7 +495,7 @@
                                     </div>
                                     <hr>
 
-
+                                       
                                   <!--   <div class="row">      
                                         <div class="p-2 flex-shrink-1 bd-highlight">
                                                         <a href="javascript:void(0);" id="agregarCupon" class="add_button_garex" title="Agregar cupon"><i class="fas fa-plus"></i></a>
