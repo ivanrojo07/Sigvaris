@@ -79,12 +79,14 @@
                         <th colspan="3">Monto de venta</th>
                         <th colspan="3">Pares x paciente</th>
                         <th colspan="3">Recompras</th>
-                        <th colspan="3">Ventas Obsoletos</th>
-                        <th colspan="3">Calcetin</th>
-                        <th colspan="3">Panti</th>
+                         <th colspan="3">TOBICV</th>
+                          <th colspan="3">Calcetin</th>
+                       <!--  <th colspan="3">Ventas Obsoletos</th> -->
+                       
+                        <th colspan="3">Pantorilleras de menor valor</th>
                          <th colspan="3">Leggings</th>
                         <th colspan="3">Media al muslo</th>
-                        <th colspan="3">Tobi</th>
+                       
                         <th colspan="3">Prendas de mayor valor</th>
                         <th colspan="3">Prendas de menor valor</th>
                     </tr>
@@ -120,9 +122,9 @@
                          <th>Obj</th>
                          <th>Real</th>
                          <th>%</th>
-                          <th>Obj</th>
+                          <!-- <th>Obj</th>
                          <th>Real</th>
-                         <th>%</th>
+                         <th>%</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -165,6 +167,7 @@
                     @else
                     @for ($i = 0; $i < count($datosVentasMes) - 1; $i++) <tr class="text-center">
                         <td>{{ $datosVentasMes[$i]["mes"] }}</td>
+
                         <td>${{ number_format($datosVentasMes[$i]["metas"]["montoVenta"], 2) }}</td>
                         <td>${{ number_format($datosVentasMes[$i][0]["montoVenta"]["valor"], 2) }}</td>
                         <td>{{ number_format($datosVentasMes[$i][0]["montoVenta"]["porcentaje"], 2) }}%</td>
@@ -184,30 +187,39 @@
                         @else
                         <td>{{ $datosVentasMes[$i][0]["recompras"]["porcentaje"] }}</td>
                         @endif
-                        <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                          <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                          <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                          <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
+                            <!-- tobi -->
+                        <td>{{ number_format($datosVentasMes[$i]["metas"]["tobi"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["tobi"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["tobi"]["porcentaje"], 2) }}%</td>
+                        <!-- calcetines -->
+                        <td>{{ number_format($datosVentasMes[$i]["metas"]["calcetines"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["calcetines"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["calcetines"]["porcentaje"], 2) }}%</td>
+                         <!-- leggings -->
+                        <td>{{ number_format($datosVentasMes[$i]["metas"]["leggings"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["leggings"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["leggings"]["porcentaje"], 2) }}%</td>
+                      
+                         <!-- panti -->
+                        <td>${{ number_format($datosVentasMes[$i]["metas"]["panti"], 2) }}</td>
+                        <td>${{ number_format($datosVentasMes[$i][0]["panti"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["panti"]["porcentaje"], 2) }}%</td>
+                          <!-- muslo -->
+                        <td>{{ number_format($datosVentasMes[$i]["metas"]["muslo"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["muslo"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["muslo"]["porcentaje"], 2) }}%</td>
+                           <!-- muslo -->
+                      <!--   <td>{{ number_format($datosVentasMes[$i]["metas"]["muslo"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["muslo"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["muslo"]["porcentaje"], 2) }}%</td> -->
+                           <!-- mayorValor -->
+                        <td>{{ number_format($datosVentasMes[$i]["metas"]["mayorValor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["mayorValor"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["mayorValor"]["porcentaje"], 2) }}%</td>
+                           <!-- menorValor -->
+                        <td>{{ number_format($datosVentasMes[$i]["metas"]["menorValor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["menorValor"]["valor"], 2) }}</td>
+                        <td>{{ number_format($datosVentasMes[$i][0]["menorValor"]["porcentaje"], 2) }}%</td>
                          
                         </tr>
                         @endfor
@@ -222,29 +234,38 @@
                             <td>{{ $datosVentasMes["totales"]["recompras"][0] }}</td>
                             <td>{{ $datosVentasMes["totales"]["recompras"][1] }}</td>
                             <td>{{ number_format($datosVentasMes["totales"]["recompras"][2]) }}%</td>
-                               <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                 <td>0</td>
-                                  <td>0</td>
-                                   <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
-                          <td>0</td>
-                         <td>0</td>
-                         <td>0</td>
+
+                              <td>{{ $datosVentasMes["totales"]["calcetines"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["calcetines"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["calcetines"][2]) }}%</td>
+
+                                 <td>{{ $datosVentasMes["totales"]["leggings"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["leggings"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["leggings"][2]) }}%</td>
+
+                                   <td>{{ $datosVentasMes["totales"]["tobi"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["tobi"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["tobi"][2]) }}%</td>
+
+                                   <td>{{ $datosVentasMes["totales"]["panti"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["panti"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["panti"][2]) }}%</td>
+
+                                    <td>{{ $datosVentasMes["totales"]["muslo"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["muslo"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["muslo"][2]) }}%</td>
+
+                                  <!--    <td>{{ $datosVentasMes["totales"]["muslo"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["muslo"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["muslo"][2]) }}%</td> -->
+
+                           <td>{{ $datosVentasMes["totales"]["mayorValor"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["mayorValor"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["mayorValor"][2]) }}%</td>
+
+                            <td>{{ $datosVentasMes["totales"]["menorValor"][0] }}</td>
+                            <td>{{ $datosVentasMes["totales"]["menorValor"][1] }}</td>
+                            <td>{{ number_format($datosVentasMes["totales"]["menorValor"][2]) }}%</td>
                         </tr>
                         @endif
                 </tbody>

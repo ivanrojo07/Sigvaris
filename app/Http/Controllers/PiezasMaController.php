@@ -47,6 +47,7 @@ class PiezasMaController extends Controller
            $pzNew = new piezasMa;
            $pzNew->producto_id = $aux->id;
            $pzNew->SKU = $aux->sku;
+           $pzNew->precio = $aux->precio_publico_iva;
            $pzNew->save();
 
             }

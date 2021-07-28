@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class piezasMe extends Model
 {
     protected $table = 'piezas_mes';
-    protected $fillable = ['id','producto_id','SKU'];
+    protected $fillable = ['id','producto_id','SKU','precio'];
     public $timestamps = true;
 }

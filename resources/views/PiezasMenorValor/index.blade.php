@@ -65,6 +65,7 @@
 						<th>ID</th>
 						<th>producto id</th>
 						<th>SKU</th>
+						<th>precio</th>
 					</tr>
 				</thead>
 				@foreach($pz as $re)
@@ -74,6 +75,7 @@
 					</td>
 					<td>{{ $re->producto_id }}</td>
 					<td>{{ $re->SKU }}</td>
+						<td>{{ $re->precio }}</td>
 					<td>
 					<div class="row">
 							<div class="col-4">

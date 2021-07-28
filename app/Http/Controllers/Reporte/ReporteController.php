@@ -17,6 +17,8 @@ use App\Http\Controllers\Controller;
 use App\Oficina;
 use App\Paciente;
 use App\Producto;
+use App\piezasMa;
+use App\piezasMe;
 use App\Venta;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -918,7 +920,7 @@ class ReporteController extends Controller
     {
 
         // Rango de fecha en el mismo mes
-        $datosVentasMes = ["montoVenta" => [], "pacientes" => [], "recompras" => [], "totales" => []];
+        $datosVentasMes = ["montoVenta" => [], "pacientes" => [], "recompras" => [], "totales" => [],"calcetines" => [],"leggings" => [],"tobi" => [],"panti" => [],"muslo" => [],"mayorValor" => [],"menorValor" => []];
         $fechaFinal = $fechaFinal->endOfMonth();
 
         // OBTENEMOS SUS VENTAS
@@ -929,13 +931,243 @@ class ReporteController extends Controller
         $metaFitter  = $fitter->fitterMetas()
             ->whereBetween('fecha_inicio', [$fechaInicial->toDateString(), $fechaFinal->toDateString()])
             ->get()->last();
-            // dd();
-            // $monto = collect($metaFitter->monto_venta);
+
+            //DETERMINAMOS LOS SKU'S QUE SON PARTE DE LOS CALCETINES PRECIO >= 2345 Y QUE NTREN EN ESTA GAMA DE SKUS
+            $calcetin = Producto::orwhere('sku','LIKE','%143C%')->orwhere('sku','LIKE','%183C%')->orwhere('sku','LIKE','%151C%')->orwhere('sku','LIKE','%191C%')->orwhere('sku','LIKE','%832%')->Where('precio_publico_iva','>=',2345)->get();
+
+            $leggings = Producto::orwhere('sku','LIKE','%170L%')->get();
+
+            $pantis= Producto::orwhere('sku','LIKE','%711P%')->orwhere('sku','LIKE','%712P%')->orwhere('sku','LIKE','%781P%')->orwhere('sku','LIKE','%782P%')->orwhere('sku','LIKE','%782M%')->orwhere('sku','LIKE','%783P%')->orwhere('sku','LIKE','%841P%')->orwhere('sku','LIKE','%842P%')->orwhere('sku','LIKE','%842M%')->orwhere('sku','LIKE','%843P%')->orwhere('sku','LIKE','%862P%')->orwhere('sku','LIKE','%863P%')->get();
+
+
+            $tobi =Producto::orwhere('sku','LIKE','%143C%')->orwhere('sku','LIKE','%189C%')->orwhere('sku','LIKE','%841C%')->orwhere('sku','LIKE','%862C%')->orwhere('sku','LIKE','%232C%')->orwhere('sku','LIKE','%233C%')->orwhere('sku','LIKE','%842C%')->orwhere('sku','LIKE','%863C%')->orwhere('sku','LIKE','%401C%')->orwhere('sku','LIKE','%843C%')->orwhere('sku','LIKE','%412V%')->orwhere('sku','LIKE','%781C%')->orwhere('sku','LIKE','%782C%')->orwhere('sku','LIKE','%783C%')->orwhere('sku','LIKE','%612C%')->orwhere('sku','LIKE','%821C%')->orwhere('sku','LIKE','%822C%')->orwhere('sku','LIKE','%823C%')->get();
+
+            $muslo=Producto::orwhere('sku','LIKE','%233N%')->orwhere('sku','LIKE','%232N%')->orwhere('sku','LIKE','%712N%')->orwhere('sku','LIKE','%711N%')->orwhere('sku','LIKE','%781N%')->orwhere('sku','LIKE','%782N%')->orwhere('sku','LIKE','%782N%')->orwhere('sku','LIKE','%783N%')->orwhere('sku','LIKE','%821N%')->orwhere('sku','LIKE','%822N%')->orwhere('sku','LIKE','%823N%')->orwhere('sku','LIKE','%841N%')->orwhere('sku','LIKE','%842N%')->orwhere('sku','LIKE','%833N%')->orwhere('sku','LIKE','%862N%')->orwhere('sku','LIKE','%863N%')->get();
+                $myValor=piezasMa::get();
+                $mnValor=piezasMe::get();
+                 $calcetin_array = [];
+                 $leggings_array = [];
+
+                 $pantis_array= [];
+                 $tobis_array =[];
+                 $muslo_array=[];
+                 $myValor_array=[];
+                 $mnValor_array=[];
+          // dd($pantis,$tobi,$muslo,$myValor,$mnValor);
+            //RECOOREMOS EL ARREGLO Y LOS GUARDAMOS PARA DESPUES COMPARARLOS
+            foreach ($calcetin as $key => $value) {
+               
+                array_push($calcetin_array, $value->sku);
+            }
+             foreach ($leggings as $key => $value) {
+               
+                array_push($leggings_array, $value->sku);
+            }
+
+             foreach ($pantis as $key => $value) {
+               
+                array_push($pantis_array, $value->sku);
+            }
+             foreach ($tobi as $key => $value) {
+               
+                array_push($tobis_array, $value->sku);
+            }
+              foreach ($muslo as $key => $value) {
+               
+                array_push($muslo_array, $value->sku);
+            }
+              foreach ($myValor as $key => $value) {
+               
+                array_push($myValor_array, $value->sku);
+            }
+             foreach ($mnValor as $key => $value) {
+               
+                array_push($mnValor_array, $value->SKU);
+            }
+
+        // dd($pantis_array);
+        // $contador=0;
         foreach ($ventasfitter as $venta) {
-            // dd($venta);
-            // 
+                   
+                    $leggings_mes=0;
+                    $CALCETIN_MES=0;
+                    $pantis_mes=0;
+                    $tobi_mes=0;
+                    $muslo_mes=0;
+                    $myValor_mes=0;
+                    $mnValor_mes=0;
+
+              foreach ($venta->productos as $key => $productos) {
+
+                    foreach ($calcetin_array as $key => $value) {
+                       
+                        if (strval($value) == $productos->sku ) {
+                                $CALCETIN_MES++;     
+                        }                      
+                    }
+              }
+                   if ($CALCETIN_MES == 0 || $metaFitter->calcetin == null ) {
+                       $datosVentasMes["calcetines"][] = [
+                        "meta"       => $metaFitter->calcetin,
+                        "valor"      => $CALCETIN_MES,
+                        "porcentaje" => 0
+                        // "porcentaje" => 100
+                         ];
+                    }ELSE{
+                        $datosVentasMes["calcetines"][] = [
+                        "meta"       => $metaFitter->calcetin,
+                        "valor"      => $CALCETIN_MES,
+                        "porcentaje" => (($CALCETIN_MES * 100) / $metaFitter->calcetin)
+                         ];
+                    }
+               foreach ($venta->productos as $key => $productos) {
+
+                    foreach ($leggings_array as $key => $value) {
+                       
+                        if (strval($value) == $productos->sku ) {
+                                $leggings_mes++;     
+                                    }
+                                }
+                          }
+                if ($leggings_mes == 0 || $metaFitter->leggings == null ) {
+                       $datosVentasMes["leggings"][] = [
+                        "meta"       => $metaFitter->leggings,
+                        "valor"      => $CALCETIN_MES,
+                        "porcentaje" => 0
+                        // "porcentaje" => 100
+                         ];
+                    }ELSE{
+                        $datosVentasMes["leggings"][] = [
+                        "meta"       => $metaFitter->leggings,
+                        "valor"      => $CALCETIN_MES,
+                        "porcentaje" => (($CALCETIN_MES * 100) / $metaFitter->leggings)
+                         ];
+                    }
+
+                    foreach ($venta->productos as $key => $productos) {
+
+                    foreach ($pantis_array as $key => $value) {
+                       
+                        if (strval($value) == $productos->sku ) {
+                                            $pantis_mes++;     
+                                    }
+                                }
+                          } 
+
+                    if ($pantis_mes == 0 || $metaFitter->panti == null ) {
+                       $datosVentasMes["panti"][] = [
+                        "meta"       => $metaFitter->panti,
+                        "valor"      => $pantis_mes,
+                        "porcentaje" => 0
+                        // "porcentaje" => 100
+                         ];
+                    }ELSE{
+                        $datosVentasMes["panti"][] = [
+                        "meta"       => $metaFitter->panti,
+                        "valor"      => $pantis_mes,
+                        "porcentaje" => (($pantis_mes * 100) / $metaFitter->panti)
+                         ];
+                    }
+                    foreach ($venta->productos as $key => $productos) {
+
+                    foreach ($tobis_array as $key => $value) {
+                       
+                        if (strval($value) == $productos->sku ) {
+                                            $tobi_mes++;     
+                                    }
+                                }
+                          } 
+
+                        if ($tobi_mes == 0 || $metaFitter->tobimedias == null ) {
+                       $datosVentasMes["tobi"][] = [
+                        "meta"       => $metaFitter->tobimedias,
+                        "valor"      => $tobi_mes,
+                        "porcentaje" => 0
+                        // "porcentaje" => 100
+                         ];
+                         }ELSE{
+                        $datosVentasMes["tobi"][] = [
+                        "meta"       => $metaFitter->tobimedias,
+                        "valor"      => $tobi_mes,
+                        "porcentaje" => (($tobi_mes * 100) / $metaFitter->tobimedias)
+                         ];
+                    }
+
+                     foreach ($venta->productos as $key => $productos) {
+
+                    foreach ($muslo_array as $key => $value) {
+                       
+                        if (strval($value) == $productos->sku ) {
+                                            $muslo_mes++;     
+                                    }
+                                }
+                          } 
+                          if ($tobi_mes == 0 || $metaFitter->tobimedias == null ) {
+                       $datosVentasMes["muslo"][] = [
+                        "meta"       => $metaFitter->tobimedias,
+                        "valor"      => $muslo_mes,
+                        "porcentaje" => 0
+                        // "porcentaje" => 100
+                         ];
+                         }ELSE{
+                        $datosVentasMes["muslo"][] = [
+                        "meta"       => $metaFitter->muslo,
+                        "valor"      => $muslo_mes,
+                        "porcentaje" => (($muslo_mes * 100) / $metaFitter->muslo)
+                         ];
+                    }
+                       foreach ($venta->productos as $key => $productos) {
+
+                    foreach ($myValor_array as $key => $value) {
+                       
+                        if (strval($value) == $productos->sku ) {
+                                            $myValor_mes++;     
+                                    }
+                                }
+                          }
+                             if ($myValor_mes == 0 || $metaFitter->pz_mayor == null ) {
+                       $datosVentasMes["mayorValor"][] = [
+                        "meta"       => $metaFitter->pz_mayor,
+                        "valor"      => $myValor_mes,
+                        "porcentaje" => 0
+                        // "porcentaje" => 100
+                         ];
+                         }ELSE{
+                        $datosVentasMes["mayorValor"][] = [
+                        "meta"       => $metaFitter->pz_mayor,
+                        "valor"      => $myValor_mes,
+                        "porcentaje" => (($myValor_mes * 100) / $metaFitter->pz_mayor)
+                         ];
+                    }
+                      foreach ($venta->productos as $key => $productos) {
+
+                    foreach ($mnValor_array as $key => $value) {
+                       
+                        if (strval($value) == $productos->sku ) {
+                                            $mnValor_mes++;     
+                                    }
+                                }
+                          }
+                    if ($mnValor_mes == 0 || $metaFitter->pz_menor == null ) {
+                       $datosVentasMes["menorValor"][] = [
+                        "meta"       => $metaFitter->pz_menor,
+                        "valor"      => $mnValor_mes,
+                        "porcentaje" => 0
+                        // "porcentaje" => 100
+                         ];
+                         }ELSE{
+                        $datosVentasMes["menorValor"][] = [
+                        "meta"       => $metaFitter->pz_menor,
+                        "valor"      => $mnValor_mes,
+                        "porcentaje" => (($mnValor_mes * 100) / $metaFitter->pz_menor)
+                         ];
+                    }
+
+
+
+
             $datosVentasMes["montoVenta"][] = [
-                "meta"       => $metaFitter->monto_venta,
+                "meta"       => $metaFitter->calcetin,
                 "valor"      => $venta->total,
                 "porcentaje" => (($venta->total * 100) / $metaFitter->monto_venta)
                 // "porcentaje" => (($venta->total * 100) /100)
@@ -945,7 +1177,7 @@ class ReporteController extends Controller
             //     # 
             //     dd($venta->productos,$venta,$datosVentasMes);
             // }
-                // dd($venta->productos,$venta->productos->count());
+              
             // OBTENEMOS SI EN UNA VENTA SE COMPRA MAS DE UNA PRENDA
             if ($venta->productos != null) 
             {        if ($venta->productos->count() > 1 && $venta->productos != null) {
@@ -992,6 +1224,7 @@ class ReporteController extends Controller
 
 
         }
+    
 
         $sumValor = 0;
         $sumPorcentaje = 0;
@@ -1022,6 +1255,89 @@ class ReporteController extends Controller
             }
         }
         $datosVentasMes["totales"]["recompras"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+        
+
+        $sumValor = 0;
+        $sumPorcentaje = 0;
+        foreach ($datosVentasMes["calcetines"] as $key => $fila) {
+            if ($fila["valor"] != "-") {
+                $sumValor += $fila["valor"];
+                $sumPorcentaje += $fila["porcentaje"];
+            }
+        }
+        $datosVentasMes["totales"]["calcetines"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+         $sumValor = 0;
+        $sumPorcentaje = 0;
+        foreach ($datosVentasMes["leggings"] as $key => $fila) {
+            if ($fila["valor"] != "-") {
+                $sumValor += $fila["valor"];
+                $sumPorcentaje += $fila["porcentaje"];
+            }
+        }
+        $datosVentasMes["totales"]["leggings"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+        $sumValor = 0;
+        $sumPorcentaje = 0;
+        foreach ($datosVentasMes["tobi"] as $key => $fila) {
+            if ($fila["valor"] != "-") {
+                $sumValor += $fila["valor"];
+                $sumPorcentaje += $fila["porcentaje"];
+            }
+        }
+        $datosVentasMes["totales"]["tobi"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+        $sumValor = 0;
+        $sumPorcentaje = 0;
+        foreach ($datosVentasMes["panti"] as $key => $fila) {
+            if ($fila["valor"] != "-") {
+                $sumValor += $fila["valor"];
+                $sumPorcentaje += $fila["porcentaje"];
+            }
+        }
+        $datosVentasMes["totales"]["panti"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+         $sumValor = 0;
+        $sumPorcentaje = 0;
+        foreach ($datosVentasMes["muslo"] as $key => $fila) {
+            if ($fila["valor"] != "-") {
+                $sumValor += $fila["valor"];
+                $sumPorcentaje += $fila["porcentaje"];
+            }
+        }
+        $datosVentasMes["totales"]["muslo"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+         $sumValor = 0;
+        $sumPorcentaje = 0;
+        foreach ($datosVentasMes["mayorValor"] as $key => $fila) {
+            if ($fila["valor"] != "-") {
+                $sumValor += $fila["valor"];
+                $sumPorcentaje += $fila["porcentaje"];
+            }
+        }
+        $datosVentasMes["totales"]["mayorValor"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+             $sumValor = 0;
+        $sumPorcentaje = 0;
+        foreach ($datosVentasMes["menorValor"] as $key => $fila) {
+            if ($fila["valor"] != "-") {
+                $sumValor += $fila["valor"];
+                $sumPorcentaje += $fila["porcentaje"];
+            }
+        }
+        $datosVentasMes["totales"]["menorValor"] = ["valor" => $sumValor, "porcentaje" => $sumPorcentaje];
+
+
+            // dd($datosVentasMes);
+
+
+
+
+
+
+
+
         return $datosVentasMes;
     }
 
@@ -1047,7 +1363,7 @@ class ReporteController extends Controller
 
         while ($fechaInicial->lessThanOrEqualTo($fechaFinal)) {
             $datosMes = $this->getDatosVentaFitterXMes($fechaInicial, $fechaFinal, $fitter, $request);
-
+            // dd($datosMes);
             if ($datosMes["totales"]["montoVenta"]["valor"] !== 0) {
                 $datosVentasMes[] = [
                     "mes"   => ucfirst($fechaInicial->formatLocalized('%B')),
@@ -1055,6 +1371,14 @@ class ReporteController extends Controller
                         "montoVenta" => $datosMes["montoVenta"][0]["meta"],
                         "pacientes"  => $datosMes["pacientes"][0]["meta"],
                         "recompras"  => $datosMes["recompras"][0]["meta"],
+
+                        "calcetines" => $datosMes["calcetines"][0]["meta"],
+                        "leggings"  => $datosMes["leggings"][0]["meta"],
+                        "tobi"      => $datosMes["tobi"][0]["meta"],
+                        "panti"     => $datosMes["panti"][0]["meta"],
+                        "muslo"     => $datosMes["muslo"][0]["meta"],
+                        "mayorValor"  => $datosMes["mayorValor"][0]["meta"],
+                        "menorValor" => $datosMes["menorValor"][0]["meta"]
                     ],
                     $datosMes["totales"],
                 ];
@@ -1066,22 +1390,58 @@ class ReporteController extends Controller
         $sumMonto = 0;
         $sumPacientes = 0;
         $sumRecompras = 0;
-        $sumMetas = [0, 0, 0];
+        $sumcalcetines=0;
+        $sumleggings=0;
+        $sumtobi=0;
+        $sumpanti =0;
+        $sumlmuslo=0;
+        $summayorValor=0;
+        $summenorValor=0;
+        $sumMetas = [0, 0, 0,0, 0, 0,0, 0, 0,0];
 
         foreach ($datosVentasMes as $row) {
+
             $sumMonto += $row[0]["montoVenta"]["valor"];
             $sumPacientes += $row[0]["pacientes"]["valor"];
             $sumRecompras += $row[0]["recompras"]["valor"];
+            $sumcalcetines += $row[0]["calcetines"]["valor"];
+            $sumleggings += $row[0]["leggings"]["valor"];
+            $sumtobi += $row[0]["tobi"]["valor"];
+            $sumpanti += $row[0]["panti"]["valor"];
+            $sumlmuslo += $row[0]["muslo"]["valor"];
+            $summayorValor += $row[0]["mayorValor"]["valor"];
+            $summenorValor += $row[0]["menorValor"]["valor"];
+            
+            
+
+
+
             $sumMetas[0] += $row["metas"]["montoVenta"];
             $sumMetas[1] += $row["metas"]["pacientes"];
             $sumMetas[2] += $row["metas"]["recompras"];
+            $sumMetas[3] += $row["metas"]["calcetines"];
+            $sumMetas[4] += $row["metas"]["leggings"];
+            $sumMetas[5] += $row["metas"]["tobi"];
+            $sumMetas[6] += $row["metas"]["panti"];
+            $sumMetas[7] += $row["metas"]["muslo"];
+            $sumMetas[8] += $row["metas"]["mayorValor"];
+            $sumMetas[9] += $row["metas"]["menorValor"];
         }
 
         $datosVentasMes["totales"] = [
             "montoVenta" => [$sumMetas[0], $sumMonto, (($sumMonto * 100) / $sumMetas[0])],
             "pacientes"  => [$sumMetas[1], $sumPacientes, (($sumPacientes * 100) / $sumMetas[1])],
-            "recompras"  => [$sumMetas[2], $sumRecompras, (($sumRecompras * 100) / $sumMetas[2])]
+            "recompras"  => [$sumMetas[2], $sumRecompras, (($sumRecompras * 100) / $sumMetas[2])],
+
+            "calcetines"  => [$sumMetas[3], $sumcalcetines, (($sumcalcetines * 100) / $sumMetas[3])],
+            "leggings"  => [$sumMetas[4], $sumleggings, (($sumleggings * 100) / $sumMetas[4])],
+            "tobi"  => [$sumMetas[5], $sumtobi, (($sumtobi * 100) / $sumMetas[5])],
+            "panti"  => [$sumMetas[6], $sumpanti, (($sumpanti * 100) / $sumMetas[6])],
+            "muslo"  => [$sumMetas[7], $sumlmuslo, (($sumlmuslo * 100) / $sumMetas[7])],
+            "mayorValor"  => [$sumMetas[8], $summayorValor, (($summayorValor * 100) / $sumMetas[8])],
+            "menorValor"  => [$sumMetas[9], $summenorValor, (($summenorValor * 100) / $sumMetas[9])],
         ];
+        // dd( $datosVentasMes);
         return $datosVentasMes;
     }
 
