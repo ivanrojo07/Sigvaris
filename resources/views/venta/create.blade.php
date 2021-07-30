@@ -1193,8 +1193,8 @@
         $('#tbody_garex')
                 .append(`
                 <tr id="garex_agregado${garex.id}">
-                    <td class="precio_total">
-                        125
+                    <td class="precio_total_garex">
+                        120
                     </td>
                    
                     <td class="Folio">
@@ -1339,9 +1339,10 @@
     function cambiarTotalVenta(){
         let precios_total = $('td.precio_total').toArray();
         let total = 0;
+        console.log("Precios totales array:",precios_total);
         precios_total.forEach(e => {
             total += parseFloat(e.innerText);
-            console.log(total);
+            console.log("total en cambioTotalVenta:",total);
         });
         $('#promocion_id option:eq(0)').prop('selected',true);
         $('#descuento').val(0);
@@ -1400,7 +1401,7 @@
         console.log('sigpesos', sigpesos);  
         console.log('desCumple', desCumple); 
 
-        console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA 1109',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
+        console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA 1403',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
             // $('#total').val(0);
         var aux=(parseFloat(subtotal)+parseFloat(iva))-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {
