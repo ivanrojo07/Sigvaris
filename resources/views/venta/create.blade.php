@@ -470,7 +470,7 @@
                         <div class="col-12">
                             <div class="card rounded-0">
                                 <div class="card-header">
-                                    <h3>Detalles Garex</h3>
+                                    <h3>Detalles Garext</h3>
                                 </div>
                                 {{-- TABLA DE Garex SELECCIONADOS --}}
                                 <div class="card-body">
