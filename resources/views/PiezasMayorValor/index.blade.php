@@ -58,7 +58,7 @@
 			<label>No hay retext añadidos</label>
 			@else
 			{{-- false expr --}}
-			<table id="precargas" class="table table-striped table-bordered table-hover"
+			<table id="Devolucionesid" class="table table-striped table-bordered table-hover"
 				style="color:rgb(51,51,51); border-collapse: collapse; margin-bottom: 0px">
 				<thead>
 					<tr class="info">
@@ -104,6 +104,12 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Devolucionesid').DataTable();
+        });
+
+</script><!-- 
 <script>
 	$(document).ready(function () {
 		$('#precargas').DataTable({
@@ -134,5 +140,5 @@
 		});
 	});
 </script>
-
+ -->
 @endsection

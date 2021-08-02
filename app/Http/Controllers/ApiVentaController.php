@@ -152,9 +152,18 @@ class ApiVentaController extends Controller
        
        
        $folio_ga = DB::table('garex_ventas')->where('venta_id',$request->ventaId)->where('status',0)->where('SKU',$request->skuProductoDevuelto)->first();
-       $folio_re = str_replace('GAREXT01-','RETEXT01-',$folio_ga->folio);
-       $folio_re = str_replace('GAREXT02-','RETEXT02-',$folio_ga->folio);
+       // dd(strpos($folio_ga->folio,'GAREXT01-'));
+       if (strpos($folio_ga->folio,'GAREXT01-') == 0) {
+           # code...
+             $folio_re = str_replace('GAREXT01-','RETEXT01-',$folio_ga->folio);
+
+       }else if(strpos($folio_ga->folio,'GAREXT02-') == 0){
+
+             $folio_re = str_replace('GAREXT02-','RETEXT02-',$folio_ga->folio);
+       }
+    
       
+        // dd($folio_re);
         if (strlen($request->skuProductoEntregado)==12) {
             # code...
              $productoQueSeraEntregado = Producto::where('upc', $request->skuProductoEntregado)->first();

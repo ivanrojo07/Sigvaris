@@ -1,6 +1,6 @@
 @extends('principal')
 @section('content')
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 	function confirmacion(doctor_id){
 		swal("¿Esta seguro de eliminar este productos de menor valor?", {
@@ -34,7 +34,7 @@
   }
 });
 	}
-</script>
+</script> -->
 <div class="container">
 	<div class="card">
 		<div class="card-header">
@@ -105,6 +105,12 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#precargas').DataTable();
+        });
+
+</script>
 <script>
 	$(document).ready(function () {
 		$('#precargas').DataTable({
