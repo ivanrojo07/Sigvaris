@@ -436,7 +436,7 @@
                                  <div class="card-header rounded-0">
                                     <div class="row">
                                         <div class="col-sm-12 col-md-6">
-                                            <h3>Garex</h3>
+                                            <h3>Garext</h3>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
                                             <label>Buscar:<input type="text" id="BuscarGarex" onkeypress="return event.keyCode!=13">
@@ -448,7 +448,7 @@
                                         <table class="table" id="garexcarga">
                                             <thead>
                                                 <tr>
-                                                    <th>Garex</th>
+                                                    <th>Garext</th>
                                                     <th>costo</th>
                                                     <th>Agregar</th>
                                                     <th>Ultimo Folio</th>
