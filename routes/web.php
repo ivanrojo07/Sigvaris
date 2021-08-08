@@ -242,6 +242,8 @@ Route::post('reportes/4','Reporte\ReporteController@cuatro')->name('reportes.4')
 Route::get('reportes/7','Reporte\ReporteController@siete')->name('reportes.7');
 Route::get('reportes/metas','Reporte\ReporteController@reporteVentasfitter')->name('reportes.metas');
 Route::post('reportes/metas','Reporte\ReporteController@reporteVentasfitter')->name('reportes.metas');
+Route::get('reportes/pacientes','Reporte\ReporteController@pacientesNuevos')->name('reportes.pacientes');
+Route::post('reportes/pacientes','Reporte\ReporteController@pacientesNuevos')->name('reportes.pacientes');
 
 //reportes excel
 Route::post('reportes/export/2','Reporte\ReporteController@exportdos')->name('reportes.2.export');

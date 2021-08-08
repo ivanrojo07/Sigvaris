@@ -1444,6 +1444,28 @@ class ReporteController extends Controller
         // dd( $datosVentasMes);
         return $datosVentasMes;
     }
+    public function pacientesNuevos(Request $request)
+    {   
+
+             $oficinas = Oficina::get();
+          ini_set('max_execution_time', 600);
+      
+        if ($request->input()) {
+
+            //con este if evaluo si se mando una oficina de lo contrario mando todos los apcientes en las oficinas 
+            if ( $request->oficina_id != null) {
+                $pacientes = Paciente::whereBetween('created_at',[$request->fechaInicial,$request->fechaFinal] )->where('oficina_id', $request->oficina_id)->get();
+            }else{
+                $pacientes = Paciente::whereBetween('created_at',[$request->fechaInicial,$request->fechaFinal] )->get();
+            }
+            
+            //dd($request->input(),$pacientes);
+            return view('reportes.pacientesN', compact('oficinas','pacientes'));
+        }
+      
+
+        return view('reportes.pacientesN', compact('oficinas'));
+    }
 
 
     public function exportdos(Request $request){

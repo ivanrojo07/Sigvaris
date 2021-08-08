@@ -186,6 +186,9 @@
                             <a class="dropdown-item" href="{{route('reportes.10')}}"><span>Pacientes por Médico</span><i class="fa fa-search float-right"></i></a>
                           
                             <a class="dropdown-item" href="{{route('reportes.metas')}}"><span>Ventas de fitter</span><i class="fa fa-search float-right"></i></a>
+                            
+                            <a class="dropdown-item" href="{{route('reportes.pacientes')}}"><span>Pacientes nuevos</span><i class="fa fa-search float-right"></i></a>
+
                             <!-- <a class="dropdown-item" href="{{url('reportes/cortecaja')}}"><span>Corte de caja</span><i class="fa fa-search float-right"></i></a> -->
                             <!-- {{-- <a class="dropdown-item" href="{{route('reportes.11')}}"><span>11</span><i class="fa fa-search float-right"></i></a> --}} -->
 
