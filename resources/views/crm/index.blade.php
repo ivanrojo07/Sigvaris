@@ -72,18 +72,6 @@
                                                 <input type="date" class="form-control" value="{{date('Y-m-d')}}"
                                                     readonly="">
                                             </div>
-
-                                             <div class="form-row">
-                                            <div class="form-group col-4">
-                                                <label for="actual">✱¿Contesto?</label>
-                                                <select class="form-control" name="contesto_id" id="contesto_id" required="">
-                                                <option value="">Selecciona...</option>
-                                                <option value="0">NO</option>
-                                                <option value="1">SI</option>
-                                                </select>
-
-                                            </div>
-
                                             <div class="form-group col-4">
                                                 <label for="fecha_aviso">✱Fecha aviso</label>
                                                 <input type="date" class="form-control" name="fecha_aviso" required="">
@@ -130,10 +118,6 @@
                                             <div class="form-group col-4">
                                                 <label for="comentarios">Comentarios</label>
                                                 <textarea class="form-control" name="comentarios"></textarea>
-                                            </div>
-                                              <div class="form-group col-4">
-                                                <label for="comentarios">✱¿Como se ha sentido con el uso del producto?</label>
-                                                <textarea class="form-control" name="comentarios_uso"></textarea>
                                             </div>
                                         </div>
                                     </div>
