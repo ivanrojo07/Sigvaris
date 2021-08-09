@@ -245,6 +245,9 @@ Route::post('reportes/metas','Reporte\ReporteController@reporteVentasfitter')->n
 Route::get('reportes/pacientes','Reporte\ReporteController@pacientesNuevos')->name('reportes.pacientes');
 Route::post('reportes/pacientes','Reporte\ReporteController@pacientesNuevos')->name('reportes.pacientes');
 
+Route::get('reportes/doctores','Reporte\ReporteController@doctoresNuevos')->name('reportes.doctores');
+Route::post('reportes/doctores','Reporte\ReporteController@doctoresNuevos')->name('reportes.doctores');
+
 //reportes excel
 Route::post('reportes/export/2','Reporte\ReporteController@exportdos')->name('reportes.2.export');
 Route::post('reportes/export/3','Reporte\ReporteController@exportTres')->name('reportes.3.export');

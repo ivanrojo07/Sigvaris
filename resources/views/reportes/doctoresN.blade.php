@@ -6,11 +6,11 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>Pacientes nuevos por fecha</h3>
+            <h3>Doctores nuevos por fecha</h3>
         </div>
         {{-- Buscador de pacientes --}}
         <div class="card-body">
-            <form action="{{route('reportes.pacientes')}}" method="POST" class="form-inline">
+            <form action="{{route('reportes.doctores')}}" method="POST" class="form-inline">
                 @csrf
                 {{-- Input de fecha inicial --}}
                 <div class="form-group mr-3">
@@ -39,23 +39,30 @@
     </button>
                 
             <hr>
-            @if(isset($pacientes))
+            @if(isset($doctores))
                <div class="card-body">
             <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
                 <thead>
                     <tr class="info">
                         <th>NUM</th>
-                        <th>PACIENTES</th>
-                        <th>OFICINA</th>
+                        <th>DOCTORES</th>
+                        <th>FITTER</th>
+    
                     </tr>
                 </thead>
                 <tbody>
                    
-                    @foreach($pacientes as $key => $sku)
+                    @foreach($doctores as $key => $sku)
                     <tr>
                         <td>{{$key}}</td>
-                        <td>{{$sku->nombre}} {{$sku->paterno}} {{$sku->materno}}</td>
-                        <td> {{$sku->oficina_id= 1 ? "POLANCO": "PERISUR"}}</td>
+                        <td>{{$sku->nombre}} {{$sku->apellidopaterno}} {{$sku->apellidomaterno}}</td>
+                        @foreach($empleadosFitter as $key => $empleado)
+                            @if($empleado->id == $sku-> empleado_id )
+                            <td>{{$empleado->nombre}} {{$empleado->appaterno}} {{$empleado->apmaterno}} </td>
+                            @else
+                            
+                            @endif
+                        @endforeach
                     </tr>
                    
                     @endforeach
@@ -83,12 +90,12 @@
     $btnExportar.addEventListener("click", function() {
         let tableExport = new TableExport($tabla, {
             exportButtons: false, // No queremos botones
-            filename: "PACIENTES_NUEVOS", //Nombre del archivo de Excel
-            sheetname: "PACIENTES_NUEVOS", //Título de la hoja
+            filename: "DOCTORES_NUEVOS", //Nombre del archivo de Excel
+            sheetname: "DOCTORES_NUEVOS", //Título de la hoja
         });
         
         let datos = tableExport.getExportData();
-        console.log('datos',datos);
+        // console.log('datos',datos);
         
         let preferenciasDocumento = datos.listaEmpleados.xlsx;
         tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);

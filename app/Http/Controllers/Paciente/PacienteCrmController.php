@@ -124,6 +124,7 @@ class PacienteCrmController extends Controller
     public function store(Request $request)
     {
         //$request->input('paciente_id')=$request->input('paciente_id1');
+        // dd($request);
         $crm = Crm::create($request->all());
         if ($crm) {
             Alert::success('Crm registrado subido correctamente.');

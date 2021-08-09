@@ -83,6 +83,7 @@ class garexController extends Controller
         $garex=Garex::where('sku',$request->nombre)->get();
         $folios = count(DB::table('garex_ventas')->get());
         foreach ($garex as $ga) {
+            // dd($ga, $folios);
             array_push ($ajaxGarex,[ 
                                         '<span garexId="'.$ga->id.'" class="garex_precio">'.$ga->id.'</span>',
                                         '<span garexId="'.$ga->id.'" class="garex_precio" name="garex_precio">'.'$'.$ga->precio_publico_iva.' </span>',

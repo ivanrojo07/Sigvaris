@@ -11,7 +11,7 @@ class Doctor extends Model
     use SoftDeletes;
 
     protected $table='doctores';
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'id',
@@ -21,7 +21,8 @@ class Doctor extends Model
         'celular',
         'mail',
         'nacimiento',
-        'activo'
+        'activo',
+        'empleado_id'
         ];
 
         public function consultorios(){

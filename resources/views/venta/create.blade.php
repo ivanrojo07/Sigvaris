@@ -770,12 +770,12 @@
             </div>
 
             
-            <div class="col-4 offset-4 text-center">
-                {{--                 <form action="{{ route('pembayaran.print') }}" method="POST">
-                <input type="hidden" name="_token" class="form-control" value="{!! csrf_token() !!}"> --}}
-                {{-- <button type="submit" name="submit" class="btn btn-info">Imprimir</button> --}}
-                {{-- </form> --}}
-            </div>
+        <!--     <div class="col-4 offset-4 text-center">
+               <form action="{{ route('pembayaran.print') }}" method="POST">
+                <input type="hidden" name="_token" class="form-control" value="{!! csrf_token() !!}"> 
+               <button type="submit" name="submit" class="btn btn-info">Imprimir</button> 
+                </form> 
+            </div> -->
         </div>
     </div>
 </div>
@@ -978,6 +978,7 @@
 </script>
    
 <script type="text/javascript">
+    var contador= 0;
     var cantidad = 0;
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));    
@@ -1186,9 +1187,10 @@
 </script>       
 <script>
     function agregarGarex(p){
-         let garex = $('#garex_precio').val();
-         let garex2 = $('.1garex_precio').val();
+    let garex = $('#garex_precio').val();
          
+         contador++;
+        
         // alert("Se agrego un garex",garex,garex2);
         $('#tbody_garex')
                 .append(`
@@ -1220,6 +1222,12 @@
                         </button>
                     </td>
                 </tr>`);
+        let aux = $('#1garex_precio').val();
+         let garex2 = $('.garex_precio').val();
+          console.log('garext2',garex2,aux);
+
+                 // console.log('contador2',contador);
+
     }
     
     function agregarProducto(p){

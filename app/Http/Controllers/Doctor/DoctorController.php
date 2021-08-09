@@ -71,7 +71,10 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request,Auth::user()->id);
         $doctor = Doctor::create($request->all());
+        // $doctor->empleado_id =  $request->empleado_id;
+        // $doctor->save();
         return redirect()->route('doctores.index');
     }
 

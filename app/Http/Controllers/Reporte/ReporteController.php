@@ -1467,6 +1467,32 @@ class ReporteController extends Controller
         return view('reportes.pacientesN', compact('oficinas'));
     }
 
+     public function doctoresNuevos(Request $request)
+    {   
+
+         $empleadosFitter = Empleado::fitters()->get();
+         // dd( $empleadosFitter[0]);
+          $oficinas = Oficina::get();
+          ini_set('max_execution_time', 600);
+      
+        if ($request->input()) {
+
+            //con este if evaluo si se mando una oficina de lo contrario mando todos los apcientes en las oficinas 
+            if ( $request->oficina_id != null) {
+
+                $doctores = Doctor::whereBetween('created_at',[$request->fechaInicial,$request->fechaFinal] )->where('oficina_id', $request->oficina_id)->get();
+            }else{
+                $doctores = Doctor::whereBetween('created_at',[$request->fechaInicial,$request->fechaFinal] )->get();
+            }
+            
+            //dd($request->input(),$pacientes);
+            return view('reportes.doctoresN', compact('oficinas','doctores','empleadosFitter'));
+        }
+      
+
+        return view('reportes.doctoresN', compact('oficinas'));
+    }
+
 
     public function exportdos(Request $request){
         ini_set('max_execution_time', 600);

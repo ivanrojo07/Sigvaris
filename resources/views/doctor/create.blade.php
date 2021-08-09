@@ -44,6 +44,10 @@
                     <label class="control-label">Fecha nacimiento:</label>
                     <input type="date" name="nacimiento" class="form-control">
                 </div>
+                   <div class="col-3 form-group">
+                   
+                    <input type="hidden" name="empleado_id" class="form-control" value="{{Auth::user()->id}}">
+                </div>
             </div>
         </div>
         <div class="card-footer">

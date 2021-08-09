@@ -111,6 +111,7 @@
         });
 
 </script>
+
 <script>
 	$(document).ready(function () {
 		$('#precargas').DataTable({

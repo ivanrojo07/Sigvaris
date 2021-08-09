@@ -20,7 +20,9 @@ class Crm extends Model
         'forma_contacto',
         'hora',
         'estado_id',
-        'oficina_id'
+        'oficina_id',
+        'contesto_id',
+        'comentarios_uso'
     ];
 
     public function paciente(){
