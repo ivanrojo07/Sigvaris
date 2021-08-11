@@ -67,6 +67,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="col-3 form-group">
                     <label class="control-label">Teléfono:</label>
                     <input type="text" name="telefono" class="form-control">
@@ -88,6 +89,11 @@
                     <input type="text" name="otro_doctor" class="form-control">
                 </div>
             </div>
+             </div>
+                   <div class="col-3 form-group">
+                   
+                    <input type="hidden" name="empleado_id" class="form-control" value="{{Auth::user()->id}}">
+                </div>
             {{-- Lista de doctores --}}
             <h6 class="text-center" id="tablaDocTitulo">LISTA PARA ASIGNAR DOCTOR</h6>
             <div class="row" id="tablaDoc">

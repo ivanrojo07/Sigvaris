@@ -138,6 +138,7 @@ class PacienteController extends Controller
                 'otro_doctor'=>$request->otro_doctor,
                 'doctor_id'=>$request->doctor_id,
                 'nivel_id'=>$request->nivel_id,
+                'empleado_id'=>$request->empleado_id
                 //dd(session()->get('oficina')),
 
                 
