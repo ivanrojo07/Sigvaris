@@ -191,6 +191,10 @@
 
                             <a class="dropdown-item" href="{{route('reportes.doctores')}}"><span>Doctores nuevos</span><i class="fa fa-search float-right"></i></a>
 
+                            <a class="dropdown-item" href="{{route('reportes.crm')}}"><span>CRM Llamadas compra</span><i class="fa fa-search float-right"></i></a>
+
+                              <a class="dropdown-item" href="{{route('reportes.crmR')}}"><span>CRM Llamadas recompra</span><i class="fa fa-search float-right"></i></a>
+
                             <!-- <a class="dropdown-item" href="{{url('reportes/cortecaja')}}"><span>Corte de caja</span><i class="fa fa-search float-right"></i></a> -->
                             <!-- {{-- <a class="dropdown-item" href="{{route('reportes.11')}}"><span>11</span><i class="fa fa-search float-right"></i></a> --}} -->
 

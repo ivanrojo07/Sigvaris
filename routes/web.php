@@ -248,6 +248,10 @@ Route::post('reportes/pacientes','Reporte\ReporteController@pacientesNuevos')->n
 Route::get('reportes/doctores','Reporte\ReporteController@doctoresNuevos')->name('reportes.doctores');
 Route::post('reportes/doctores','Reporte\ReporteController@doctoresNuevos')->name('reportes.doctores');
 
+Route::get('reportes/crm','Reporte\ReporteController@crm')->name('reportes.crm');
+Route::post('reportes/crm','Reporte\ReporteController@crm')->name('reportes.crm');
+Route::post('reportes/crm/recompra','Reporte\ReporteController@crmRecompra')->name('reportes.crmR');
+
 //reportes excel
 Route::post('reportes/export/2','Reporte\ReporteController@exportdos')->name('reportes.2.export');
 Route::post('reportes/export/3','Reporte\ReporteController@exportTres')->name('reportes.3.export');

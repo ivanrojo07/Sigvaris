@@ -15,6 +15,7 @@ use App\Exports\ReporteFitterExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Oficina;
+use App\Crm;
 use App\Paciente;
 use App\Producto;
 use App\piezasMa;
@@ -811,6 +812,68 @@ class ReporteController extends Controller
         }
     }
 
+
+    public function crm(Request $request){
+            $oficinas = Oficina::get();
+
+
+             if ($request->input()) {
+                  
+                    $inicio =  Carbon::parse($request->fechaInicial);
+                     $fin =  Carbon::parse($request->fechaFinal);
+                     $now = Carbon::now();
+                    $aux = $now->diffInDays($inicio);
+                    $CRM = [];
+                     $aux2 = $inicio->diffInDays($fin);
+                      $añosDif = $inicio->diffInYears($fin);
+                       $mesDif = $inicio->diffInMonths($fin);
+                        // $aux2 = $inicio->diffInDays($fin);
+                        for ($i=0; $i <= $añosDif; $i++) { 
+
+                            for ($i=0; $i <= $mesDif ; $i++) { 
+                                
+                                 $inicio =  Carbon::parse($inicio);
+
+                                $crm = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=', $inicio->addMonth()->format('Y-m-d'))->get();
+                                $finAux= $inicio->addMonth()->format('Y-m-d');
+                                  $crm = Crm::whereBetween('fecha_contacto',[$inicio,$finAux])->get();
+
+                                 $Efectivas = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fin)->where('contesto_id',1)->get();
+                                    
+                                        dd($crm,$Efectivas,$inicio,$finAux,$request->fechaFinal,$request->fechaInicial);
+                                $arreglo_mes = array(
+                                    "num"=>$i,
+                                    "LLAMADAS"=>count($crm),
+                                    'nombre_mes'=>$inicio->format("F"),
+                                    'Efectivas'=>count($Efectivas),
+
+
+                                ); 
+                                array_push($CRM ,$arreglo_mes);
+                            
+                                $inicio = $inicio->addMonth()->format('Y-m-d');
+                            }
+                        }
+                        // dd($CRM,$request->fechaFinal,$request->fechaInicial);
+
+                    // $crm = Crm::whereBetween('fecha_contacto',[$request->fechaInicial,$request->fechaFinal])->get();
+                    //    dd($aux,$aux2,$request->fechaInicial,$request->fechaFinal, $añosDif,$mesDif,$inicio->addMonth());
+
+                      return view('reportes.crm',compact('oficinas','CRM'));
+
+             }
+     
+       
+        return view('reportes.crm',compact('oficinas'));
+       
+    }
+
+    public function crmRecompra(Request $request){
+
+         return "hola crm2";
+    
+       
+    }
     /**
      * Obtiene las ventas que ha realizado un fitter en un rango de fechas si se envia un request,
      * en otro caso solo muestra la vista con los campos para hacer la busqueda.

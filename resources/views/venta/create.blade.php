@@ -1397,7 +1397,7 @@
         var desCumple=parseFloat($('#descuentoCumple').val());
         var saldoAFavor=parseFloat($('#saldoAFavor').val());
         // alert($('#descuentoCumple').val());
-        getIva = (($('#subtotal').val())*0.16).toFixed(2);
+        getIva = (($('#subtotal').val())*0.16).toFixed(1);
         $('#iva').val(getIva);
         var iva=getIva;
         // console.log(des);
@@ -1413,7 +1413,7 @@
             // $('#total').val(0);
         var aux=(parseFloat(subtotal)+parseFloat(iva))-parseFloat(des)-parseFloat(desCumple);
         if (aux>0) {
-            $('#total').val(aux.toFixed(2));
+            $('#total').val(Math.round(aux.toFixed(1)));
         }else{
             $('#total').val(0);
         }
@@ -2035,7 +2035,7 @@
                     if(res.status){
                         if (res.status==1) {     
                             console.log('Datos del descuento:',res);                  
-                            $('#descuento').val(res.total);
+                            $('#descuento').val(Math.round(res.total));
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
                             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
@@ -2046,7 +2046,7 @@
                             $('#iva').val(getIva);
                             var iva=getIva;
                             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
-                            $('#total').val(aux.toFixed(2));
+                            $('#total').val(Math.round(aux.toFixed(2)));
                             if($('#total').val()<0)
                             {
                                 $('#total').val(0);
