@@ -81,6 +81,7 @@
                                                 <input type="date" class="form-control" name="fecha_contacto"
                                                     required="">
                                             </div>
+                                           
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-4">
@@ -104,6 +105,20 @@
                                             <div class="form-group col-4">
                                                 <label for="hora">✱Hora</label>
                                                 <input class="form-control" type="text" name="hora" required="">
+                                            </div>
+                                        </div>
+                                        <div class="form-row"> 
+                                            <div class="form-group col-4">
+                                                <label for="forma_contacto">✱¿Contesto?</label>
+                                                <select class="form-control" name="contesto_id" required="">
+                                                    <option value="">Seleccionar</option>
+                                                    <option value="0">SI</option>
+                                                    <option value="1">NO</option>
+                                                </select>
+                                            </div>
+                                              <div class="form-group col-4">
+                                                <label for="observaciones">¿Como se ha sentido con el uso?</label>
+                                                <textarea class="form-control" name="comentarios_uso"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -203,6 +218,7 @@
                                             <input class="form-control" type="text" id="hora" name="hora" value=""
                                                 readonly="">
                                         </div>
+                                   
                                     </div>
                                      <div class="form-row">
                                         <div class="form-group col-4">
@@ -219,6 +235,17 @@
                                             <input type="text" class="form-control" id="mail"
                                                 name="mail" value="" readonly="">
                                         </div>
+                                        <div class="form-group col-4">
+                                            <label for="mail">contesto</label>
+                                            <input type="text" class="form-control" id="contesto"
+                                                name="contesto" value="" readonly="">
+                                        </div>
+                                         <div class="form-group col-4">
+                                            <label for="observaciones">Comentario de uso</label>
+                                            <textarea class="form-control" id="comentario_de_uso" name="comentario_de_uso"
+                                                value="" readonly=""></textarea>
+                                        </div>
+
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-4">
@@ -274,6 +301,14 @@
                         <label for="hasta" class="text-muted text-uppercase"><strong>Hasta:</strong></label>
                         <input type="date" class="form-control" name="fechaFinBusqueda" required>
                     </div>
+                     <div class="col-12 col-sm-6 col-md-4">
+                                                 <label for="fecha_contacto">✱Estado</label>
+                                                 <select class="form-control" name="forma_contacto" required="">
+                                                     @foreach($estados as $estado)
+                                                            <option value="{{$estado->id}}">{{$estado->nombre}}</option>
+                                                            @endforeach
+                                                </select>
+                                            </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
@@ -295,6 +330,7 @@
                         <th>Fecha Contacto</th>
                         <th>Forma de Contacto</th>
                         <th>Ultima Venta</th>
+                        <th>Tipo</th>
                         <th>Comentarios</th>
                         <th>Historial de Paciente</th>
                     </tr>
@@ -324,6 +360,11 @@
                                 <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')"></td>
                             @endif
                             <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{\Carbon\Carbon::parse($UltimaVenta->fecha)->format('m-d-Y')}}</td>
+                            @foreach($estados as $estado)
+                            @if($estado->id == $crm->estado_id)
+                            <td>{{ $estado->nombre}}</td>
+                            @endif
+                            @endforeach
                             <td title="Has Click Aquì para ver o modificar" style="cursor: pointer"  id="crear_crm_boton"  data-toggle="modal" data-target="#ver_crm_modal" onclick="mostrarCrm('{{$crm}}','{{ $pacientes->find($crm->paciente_id) }}','{{ $estados->find($crm->estado_id) }}')">{{$crm->comentarios}}</td>
                             
                             {{--<td>
@@ -337,6 +378,7 @@
                                  <button id="crear_crm_boton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ver_crm_modal"onclick="mostrarCrm('{{$crm}}')">
                                     <button type="button" onclick="mostrarCrm('{{$crm}}')" class="btn btn-primary botonMostrarCrm">Ver</button> 
                             </td>--}}
+
                             <td class="text-center">
                                 <button id="crear_crm_boton" type="button" class="btn btn-success" data-toggle="modal" onclick="generarHistorial('{{ $pacientes->find($crm->paciente_id) }}')">
                                     <strong>Ver Historial </strong>
@@ -471,6 +513,9 @@
                     $('#fecha_aviso').val(crm.fecha_aviso);
                     $('#fecha_contacto').val(crm.fecha_contacto);
                     $('#forma_contacto').val(crm.forma_contacto);
+
+                     $('#contesto').val(crm.contesto_id);
+                    $('#comentario_de_uso').val(crm.comentario_uso);
                     $('#estado').val(nomEstado);
                     $('#estado_id').val(crm.estado_id);
                     $('#hora').val(crm.hora);
@@ -482,6 +527,7 @@
                     $('#fecha_aviso').attr('readonly', true);
                     $('#fecha_contacto').attr('readonly', true);
                     $('#hora').attr('readonly', true);
+
                     //$('#telefono').val(1111111111);
                     //$('#celular').val(paciente.celular);
                     //$('#mail').val(paciente.mail);
@@ -514,6 +560,8 @@
         $('#fecha_aviso').val(crm.fecha_aviso);
         $('#fecha_contacto').val(crm.fecha_contacto);
         $('#forma_contacto').val(crm.forma_contacto);
+         $('#contesto').val(crm.contesto_id);
+        $('#comentario_de_uso').val(crm.comentarios_uso);
         $('#estado').val(estado.nombre);
         $('#hora').val(crm.hora);
         $('#forma_contacto2').hide(100);

@@ -981,7 +981,40 @@
     var contador= 0;
     var cantidad = 0;
     function redondear(){
-        $('#total').val(parseFloat($('#total').val()).toFixed(0));    
+        $('#total').val(parseFloat($('#total').val()).toFixed(0));  
+
+            if($('#tipoPago').val()==3){
+                    
+                     $('#pago_combinado').val(Math.round($('#pago_combinado').val()));
+    
+            }
+            if($('#tipoPago').val()==4){
+                 $('#sigpesos_usar').val(Math.round($('#sigpesos_usar').val() ) );
+    
+            }
+             if($('#tipoPago').val()==5){
+                    $('#saldo_a_usar').val(Math.round($('#saldo_a_usar').val())) ;
+                  
+                
+            }if($('#tipoPago').val()==6){
+                   $('#deposito_total').val(Math.round($('#deposito_total').val() ) ) ;
+                    $('#transferencia_total').val(Math.round($('#transferencia_total').val() ) ) ;
+               
+            }
+            if($('#tipoPago').val()==1){
+                   $('#PagoEfectivo').val( Math.round($('#PagoEfectivo').val())) ;
+               
+            }
+
+            if($('#tipoPago').val()==2){
+                           $('#PagoTarjeta').val( Math.round($('#PagoTarjeta').val() )); 
+            } 
+                    
+                    
+                 
+                   
+                   
+                   
     }
     function sumar(){
         
@@ -1189,9 +1222,15 @@
     function agregarGarex(p){
     let garex = $('#garex_precio').val();
          
-         contador++;
-        
-        // alert("Se agrego un garex",garex,garex2);
+            contador++;
+             let aux = $('#1garex_precio').val();
+             let garex2 = $('.garex_precio').val();
+             let folio_ga = $('#garex_precio').text();
+             let aux2=0;
+             aux2 = parseInt(folio_ga.substring(9)) + contador;   
+             let NAME = folio_ga.substring(0,9) + aux2 ;
+
+
         $('#tbody_garex')
                 .append(`
                 <tr id="garex_agregado${garex.id}">
@@ -1200,7 +1239,7 @@
                     </td>
                    
                     <td class="Folio">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="GAREXT0">
+                        <input class="form-control cantidad" id="" readonly min="1"  type="text" name="garexFolio[]" value="${NAME}">
                     </td>
                     
                     <td class="SKU">
@@ -1222,13 +1261,10 @@
                         </button>
                     </td>
                 </tr>`);
-        let aux = $('#1garex_precio').val();
-         let garex2 = $('.garex_precio').val();
-          console.log('garext2',garex2,aux);
-
-                 // console.log('contador2',contador);
 
     }
+
+
     
     function agregarProducto(p){
         // alert($(p).val());
@@ -1276,7 +1312,9 @@
         cambiarTotalVenta();
     }
     function quitarGarex(p){
+       
         $(p).remove();
+         contador--;
         cambiarTotalVentaGarex();
     }
     function cambiarTotalVentaGarex(a,p){
@@ -1478,13 +1516,13 @@
 
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
             if (aux>0) {
-                $('#total').val(aux.toFixed(2));
+                $('#total').val(Math.round(aux.toFixed(1)));
                  cambiarTotalVenta();
             }else{
                 $('#total').val(0);
             }
             
-            console.log('TOTAL ACTUALIZADO EN LINEA 1061',$('#total').val());
+            console.log('TOTAL ACTUALIZADO EN LINEA 1061',Math.round($('#total').val()));
          });
 
         $('#tipoPago').change(function(){  
@@ -1524,12 +1562,12 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Math.round(aux.toFixed(1)));
                 }else{
                     $('#total').val(0);
-                     $('#montonegativo').val(-aux.toFixed(2));
+                     $('#montonegativo').val(-aux.toFixed(1));
                 }
-                console.log('TOTAL ACTUALIZADO DESDE TARJETA',$('#total').val());
+                console.log('TOTAL ACTUALIZADO DESDE TARJETA',Math.round($('#total').val()));
 
 
                 $('#PagoTarjeta').val($('#total').val());
@@ -1559,10 +1597,10 @@
 
                 var pago_combinado = sigpesos + $('#PagoEfectivo').val()+$('#PagoTarjeta').val()+$('#saldo_a_usar').val();
                 console.log('Pgo_combinado =',pago_combinado);
-                $('#pago_combinado').val(pago_combinado);
+                $('#pago_combinado').val(Math.round(pago_combinado));
 
 
-                console.log('TOTAL ACTUALIZADO DESDE COMBINADO',$('#total').val());
+                console.log('TOTAL ACTUALIZADO DESDE COMBINADO',Math.round($('#total').val()));
                 console.log('Sipesos:',sigpesos);
                
             }
@@ -1602,7 +1640,7 @@
                 saldoAFavor = 0;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Math.round(aux.toFixed(1)));
                 }else{
                     $('#total').val(0);
                 }
@@ -1610,7 +1648,7 @@
                 console.log('Saldo a favor:',saldoAFavor);
                 
 
-                $('#PagoEfectivo').val($('#total').val());
+                $('#PagoEfectivo').val(Math.round($('#total').val()));
 
             }
             else if($('#tipoPago').val()==4){
@@ -1690,7 +1728,7 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Math.round(aux.toFixed(1)));
 
                 }else{
                     $('#total').val(0);
@@ -1730,7 +1768,7 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Math.round(aux.toFixed(1)));
 
                 }else{
                     $('#total').val(0);
@@ -1738,8 +1776,8 @@
                 
                 console.log('TOTAL ACTUALIZADO EN deposito',$('#total').val());
                console.log('Saldo a favor:',saldoAFavor);
-               $('#deposito_total').val($('#total').val());
-               $('#transferencia_total').val($('#total').val());
+               $('#deposito_total').val(Math.round($('#total').val()));
+               $('#transferencia_total').val(Math.round($('#total').val()));
 
 
 

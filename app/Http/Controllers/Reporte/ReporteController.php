@@ -822,6 +822,10 @@ class ReporteController extends Controller
                     $inicio =  Carbon::parse($request->fechaInicial);
                      $fin =  Carbon::parse($request->fechaFinal);
                      $now = Carbon::now();
+                   $Partida = date("Y-m-d",strtotime($request->fechaInicial));
+                   $Termino = date("Y-m-d",strtotime($request->fechaFinal));
+                   
+                   // dd($Partida,$Termino );
                     $aux = $now->diffInDays($inicio);
                     $CRM = [];
                      $aux2 = $inicio->diffInDays($fin);
@@ -832,27 +836,31 @@ class ReporteController extends Controller
 
                             for ($i=0; $i <= $mesDif ; $i++) { 
                                 
-                                 $inicio =  Carbon::parse($inicio);
+                                $fin_aux= $inicio;
+                                $prueba1 = '2020-02-01';
+                                      $prueba2 = '2020-03-01';
+                                // $fin_aux->addMonth();
+                                $crm = Crm::where('fecha_contacto','>=',$prueba1)->where('fecha_contacto','<=',$prueba2)->get();
 
-                                $crm = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=', $inicio->addMonth()->format('Y-m-d'))->get();
-                                $finAux= $inicio->addMonth()->format('Y-m-d');
-                                  $crm = Crm::whereBetween('fecha_contacto',[$inicio,$finAux])->get();
 
-                                 $Efectivas = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fin)->where('contesto_id',1)->get();
-                                    
-                                        dd($crm,$Efectivas,$inicio,$finAux,$request->fechaFinal,$request->fechaInicial);
+                                $Efectivas = Crm::where('fecha_contacto','<=',$inicio)->where('contesto_id',1)->get();
+
+                                     $inicio =  Carbon::parse($inicio);
+                                     $fin_aux= Carbon::parse($fin_aux);
+                                        // dd($crm,$Efectivas,$inicio,$fin_aux);
                                 $arreglo_mes = array(
                                     "num"=>$i,
                                     "LLAMADAS"=>count($crm),
                                     'nombre_mes'=>$inicio->format("F"),
                                     'Efectivas'=>count($Efectivas),
-
-
                                 ); 
+                                
+                                
+                                $inicio = $inicio->addMonth(1)->format('Y-m-d');
                                 array_push($CRM ,$arreglo_mes);
-                            
-                                $inicio = $inicio->addMonth()->format('Y-m-d');
                             }
+                            // dd($CRM,$fin_aux,$inicio);
+
                         }
                         // dd($CRM,$request->fechaFinal,$request->fechaInicial);
 

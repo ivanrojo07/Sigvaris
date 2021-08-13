@@ -866,14 +866,48 @@
 
 </script>
 <script type="text/javascript">
+    var contador= 0;
     function redondear(){
         $('#total').val(parseFloat($('#total').val()).toFixed(0));
+        if($('#tipoPago').val()==3){
+                    
+                     $('#pago_combinado').val(Math.round($('#pago_combinado').val()));
+    
+            }
+            if($('#tipoPago').val()==4){
+                 $('#sigpesos_usar').val(Math.round($('#sigpesos_usar').val() ) );
+    
+            }
+             if($('#tipoPago').val()==5){
+                    $('#saldo_a_usar').val(Math.round($('#saldo_a_usar').val())) ;
+                  
+                
+            }if($('#tipoPago').val()==6){
+                   $('#deposito_total').val(Math.round($('#deposito_total').val() ) ) ;
+                    $('#transferencia_total').val(Math.round($('#transferencia_total').val() ) ) ;
+               
+            }
+            if($('#tipoPago').val()==1){
+                   $('#PagoEfectivo').val( Math.round($('#PagoEfectivo').val())) ;
+               
+            }
+
+            if($('#tipoPago').val()==2){
+                           $('#PagoTarjeta').val( Math.round($('#PagoTarjeta').val() )); 
+            } 
     }
     function agregarGarex(p){
          let garex = $('#garex_precio').val();
-         let garex2 = $('.1garex_precio').val();
+         // let garex2 = $('.1garex_precio').val();
+          contador++;
+             let aux = $('#1garex_precio').val();
+             let garex2 = $('.garex_precio').val();
+             let folio_ga = $('#garex_precio').text();
+             let aux2=0;
+             aux2 = parseInt(folio_ga.substring(9)) + contador;   
+             let NAME = folio_ga.substring(0,9) + aux2 ;
          
-        // alert("Se agrego un garex",garex,garex2);
+   
         $('#tbody_garex')
                 .append(`
                 <tr id="garex_agregado${garex.id}">
@@ -882,7 +916,7 @@
                     </td>
                    
                     <td class="Folio">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="GAREXT01-">
+                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="${NAME}" readonly>
                     </td>
                     
                     <td class="SKU">
@@ -907,6 +941,7 @@
     }
      function quitarGarex(p){
         $(p).remove();
+         contador--;
         cambiarTotalVentaGarex();
     }
      function cambiarTotalVentaGarex(a,p){
