@@ -25,6 +25,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use DateTime;
 
 class ReporteController extends Controller
 {
@@ -815,6 +816,8 @@ class ReporteController extends Controller
 
     public function crm(Request $request){
             $oficinas = Oficina::get();
+            $DatosMesCrm=[];
+                    $Mes_name=[];
 
 
              if ($request->input()) {
@@ -824,10 +827,14 @@ class ReporteController extends Controller
                      $now = Carbon::now();
                    $Partida = date("Y-m-d",strtotime($request->fechaInicial));
                    $Termino = date("Y-m-d",strtotime($request->fechaFinal));
-                   
-                   // dd($Partida,$Termino );
+                  $fecha_ini = new DateTime($request->fechaInicial);
+
+                   $fecha_ini->modify('+1 month');
+                    //dd($Partida,$Termino,$aux->format('Y-m-d'));
                     $aux = $now->diffInDays($inicio);
                     $CRM = [];
+                    
+
                      $aux2 = $inicio->diffInDays($fin);
                       $añosDif = $inicio->diffInYears($fin);
                        $mesDif = $inicio->diffInMonths($fin);
@@ -837,29 +844,47 @@ class ReporteController extends Controller
                             for ($i=0; $i <= $mesDif ; $i++) { 
                                 
                                 $fin_aux= $inicio;
-                                $prueba1 = '2020-02-01';
-                                      $prueba2 = '2020-03-01';
-                                // $fin_aux->addMonth();
-                                $crm = Crm::where('fecha_contacto','>=',$prueba1)->where('fecha_contacto','<=',$prueba2)->get();
+                                $fecha_fin= new DateTime($inicio);
+                                $fecha_fin->modify('+1 month');
+                                
+                               
+                                //dd($cadena); 
+                                //$fin_aux->modify('+1 month');
+                               
+                                
+                                $crm = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->get();
 
 
-                                $Efectivas = Crm::where('fecha_contacto','<=',$inicio)->where('contesto_id',1)->get();
+                                $Efectivas = Crm::where('fecha_contacto','<=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->where('contesto_id',1)->get();
 
                                      $inicio =  Carbon::parse($inicio);
                                      $fin_aux= Carbon::parse($fin_aux);
-                                        // dd($crm,$Efectivas,$inicio,$fin_aux);
+                                    if (count($Efectivas)==0) {
+                                        $uno=count($crm);
+                                        $dos=count($Efectivas);
+                                        if ($dos==0) {
+                                           $porcentaje=0;
+                                        }else{
+                                           $porcentaje= $uno/$dos;
+                                        }
+
+                                       }   
                                 $arreglo_mes = array(
                                     "num"=>$i,
                                     "LLAMADAS"=>count($crm),
                                     'nombre_mes'=>$inicio->format("F"),
                                     'Efectivas'=>count($Efectivas),
+                                    'porcentaje'=>$porcentaje
                                 ); 
-                                
+                                 $nombre_mes=$inicio->format("F");
+                                array_push($Mes_name,$nombre_mes);
                                 
                                 $inicio = $inicio->addMonth(1)->format('Y-m-d');
                                 array_push($CRM ,$arreglo_mes);
+                                array_push($DatosMesCrm,count($crm));
+
                             }
-                            // dd($CRM,$fin_aux,$inicio);
+                             //dd($CRM,$fin_aux,$inicio,$DatosMesCrm,$Mes_name);
 
                         }
                         // dd($CRM,$request->fechaFinal,$request->fechaInicial);
@@ -867,12 +892,12 @@ class ReporteController extends Controller
                     // $crm = Crm::whereBetween('fecha_contacto',[$request->fechaInicial,$request->fechaFinal])->get();
                     //    dd($aux,$aux2,$request->fechaInicial,$request->fechaFinal, $añosDif,$mesDif,$inicio->addMonth());
 
-                      return view('reportes.crm',compact('oficinas','CRM'));
+                      return view('reportes.crm',compact('oficinas','CRM','Mes_name','DatosMesCrm'));
 
              }
      
        
-        return view('reportes.crm',compact('oficinas'));
+        return view('reportes.crm',compact('oficinas','Mes_name','DatosMesCrm'));
        
     }
 

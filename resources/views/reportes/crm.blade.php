@@ -57,7 +57,7 @@
                         <td>{{$sku['nombre_mes']}}</td>
                         <td>{{$sku['LLAMADAS']}}</td>
                         <td>{{$sku['Efectivas']}} </td>
-                         <td>0%</td>
+                         <td>{{$sku['porcentaje']}}</td>
                     </tr>
                    
                     @endforeach
@@ -65,6 +65,10 @@
                 
              </table> 
              @endif
+             {{-- GRAFICA DE TABLA --}}
+                <div class="card-body">
+                    <canvas id="canvas3" height="280" width="600"></canvas>
+            </div>
         </div>
     </div>
 </div>
@@ -96,5 +100,148 @@
         tableExport.export2file(preferenciasDocumento.data, preferenciasDocumento.mimeType, preferenciasDocumento.filename, preferenciasDocumento.fileExtension, preferenciasDocumento.merges, preferenciasDocumento.RTL, preferenciasDocumento.sheetname);
     });
 </script>
+
+{{-- SCRIPT PARA DESCARGAR EN PDF --}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+
+{{-- SCRIPTS PARA GRAFICAR DE TABLA --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
+
+<script>
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext('2d');
+ctx.fillStyle = "#FFFFFF";
+
+var datasets = new Array();
+
+var aniosSolicitados = {!! json_encode($Mes_name) !!};
+var productosPorAnio = {!! json_encode($DatosMesCrm) !!};
+var aniosYProductosPorMes = {!! json_encode($DatosMesCrm) !!};
+console.log(aniosSolicitados);
+
+
+
+
+
+console.log('auxiliar total',aux[1] );
+console.log('completo',aniosYProductosPorMes);
+console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
+var arreglo=[] ; 
+totales = [];
+
+console.log('arreglo',arreglo);
+for (const i in aniosSolicitados) {
+
+    if (aniosSolicitados.hasOwnProperty(i)) {
+        
+        const anio = aniosSolicitados[i];
+       
+        const color = getRandomColor();    
+
+           
+
+        const objeto = {
+            label: aniosSolicitados[i],
+            fill: false,
+            lineTension: 0.5,
+            backgroundColor: color,
+            borderColor: color, // The main line color
+            borderCapStyle: 'square',
+            borderDash: [], // try [5, 15] for instance
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "black",
+            pointBackgroundColor: "white",
+            pointBorderWidth: 1,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: color,
+            pointHoverBorderColor: "brown",
+            pointHoverBorderWidth: 2,
+            pointRadius: 4,
+            pointHitRadius: 10,
+            // notice the gap in the data and the spanGaps: true
+            data: aux[i][0] ,
+            spanGaps: true,
+        };
+
+        datasets.push(objeto);
+        
+    }
+
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+// Global Options:
+Chart.defaults.global.defaultFontColor = 'black';
+Chart.defaults.global.defaultFontSize = 16;
+
+var data = {
+  labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+  datasets: datasets
+};
+
+// Notice the scaleLabel at the same level as Ticks
+var options = {
+  scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+
+                },
+                scaleLabel: {
+                     display: true,
+                     labelString: 'Ventas vs Mes',
+                     fontSize: 20 
+                  }
+            }]            
+        }  
+};
+
+// Chart declaration:
+var myBarChart = new Chart(ctx, {
+  type: 'line',
+  data: data,
+  options: options
+});
+
+//add event listener to 2nd button
+// document.getElementById('download-pdf').addEventListener("click", downloadPDF2);
+
+//download pdf form hidden canvas
+// function downloadPDF2() {
+//  var newCanvas = document.querySelector('#canvas');
+
+//   //create image from dummy canvas
+//  var newCanvasImg = newCanvas.toDataURL("image/png", 1.0);
+  
+//      //creates PDF from img
+//  var doc = new jsPDF('landscape');
+//  doc.setFontSize(20);
+//  doc.text(10, 10, "Prendas vendidas por año");
+//  doc.addImage(newCanvasImg, 'PNG', 10, 10, 280, 150 );
+//  doc.save('prendas-vendidas-por-anio.pdf');
+//  }
+
+</script>
+
+
+
+
+
+
+
+
 
 @endsection
