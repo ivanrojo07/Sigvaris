@@ -250,6 +250,7 @@ Route::post('reportes/doctores','Reporte\ReporteController@doctoresNuevos')->nam
 
 Route::get('reportes/crm','Reporte\ReporteController@crm')->name('reportes.crm');
 Route::post('reportes/crm','Reporte\ReporteController@crm')->name('reportes.crm');
+Route::get('reportes/crm/recompra','Reporte\ReporteController@crmRecompra')->name('reportes.crmR');
 Route::post('reportes/crm/recompra','Reporte\ReporteController@crmRecompra')->name('reportes.crmR');
 
 //reportes excel

@@ -6,11 +6,11 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3>CRM LLamadas por fecha</h3>
+            <h3>CRM LLamadas por recompra</h3>
         </div>
         {{-- Buscador de pacientes --}}
         <div class="card-body">
-            <form action="{{route('reportes.crm')}}" method="POST" class="form-inline">
+            <form action="{{route('reportes.crmR')}}" method="POST" class="form-inline">
                 @csrf
                 {{-- Input de fecha inicial --}}
                 <div class="form-group mr-3">
@@ -78,9 +78,7 @@
 </div>
 
 
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> -->
+
 
 <!-- script para exportar a excel -->
 <script>
@@ -114,133 +112,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
 
-<!-- <script>
-
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext('2d');
-ctx.fillStyle = "#FFFFFF";
-
-var datasets = new Array();
-
-var aniosSolicitados = {!! json_encode($Mes_name) !!};
-var productosPorAnio = {!! json_encode($DatosMesCrm) !!};
-var aniosYProductosPorMes = {!! json_encode($DatosMesCrm) !!};
-// console.log(aniosSolicitados);
-
-
-
-
-
-console.log('auxiliar total',aniosSolicitados);
-console.log('completo',aniosYProductosPorMes);
-
-// console.log('aniosYProductosPorMes',Object.values(aniosYProductosPorMes[0])[0]);
-var arreglo=[] ; 
-totales = [];
-
-console.log('arreglo',arreglo);
-for (const i in aniosSolicitados) {
-
-    // if (aniosSolicitados.hasOwnProperty(i)) {
-        
-        const anio = aniosSolicitados[i];
-        console.log('crm',aniosSolicitados[i]);
-
-        console.log('meses',aniosYProductosPorMes[i]);
-        const color = getRandomColor();    
-
-           
-
-        const objeto = {
-            label: [aniosSolicitados[i]],
-            fill: false,
-            lineTension: 0.5,
-            backgroundColor: color,
-            borderColor: color, // The main line color
-            borderCapStyle: 'square',
-            borderDash: [], // try [5, 15] for instance
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "black",
-            pointBackgroundColor: "white",
-            pointBorderWidth: 1,
-            pointHoverRadius: 8,
-            pointHoverBackgroundColor: color,
-            pointHoverBorderColor: "brown",
-            pointHoverBorderWidth: 2,
-            pointRadius: 4,
-            pointHitRadius: 10,
-            // notice the gap in the data and the spanGaps: true
-            data: aniosYProductosPorMes,
-            spanGaps: true,
-        };
-
-        datasets.push(objeto);
-        
-    // }
-
-}
-
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
-
-Chart.defaults.global.defaultFontColor = 'black';
-Chart.defaults.global.defaultFontSize = 16;
-
-var data = {
-  labels: aniosSolicitados,
-  datasets: datasets
-};
-
-var options = {
-  scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true,
-
-                },
-                scaleLabel: {
-                     display: true,
-                     labelString: 'Ventas vs Mes',
-                     fontSize: 20 
-                  }
-            }]            
-        }  
-};
-
-// Chart declaration:
-var myBarChart = new Chart(ctx, {
-  type: 'bar',
-  data: data,
-  options: options
-});
-
-//add event listener to 2nd button
-// document.getElementById('download-pdf').addEventListener("click", downloadPDF2);
-
-//download pdf form hidden canvas
-// function downloadPDF2() {
-//  var newCanvas = document.querySelector('#canvas');
-
-//   //create image from dummy canvas
-//  var newCanvasImg = newCanvas.toDataURL("image/png", 1.0);
-  
-//      //creates PDF from img
-//  var doc = new jsPDF('landscape');
-//  doc.setFontSize(20);
-//  doc.text(10, 10, "Prendas vendidas por año");
-//  doc.addImage(newCanvasImg, 'PNG', 10, 10, 280, 150 );
-//  doc.save('prendas-vendidas-por-anio.pdf');
-//  }
-
-</script> -->
 
 
 <script>

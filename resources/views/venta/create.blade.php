@@ -1562,7 +1562,7 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(Math.round(aux.toFixed(1)));
+                    $('#total').val(aux.toFixed(2));
                 }else{
                     $('#total').val(0);
                      $('#montonegativo').val(-aux.toFixed(1));
