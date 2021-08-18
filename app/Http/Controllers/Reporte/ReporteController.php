@@ -815,6 +815,7 @@ class ReporteController extends Controller
 
 
     public function crm(Request $request){
+         ini_set('max_execution_time', 900);
             $oficinas = Oficina::get();
             $DatosMesCrm=[];
             $Mes_name=[];
@@ -855,7 +856,7 @@ class ReporteController extends Controller
                                 $crm = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->get();
 
 
-                                $Efectivas = Crm::where('fecha_contacto','<=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->where('contesto_id',1)->get();
+                                $Efectivas = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->where('contesto_id',1)->get();
 
                                      $inicio =  Carbon::parse($inicio);
                                      $fin_aux= Carbon::parse($fin_aux);
@@ -866,11 +867,11 @@ class ReporteController extends Controller
                                         if ($dos==0) {
                                            $porcentaje=0;
                                         }else{
-                                           $porcentaje= $uno/$dos;
+                                           $porcentaje= ($dos/$uno)*100;
                                         }
 
                                        } else if(count($Efectivas)>=0 ){
-                                            $porcentaje= $uno/$dos;
+                                            $porcentaje= ($dos/$uno)*100;
                                        }  
                                 $arreglo_mes = array(
                                     "num"=>$i,
@@ -887,7 +888,7 @@ class ReporteController extends Controller
                                 array_push($DatosMesCrm,count($crm));
 
                             }
-                             //dd($CRM,$fin_aux,$inicio,$DatosMesCrm,$Mes_name);
+                            // dd($CRM,$fin_aux,$inicio,$DatosMesCrm,$Mes_name);
 
                         }
                         // dd($CRM,$request->fechaFinal,$request->fechaInicial);
@@ -905,11 +906,12 @@ class ReporteController extends Controller
     }
 
     public function crmRecompra(Request $request){
+         ini_set('max_execution_time', 900);
             $oficinas = Oficina::get();
             $DatosMesCrm=[];
             $Mes_name=[];
              $CRM = [];
-                    
+                $ventasPost=[];     
             // dd();
              if ($request->input()) {
                 $inicio =  Carbon::parse($request->fechaInicial);
@@ -919,7 +921,7 @@ class ReporteController extends Controller
                    $Termino = date("Y-m-d",strtotime($request->fechaFinal));
                    $fecha_ini = new DateTime($request->fechaInicial);
                    $ventas=[];
-                    $ventasPost=[];
+                    
                    $fecha_ini->modify('+1 month');
                     //dd($Partida,$Termino,$aux->format('Y-m-d'));
                     $aux = $now->diffInDays($inicio);
@@ -930,13 +932,13 @@ class ReporteController extends Controller
                        $mesDif = $inicio->diffInMonths($fin);
                         // $aux2 = $inicio->diffInDays($fin);
                         for ($i=0; $i <= $añosDif; $i++) { 
-
+                               
                             for ($i=0; $i <= $mesDif ; $i++) { 
-                                
+                                 $Ventas_efe = 0;
                                 $fin_aux= $inicio;
                                 $fecha_fin= new DateTime($inicio);
                                 $fecha_fin->modify('+1 month');
-                                $Ventas_efe = 0;
+                               
                                
                                 //dd($cadena); 
                                 //$fin_aux->modify('+1 month');
@@ -948,45 +950,46 @@ class ReporteController extends Controller
 
                                 $Efectivas = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->where('contesto_id',1)->get();
 
-                                   
-                                
+                                   // if (count($Efectivas)>0 ) {
+                                        // dd($Efectivas,$ventas,$inicio,$fecha_fin->format('Y-m-d'));
+                                   // }
+                               
                                     foreach ($Efectivas as $key => $efectiva) {
                                         
                                     
                                         foreach ($ventas as $key => $venta) {
                                              // dd( count($Efectivas->where('paciente_id',$venta->paciente_id))  );
-                                            $cuenta = count($Efectivas->where('paciente_id',$venta->paciente_id));
-                                             // dd($efectiva->paciente_id,$venta->paciente_id);
-                                            if ($efectiva->paciente_id == $venta->paciente_id) {
-                                            
-                                                // $Ventas_efe = $Ventas_efe+1;
+                                        $cuenta = count($Efectivas->where('paciente_id',$venta->paciente_id));
+
+                                            if ($efectiva->paciente_id==$venta->paciente_id) {
+                                                $Ventas_efe++;
+                                                break;
+                                            }else{
+
                                             }
-                                            array_push($ventasPost, $cuenta);
-                                            // if ($cuenta>0) {
-                                            //    // dd($cuenta);
-                                            //     // $Ventas_efe=$cuenta;
-                                                
-                                            // }
+                                            $AUX = Array(
+                                                "NUMERO DE VENTA"=>$Ventas_efe,
+                                                "VENTA_ID"=>$venta->id
+                                            );
+                                            array_push($ventasPost,$AUX);
 
                                         }
-                        
+                                          
+                                       
+                            
                                     }
+                                     
                                    
                                      $inicio =  Carbon::parse($inicio);
                                      $fin_aux= Carbon::parse($fin_aux);
                                      $uno=count($crm);
                                         $dos=count($Efectivas);
-                                            if (count($Efectivas)==0) {
-                                                
-                                                if ($dos==0) {
-                                                   $porcentaje=0;
-                                                }else{
-                                                   $porcentaje= $uno/$dos;
-                                                }
-
-                                               } else if(count($Efectivas)>=0 ){
-                                                    $porcentaje= $uno/$dos;
-                                            }  
+                                         
+                                            if ($Ventas_efe>0) {
+                                                $porcentaje =  ($Ventas_efe/$dos)*100;
+                                            }else{
+                                                $porcentaje = 0;
+                                            }
                                 $arreglo_mes = array(
                                     "num"=>$i,
                                     "LLAMADAS"=>count($crm),
@@ -1001,14 +1004,17 @@ class ReporteController extends Controller
                                 
                                 $inicio = $inicio->addMonth(1)->format('Y-m-d');
                                 array_push($CRM ,$arreglo_mes);
-                                array_push($DatosMesCrm,count($crm));
+
+                                array_push($DatosMesCrm,count($Efectivas));
 
                             }
 
                          }
+                          // dd($ventasPost,$CRM,"Hola");
                         }
+                       
                          // dd($Ventas_efe,$ventasPost);
-                        dd($CRM,$DatosMesCrm,$Ventas_efe,$ventasPost);
+                        // dd($CRM,$DatosMesCrm,$ventasPost);
                     return view('reportes.crmRecompra',compact('oficinas','Mes_name','DatosMesCrm','CRM'));
              }
       

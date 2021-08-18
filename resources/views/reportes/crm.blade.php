@@ -57,7 +57,7 @@
                         <td>{{$sku['nombre_mes']}}</td>
                         <td>{{$sku['LLAMADAS']}}</td>
                         <td>{{$sku['Efectivas']}} </td>
-                         <td>{{$sku['porcentaje']}} %</td>
+                         <td>{{number_format($sku['porcentaje'],1)}} %</td>
                     </tr>
                    
                     @endforeach

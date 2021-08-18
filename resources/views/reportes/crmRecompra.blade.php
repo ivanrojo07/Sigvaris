@@ -44,10 +44,11 @@
             <table class="table table-hover table-striped table-bordered" style="margin-bottom: 0;" id="listaEmpleados">
                 <thead>
                     <tr class="info">
-                        <th>NUM</th>
-                        <th>LLAMADAS</th>
+                         <th>NUM</th>
                          <th>Efectivas</th>
-                        <th>PORCENTAJE</th>
+                         <th>VENTAS</th>
+                         <th>PORCENTAJE</th>
+                         
                     </tr>
                 </thead>
                 <tbody>
@@ -55,9 +56,11 @@
                     @foreach($CRM as $key => $sku)
                     <tr>
                         <td>{{$sku['nombre_mes']}}</td>
-                        <td>{{$sku['LLAMADAS']}}</td>
+                       
                         <td>{{$sku['Efectivas']}} </td>
-                         <td>{{$sku['porcentaje']}} %</td>
+                        <td>{{$sku['ventas']}}</td>
+                        <td>{{number_format($sku['porcentaje'],1)}} %</td>
+                   
                     </tr>
                    
                     @endforeach
