@@ -137,7 +137,7 @@ Chart.defaults.global.defaultFontSize = 16;
 var data = {
   labels: meses,
   datasets: [{
-      label: "CRMS",
+      label: "CRMS RECOMPRA",
       fill: false,
       lineTension: 0.1,
       backgroundColor: "rgba(50,200,50,0.9)",
@@ -171,7 +171,7 @@ var options = {
                 },
                 scaleLabel: {
                      display: true,
-                     labelString: 'CRMS vs MES',
+                     labelString: 'CRMS RE vs MES',
                      fontSize: 20 
                   }
             }]            
@@ -198,8 +198,8 @@ function downloadPDF2() {
     //creates PDF from img
     var doc = new jsPDF('landscape');
     doc.setFontSize(20);
-    doc.text(10, 10, "CRMS POR MES" );
-    doc.save('crms-por-mes.pdf');
+    doc.text(10, 10, "CRMS RECOMPRA POR MES" );
+    doc.save('crms-recompra-por-mes.pdf');
  }
 
 </script>

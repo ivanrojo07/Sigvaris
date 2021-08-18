@@ -920,7 +920,7 @@
                     </td>
                     
                     <td class="SKU">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="">
+                        <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="" onkeypress="return event.keyCode!=13">
                     </td>
 
                     <td class="tipo">

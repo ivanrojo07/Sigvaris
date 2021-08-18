@@ -770,12 +770,12 @@
             </div>
 
             
-        <!--     <div class="col-4 offset-4 text-center">
+            <div class="col-4 offset-4 text-center">
                <form action="{{ route('pembayaran.print') }}" method="POST">
                 <input type="hidden" name="_token" class="form-control" value="{!! csrf_token() !!}"> 
                <button type="submit" name="submit" class="btn btn-info">Imprimir</button> 
                 </form> 
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
@@ -1243,7 +1243,7 @@
                     </td>
                     
                     <td class="SKU">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="">
+                        <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="" onkeypress="return event.keyCode!=13">
                     </td>
 
                     <td class="tipo">

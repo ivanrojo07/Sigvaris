@@ -15,6 +15,7 @@
     {
         public function print(Request $request)
         {
+                dd($request);
             try {
                 //   !!!IMPORTANTE!!!  son 47 caracteres por linea.
 
@@ -29,9 +30,9 @@
                     el salto de línea o llamar muchas
                     veces a $printer->text()
                 */
-                $printer->text("Sigvaris 2019" . "\n");
+                $printer->text("Sigvaris 2021" . "\n");
                 $printer->text(date("Y-m-d H:i:s") . "\n");
-                $printer->text("Paciente: Miguel Contreras Nuñez\n");
+                $printer->text("Paciente: Marco A Mtz Mtz\n");
                 //$printer->text("1234567890-1234567890-234567890-1234567890-1234567890-1234567890\n");
                 $printer->setJustification(Printer::JUSTIFY_LEFT);
                 $printer->text("Cantidad    Producto                Precio\n");
