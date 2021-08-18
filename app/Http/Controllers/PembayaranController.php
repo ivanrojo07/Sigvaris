@@ -15,7 +15,7 @@
     {
         public function print(Request $request)
         {
-                dd($request);
+                // dd($request);
             try {
                 //   !!!IMPORTANTE!!!  son 47 caracteres por linea.
 
