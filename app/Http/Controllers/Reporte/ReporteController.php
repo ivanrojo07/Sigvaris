@@ -940,8 +940,7 @@ class ReporteController extends Controller
                                 $fecha_fin->modify('+1 month');
                                
                                
-                                //dd($cadena); 
-                                //$fin_aux->modify('+1 month');
+                              
                                
                                 
                                 $crm = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->get();
@@ -950,18 +949,17 @@ class ReporteController extends Controller
 
                                 $Efectivas = Crm::where('fecha_contacto','>=',$inicio)->where('fecha_contacto','<=',$fecha_fin->format('Y-m-d'))->where('contesto_id',1)->get();
 
-                                   // if (count($Efectivas)>0 ) {
-                                        // dd($Efectivas,$ventas,$inicio,$fecha_fin->format('Y-m-d'));
-                                   // }
+                                  
                                
                                     foreach ($Efectivas as $key => $efectiva) {
                                         
                                     
                                         foreach ($ventas as $key => $venta) {
-                                             // dd( count($Efectivas->where('paciente_id',$venta->paciente_id))  );
+                                             
                                         $cuenta = count($Efectivas->where('paciente_id',$venta->paciente_id));
 
                                             if ($efectiva->paciente_id==$venta->paciente_id) {
+                                                
                                                 $Ventas_efe++;
                                                 break;
                                             }else{
