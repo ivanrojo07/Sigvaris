@@ -136,7 +136,7 @@
                                                                 <label for="" class="text-uppercase text-muted mt-2">SKU
                                                                     PRODUCTO ENTREGADO</label>
                                                                 <input type="text" class="form-control inputSkuProductoEntregado"
-                                                                    name="skuProductoEntregado" productoId="{{$producto->id}}" ventaId="{{$venta->id}}">
+                                                                    name="skuProductoEntregado" productoId="{{$producto->id}}" ventaId="{{$venta->id}}" onkeypress="return event.keyCode!=13">
                                                             </div>
 
                                                             <div class="col-12 col-md-6">
