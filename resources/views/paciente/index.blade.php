@@ -104,8 +104,8 @@
 							<label for="">ORDENAR POR</label>
 							<select name="ordenar_por" class="form-control">
 								<option  {{request()->input('ordenar_por') == 'nombre' ? 'selected' : ''}} value="nombre">Nombre</option>
-								<option  {{request()->input('ordenar_por') == 'materno' ? 'selected' : ''}} value="paterno">Apellido materno</option>
-								<option {{request()->input('ordenar_por') == 'paterno' ? 'selected' : ''}} value="materno">Apellido paterno</option>
+								<option  {{request()->input('ordenar_por') == 'materno' ? 'selected' : ''}} value="materno">Apellido materno</option>
+								<option {{request()->input('ordenar_por') == 'paterno' ? 'selected' : ''}} value="paterno">Apellido paterno</option>
 							</select>
 						</div>
 					</div>
