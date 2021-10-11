@@ -952,7 +952,7 @@
         // console.log($(a).val());
           console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
                 if ($(a).val() == 100) {
-                       nuevo_total = parseInt($('#total').val()) + 120;
+                       nuevo_total = parseInt($('#total').val()) + 125;
                        $('#total').val(nuevo_total);
                        console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
 
@@ -969,7 +969,7 @@
                         nuevo_total = parseInt($('#total').val());
                        $('#total').val(nuevo_total);
 
-                       }else{ nuevo_total = parseInt($('#total').val())-120;
+                       }else{ nuevo_total = parseInt($('#total').val())-125;
                         $('#total').val(nuevo_total);}
                        
 
