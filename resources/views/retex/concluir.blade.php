@@ -647,6 +647,8 @@
 </div>
 
 <script>
+    var contador= 0;
+    var cantidad = 0;
     class FormValidator{
 
 
@@ -790,6 +792,7 @@
     });
 </script>
 <script type="text/javascript">
+
     $(document).ready(function(){
         var maxField = 100; //Input fields increment limitation
         var addButton = $('.add_button_garex'); //Add button selector
@@ -954,19 +957,26 @@
 </script>
 <script type="text/javascript">
         function agregarGarex(p){
-         let garex = $('#garex_precio').val();
-         let garex2 = $('.1garex_precio').val();
+    let garex = $('#garex_precio').val();
          
-        // alert("Se agrego un garex",garex,garex2);
+            contador++;
+             let aux = $('#1garex_precio').val();
+             let garex2 = $('.garex_precio').val();
+             let folio_ga = $('#garex_precio').text();
+             let aux2=0;
+             aux2 = parseInt(folio_ga.substring(9)) + contador;   
+             let NAME = folio_ga.substring(0,9) + aux2 ;
+
+
         $('#tbody_garex')
                 .append(`
                 <tr id="garex_agregado${garex.id}">
-                    <td class="precio_total">
-                        125
+                    <td class="precio_total_garex">
+                        120
                     </td>
                    
                     <td class="Folio">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="GAREXT01-">
+                        <input class="form-control cantidad" id="" readonly min="1"  type="text" name="garexFolio[]" value="${NAME}">
                     </td>
                     
                     <td class="SKU">
@@ -988,9 +998,11 @@
                         </button>
                     </td>
                 </tr>`);
+
     }
      function quitarGarex(p){
-        $(p).remove();
+         $(p).remove();
+         contador--;
         cambiarTotalVentaGarex();
     }
      function cambiarTotalVentaGarex(a,p){
