@@ -1320,16 +1320,19 @@
     function cambiarTotalVentaGarex(a,p){
         let precios_total = $('td.precio_total').toArray();
         let total = 0;
+        let auxiliarPrec= $('#total').val();
+        console.log('VALOR QUE SE GUARDA:',auxiliarPrec);
         // alert(precios_total);
         precios_total.forEach(e => {
             total += parseFloat(e.innerText);
-            console.log(total);
+            console.log("VALOR CAMBIADO EN GAREXT:",total);
         });
         // console.log($(a).val());
+          console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
                 if ($(a).val() == 100) {
                        nuevo_total = parseInt($('#total').val()) + 120;
                        $('#total').val(nuevo_total);
-                       // alert(nuevo_total);
+                       console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
 
                 }
                 if ($(a).val() == 0 ) {
@@ -1359,6 +1362,9 @@
                        
                        // alert(nuevo_total);
 
+                }
+                if ($(a).val() == 0  && contador==0) {
+                    $('#total').val(auxiliarPrec);
                 }
 
                 if ($('#tipoPago').val()==1) {
