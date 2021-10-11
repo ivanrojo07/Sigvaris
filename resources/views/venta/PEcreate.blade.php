@@ -964,9 +964,43 @@
 </script>
    
 <script type="text/javascript">
+    var contador= 0;
     var cantidad = 0;
-    function redondear(){
-        $('#total').val(parseFloat($('#total').val()).toFixed(0));    
+   function redondear(){
+        $('#total').val(parseFloat($('#total').val()).toFixed(0));  
+
+            if($('#tipoPago').val()==3){
+                    
+                     $('#pago_combinado').val(Math.round($('#pago_combinado').val()));
+    
+            }
+            if($('#tipoPago').val()==4){
+                 $('#sigpesos_usar').val(Math.round($('#sigpesos_usar').val() ) );
+    
+            }
+             if($('#tipoPago').val()==5){
+                    $('#saldo_a_usar').val(Math.round($('#saldo_a_usar').val())) ;
+                  
+                
+            }if($('#tipoPago').val()==6){
+                   $('#deposito_total').val(Math.round($('#deposito_total').val() ) ) ;
+                    $('#transferencia_total').val(Math.round($('#transferencia_total').val() ) ) ;
+               
+            }
+            if($('#tipoPago').val()==1){
+                   $('#PagoEfectivo').val( Math.round($('#PagoEfectivo').val())) ;
+               
+            }
+
+            if($('#tipoPago').val()==2){
+                           $('#PagoTarjeta').val( Math.round($('#PagoTarjeta').val() )); 
+            } 
+                    
+                    
+                 
+                   
+                   
+                   
     }
     function sumar(){
         
@@ -1212,23 +1246,30 @@
         } 
     }
     function agregarGarex(p){
-         let garex = $('#garex_precio').val();
-         let garex2 = $('.1garex_precio').val();
+    let garex = $('#garex_precio').val();
          
-        // alert("Se agrego un garex",garex,garex2);
+            contador++;
+             let aux = $('#1garex_precio').val();
+             let garex2 = $('.garex_precio').val();
+             let folio_ga = $('#garex_precio').text();
+             let aux2=0;
+             aux2 = parseInt(folio_ga.substring(9)) + contador;   
+             let NAME = folio_ga.substring(0,9) + aux2 ;
+
+
         $('#tbody_garex')
                 .append(`
                 <tr id="garex_agregado${garex.id}">
-                    <td class="precio_total">
-                        125
+                    <td class="precio_total_garex">
+                        120
                     </td>
                    
                     <td class="Folio">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garexFolio[]" value="GAREXT01-">
+                        <input class="form-control cantidad" id="" readonly min="1"  type="text" name="garexFolio[]" value="${NAME}">
                     </td>
                     
                     <td class="SKU">
-                        <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="">
+                        <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="" onkeypress="return event.keyCode!=13">
                     </td>
 
                     <td class="tipo">
@@ -1246,9 +1287,11 @@
                         </button>
                     </td>
                 </tr>`);
+
     }
      function quitarGarex(p){
-        $(p).remove();
+         $(p).remove();
+         contador--;
         cambiarTotalVentaGarex();
     }
      function cambiarTotalVentaGarex(a,p){
@@ -1575,7 +1618,7 @@
                 saldoAFavor = 0;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Math.round(aux.toFixed(1)));
                 }else{
                     $('#total').val(0);
                 }
@@ -1663,7 +1706,7 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Math.round(aux.toFixed(1)));
 
                 }else{
                     $('#total').val(0);
@@ -1703,7 +1746,7 @@
                 var iva=getIva;
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
-                    $('#total').val(aux.toFixed(2));
+                    $('#total').val(Math.round(aux.toFixed(1)));
 
                 }else{
                     $('#total').val(0);
@@ -1995,18 +2038,20 @@
                 url:"{{ url('/calcular_descuento') }}/"+id,
                 type:'POST',
                 data: {"_token": "{{CSRF_TOKEN()}}",
-                    "subtotal":$("#total").val(),
+                    "subtotal":$("#subtotal").val(),
+                    "total":$("#total").val(),
                     "paciente_id":paciente_id,
                     "total_productos":total_productos,
                     "productos_id":productos_id,
                     "cantidad_id":cantidad_id
                 },
                 dataType:'json',
-                success: function(res){
+               success: function(res){
                     //alert(res.sigpesos);                  
                     if(res.status){
-                        if (res.status==1) {                       
-                            $('#descuento').val(res.total);
+                        if (res.status==1) {     
+                            console.log('Datos del descuento:',res);                  
+                            $('#descuento').val(Math.round(res.total));
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
                             //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
@@ -2017,7 +2062,7 @@
                             $('#iva').val(getIva);
                             var iva=getIva;
                             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
-                            $('#total').val(aux.toFixed(2));
+                            $('#total').val(Math.round(aux.toFixed(2)));
                             if($('#total').val()<0)
                             {
                                 $('#total').val(0);
