@@ -942,27 +942,41 @@
      function cambiarTotalVentaGarex(a,p){
         let precios_total = $('td.precio_total').toArray();
         let total = 0;
+        let auxiliarPrec= $('#total').val();
+        console.log('VALOR QUE SE GUARDA:',auxiliarPrec);
         // alert(precios_total);
         precios_total.forEach(e => {
             total += parseFloat(e.innerText);
-            console.log(total);
+            console.log("VALOR CAMBIADO EN GAREXT:",total);
         });
         // console.log($(a).val());
+          console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
                 if ($(a).val() == 100) {
                        nuevo_total = parseInt($('#total').val()) + 120;
                        $('#total').val(nuevo_total);
-                       // alert(nuevo_total);
+                       console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
 
                 }
-                 if ($(a).val() == 0) {
+                if ($(a).val() == 0 ) {
+                        aux = $('#total').val();
+
                         if ($('#total').val() == 0) {
                             $('#total').val(0);
-                        } else if($('#total').val()>0){
+                        }
+                        else if($('#total').val()>0){
 
-                        nuevo_total = parseInt($('#total').val())-120;
+                            if($('#total').val()==120){
+                        nuevo_total = parseInt($('#total').val());
+                       $('#total').val(nuevo_total);
+
+                       }else{ nuevo_total = parseInt($('#total').val())-120;
                         $('#total').val(nuevo_total);}
+                       
 
-                       else{
+
+                    }
+
+                       else if($('#total').val()==120){
                         nuevo_total = parseInt($('#total').val());
                        $('#total').val(nuevo_total);
 
@@ -971,6 +985,10 @@
                        // alert(nuevo_total);
 
                 }
+                if ($(a).val() == 0  && contador==0) {
+                    $('#total').val(auxiliarPrec);
+                }
+
                 if ($('#tipoPago').val()==1) {
                          $('#PagoEfectivo').val(nuevo_total);
                 }
