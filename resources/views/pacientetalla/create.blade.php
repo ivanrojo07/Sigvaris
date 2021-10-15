@@ -107,65 +107,65 @@
                             <h6>Dcha&nbsp;&nbsp;&nbsp;</h6>
                         </div>
                     </div>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <div class="col-sm-8">
                             <span class="input-group-text">Circunferencia Tobillo</span>
                         </div>
-                        <input name="circunferencia_tobillo_izq" id="circunferencia_tobillo_izq" type="number" step="any" class="form-control medidas-pierna">
-                        <input name="circunferencia_tobillo_dcha" id="circunferencia_tobillo_dcha" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="circunferencia_tobillo_izq" id="circunferencia_tobillo_izq" type="text" step="any" class="form-control medidas-pierna">
+                        <input name="circunferencia_tobillo_dcha" id="circunferencia_tobillo_dcha" type="text"  class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2">
                         <div class="col-sm-8">
                             <span class="input-group-text">Circunferencia Pantorrilla</span>
                         </div>
-                        <input name="circunferencia_pantorrilla_izq" id="circunferencia_pantorrilla_izq" type="number" step="any" class="form-control medidas-pierna">
-                        <input name="circunferencia_pantorrilla_dcha" id="circunferencia_pantorrilla_dcha" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="circunferencia_pantorrilla_izq" id="circunferencia_pantorrilla_izq" type="text" step="any" class="form-control medidas-pierna">
+                        <input name="circunferencia_pantorrilla_dcha" id="circunferencia_pantorrilla_dcha" type="text" step="any" class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2">
                         <div class="col-sm-8">
                             <span class="input-group-text">Altura Pantorrilla</span>
                         </div>
-                        <input name="altura_pantorrilla_izq" id="altura_pantorrilla_izq" type="number" step="any" class="form-control medidas-pierna">
-                        <input name="altura_pantorrilla_dcha" id="altura_pantorrilla_dcha" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="altura_pantorrilla_izq" id="altura_pantorrilla_izq" type="text" step="any" class="form-control medidas-pierna">
+                        <input name="altura_pantorrilla_dcha" id="altura_pantorrilla_dcha" type="text" step="any" class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2">
                         <div class="col-sm-8">
                             <span class="input-group-text">Circunferencia Muslo</span>
                         </div>
-                        <input name="circunferencia_muslo_izq" id="circunferencia_muslo_izq" type="number" step="any" class="form-control medidas-pierna">
-                        <input name="circunferencia_muslo_dcha" id="circunferencia_muslo_dcha" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="circunferencia_muslo_izq" id="circunferencia_muslo_izq" type="text" step="any" class="form-control medidas-pierna">
+                        <input name="circunferencia_muslo_dcha" id="circunferencia_muslo_dcha" type="text" step="any" class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2">
                         <div class="col-sm-8">
                             <span class="input-group-text">Altura Pierna</span>
                         </div>
-                        <input name="altura_pierna_izq" id="altura_pierna_izq" type="number" step="any" class="form-control medidas-pierna">
-                        <input name="altura_pierna_dcha" id="altura_pierna_dcha" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="altura_pierna_izq" id="altura_pierna_izq" type="text" step="any" class="form-control medidas-pierna">
+                        <input name="altura_pierna_dcha" id="altura_pierna_dcha" type="text" step="any" class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2 circunferencia_cadera">
                         <div class="col-sm-8">
                             <span class="input-group-text">Circunferencia cadera</span>
                         </div>
-                        <input name="circunferencia_cadera" id="circunferencia_cadera" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="circunferencia_cadera" id="circunferencia_cadera" type="text" step="any" class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2">
                         <div class="col-sm-8">
                             <span class="input-group-text">Calzado</span>
                         </div>
-                        <input name="calzado_izq" id="calzado_izq" type="number" step="any" class="form-control medidas-pierna">
-                        <input name="calzado_dcha" id="calzado_dcha" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="calzado_izq" id="calzado_izq" type="text" step="any" class="form-control medidas-pierna">
+                        <input name="calzado_dcha" id="calzado_dcha" type="text" step="any" class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2 peso">
                         <div class="col-sm-8">
                             <span class="input-group-text">Peso</span>
                         </div>
-                        <input name="peso" id="peso" type="number" step="any" class="form-control medidas-pierna">
+                        <input name="peso" id="peso" type="text" step="any" class="form-control medidas-pierna">
                     </div>
                     <div class="input-group mb-2 estatura">
                             <div class="col-sm-8">
                                 <span class="input-group-text">Estatura</span>
                             </div>
-                            <input name="estatura" id="estatura" type="number" step="any" class="form-control medidas-pierna">
+                            <input name="estatura" id="estatura" type="text" step="any" class="form-control medidas-pierna">
                         </div>
                 </div>
                 <div class="form-group col-6 estilos-brazo">
@@ -185,29 +185,29 @@
                             <div class="col-sm-8">
                                 <span class="input-group-text">Circunferencia Palma</span>
                             </div>
-                            <input name="circunferencia_plama_izq" id="circunferencia_plama_izq" type="number" step="any" class="form-control medidas-brazo">
-                            <input name="circunferencia_plama_dcha" id="circunferencia_plama_dcha" type="number" step="any" class="form-control medidas-brazo">
+                            <input name="circunferencia_plama_izq" id="circunferencia_plama_izq" type="text" step="any" class="form-control medidas-brazo">
+                            <input name="circunferencia_plama_dcha" id="circunferencia_plama_dcha" type="text" step="any" class="form-control medidas-brazo">
                         </div>
                         <div class="input-group mb-2">
                             <div class="col-sm-8">
                                 <span class="input-group-text">Circunferencia Muñeca</span>
                             </div>
-                            <input name="circunferencia_munieca_izq" id="circunferencia_munieca_izq" type="number" step="any" class="form-control medidas-brazo">
-                            <input name="circunferencia_munieca_dcha" id="circunferencia_munieca_dcha" type="number" step="any" class="form-control medidas-brazo">
+                            <input name="circunferencia_munieca_izq" id="circunferencia_munieca_izq" type="text" step="any" class="form-control medidas-brazo">
+                            <input name="circunferencia_munieca_dcha" id="circunferencia_munieca_dcha" type="text" step="any" class="form-control medidas-brazo">
                         </div>
                         <div class="input-group mb-2">
                             <div class="col-sm-8">
                                 <span class="input-group-text">Circunferencia parte media</span>
                             </div>
-                            <input name="circunferencia_media_izq" id="circunferencia_media_izq" type="number" step="any" class="form-control medidas-brazo">
-                            <input name="circunferencia_media_dcha" id="circunferencia_media_dcha" type="number" step="any" class="form-control medidas-brazo">
+                            <input name="circunferencia_media_izq" id="circunferencia_media_izq" type="text" step="any" class="form-control medidas-brazo">
+                            <input name="circunferencia_media_dcha" id="circunferencia_media_dcha" type="text" step="any" class="form-control medidas-brazo">
                         </div>
                         <div class="input-group mb-2">
                             <div class="col-sm-8">
                                 <span class="input-group-text">Talla</span>
                             </div>
-                            <input name="talla_izq" id="talla_izq" type="number" step="any" class="form-control medidas-brazo">
-                            <input name="talla_dcha" id="talla_dcha" type="number" step="any" class="form-control medidas-brazo">
+                            <input name="talla_izq" id="talla_izq" type="text" step="any" class="form-control medidas-brazo">
+                            <input name="talla_dcha" id="talla_dcha" type="text" step="any" class="form-control medidas-brazo">
                         </div>
                     </div>
 
