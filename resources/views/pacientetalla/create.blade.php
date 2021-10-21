@@ -95,7 +95,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-6 estilos-pierna">
+                <div class="form-group col-8 estilos-pierna">
                     <h5>Medidas Pierna</h5>
                     <div class="row">
                         <div class="col-8 ">
@@ -103,11 +103,11 @@
                         <div class="col-2 text-right">
                             <h6>Izq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
                         </div>
-                        <div class="col-2 text-right">
+                        <div class="col-2 text-right"> 
                             <h6>Dcha&nbsp;&nbsp;&nbsp;</h6>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-4">
                         <div class="col-sm-8">
                             <span class="input-group-text">Circunferencia Tobillo</span>
                         </div>
