@@ -256,17 +256,35 @@ class PacienteController extends Controller
         return view('paciente.index', ['pacientes'=>$pacientes]);
     }
 
-    public function getPacienteNombre(Request $request)
-    {
-
-        dd($request[0]->input('nombre').'%');
-
+    public function getPacienteNombre(Request $request){
         $ajaxPaciente=array();
+        $Pacientes = '';
+
+        if ($request->input('nombre').'%' != '' && $request->input('lastName').'%' != ''){
+            $Pacientes=Paciente::where('nombre','like',$request->input('nombre').'%')
+                ->where('paterno','like',$request->input('lastName').'%')
+                ->get();
+        }else if ($request->input('nombre').'%' != ''){
+            $Pacientes=Paciente::where('nombre','like',$request->input('nombre').'%')
+                ->get();
+        }else if ($request->input('lastName').'%' != ''){
+            $Pacientes=Paciente::where('paterno','like',$request->input('lastName').'%')
+                ->orWhere('materno','like',$request->input('lastName').'%')
+                ->get();
+        }else{
+            $Pacientes=Paciente::where('nombre','like',$request->input('nombre').'%')
+                ->where('paterno','like',$request->input('lastName').'%')
+                ->where('materno','like',$request->input('lastName').'%')
+                ->get();
+        }
+
+        /*
         $Pacientes=Paciente::where('nombre','like',$request->input('nombre').'%')
-        ->orWhere('paterno','like',$request->input('nombre').'%')
-        ->orWhere('materno','like',$request->input('nombre').'%')
+        ->where('paterno','like',$request->input('lastName').'%')
+        ->where('materno','like',$request->input('lastName').'%')
         ->get();
-        //dd($Productos);
+        */
+
         foreach ($Pacientes as $Paciente) {
             array_push ($ajaxPaciente,[ $Paciente->rfc,
                                         '<span pacienteId="'.$Paciente->id.'" class="nombrePaciente">'.$Paciente->nombre.'</span>',

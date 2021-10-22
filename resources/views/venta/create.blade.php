@@ -93,10 +93,11 @@
                                         </div>
 
                                         <div class="col-sm-12 col-md-6">
-                                            <label>Nombre:<input type="search" id="BuscarPaciente" onkeypress="return event.keyCode!=13">
+                                            <label>Nombre:<input type="search" id="userNameSearch" onkeypress="return event.keyCode!=13">
                                             </label>
 
-
+                                            <label>Apellido:<input type="search" id="userLastNameSearch" onkeypress="return event.keyCode!=13">
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -2119,16 +2120,67 @@
 
             }
         });
-        $('#BuscarPaciente').change( function() {
+
+        // Buscador de Pacientes :)
+
+        $('#userNameSearch').change( function() {
             $("#pacientes").dataTable().fnDestroy();
-            //console.log($(this).val());
+            let userNameData = $('#userNameSearch').val();
+            let lastNameData = $('#userLastNameSearch').val();
 
             $('#pacientes').DataTable({
                 "ajax":{
                     type: "POST",
                     url:"/getPacientes_nombre",
-                    data: {"_token": $("meta[name='csrf-token']").attr("content"),
-                           "nombre" : $(this).val()
+                    data: {
+                        "_token": $("meta[name='csrf-token']").attr("content"),
+                        "nombre" : userNameData,
+                        "lastName": lastNameData,
+                    }
+                },
+                "searching": false,
+                pageLength : 3,
+                'language':{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Productos _START_ al _END_ de un total de _TOTAL_ ",
+                    "sInfoEmpty":      "Productos 0 de un total de 0 ",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+
+        $('#userLastNameSearch').change( function() {
+            $("#pacientes").dataTable().fnDestroy();
+            let userNameData = $('#userNameSearch').val();
+            let lastNameData = $('#userLastNameSearch').val();
+
+            $('#pacientes').DataTable({
+                "ajax":{
+                    type: "POST",
+                    url:"/getPacientes_nombre",
+                    data: {
+                        "_token": $("meta[name='csrf-token']").attr("content"),
+                        "nombre" : userNameData,
+                        "lastName": lastNameData,
                     }
                 },
                 "searching": false,
@@ -2460,12 +2512,6 @@
         }
     });
 
-</script>
-
-<script>
-    function goto() {
-        console.log('Hola');
-    }
 </script>
 @else
 @endif
