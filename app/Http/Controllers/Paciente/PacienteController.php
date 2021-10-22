@@ -24,11 +24,11 @@ class PacienteController extends Controller
                 if(Auth::user()->role->pacientes)
                 {
                     return $next($request);
-                }                
+                }
                 return redirect('/inicio');
-                 
+
             }
-            return redirect('/');            
+            return redirect('/');
         });
     }
     public function index(Request $request)
@@ -36,7 +36,7 @@ class PacienteController extends Controller
         $busqueda=$request->search;
         // $pacientes = Paciente::get();
 
-        
+
         if($request->ordenar_por){
             $pacientes = Paciente::orderBy($request->ordenar_por,'asc');
         }else{
@@ -50,18 +50,18 @@ class PacienteController extends Controller
             $pacientes=$pacientes->where(function($query)use($palabras_busqueda){
 
                 foreach ($palabras_busqueda as $palabra) {
-                    $query->where('nombre','like',"$palabra%" )->orWhere('paterno','like',"$palabra%")->orWhere('materno','like',"$palabra%"); 
+                    $query->where('nombre','like',"$palabra%" )->orWhere('paterno','like',"$palabra%")->orWhere('materno','like',"$palabra%");
                 }
             })->paginate(10);
             $pacientes->appends(['search' => $request->search]);
         }
         else
         {
-            $pacientes = $pacientes->paginate(10);    
+            $pacientes = $pacientes->paginate(10);
         }
 
-        
-        
+
+
         return view('paciente.index', ['pacientes'=> $pacientes]);
     }
 
@@ -84,7 +84,7 @@ class PacienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         // dd($request->telefono);
 
         $hay_rfc = Paciente::where('rfc',$request->input('rfc'))->first();
@@ -113,15 +113,15 @@ class PacienteController extends Controller
                 $paciente->oficina_id=session()->get('oficina');
                 $paciente->save();
             }
-            
+
         }
         elseif($request->rfc==null && $request->nacimiento!=null)
-        {   
-            $time=strtotime($request->nacimiento); 
-            $year=date("Y",$time);  
+        {
+            $time=strtotime($request->nacimiento);
+            $year=date("Y",$time);
             $rfc=substr($request->paterno,0,2);
             $rfc.=substr($request->materno,0,1);
-            $rfc.=substr($request->nombre,0,1);        
+            $rfc.=substr($request->nombre,0,1);
             $rfc.=substr($year,2,3);
             $rfc.=date("m",$time);
             $rfc.=date("d",$time);
@@ -141,7 +141,7 @@ class PacienteController extends Controller
                 'empleado_id'=>$request->empleado_id
                 //dd(session()->get('oficina')),
 
-                
+
             ]);
             if (session()->get('oficina')) {
 
@@ -149,11 +149,11 @@ class PacienteController extends Controller
             }
            // dd($paciente);
             $paciente->save();
-            
+
         }
         elseif($request->nacimiento==null && $request->rfc!=null){
             $birth=strtotime("19".substr($request->rfc,-6));
-            $fecha=date('Y-m-d',$birth); 
+            $fecha=date('Y-m-d',$birth);
             $paciente=new Paciente([
                 'nombre'=>$request->nombre,
                 'materno'=>$request->materno,
@@ -167,14 +167,14 @@ class PacienteController extends Controller
                 'doctor_id'=>$request->doctor_id,
                 'nivel_id'=>$request->nivel_id,
                 //dd(session()->get('oficina')),
-                
+
             ]);
             //dd($paciente);
             if (session()->get('oficina')) {
-                
+
                 $paciente->oficina_id=session()->get('oficina');
             }
-            $paciente->save();  
+            $paciente->save();
             // dd($fecha);
         }
         else{
@@ -191,14 +191,14 @@ class PacienteController extends Controller
                 'doctor_id'=>$request->doctor_id,
                 'nivel_id'=>$request->nivel_id,
                 //dd(session()->get('oficina')),
-                
+
             ]);
             //dd($paciente);
             if (session()->get('oficina')) {
-                
+
                 $paciente->oficina_id=session()->get('oficina');
             }
-            $paciente->save();  
+            $paciente->save();
         }
         return redirect()->route('pacientes.index');
     }
@@ -259,11 +259,12 @@ class PacienteController extends Controller
     public function getPacienteNombre(Request $request)
     {
 
+        dd($request[0]->input('nombre').'%');
 
         $ajaxPaciente=array();
         $Pacientes=Paciente::where('nombre','like',$request->input('nombre').'%')
-        ->orWhere('paterno','like',$request->input('nombre').'%')    
-        ->orWhere('materno','like',$request->input('nombre').'%')    
+        ->orWhere('paterno','like',$request->input('nombre').'%')
+        ->orWhere('materno','like',$request->input('nombre').'%')
         ->get();
         //dd($Productos);
         foreach ($Pacientes as $Paciente) {

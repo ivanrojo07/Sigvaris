@@ -31,7 +31,7 @@
                     <input type="hidden" name="oficina_id" value="{{session('oficina')}}">
                     <input type="hidden" name="cumpleDes" id="cumpleDes" value="0">
                     <input type="hidden" name="INAPAM_" id="INAPAM_" value="0">
-                
+
                     <div class="row">
                         <div class="col-4 form-group">
                             <label class="control-label">Fitter:</label>
@@ -75,7 +75,7 @@
                                     </select>
                                 @endif
                             @endif
-                            
+
                         </div>
                     </div>
 
@@ -91,9 +91,12 @@
                                         <div class="col-sm-12 col-md-6">
                                             <h3>Pacientes</h3>
                                         </div>
+
                                         <div class="col-sm-12 col-md-6">
-                                            <label>Buscar:<input type="search" id="BuscarPaciente" onkeypress="return event.keyCode!=13">
+                                            <label>Nombre:<input type="search" id="BuscarPaciente" onkeypress="return event.keyCode!=13">
                                             </label>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +105,7 @@
                                         <table class="table" id="pacientes">
                                             <thead>
                                                 <tr>
-                                                    <th>RFC</th>
+                                                    <th onclick="javascript:console.log('hola')">RFC</th>
                                                     <th>Nombre</th>
                                                     <th>Apellidos</th>
                                                     <th>Teléfono</th>
@@ -225,7 +228,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-12 text-center">
                                             <div class="alert alert-danger" id="ErrorInapam" style="display: none;">
-                                                El INAPAM no esta cargado 
+                                                El INAPAM no esta cargado
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input" name="INAPAM" id="INAPAM" value="0">
@@ -234,7 +237,7 @@
 
                                        </div>
                                     </div>
-                                    
+
                                     {{-- Pagos Y tarjeta --}}
                                     <div class="row">
                                         {{-- INPUT Tipo de pago --}}
@@ -372,7 +375,7 @@
                                                 <label for=""> Monto</label>
                                                 <input type="number" class="form-control inputPesos" name="monto[]" onchange="cienporciento()" id="monto" readonly="">
                                             </div>
-                                           
+
 
                                         </div>
                                         <div class="field_wrapper"></div>
@@ -387,44 +390,44 @@
                                              <div class="col-12 col-sm-4 col-md-4 form-group">
 
                                                 <label for="" class="text-uppercase text-muted">PAGO COMBINADO</label>
-                                                
+
 
                                                 <input type="text" class="form-control" name="pago_combinado"
                                                     id="pago_combinado" value="0"readonly="true">
                                             </div>
                                              <div  class="col-12 col-sm-4 col-md-4 form-group">
-                                            
+
                                             <a class="btn btn-success rounded-0" onclick="javascript:sumar();">
                                                 <i class="fa fa-plus"></i>Sumar
                                             </a>
                                              </div>
-                                                 
-                                                     
+
+
                                         </div>
                                     </div>
                                         <hr>
                                         {{--Sigvaris card---}}
-                                        
+
                                         <div class="row">
                                              <label for="" class="text-uppercase text-muted">Sigvaris card</label>
                                              <div class="col-4 form-group">
-                                               
+
                                                 <input type="text" class="form-control" name="SigvarisCardFolio" id="SigvarisCardFolio">
-                                                
+
 
                                             </div>
-                                            
+
 
                                             <div class="col-4 form-group">
-                                               
+
                                                 <select  id="SigvarisCard" name="SigvarisCard" class="form-control lista" required>
                                                     <option value="">Seleccionar</option>
                                                     <option value="Blue">Blue</option>
                                                     <option value="Gold">Gold</option>
                                                     <option value="Black">Black</option>
                                                     <option value="Platinum">Platinum</option>
-                                                  
-                                                </select> 
+
+                                                </select>
                                             </div>
 
                                         </div>
@@ -452,8 +455,8 @@
                                                     <th>costo</th>
                                                     <th>Agregar</th>
                                                     <th>Ultimo Folio</th>
-                                                   
-                                                    
+
+
 
                                                 </tr>
                                             </thead>
@@ -480,7 +483,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>costo</th>
-                                                        
+
                                                          <th>Folio</th>
                                                          <th>SKU</th>
                                                         <th>Tipo</th>
@@ -495,38 +498,36 @@
                                     </div>
                                     <hr>
 
-                                       
-                                  <!--   <div class="row">      
+
+                                  <!--   <div class="row">
                                         <div class="p-2 flex-shrink-1 bd-highlight">
                                                         <a href="javascript:void(0);" id="agregarCupon" class="add_button_garex" title="Agregar cupon"><i class="fas fa-plus"></i></a>
                                         </div>
                                          <label for="" class="text-uppercase text-muted">GAREXT01 </label>
                                              <div class="col-2 form-group">
-                                               
-                                            
+
+
                                                 <input type="text" class="myClass form-control" name="garexFolio[] " id="garex[]">
 
-                                    
-
                                          </div>
-                                            <div class="col-2 form-group"> 
+                                            <div class="col-2 form-group">
                                              <label for="" class="text-uppercase text-muted"> SKU  LIGADO</label>
-                                              </div>     
-                                            <div class="col-3 form-group"> 
+                                              </div>
+                                            <div class="col-3 form-group">
                                             <input type="text" class="form-control" name="garex[] " id="garex">
                                             </div>
-                                                <div class="col-2 form-group">                                    
+                                                <div class="col-2 form-group">
                                             <select  id="tipogarex" name="tipogarex[]" class="form-control lista" required >
                                                     <option value="">Seleccionar</option>
                                                     <option value="100">100%</option>
                                                     <option value="0">Gratis</option>
-                                                   
-                                                  
-                                                </select> 
+
+
+                                                </select>
                                             </div>
-                                                                                              
+
                                     </div>
-                                    <div class="field_wrapper_garex"></div> 
+                                    <div class="field_wrapper_garex"></div>
                                     <hr> -->
                                     <input type="hidden" name="paciente_id" id="paciente_id" required>
                                     <div class="row">
@@ -537,7 +538,7 @@
                                         </div>
                                         <div class="col-4 form-group">
                                             <label for="" class="text-uppercase text-muted">Fecha: </label>
-                                          
+
                                             <input type="text" name="fecha" class="form-control" readonly=""value="{{date('Y-m-d H:i:s')}}" required="">
                                         </div>
                                         <div class="col-4 form-group">
@@ -562,12 +563,12 @@
                                             <label for="" class="text-uppercase text-muted">Saldo a favor: </label>
                                             @if (isset($paciente))
                                             <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
-                                            
-                                                value="{{$paciente->saldo_a_favor!= null ? 
+
+                                                value="{{$paciente->saldo_a_favor!= null ?
                                                 $paciente->saldo_a_favor: 0}}" min="0" step="0.01" readonly="">
                                             @else
                                                 <input type="number" class="form-control" name="saldo_a_favor" id="saldoAFavor"
-                                            
+
                                                 value="0" min="0" step="0.01" readonly="">
                                             @endif
                                         </div>
@@ -577,7 +578,7 @@
                                             <label for="" class="text-uppercase text-muted">Sigpesos a favor: </label>
                                             @if (isset($paciente))
                                             <input type="text" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
-                                                value="{{$paciente->sigpesos_a_favor != null ? 
+                                                value="{{$paciente->sigpesos_a_favor != null ?
                                                 intval($paciente->sigpesos_a_favor) : 0}} "  min="0" step="0.01"readonly="">
                                             @else
                                             <input type="number" class="form-control" name="sigpesosAFavor" id="sigpesosAFavor"
@@ -629,17 +630,17 @@
                                     </div>
                                     {{-- Comentario --}}
                                     <div class="row">
-                                        
+
                                         <div  class="col-12 col-sm-12 col-md-12 form-group">
                                             <label for="" class="text-uppercase text-muted">Comentario</label>
                                             <input type="text" class="form-control" id="comentario"
                                                 name="comentario">
                                         </div>
-                                        
+
                                     </div>
                                     <div class="row">
                                         <div  class="col-12 col-sm-12 col-md-12 form-group">
-                                            
+
                                             <a class="btn btn-success rounded-0" onclick="javascript:redondear();">
                                                 <i class="fa fa-check"></i>Redondear
                                             </a>
@@ -769,12 +770,12 @@
                 </div>
             </div>
 
-            
+
             <div class="col-4 offset-4 text-center">
                <form action="{{ route('pembayaran.print') }}" method="POST">
-                <input type="hidden" name="_token" class="form-control" value="{!! csrf_token() !!}"> 
-               <button type="submit" name="submit" class="btn btn-info">Imprimir</button> 
-                </form> 
+                <input type="hidden" name="_token" class="form-control" value="{!! csrf_token() !!}">
+               <button type="submit" name="submit" class="btn btn-info">Imprimir</button>
+                </form>
             </div>
         </div>
     </div>
@@ -877,27 +878,27 @@
                 <label for=""> Monto</label>
                 <input type="text" class="form-control inputPesos" name="monto[]">
             </div>
-           
+
         </div>
         `;
-  
 
 
 
 
-        // '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option></select><input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div></div>'; //New input field html 
+
+        // '<div class="input-group offset-md-4 col-md-6"> <select id="uva" class="form-control" name="uva[]"><option value="">Seleccione su uva</option></select><input type="number" step="any" min="0.00" placeholder="Hectareas" class="form-control" name="hectarea[]" value=""/><div class="input-group-append"><span class="input-group-text"><strong>ha</strong></span></div><div class="input-group"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">$</span></div><input type="number" step="any" min="0.00" placeholder="Costo de la uva" class="form-control" name="costo[]" value=""/><div class="input-group-append"><span class="input-group-text">USD</span></div></div></div>'; //New input field html
         var x = 1; //Initial field counter is 1
-        
+
         //Once add button is clicked
         $(addButton).click(function(){
             //Check maximum number of input fields
 
-            if(x < maxField){ 
+            if(x < maxField){
                 x++; //Increment field counter
                 $(wrapper).append(fieldHTML); //Add field html
             }
         });
-        
+
         //Once remove button is clicked
         $(wrapper).on('click', '.remove_button', function(e){
             e.preventDefault();
@@ -912,33 +913,33 @@
         var addButton = $('.add_button_garex'); //Add button selector
         var wrapper = $('.field_wrapper_garex'); //Input field wrapper
         var fieldHTML = `
-        
-            <div class="row">      
+
+            <div class="row">
                                         <div class="p-2 flex-shrink-1 bd-highlight">
                                                         <a href="javascript:void(0);" id="agregarCupon" class="remove_button_garex" title="Agregar cupon"><i class="fa fa-minus-circle"></i></a>
                                         </div>
                                          <label for="" class="text-uppercase text-muted">GAREXT01/ SKU PRODUCTO LIGADO</label>
                                              <div class="col-2 form-group">
-                                               
-                                            
+
+
                                                 <input type="text" class="form-control" name="garexFolio[] " id="garex">
 
-                                    
+
 
                                          </div>
-                                            <div class="col-2 form-group">                                    
+                                            <div class="col-2 form-group">
                                             <input type="text" class="form-control" name="garex[] " id="garex[]">
                                             </div>
-                                                <div class="col-2 form-group">                                    
+                                                <div class="col-2 form-group">
                                             <select  id="tipogarex" name="tipogarex[] " class="form-control lista" required>
                                                     <option value="">Seleccionar</option>
                                                     <option value="100">100%</option>
                                                     <option value="0">Gratis</option>
-                                                   
-                                                  
-                                                </select> 
+
+
+                                                </select>
                                             </div>
-                                                                                              
+
                                     </div>
         `;
          // sumargarext();
@@ -948,12 +949,12 @@
         $(addButton).click(function(){
             //Check maximum number of input fields
 
-            if(x < maxField){ 
+            if(x < maxField){
                 x++; //Increment field counter
                 $(wrapper).append(fieldHTML); //Add field html
                  sumargarext();
                  // alert('se agrego');
-                
+
             }
         });
         function sumargarext(){
@@ -976,48 +977,48 @@
  });
 
 </script>
-   
+
 <script type="text/javascript">
     var contador= 0;
     var cantidad = 0;
     function redondear(){
-        $('#total').val(parseFloat($('#total').val()).toFixed(0));  
+        $('#total').val(parseFloat($('#total').val()).toFixed(0));
 
             if($('#tipoPago').val()==3){
-                    
+
                      $('#pago_combinado').val(Math.round($('#pago_combinado').val()));
-    
+
             }
             if($('#tipoPago').val()==4){
                  $('#sigpesos_usar').val(Math.round($('#sigpesos_usar').val() ) );
-    
+
             }
              if($('#tipoPago').val()==5){
                     $('#saldo_a_usar').val(Math.round($('#saldo_a_usar').val())) ;
-                  
-                
+
+
             }if($('#tipoPago').val()==6){
                    $('#deposito_total').val(Math.round($('#deposito_total').val() ) ) ;
                     $('#transferencia_total').val(Math.round($('#transferencia_total').val() ) ) ;
-               
+
             }
             if($('#tipoPago').val()==1){
                    $('#PagoEfectivo').val( Math.round($('#PagoEfectivo').val())) ;
-               
+
             }
 
             if($('#tipoPago').val()==2){
-                           $('#PagoTarjeta').val( Math.round($('#PagoTarjeta').val() )); 
-            } 
-                    
-                    
-                 
-                   
-                   
-                   
+                           $('#PagoTarjeta').val( Math.round($('#PagoTarjeta').val() ));
+            }
+
+
+
+
+
+
     }
     function sumar(){
-        
+
         // var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
         if ($('#PagoEfectivo').val() == '') {$('#PagoEfectivo').val(0)}
             if ($('#PagoTarjeta').val() == '') {$('#PagoTarjeta').val(0)}
@@ -1032,11 +1033,11 @@
              var deposito = parseFloat($('#deposito_total').val());
              var transferencia = parseFloat($('#transferencia_total').val());
 
-             $('#pago_combinado').val(parseInt($pago_efectivo+$pago_tarjeta+$pago_saldo+$pago_sigpesos+deposito+transferencia)); 
+             $('#pago_combinado').val(parseInt($pago_efectivo+$pago_tarjeta+$pago_saldo+$pago_sigpesos+deposito+transferencia));
             // var $total_venta = parseFloat($('#total').val());
-            // var $sigpeso = parseInt($('#sigpesos_usar').val());   
+            // var $sigpeso = parseInt($('#sigpesos_usar').val());
     }
-     
+
     function ShowSelected(){
                     /* Para obtener el valor */
             // var cod = document.getElementById("descuento_id").value;
@@ -1054,79 +1055,69 @@
             //         $( "#descuento_id" ).val(0);
 
             // }
-            
+
             /* Para obtener el texto */
              // var combo = document.getElementById("descuento_id");
              // var selected = combo.options[combo.selectedIndex].text;
-            // 
+            //
     }
-   
+
 
     function sendFormValidador() {
-        console.log("empleado",$('#empleado_id').val());  
+        console.log("empleado",$('#empleado_id').val());
         console.log("id del paciente: ",$('#empleado_id').val());
 
-        
-    if ($('#empleado_id').val()!="" && $('#paciente_id').val()) {
+        if ($('#empleado_id').val()!="" && $('#paciente_id').val()) {
             var $suma = (parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()));
             var $total_venta = parseFloat($('#total').val());
             var $sigpeso = parseInt($('#sigpesos_usar').val());
 
             console.log($suma+$sigpeso);
-          if($('#tipoPago').val()==3){
+            if($('#tipoPago').val()==3){
 
                 if (parseInt($('#total').val()) == parseInt($('#pago_combinado').val())) {
-                     document.getElementById("form-cliente").submit(); 
+                     document.getElementById("form-cliente").submit();
                 } else {
-                 alert("Valida que PAGO COMBINADO sea igual al TOTAL de pago");
-                 return false;
-                 }
-    
+                    alert("Valida que PAGO COMBINADO sea igual al TOTAL de pago");
+                    return false;
+                }
             }
             if($('#tipoPago').val()==4){
-
                 if (parseInt($('#total').val()) == parseInt($('#pago_combinado').val())) {
-                     document.getElementById("form-cliente").submit(); 
+                    document.getElementById("form-cliente").submit();
                 }
-    
             }
-             if($('#tipoPago').val()==5){
 
+            if($('#tipoPago').val()==5){
                 if (parseInt($('#total').val()) == parseInt($('#saldo_a_usar').val())) {
-                     document.getElementById("form-cliente").submit(); 
-                } 
+                    document.getElementById("form-cliente").submit();
+                }
             }if($('#tipoPago').val()==6){
-
                 if (parseInt($('#total').val()) == parseInt($('#deposito_total').val())||parseInt($('#total').val()) == parseInt($('#transferencia_total').val())) {
-                     document.getElementById("form-cliente").submit(); 
+                    document.getElementById("form-cliente").submit();
                 } else {
-                 alert("Valida que el deposito sea igual al total");
-                 return false;
-                 }
+                    alert("Valida que el deposito sea igual al total");
+                    return false;
+                }
             }
 
             if($('#tipoPago').val()==2 || $('#tipoPago').val()==1 ){
-                    if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
-                document.getElementById("form-cliente").submit();        
-            } 
-            else {
-                 alert("Valida los campos de forma de pago");
-                 return false;
-                 }
+                if (parseFloat($('#total').val())==(parseFloat($('#PagoTarjeta').val())+parseFloat($('#PagoEfectivo').val()))) {
+                    document.getElementById("form-cliente").submit();
+                } else {
+                    alert("Valida los campos de forma de pago");
+                    return false;
+                }
             }
-
-        
-               }
-                 else{
-                 alert("Valida el campo de empleado o paciente");
-                 return false;
-             }
-                   
-    } 
+        } else{
+            alert("Valida el campo de empleado o paciente");
+            return false;
+        }
+    }
 
     function on(){
-         $('#descuento').val(0);
-         $('#descuento').val(parseFloat(parseFloat($('#subtotal').val())*.05).toFixed(2));
+        $('#descuento').val(0);
+        $('#descuento').val(parseFloat(parseFloat($('#subtotal').val())*.05).toFixed(2));
         var sigpesos=parseInt($('#sigpesos_usar').val());
         var subtotal=parseFloat($('#subtotal').val());
         var des=parseFloat($('#descuento').val());
@@ -1136,12 +1127,12 @@
         var iva=getIva;
         var saldoAFavor=parseFloat($('#saldoAFavor').val());
         //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
-        
+
         // console.log(des);
         console.log('SUBTOTAL', subtotal);
         console.log('iva', iva);
         console.log('des', des);
-        console.log('sigpesos', sigpesos);  
+        console.log('sigpesos', sigpesos);
         console.log('TOTAL ACTUALIZADO EN ON',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
         if (aux>0) {
@@ -1149,10 +1140,8 @@
         }else{
             $('#total').val(0);
         }
-        
-        
-        $('#PromocionDescuento').hide();
 
+        $('#PromocionDescuento').hide();
     }
 
     function off(){
@@ -1171,7 +1160,7 @@
         console.log('SUBTOTAL', subtotal);
         console.log('iva', iva);
         console.log('des', des);
-        console.log('sigpesos', sigpesos);  
+        console.log('sigpesos', sigpesos);
         console.log('TOTAL ACTUALIZADO EN OFF',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple));
         var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(sigpesos)-parseFloat(desCumple)-parseFloat(saldoAFavor);
         if (aux.toFixed(2)!=$('#total').val()) {
@@ -1181,7 +1170,7 @@
                 $('#total').val(0);
             }
         }
-        
+
         $('#PromocionDescuento').show();
     }
 
@@ -1198,11 +1187,11 @@
                 success: function(inapam){
                     if (inapam=="1") {
                         var opcion = confirm("Se cargar la INAPAM despues ");
-                         $('#INAPAM_').val(1);
+                        $('#INAPAM_').val(1);
                         if (opcion == true) {
                             on();
                         } else {
-                           $("#INAPAM").prop("checked", false); 
+                           $("#INAPAM").prop("checked", false);
                            $('#PromocionDescuento').show();
                         }
                     }else{
@@ -1210,38 +1199,35 @@
                     }
                 }
             });
-            
-            
         }else{
             off();
         }
     }
 
-</script>       
+</script>
 <script>
     function agregarGarex(p){
     let garex = $('#garex_precio').val();
-         
+
             contador++;
              let aux = $('#1garex_precio').val();
              let garex2 = $('.garex_precio').val();
              let folio_ga = $('#garex_precio').text();
              let aux2=0;
-             aux2 = parseInt(folio_ga.substring(9)) + contador;   
+             aux2 = parseInt(folio_ga.substring(9)) + contador;
              let NAME = folio_ga.substring(0,9) + aux2 ;
 
-
         $('#tbody_garex')
-                .append(`
-                <tr id="garex_agregado${garex.id}">
+            .append(`
+               <tr id="garex_agregado${garex.id}">
                     <td class="precio_total_garex">
                         120
                     </td>
-                   
+
                     <td class="Folio">
                         <input class="form-control cantidad" id="" readonly min="1"  type="text" name="garexFolio[]" value="${NAME}">
                     </td>
-                    
+
                     <td class="SKU">
                         <input class="form-control cantidad" id="" min="1"  type="text" name="garex[]" value="" onkeypress="return event.keyCode!=13">
                     </td>
@@ -1251,9 +1237,7 @@
                                                     <option value="">Seleccionar</option>
                                                     <option value="100">100%</option>
                                                     <option value="0">Gratis</option>
-                                                   
-                                                  
-                         </select> 
+                         </select>
                     </td>
                     <td>
                         <button onclick="quitarGarex('#garex_agregado${garex.id}')" type="button" class="btn btn-danger boton_quitar">
@@ -1261,11 +1245,8 @@
                         </button>
                     </td>
                 </tr>`);
-
     }
 
-
-    
     function agregarProducto(p){
         // alert($(p).val());
         let producto = JSON.parse($(p).val());
@@ -1278,10 +1259,8 @@
                 .append(`
                 <tr id="producto_agregado${producto.id}">
                     <td>
-
                         <input class="form-control cantidad" id="producto_agregado_cantidad${producto.id}" min="1" onchange="cambiarTotal(this, '#producto_agregado${producto.id}')" type="number" name="cantidad[]" value="1" stock="${producto.stock}" iva=${producto.precio_publico_iva}>
                         <input class="form-control" type="hidden" name="producto_id[]" value="${producto.id}" iva=${producto.precio_publico_iva}>
-
                     </td>
                     <td>
                         ${producto.descripcion}
@@ -1304,19 +1283,20 @@
             }else{
                 alert('Producto sin stock');
             }
-        } 
+        }
     }
 
     function quitarProducto(p){
         $(p).remove();
         cambiarTotalVenta();
     }
+
     function quitarGarex(p){
-       
         $(p).remove();
          contador--;
         cambiarTotalVentaGarex();
     }
+
     function cambiarTotalVentaGarex(a,p){
         let precios_total = $('td.precio_total').toArray();
         let total = 0;
@@ -1328,66 +1308,58 @@
             console.log("VALOR CAMBIADO EN GAREXT:",total);
         });
         // console.log($(a).val());
-          console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
-                if ($(a).val() == 100) {
-                       nuevo_total = parseInt($('#total').val()) + 120;
-                       $('#total').val(nuevo_total);
-                       console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
+        console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
+        if ($(a).val() == 100) {
+            nuevo_total = parseInt($('#total').val()) + 120;
+            $('#total').val(nuevo_total);
+            console.log('VALOR DE A DENTRO DE GAREXT',$(a).val());
 
+        }
+        if ($(a).val() == 0 ) {
+            aux = $('#total').val();
+
+            if ($('#total').val() == 0) {
+                $('#total').val(0);
+            }
+            else if($('#total').val()>0){
+
+                if($('#total').val()==120){
+                    nuevo_total = parseInt($('#total').val());
+                    $('#total').val(nuevo_total);
+                }else{ nuevo_total = parseInt($('#total').val())-120;
+                    $('#total').val(nuevo_total);
                 }
-                if ($(a).val() == 0 ) {
-                        aux = $('#total').val();
-
-                        if ($('#total').val() == 0) {
-                            $('#total').val(0);
-                        }
-                        else if($('#total').val()>0){
-
-                            if($('#total').val()==120){
-                        nuevo_total = parseInt($('#total').val());
-                       $('#total').val(nuevo_total);
-
-                       }else{ nuevo_total = parseInt($('#total').val())-120;
-                        $('#total').val(nuevo_total);}
-                       
-
-
-                    }
-
-                       else if($('#total').val()==120){
-                        nuevo_total = parseInt($('#total').val());
-                       $('#total').val(nuevo_total);
-
-                       }
-                       
+            }
+            else if($('#total').val()==120){
+                nuevo_total = parseInt($('#total').val());
+                $('#total').val(nuevo_total);
+            }
                        // alert(nuevo_total);
+        }
+        if ($(a).val() == 0  && contador==0) {
+            $('#total').val(auxiliarPrec);
+        }
+        if ($('#tipoPago').val()==1) {
+            $('#PagoEfectivo').val(nuevo_total);
+        }
+        else if ($('#tipoPago').val()==2) {
+            $('#PagoTarjeta').val(nuevo_total);
+        }
+        else if ($('#tipoPago').val()==3) {
 
-                }
-                if ($(a).val() == 0  && contador==0) {
-                    $('#total').val(auxiliarPrec);
-                }
+        }
+        else if ($('#tipoPago').val()==4) {
 
-                if ($('#tipoPago').val()==1) {
-                         $('#PagoEfectivo').val(nuevo_total);
-                }
-                else if ($('#tipoPago').val()==2) {
-                         $('#PagoTarjeta').val(nuevo_total); 
-                }
-                    else if ($('#tipoPago').val()==3) {
+        }
+        else if ($('#tipoPago').val()==5) {
+            $('#saldo_a_usar').val(nuevo_total);
+        }
+        else if ($('#tipoPago').val()==6) {
+            $('#deposito_total').val(nuevo_total);
+            $('#transferencia_total').val(nuevo_total);
+        }
+    }
 
-                    }
-                        else if ($('#tipoPago').val()==4) {
-
-                        }
-                            else if ($('#tipoPago').val()==5) {
-                                     $('#saldo_a_usar').val(nuevo_total);
-                            }
-                                else if ($('#tipoPago').val()==6) {
-                                     $('#deposito_total').val(nuevo_total);
-                                        $('#transferencia_total').val(nuevo_total);
-
-                                }
-         }
     function cambiarTotalVenta(){
         let precios_total = $('td.precio_total').toArray();
         let total = 0;
@@ -1414,26 +1386,25 @@
                    if (!isNaN(res.sigpesos)&&res.sigpesos!="") {
                         var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                         console.log('sigpesos peticione4444',res.sigpesos);
-                    }else{             
-                        res.sigpesos=0;       
-                        var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
-                        console.log('sigpesos peticion5555',res.sigpesos);
-                    }   
-                    
-                    $('#descuentoCumple').val(parseInt(res.cumple));
-                    if (isNaN($('#descuentoCumple').val(res.cumple))) {
+                   }else{
+                       res.sigpesos=0;
+                       var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
+                       console.log('sigpesos peticion5555',res.sigpesos);
+                   }
+                   $('#descuentoCumple').val(parseInt(res.cumple));
+                   if (isNaN($('#descuentoCumple').val(res.cumple))) {
 
-                        desCumple=500
+                       desCumple=500
 
-                        } else{
-                            $('#descuentoCumple').val(parseInt(res.cumple));
-                        }
-                    if (res.cumple>0) {
-                        $('#cumpleDes').val(1);
-                    }
+                   } else{
+                       $('#descuentoCumple').val(parseInt(res.cumple));
+                   }
+                   if (res.cumple>0) {
+                       $('#cumpleDes').val(1);
+                   }
                 }
             });
-             console.log('sigpesos3rff', sigpesos);
+            console.log('sigpesos3rff', sigpesos);
         }
         var sigpesos=parseInt($('#sigpesos_usar').val());
         var subtotal=parseFloat($('#subtotal').val());
@@ -1445,13 +1416,13 @@
         $('#iva').val(getIva);
         var iva=getIva;
         // console.log(des);
-        
+
         console.log('getIva', getIva);
         console.log('SUBTOTAL', subtotal);
         console.log('iva999', iva);
         console.log('des', des);
-        console.log('sigpesos', sigpesos);  
-        console.log('desCumple', desCumple); 
+        console.log('sigpesos', sigpesos);
+        console.log('desCumple', desCumple);
 
         console.log('TOTAL ACTUALIZADO EN CAMBIAR TOTAL DE VENTA 1403',parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple));
             // $('#total').val(0);
@@ -1479,12 +1450,11 @@
             a.val(parseFloat(cant));
             cambiarTotalVenta();
         }else{
-        alert('Producto sin stock necesario');
+            alert('Producto sin stock necesario');
+        }
     }
-        
-    }
-    function cambiarTotal(a, p){
 
+    function cambiarTotal(a, p){
         let cant = parseFloat(a.value);
         if (a.getAttribute("stock")>cant) {
             let cantiva = parseFloat(a.getAttribute("iva"));
@@ -1496,11 +1466,9 @@
             $(p).find('.precio_individual_iva').text(parseFloat(totaliva).toFixed(2));
             cambiarTotalVenta();
         }else{
-        alert('Producto sin stock necesario');
+            alert('Producto sin stock necesario');
+        }
     }
-        
-    }
-
 
     $(document).ready(function () {
         $('#sigpesos_usar').change(function(){
@@ -1519,7 +1487,6 @@
                 console.log('Pgo_combinado =',pago_combinado);
                 $('#pago_combinado').val(pago_combinado);
 
-
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
             if (aux>0) {
                 $('#total').val(Math.round(aux.toFixed(1)));
@@ -1527,21 +1494,21 @@
             }else{
                 $('#total').val(0);
             }
-            
+
             console.log('TOTAL ACTUALIZADO EN LINEA 1061',Math.round($('#total').val()));
          });
 
-        $('#tipoPago').change(function(){  
+        $('#tipoPago').change(function(){
             console.log('Entra');
             if ($('#tipoPago').val()==2){
-                
+
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
                 $('#saldo_a_usar').val(0);
                 $('#saldo_a_favoor').hide();
-                 $('#deposito').hide();
-                  $('#transferencia').hide();
-                  $('#deposito_total').val(0);
+                $('#deposito').hide();
+                $('#transferencia').hide();
+                $('#deposito_total').val(0);
                 $('#transferencia_total').val(0);
                 $('#deposito_folio').val(null);
                 $('#transferencia_folio').val(null);
@@ -1552,8 +1519,7 @@
                 $('#tar4').hide();
                 $('#PagoSigpesos').hide();
                 $('#digitos_targeta').required;
-                
-                
+
                 //$('#sigpesos_usar').val(0);
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
@@ -1574,7 +1540,6 @@
                      $('#montonegativo').val(-aux.toFixed(1));
                 }
                 console.log('TOTAL ACTUALIZADO DESDE TARJETA',Math.round($('#total').val()));
-
 
                 $('#PagoTarjeta').val($('#total').val());
 
@@ -1605,10 +1570,8 @@
                 console.log('Pgo_combinado =',pago_combinado);
                 $('#pago_combinado').val(Math.round(pago_combinado));
 
-
                 console.log('TOTAL ACTUALIZADO DESDE COMBINADO',Math.round($('#total').val()));
                 console.log('Sipesos:',sigpesos);
-               
             }
             else if ($('#tipoPago').val()==1) {
                 $('#PagoEfectivo').val(0);
@@ -1627,9 +1590,8 @@
                 $('#tar5').hide();
                 $('#tar10').hide();
                 $('#PagoSigpesos').hide();
-                 $('#deposito').hide();
-                  $('#transferencia').hide();
-
+                $('#deposito').hide();
+                $('#transferencia').hide();
 
                 //$('#sigpesos_usar').val(0);
                 var subtotal=parseFloat($('#subtotal').val());
@@ -1637,9 +1599,9 @@
                 var sigpesos=parseInt($('#sigpesos_usar').val());
                 var desCumple=parseFloat($('#descuentoCumple').val());
                 //let getIva = (($('#subtotal').val()-des-desCumple)*0.16);
-                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));                   
-                 var saldoAFavor=parseFloat($('#saldoAFavor').val());
-                 var saldoAFavor = sigpesos;
+                //var iva=parseFloat($('#iva').val(getIva.toFixed(2)));
+                var saldoAFavor=parseFloat($('#saldoAFavor').val());
+                var saldoAFavor = sigpesos;
                 var getIva = (($('#subtotal').val())*0.16).toFixed(2);
                 $('#iva').val(getIva);
                 var iva=getIva;
@@ -1652,7 +1614,6 @@
                 }
                 console.log('TOTAL ACTUALIZADO DESDE EFECTIVO',$('#total').val());
                 console.log('Saldo a favor:',saldoAFavor);
-                
 
                 $('#PagoEfectivo').val(Math.round($('#total').val()));
 
@@ -1677,7 +1638,7 @@
                 $('#tar5').hide();
                 $('#tar10').hide();
 
-                    //Agregando lineas para actualizar el sigpesos                   
+                    //Agregando lineas para actualizar el sigpesos
                 var subtotal=parseFloat($('#subtotal').val());
                 var des=parseFloat($('#descuento').val());
                 var sigpesos=parseInt($('#sigpesos_usar').val());
@@ -1697,9 +1658,7 @@
                     $('#total').val(0);
                 }
                 console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
-               console.log('Saldo a favor:',saldoAFavor);
-              
-
+                console.log('Saldo a favor:',saldoAFavor);
 
             }else if($('#tipoPago').val()==5){
                 $('#PagoEfectivo').val(0);
@@ -1735,14 +1694,13 @@
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
                     $('#total').val(Math.round(aux.toFixed(1)));
-
                 }else{
                     $('#total').val(0);
                 }
-                
+
                 console.log('TOTAL ACTUALIZADO EN saldo a favor',$('#total').val());
-               console.log('Saldo a favor:',saldoAFavor);
-               $('#saldo_a_usar').val($('#total').val());
+                console.log('Saldo a favor:',saldoAFavor);
+                $('#saldo_a_usar').val($('#total').val());
             }else if($('#tipoPago').val()==6){
                 $('#deposito_total').val(0);
                 $('#transferencia_total').val(0);
@@ -1775,26 +1733,16 @@
                 var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple);
                 if (aux>0) {
                     $('#total').val(Math.round(aux.toFixed(1)));
-
                 }else{
                     $('#total').val(0);
                 }
-                
+
                 console.log('TOTAL ACTUALIZADO EN deposito',$('#total').val());
-               console.log('Saldo a favor:',saldoAFavor);
-               $('#deposito_total').val(Math.round($('#total').val()));
-               $('#transferencia_total').val(Math.round($('#total').val()));
+                console.log('Saldo a favor:',saldoAFavor);
+                $('#deposito_total').val(Math.round($('#total').val()));
+                $('#transferencia_total').val(Math.round($('#total').val()));
 
-
-
-
-
-
-                }
-
-            else
-
-            {
+            } else {
                 $('#PagoEfectivo').val(0);
                 $('#PagoTarjeta').val(0);
                 $('#deposito_total').val(0);
@@ -1829,9 +1777,7 @@
                 }
                 console.log('TOTAL ACTUALIZADO EN SIGPESOS',$('#total').val());
                 console.log('Saldo a favor:',saldoAFavor);
-
             }
-
         });
         /*$('#pacientes').DataTable({
             pageLength : 3,
@@ -1865,86 +1811,65 @@
 
 <script type="text/javascript">
 
+    function ultimoFolio(){
 
-
-        function ultimoFolio(){
-
-        }
-
-
-  $(document).ready(function() {
-       $("#lista").change(function() {
+    }
+    $(document).ready(function() {
+        $("#lista").change(function() {
             var folio_id = $(this).val();
             var pacienteId=$('#paciente_id').val();
-
-            
 
             $.ajax({
             url:"{{ url('/folios') }}/"+pacienteId+"/sigpesos",
             type:'GET',
             dataType:'json',
-            success: function(res34){   
-             
-              console.log(res34.folio);
-              $('#folio').val(res34.folio);
-              $('#monto').val(res34.monto);
-              if (res34.descripcion != null && res34.folio != null ) {swal(res34.descripcion)}
+            success: function(res34){
+                console.log(res34.folio);
+                $('#folio').val(res34.folio);
+                $('#monto').val(res34.monto);
+                if (res34.descripcion != null && res34.folio != null ) {swal(res34.descripcion)}
               // var folios_old =  res34.pac;
 
-               for(var i=0;i<res34.pac.length;i++){
-
+                for(var i=0;i<res34.pac.length;i++){
                     swal("Folio de: "+res34.pac[i]["monto"]+" con folio "+res34.pac[i]["folio"]);
-                            }
-              console.log(res34.pac);
-              console.log(res34.monto);
-              console.log("Folio de paciente");
-                       if (res34.folio==null) {
-                        
-                         // alert($(this).val());
-                         console.log('Folio que se envia::',folio_id);
-
-                 $.ajax({
-            url:"{{ url('/obtener_folios') }}/"+folio_id,
-            type:'GET',
-            dataType:'json',
-            success: function(res34){   
-             
-              console.log(res34.folio);
-              $('#folio').val(res34.folio);
-              $('#monto').val(res34.monto);
-              console.log(res34.monto);
-               console.log("Folio si es null");
-            }
-
-                 });
-            }
-
-
-
+                }
+                console.log(res34.pac);
+                console.log(res34.monto);
+                console.log("Folio de paciente");
+                if (res34.folio==null) {
+                    // alert($(this).val());
+                    console.log('Folio que se envia::',folio_id);
+                    $.ajax({
+                        url:"{{ url('/obtener_folios') }}/"+folio_id,
+                        type:'GET',
+                        dataType:'json',
+                        success: function(res34){
+                            console.log(res34.folio);
+                            $('#folio').val(res34.folio);
+                            $('#monto').val(res34.monto);
+                            console.log(res34.monto);
+                            console.log("Folio si es null");
+                        }
+                    });
+                }
             },error: function(e){
-            
-           // alert($(this).val());
-           console.log('Folio que se envia::',folio_id);
+                // alert($(this).val());
+                console.log('Folio que se envia::',folio_id);
 
-            $.ajax({
-            url:"{{ url('/obtener_folios') }}/"+folio_id,
-            type:'GET',
-            dataType:'json',
-            success: function(res34){   
-             
-              console.log(res34.folio);
-              $('#folio').val(res34.folio);
-              $('#monto').val(res34.monto);
-              console.log(res34.monto);
-               console.log("Folio ultimo");
+                $.ajax({
+                    url:"{{ url('/obtener_folios') }}/"+folio_id,
+                    type:'GET',
+                    dataType:'json',
+                    success: function(res34){
+                        console.log(res34.folio);
+                        $('#folio').val(res34.folio);
+                        $('#monto').val(res34.monto);
+                        console.log(res34.monto);
+                        console.log("Folio ultimo");
+                    }
+                });
             }
-
-                 });
-            }
-
         });
-
-
 
         //    var folio_id = $(this).val();
         //    // alert($(this).val());
@@ -1954,8 +1879,8 @@
         //     url:"{{ url('/obtener_folios') }}/"+folio_id,
         //     type:'GET',
         //     dataType:'json',
-        //     success: function(res34){   
-             
+        //     success: function(res34){
+
         //       console.log(res34.folio);
         //       $('#folio').val(res34.folio);
         //       $('#monto').val(res34.monto);
@@ -1964,22 +1889,15 @@
 
         // });
 
-
-           
-
        });
-
-
-
 });
 
 </script>
 
 <script type="text/javascript">
     $(document).ready(function(){
-      
 
-        $('#descuento_id').change(function(){            
+        $('#descuento_id').change(function(){
             var id=$('#descuento_id').val();
             $('#descuento').val(0);
             $("#INAPAM").prop("checked", false);
@@ -2048,7 +1966,7 @@
             }else{
                 $('#total').val(0);
             }
-            
+
             var productos_id=[];
             var cantidad_id=[];
 
@@ -2061,7 +1979,7 @@
             // OBTENEMOS EL ID DE LOS PRODUCTOS DE LA POSIBLE COMPRA
             $('[name="producto_id[]"]').each(function(){
                 productos_id.push($(this).val());
-            }); 
+            });
             $.ajax({
                 url:"{{ url('/calcular_descuento') }}/"+id,
                 type:'POST',
@@ -2075,10 +1993,10 @@
                 },
                 dataType:'json',
                 success: function(res){
-                    //alert(res.sigpesos);                  
+                    //alert(res.sigpesos);
                     if(res.status){
-                        if (res.status==1) {     
-                            console.log('Datos del descuento:',res);                  
+                        if (res.status==1) {
+                            console.log('Datos del descuento:',res);
                             $('#descuento').val(Math.round(res.total));
                             $('#sigpesos').val(res.sigpesos);
                             des=parseFloat($('#descuento').val());
@@ -2121,8 +2039,7 @@
                             // $('.folio').prop("disabled", true);
                             // $('.inputPesos').prop("disabled", true);
                             // $('.lista').prop("disabled", true);
-                              
-                            
+
                         }else if (res.aceptsp==1) {
                             $('#sigpesos_usar').prop("disabled", false);
 
@@ -2132,9 +2049,7 @@
                             $('.lista').prop("disabled", false);
                         }
                         //$('#total').val()
-                    }
-                    else
-                    {
+                    } else {
                         swal("No aplica el descuento");
                         $('#promocion_id option:eq(0)').prop('selected',true);
                         $('#sigpesos_usar').prop("disabled", false);
@@ -2155,11 +2070,10 @@
                 }
 
             });
-        });     
+        });
         $('#paciente_id').change( async function(){
             var pacienteId=$(this).val();
-            
-            
+
         });
         $("#BuscarGarex").on('keyup', function (e) {
           var keycode = e.keyCode || e.which;
@@ -2208,6 +2122,7 @@
         $('#BuscarPaciente').change( function() {
             $("#pacientes").dataTable().fnDestroy();
             //console.log($(this).val());
+
             $('#pacientes').DataTable({
                 "ajax":{
                     type: "POST",
@@ -2333,8 +2248,8 @@
 
    @if(!isset($paciente))
     $(document).on('click', '.botonSeleccionCliente', async function(){
-        
-                
+
+
         const pacienteId = $(this).attr('pacienteid');
 
         $.ajax({
@@ -2376,10 +2291,10 @@
                     $('#ErrorInapam').show();
                 }else{
                     $('#ErrorInapam').hide();
-                }                
+                }
             }
         });
-       
+
         const nombrePaciente = $(`.nombrePaciente[pacienteId=${pacienteId}]`).html();
         const apellidosPaciente = $(`.apellidosPaciente[pacienteId=${pacienteId}]`).html();
 
@@ -2412,8 +2327,8 @@
                 if (!isNaN(res.sigpesos)&&res.sigpesos!="") {
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion00',res);
-                }else{             
-                    res.sigpesos=0;       
+                }else{
+                    res.sigpesos=0;
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res.sigpesos));
                     console.log('sigpesos peticion111',res.sigpesos);
                 }
@@ -2435,7 +2350,7 @@
             }
 
         });
-        
+
         if((subtotal+iva-des-desCumple-saldoAFavor)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
@@ -2448,7 +2363,7 @@
             }else{
                 $('#total').val(0);
             }
-            
+
             console.log('total',$('#sigpesos_usar').val())
         }
     });
@@ -2464,7 +2379,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-            <?php
+        <?php
             if ($paciente->expediente()->first()!=null) {
                 if ($paciente->expediente()->first()->inapam==null) {
                     echo "$('#ErrorInapam').show();";
@@ -2473,8 +2388,8 @@
                 echo "$('#ErrorInapam').show();";
             }
             //dd($paciente->expediente()->first()->inapam);
-            ?>
-        
+        ?>
+
         const pacienteId = {{$paciente->id}};
 
         const nombrePaciente = "{{ $paciente->nombre }}";
@@ -2499,17 +2414,17 @@
         var saldoAFavor = sigpesos;
         var getIva = (($('#subtotal').val())*0.16).toFixed(2);
         $('#iva').val(getIva);
-        var iva=getIva; 
+        var iva=getIva;
         $.ajax({
             url:"{{ url('/obtener_sigpesos') }}/"+pacienteId,
             type:'GET',
             dataType:'json',
-            success: function(res34){   
+            success: function(res34){
                 if (!isNaN(res34.sigpesos)&&res34.sigpesos!="") {
                     var sigpesos=$('#sigpesos_usar').val(parseInt(res34.sigpesos));
                     console.log('sigpesos peticion00',res34.sigpesos);
-                }else{             
-                    res34=0;       
+                }else{
+                    res34=0;
                     var sigpesos=$('#sigpesos_usar').val(0);
                     console.log('sigpesos peticion1199',0);
                 }
@@ -2528,16 +2443,13 @@
 
         });
 
-      
-
-
         if((subtotal+iva-des-desCumple-saldoAFavor)<$('#sigpesos_usar').val())
         {
             $('#total').val(0);
         }
         else
         {
-            
+
             var aux=parseFloat(subtotal)+parseFloat(iva)-parseFloat(des)-parseFloat(desCumple)-$('#sigpesos_usar').val()-parseFloat($('#saldoAFavor').val());
             if (aux>0) {
                 $('#total').val(aux.toFixed(2));
@@ -2548,8 +2460,12 @@
         }
     });
 
-   
+</script>
 
+<script>
+    function goto() {
+        console.log('Hola');
+    }
 </script>
 @else
 @endif
